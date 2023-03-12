@@ -1,0 +1,44 @@
+
+
+<div class="">
+    <div class="col-12">
+      <div class="table-container" #tableContainer>
+        <table>
+          <thead>
+            <tr>
+              <th>cupon_id</th>
+              <th>servicio_id</th>
+              <th>tipo_valor</th>
+              <th>valor</th>
+              <th>fecha_desde</th>
+              <th>fecha_hasta</th>
+              
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let cupon of listado_Cupones">
+              <td  (click)="showDetails()" >{{cupon.cupon_id}}</td>
+              <td>{{cupon.servicio_id}}</td>
+              <td>{{cupon.tipo_valor}}</td>
+              <td>{{cupon.valor}}</td>
+              <td>{{cupon.fecha_desde | extractDate}}</td>
+              <td>{{cupon.fecha_hasta | extractDate }} </td>
+              
+
+
+            </tr>
+            
+          </tbody>
+        </table>
+      </div>
+      <div class="animated-component" [class.active]="showComponent"   >
+        <span  >Hola mundo</span>
+        <button (click)="showDetails()">Close</button>
+      </div>
+      
+    </div>
+      
+  </div>
+
+
+  
