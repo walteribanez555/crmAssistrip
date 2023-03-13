@@ -42,6 +42,7 @@ export class GenerarPolizasComponent {
     prevBtns.forEach(btn => {
       btn.addEventListener("click", ()=> {
         this.formStepsNum--;
+        this.formTitle = this.formsTitle[this.formStepsNum];
         this.updateFormSteps();
         this.updateProgressbar();
       })
