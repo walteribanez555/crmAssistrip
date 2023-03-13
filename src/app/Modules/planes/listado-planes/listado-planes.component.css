@@ -14,7 +14,6 @@ table {
     position: relative;
     max-height: 85vh; /* Set the maximum height of the table container */
     overflow: auto;
-    
   }
 
   thead {
