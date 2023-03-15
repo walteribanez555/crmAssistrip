@@ -15,9 +15,9 @@ export class GenerarPolizasComponent implements OnInit, OnDestroy{
 
 
   formStepsNum = 0;
-  progressSteps!: NodeListOf<Element>;
-  formSteps!: NodeListOf<Element>;
-  progress!: HTMLElement;
+  progressSteps?: NodeListOf<Element>;
+  formSteps?: NodeListOf<Element>;
+  progress?: HTMLElement | null ;
 
 
   formsTitle : string[] = [
@@ -42,41 +42,54 @@ export class GenerarPolizasComponent implements OnInit, OnDestroy{
   }
 
   ngAfterViewInit() {
-    this.progressSteps = document?.querySelectorAll(".progress-step");
-    this.formSteps = document.querySelectorAll(".form-step");
-    this.progress = document.getElementById("progress")!;
-    const prevBtns = document.querySelectorAll(".btn-prev");
-    const nextBtns = document.querySelectorAll(".btn-next");
-
-    nextBtns.forEach(btn => {
-      btn.addEventListener("click", ()=> {
-        this.formStepsNum++;
-        this.formTitle = this.formsTitle[this.formStepsNum];
-        this.updateFormSteps();
-        this.updateProgressbar();
+    
+      this.progressSteps = document.querySelectorAll(".progress-step");
+      this.formSteps = document.querySelectorAll(".form-step");
+      this.progress = document.getElementById("progress");
+        
+      const prevBtns = document.querySelectorAll(".btn-prev");
+      const nextBtns = document.querySelectorAll(".btn-next");
+  
+      // rest of your code here
+      nextBtns.forEach(btn => {
+        btn.addEventListener("click", ()=> {
+          this.formStepsNum++;
+          this.formTitle = this.formsTitle[this.formStepsNum];
+          this.updateFormSteps();
+          this.updateProgressbar();
+        })
       })
-    })
-
-    prevBtns.forEach(btn => {
-      btn.addEventListener("click", ()=> {
-        this.formStepsNum--;
-        this.formTitle = this.formsTitle[this.formStepsNum];
-        this.updateFormSteps();
-        this.updateProgressbar();
+  
+      prevBtns.forEach(btn => {
+        btn.addEventListener("click", ()=> {
+          this.formStepsNum--;
+          this.formTitle = this.formsTitle[this.formStepsNum];
+          this.updateFormSteps();
+          this.updateProgressbar();
+        })
       })
-    })
+    
+
+    
   }
 
   updateFormSteps(){
-    this.formSteps.forEach(formStep =>  {
+
+    
+    this.formSteps?.forEach(formStep =>  {
       formStep.classList.contains("form-step-active") &&
       formStep.classList.remove("form-step-active")
     })
-    this.formSteps[this.formStepsNum].classList.add("form-step-active")
+    if(this.formSteps){
+      this.formSteps[this.formStepsNum].classList.add("form-step-active")
+    }
+    
   }
 
   updateProgressbar(){
-    this.progressSteps.forEach((progressStep, idx) => {
+
+    
+    this.progressSteps?.forEach((progressStep, idx) => {
       if(idx < this.formStepsNum + 1){
         progressStep.classList.add("progress-step-active")
       } else {
@@ -85,6 +98,10 @@ export class GenerarPolizasComponent implements OnInit, OnDestroy{
     });
 
     const progressActive = document.querySelectorAll(".progress-step-active");
-    this.progress.style.width = ((progressActive.length - 1) / (this.progressSteps.length - 1)) * 100 + "%";
+    if (this.progress) {
+      this.progress.style.width = ((progressActive.length - 1) / (this.progressSteps!.length - 1)) * 100 + "%";
+    }
+    
+    
   }
 }

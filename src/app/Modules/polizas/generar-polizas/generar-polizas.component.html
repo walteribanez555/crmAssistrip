@@ -8,7 +8,7 @@
         
                 <div class="progressbar">
                    
-        
+                    <div class="progress" id="progress"></div>
                     <div class="progress-step progress-step-active" data-title="Intro" ></div>
                     <div class="progress-step" data-title="Contact"></div>
                     <div class="progress-step" data-title="Id"></div>
@@ -22,26 +22,20 @@
               <app-list-card></app-list-card>
                 
                 
-                    <button type="button"  class="btn btn-next  width-25 ml-auto">Next</button>
+              <button type="button"  class="btn btn-next  width-25 ml-auto">Next</button>
                 
     
             </div>
     
             <div class="form-step ">
-                <div class="input-group">
-                    <label for="phone">Phone</label>
-                    <input type="text" name="phone" id="email">
-                </div>
-                <div class="input-group">
-                    <label for="email">Email</label>
-                    <input type="text" name="email" id="email">
-                </div>
-                <div class="btns-group">
-                    <button type="button" class="btn btn-prev  ">Previous</button>
-                    <button type="button"  class="btn btn-next  ">Next</button>
-    
-                </div>
-    
+              <app-cliente-formulario></app-cliente-formulario>
+
+
+              <div class="btns-group">
+                <button type="button"  class="btn btn-prev  ">Previous</button>
+                <button type="button"  class="btn btn-next  ">Next</button>
+
+              </div>
             </div>
     
     

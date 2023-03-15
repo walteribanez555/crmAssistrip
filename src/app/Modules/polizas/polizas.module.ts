@@ -9,6 +9,7 @@ import { ExtractDatePipe } from 'src/app/pipes/extract-date.pipe';
 import { ServicesModule } from 'src/app/services/services.module';
 import { PipesModule } from 'src/app/pipes/pipes.module';
 import { ListCardComponent } from 'src/app/components/listCard/list-card.component';
+import { ClienteFormularioComponent } from 'src/app/components/cliente-formulario/cliente-formulario.component';
 
 
 
@@ -20,6 +21,7 @@ import { ListCardComponent } from 'src/app/components/listCard/list-card.compone
     GenerarPolizasComponent,
     GenerarCotizacionComponent,
     ListCardComponent,
+    ClienteFormularioComponent
     
     
   ],
