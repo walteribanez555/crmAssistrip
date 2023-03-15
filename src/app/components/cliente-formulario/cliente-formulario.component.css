@@ -1,0 +1,17 @@
+.container_form {
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* Set columns to 2/3 and 1/3 of available space */
+    height: 300px; /* Set height for the container */
+  }
+  
+  .left-section {
+    background-color: blue;
+    color: white;
+    padding: 20px;
+  }
+  
+  .right-section {
+    background-color: red;
+    color: white;
+    padding: 20px;
+  }
