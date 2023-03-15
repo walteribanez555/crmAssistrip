@@ -8,6 +8,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { ExtractDatePipe } from 'src/app/pipes/extract-date.pipe';
 import { ServicesModule } from 'src/app/services/services.module';
 import { PipesModule } from 'src/app/pipes/pipes.module';
+import { ListCardComponent } from 'src/app/components/listCard/list-card.component';
+
+
 
 
 
@@ -16,6 +19,8 @@ import { PipesModule } from 'src/app/pipes/pipes.module';
     ListadoPolizasComponent,
     GenerarPolizasComponent,
     GenerarCotizacionComponent,
+    ListCardComponent,
+    
     
   ],
   imports: [
@@ -23,7 +28,9 @@ import { PipesModule } from 'src/app/pipes/pipes.module';
     HttpClientModule,
     PolizasRoutingModule,
     ServicesModule,
-    PipesModule
+    PipesModule,
+
+    
   ],
   exports: [ 
     ListadoPolizasComponent,

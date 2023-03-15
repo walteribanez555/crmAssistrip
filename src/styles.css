@@ -1,12 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 /* You can add global styles to this file, and also import other style files */
+
+
 :root {
     --body-bg: #fafafb;
     --box-bg: #ffffff;
     /* --main-color: #5e34eb;
     --logo-color: #5e34eb; */
-    --main-color: #280ee8;
-    --logo-color: #2812cc;
+    --main-color: #34189A;
+    --logo-color: #34189A;
     --text-color: #455560;
     --text-second-color: #72849ab3;
     --border-color: #e9e9e9;

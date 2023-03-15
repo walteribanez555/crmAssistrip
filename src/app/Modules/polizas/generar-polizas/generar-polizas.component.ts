@@ -1,15 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { OwlOptions } from 'ngx-owl-carousel-o';
+
+// register Swiper custom elements
+
 
 @Component({
   selector: 'app-generar-polizas',
   templateUrl: './generar-polizas.component.html',
   styleUrls: ['./generar-polizas.component.css']
 })
-export class GenerarPolizasComponent {
+export class GenerarPolizasComponent implements OnInit, OnDestroy{
+
+  
+
+
   formStepsNum = 0;
   progressSteps!: NodeListOf<Element>;
   formSteps!: NodeListOf<Element>;
   progress!: HTMLElement;
+
 
   formsTitle : string[] = [
     "Elegir Poliza",
@@ -21,7 +30,16 @@ export class GenerarPolizasComponent {
 
  
 
-  constructor() { }
+  constructor() {
+   }
+
+  ngOnInit(): void {
+    
+  }
+
+  ngOnDestroy(): void {
+    
+  }
 
   ngAfterViewInit() {
     this.progressSteps = document?.querySelectorAll(".progress-step");
