@@ -1,12 +1,13 @@
 .container-carousel{
     display: flex;
     height: 100%;
-    margin: 0;
+    
     padding-bottom: 20px;
     width: 100%;
     align-items: center;
-    
-    
+    margin-left: 50px;
+    margin-bottom:  20px;
+   
     
 }
 
@@ -23,6 +24,13 @@
     .carousel{
         margin:  0px 60px;
     }
+
+    .container-carousel{ 
+        margin-left: 0;
+
+    }
+
+    
 
 }
 
