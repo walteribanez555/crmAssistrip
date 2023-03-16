@@ -154,6 +154,13 @@ a {
     
 }
 
+hr{
+    border-color: coral;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+
 
 .btn-outline:hover svg{
     fill: var(--body-bg);

@@ -25,6 +25,7 @@
             <span >{{ menuItem.label  }}</span>
             <div class="dropdown-icon"></div>
           </div>
+          <hr>
           <ul class="sidebar-menu sidebar-menu-dropdown-content" [style.height]="menuItem.dropdownHeight" [class.active]="menuItem.isDropdownOpen">
             <li *ngFor="let subMenuItem of menuItem.submenuItems">
               <a routerLink="{{subMenuItem.route}}" href="#" (click)="cargarHeader(subMenuItem.label)"  >
@@ -74,6 +75,7 @@
           
       </nav>
   </div>
+  <hr>
   <div class="main-content overflow-scroll ">
       <router-outlet></router-outlet>
       
