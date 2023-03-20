@@ -17,7 +17,7 @@ export class GenerarPolizasComponent implements OnInit, OnDestroy{
   @ViewChild('tagNumber') tagNumber!: ElementRef;
 
   maxTags: number = 10;
-  tags: string[] = ["coding", "nepal"];
+  tags: string[] = [];
 
   countTags() {
     this.tagInput?.nativeElement.focus();
@@ -52,12 +52,15 @@ export class GenerarPolizasComponent implements OnInit, OnDestroy{
   }
 
   insertTag(tag: string) {
-    if (tag.length > 1 && !this.tags.includes(tag)) {
-      if (this.tags.length < 10) {
-        tag.split(',').forEach(tag => {
-          this.tags.push(tag);
-          this.createTag();
-        });
+    if(tag!=="pais"){
+
+      if (tag.length > 1 && !this.tags.includes(tag)) {
+        if (this.tags.length < 10) {
+          tag.split(',').forEach(tag => {
+            this.tags.push(tag);
+            this.createTag();
+          });
+        }
       }
     }
   }
