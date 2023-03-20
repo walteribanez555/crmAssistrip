@@ -1,79 +1,99 @@
 
-    <div class="box-form">  
-        <form action="#" class="form ">
-
-            <div class="top">
-                
-                <h1 class="text-center" >{{formTitle}}</h1>
+    <div class="box-form">
+        <div class="grid-container">
+            <div class="grid-item-1">
+                <div class="container_form">    
+                    <header>Fechas y Destinos</header>
         
-                <div class="progressbar">
-                   
-                    <div class="progress" id="progress"></div>
-                    <div class="progress-step progress-step-active" data-title="Intro" ></div>
-                    <div class="progress-step" data-title="Contact"></div>
-                    <div class="progress-step" data-title="Id"></div>
-                    <div class="progress-step" data-title="Password"></div>
-                </div>
-            </div>
-    
-            <div class="form-step form-step-active"   >
-                
+                    <form action="#">
+                        <div class="form first">
+                            <div class="details personal">
+                                <span class="title">Las fechas del viaje</span>
+            
+                                <div class="fields">
+                                    <div class="input-field">
+                                        <label>Fecha de salida</label>
+                                        <input type="date" placeholder="Ingresar la fecha de salida" required>
+                                    </div>
+            
+                                    <div class="input-field">
+                                        <label>Fecha de llegada</label>
+                                        <input type="date" placeholder="Ingresar la fecha de llegada" required>
+                                    </div>
+                                    
+            
+                                    
+                                </div>
+                                
+                               
 
-              <app-list-card></app-list-card>
-                
-                
-              <button type="button"  class="btn btn-next  width-25 ml-auto">Next</button>
-                
-    
-            </div>
-    
-            <div class="form-step ">
-              <app-cliente-formulario></app-cliente-formulario>
+                                        <div class="wrapper">
+                                            <div class="title">
+                                              
+                                              <h2>Destinos</h2>
+                                            </div>
+                                            <div class="content">
+                                              <p>Agregar el pais destino al cual viajar</p>
+                                              <ul class="tagList">
+                                                <li *ngFor="let tag of tags"  >{{tag}} 
+                                                    <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20"  (click)="remove(tag)" ><path d="M6.062 15 5 13.938 8.938 10 5 6.062 6.062 5 10 8.938 13.938 5 15 6.062 11.062 10 15 13.938 13.938 15 10 11.062Z"/></svg>
+                                                </li>
+                                                <input class="tagInput"  type="text" spellcheck="false" disabled  >
+                                                </ul>
+                                            </div>
+                                      
+                                            <div class="options" >
+                                              <select class="listado" (change)="onSelect($event)" name="listado" id="listadoId">
+                                                  <option value="Nepal">Value1</option>
+                                                  <option value="Chechenia">Value2</option>
+                                                  <option value="Brazil">Value3</option>
+                                                  <option value="Si">Value4</option>
+                                                  <option value="Nepal">Value1</option>
+                                                  <option value="Chechenia">Value2</option>
+                                                  <option value="Brazil">Value3</option>
+                                                  <option value="Si">Value4</option>
+                                                  <option value="Nepal">Value1</option>
+                                                  <option value="Chechenia">Value2</option>
+                                                  <option value="Brazil">Value3</option>
+                                                  <option value="Si">Value4</option>
+                                                  <option value="Nepal">Value1</option>
+                                                  <option value="Chechenia">Value2</option>
+                                                  <option value="Brazil">Value3</option>
+                                                  <option value="Si">Value4</option>
+                                                  <option value="Nepal">Value1</option>
+                                                  <option value="Chechenia">Value2</option>
+                                                  <option value="Brazil">Value3</option>
+                                                  <option value="Si">Value4</option>
+                                                  <option value="Nepal">Value1</option>
+                                                  <option value="Chechenia">Value2</option>
+                                                  <option value="Brazil">Value3</option>
+                                                  <option value="Si">Value4</option>
+                                              </select>
+                                              
+                                            </div>
+                                          </div>
+                                
+                            </div>
+                            
+                            <div class="buttonSpace">
+                                <button type="button" class="nextBtn">
+                                    <span class="btnText">Next</span>
+                                </button>
+                            </div>
+                            
+                        </div>
+            
+                      
+                    </form>
+                </div>
+               
 
 
-              <div class="btns-group">
-                <button type="button"  class="btn btn-prev  ">Previous</button>
-                <button type="button"  class="btn btn-next  ">Next</button>
+            </div>
+            <div class="grid-item-2">Element 2 (1/3)</div>
 
-              </div>
-            </div>
-    
-    
-            <div class="form-step ">
-                <div class="input-group">
-                    <label for="dob">Date of Birth</label>
-                    <input type="date" name="dob" id="dob">
-                </div>
-                <div class="input-group">
-                    <label for="number">Number</label>
-                    <input type="text" name="number" id="number">
-                </div>
-                <div class="btns-group">
-                    <button type="button"  class="btn btn-prev  ">Previous</button>
-                    <button type="button"  class="btn btn-next  ">Next</button>
-    
-                </div>
-    
-            </div>
-    
-            <div class="form-step ">
-                <div class="input-group">
-                    <label for="password">Password</label>
-                    <input type="password" name="password" id="password">
-                </div>
-                <div class="input-group">
-                    <label for="confirmPassword">Confirm Password</label>
-                    <input type="password" name="confirmPassword" id="confirmPassword">
-                </div>
-                <div class="btns-group">
-                    <button type="button"  class="btn btn-prev  ">Previous</button>
-                    <button type="submit" value="Submit" class="btn btn-submit">Generar Poliza</button>
-    
-                </div>
-    
-            </div>
-    
-        </form>
+        </div>
+        
     
     
     

@@ -32,10 +32,12 @@ export class AppComponent {
       submenuItems: [
         {
           label: 'Encontrar Usuarios',
-          route: 'usuarios/listado-usuarios'
+          route: 'usuarios/listado-usuarios',
+          icon: '',
         },
         {
           label: 'Crear Usuarios',
+          icon : 'M11 17h2v-4h4v-2h-4V7h-2v4H7v2h4Zm1 5q-2.075 0-3.9-.788-1.825-.787-3.175-2.137-1.35-1.35-2.137-3.175Q2 14.075 2 12t.788-3.9q.787-1.825 2.137-3.175 1.35-1.35 3.175-2.138Q9.925 2 12 2t3.9.787q1.825.788 3.175 2.138 1.35 1.35 2.137 3.175Q22 9.925 22 12t-.788 3.9q-.787 1.825-2.137 3.175-1.35 1.35-3.175 2.137Q14.075 22 12 22Zm0-2q3.35 0 5.675-2.325Q20 15.35 20 12q0-3.35-2.325-5.675Q15.35 4 12 4 8.65 4 6.325 6.325 4 8.65 4 12q0 3.35 2.325 5.675Q8.65 20 12 20Zm0-8Z',
           route: 'usuarios/agregado-usuarios'
         }
       ]
@@ -47,19 +49,26 @@ export class AppComponent {
       submenuItems: [
         {
           label: 'Encontrar Plan',
-          route: 'planes/listado-planes'
+          route: 'planes/listado-planes',
+          icon: ''
         },
         {
           label: 'Crear Plan',
-          route: 'planes/crear-cobertura'
+          route: 'planes/crear-cobertura',
+          icon : 'M11 17h2v-4h4v-2h-4V7h-2v4H7v2h4Zm1 5q-2.075 0-3.9-.788-1.825-.787-3.175-2.137-1.35-1.35-2.137-3.175Q2 14.075 2 12t.788-3.9q.787-1.825 2.137-3.175 1.35-1.35 3.175-2.138Q9.925 2 12 2t3.9.787q1.825.788 3.175 2.138 1.35 1.35 2.137 3.175Q22 9.925 22 12t-.788 3.9q-.787 1.825-2.137 3.175-1.35 1.35-3.175 2.137Q14.075 22 12 22Zm0-2q3.35 0 5.675-2.325Q20 15.35 20 12q0-3.35-2.325-5.675Q15.35 4 12 4 8.65 4 6.325 6.325 4 8.65 4 12q0 3.35 2.325 5.675Q8.65 20 12 20Zm0-8Z',
+
         },
         {
           label: 'Create nueva categoria',
-          route: 'planes/crear-categoria'
+          route: 'planes/crear-categoria',
+          icon : 'M11 17h2v-4h4v-2h-4V7h-2v4H7v2h4Zm1 5q-2.075 0-3.9-.788-1.825-.787-3.175-2.137-1.35-1.35-2.137-3.175Q2 14.075 2 12t.788-3.9q.787-1.825 2.137-3.175 1.35-1.35 3.175-2.138Q9.925 2 12 2t3.9.787q1.825.788 3.175 2.138 1.35 1.35 2.137 3.175Q22 9.925 22 12t-.788 3.9q-.787 1.825-2.137 3.175-1.35 1.35-3.175 2.137Q14.075 22 12 22Zm0-2q3.35 0 5.675-2.325Q20 15.35 20 12q0-3.35-2.325-5.675Q15.35 4 12 4 8.65 4 6.325 6.325 4 8.65 4 12q0 3.35 2.325 5.675Q8.65 20 12 20Zm0-8Z',
+
         },
         {
           label: 'Crear nueva cobertura',
-          route: 'planes/crear-cobertura'
+          route: 'planes/crear-cobertura',
+          icon : 'M11 17h2v-4h4v-2h-4V7h-2v4H7v2h4Zm1 5q-2.075 0-3.9-.788-1.825-.787-3.175-2.137-1.35-1.35-2.137-3.175Q2 14.075 2 12t.788-3.9q.787-1.825 2.137-3.175 1.35-1.35 3.175-2.138Q9.925 2 12 2t3.9.787q1.825.788 3.175 2.138 1.35 1.35 2.137 3.175Q22 9.925 22 12t-.788 3.9q-.787 1.825-2.137 3.175-1.35 1.35-3.175 2.137Q14.075 22 12 22Zm0-2q3.35 0 5.675-2.325Q20 15.35 20 12q0-3.35-2.325-5.675Q15.35 4 12 4 8.65 4 6.325 6.325 4 8.65 4 12q0 3.35 2.325 5.675Q8.65 20 12 20Zm0-8Z',
+
         }
       ]
     },
@@ -70,11 +79,15 @@ export class AppComponent {
       submenuItems: [
         {
           label: 'Buscar cupon',
-          route : 'cupones/listado-cupones'
+          route : 'cupones/listado-cupones',
+          icon : ''
         },
         {
           label : 'Crear cupon',
-          route : 'cupones/crear-cupones'
+          route : 'cupones/crear-cupones',
+          icon : 'M11 17h2v-4h4v-2h-4V7h-2v4H7v2h4Zm1 5q-2.075 0-3.9-.788-1.825-.787-3.175-2.137-1.35-1.35-2.137-3.175Q2 14.075 2 12t.788-3.9q.787-1.825 2.137-3.175 1.35-1.35 3.175-2.138Q9.925 2 12 2t3.9.787q1.825.788 3.175 2.138 1.35 1.35 2.137 3.175Q22 9.925 22 12t-.788 3.9q-.787 1.825-2.137 3.175-1.35 1.35-3.175 2.137Q14.075 22 12 22Zm0-2q3.35 0 5.675-2.325Q20 15.35 20 12q0-3.35-2.325-5.675Q15.35 4 12 4 8.65 4 6.325 6.325 4 8.65 4 12q0 3.35 2.325 5.675Q8.65 20 12 20Zm0-8Z',
+
+
         }
       ]
     },
@@ -86,10 +99,13 @@ export class AppComponent {
         {
           label: 'Buscar campañas',
           route: 'camp-descuentos/listado-camp',
+          icon : ''
         },
         {
           label: 'Crear campañas',
-          route : 'camp-descuentos/crear-camp'
+          route : 'camp-descuentos/crear-camp',
+          icon : 'M11 17h2v-4h4v-2h-4V7h-2v4H7v2h4Zm1 5q-2.075 0-3.9-.788-1.825-.787-3.175-2.137-1.35-1.35-2.137-3.175Q2 14.075 2 12t.788-3.9q.787-1.825 2.137-3.175 1.35-1.35 3.175-2.138Q9.925 2 12 2t3.9.787q1.825.788 3.175 2.138 1.35 1.35 2.137 3.175Q22 9.925 22 12t-.788 3.9q-.787 1.825-2.137 3.175-1.35 1.35-3.175 2.137Q14.075 22 12 22Zm0-2q3.35 0 5.675-2.325Q20 15.35 20 12q0-3.35-2.325-5.675Q15.35 4 12 4 8.65 4 6.325 6.325 4 8.65 4 12q0 3.35 2.325 5.675Q8.65 20 12 20Zm0-8Z',
+
         }
       ]
 
@@ -102,14 +118,19 @@ export class AppComponent {
         {
           label: 'Buscar pólizas',
           route:'polizas/listado-polizas',
+          icon : ''
         },
         {
           label: 'Emitir póliza',
           route: 'polizas/generar-polizas',
+          icon : 'M11 17h2v-4h4v-2h-4V7h-2v4H7v2h4Zm1 5q-2.075 0-3.9-.788-1.825-.787-3.175-2.137-1.35-1.35-2.137-3.175Q2 14.075 2 12t.788-3.9q.787-1.825 2.137-3.175 1.35-1.35 3.175-2.138Q9.925 2 12 2t3.9.787q1.825.788 3.175 2.138 1.35 1.35 2.137 3.175Q22 9.925 22 12t-.788 3.9q-.787 1.825-2.137 3.175-1.35 1.35-3.175 2.137Q14.075 22 12 22Zm0-2q3.35 0 5.675-2.325Q20 15.35 20 12q0-3.35-2.325-5.675Q15.35 4 12 4 8.65 4 6.325 6.325 4 8.65 4 12q0 3.35 2.325 5.675Q8.65 20 12 20Zm0-8Z',
+
         },
         {
           label: 'Crear cotización',
-          route: 'polizas/generar-cotizacion'
+          route: 'polizas/generar-cotizacion',
+          icon : 'M11 17h2v-4h4v-2h-4V7h-2v4H7v2h4Zm1 5q-2.075 0-3.9-.788-1.825-.787-3.175-2.137-1.35-1.35-2.137-3.175Q2 14.075 2 12t.788-3.9q.787-1.825 2.137-3.175 1.35-1.35 3.175-2.138Q9.925 2 12 2t3.9.787q1.825.788 3.175 2.138 1.35 1.35 2.137 3.175Q22 9.925 22 12t-.788 3.9q-.787 1.825-2.137 3.175-1.35 1.35-3.175 2.137Q14.075 22 12 22Zm0-2q3.35 0 5.675-2.325Q20 15.35 20 12q0-3.35-2.325-5.675Q15.35 4 12 4 8.65 4 6.325 6.325 4 8.65 4 12q0 3.35 2.325 5.675Q8.65 20 12 20Zm0-8Z',
+
         }
       ]
 
@@ -121,23 +142,29 @@ export class AppComponent {
       submenuItems: [
         {
           label: 'Banner superior',
-          route: 'sitio-web/inicio/banner-superior'
+          route: 'sitio-web/inicio/banner-superior',
+          icon : ''
         },
         {
           label: 'Carusel principal',
           route: 'sitio-web/inicio/carusel-principal',
+          icon : ''
         },
         {
           label: 'Banner intermedio',
           route: 'sitio-web/inicio/banner-intermedio',
+          icon : ''
         },
         {
           label: 'Como funciona',
-          route: 'sitio-web/inicio/como-funciona'
+          route: 'sitio-web/inicio/como-funciona',
+          icon : ''
+
         },
         {
           label: 'Banner inferior',
-          route: 'sitio-web/inicio/banner-inferior'
+          route: 'sitio-web/inicio/banner-inferior',
+          icon : ''
         }
 
 
@@ -150,11 +177,13 @@ export class AppComponent {
       submenuItems: [
         {
           label:'Texto superior',
-          route: 'sitio-web/sobre-nosotros/texto-superior'
+          route: 'sitio-web/sobre-nosotros/texto-superior',
+          icon : ''
         },
         {
           label:'Banner intermedio',
-          route: 'sitio-web/sobre-nosotros/banner-intermedio'
+          route: 'sitio-web/sobre-nosotros/banner-intermedio',
+          icon : ''
         },
       ]
 
@@ -166,15 +195,19 @@ export class AppComponent {
       submenuItems: [
         {
           label:'Preguntas',
-          route:'sitio-web/ayuda/preguntas'
+          route:'sitio-web/ayuda/preguntas',
+          icon : ''
         },
         {
           label:'Contacto',
           route: 'sitio-web/ayuda/contacto',
+          icon : ''
         },
         {
           label: 'Redes sociales',
-          route: 'sitio-web/ayuda/redes-sociales'
+          route: 'sitio-web/ayuda/redes-sociales',
+          icon : ''
+        
         }
 
       ]

@@ -41,8 +41,7 @@ export class ListCardComponent {
     const track = carruselList.querySelector('#track') as HTMLElement;
     const carrusel = track.querySelectorAll('.carrusel');
     const carruselWidth = (carrusel[0] as HTMLElement).offsetWidth;
-    const trackWidth = track.offsetWidth;
-    const listWidth = carruselList.offsetWidth;
+    
     let leftPosition = 0;
     if (track.style.left !== '') {
       leftPosition = parseFloat(track.style.left.slice(0, -2)) * -1;

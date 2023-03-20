@@ -160,6 +160,11 @@ hr{
     margin-right: 20px;
 }
 
+.h-5{
+    
+    background-color: coral;
+    height: 3px;
+}
 
 
 .btn-outline:hover svg{
@@ -968,3 +973,4 @@ table td {
         width: 100%;
     }
 }
+
