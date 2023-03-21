@@ -249,19 +249,19 @@ form .buttons button , .backBtn{
     border: 1px solid #a6a6a6;
   }
   .content ul  li{
-    color: white;
+    color: var(--main-color);
     margin: 4px 3px;
     list-style: none;
     border-radius: 5px;
-    background-color: var(--main-color);
+    background-color: var(--body-bg);
     padding: 5px 8px 5px 10px;
-    border: 1px solid #e3e1e1;
+    border: 1px solid var(--main-color);
   }
   .content ul li svg{
     height: 20px;
     width: 20px;
-    fill: white;
-    margin-left: 8px;
+    fill: var(--main-color);
+    margin-right: 8px;
     font-size: 12px;
     cursor: pointer;
     border-radius: 50%;

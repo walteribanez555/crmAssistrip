@@ -9,7 +9,7 @@ import { Catalogo } from '../models/Data/Catalogo';
 })
 export class CatalogosService {
   
-  apiUrl  = environment.apiUrl + 'catalogo';
+  apiUrl  = environment.apiUrl + 'catalogos';
 
   constructor( private http : HttpClient) {  }
 
@@ -22,6 +22,23 @@ export class CatalogosService {
 
     return this.http.get<Catalogo[]>(this.apiUrl, {params});
     
+
+  }
+
+
+  getPaises(): Observable<Catalogo[]> {
+
+
+    let params = new HttpParams;
+
+    
+    params = params.append('id',"paises");
+
+
+    return this.http.get<Catalogo[]>(this.apiUrl, {params});
+
+
+
 
   }
 

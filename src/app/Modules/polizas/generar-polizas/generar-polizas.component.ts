@@ -1,4 +1,7 @@
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
+import { FormBuilder,FormGroup,Validators } from '@angular/forms';
+import { Catalogo } from 'src/app/models/Data/Catalogo';
+import { CatalogosService } from 'src/app/services/catalogos.service';
 
 
 // register Swiper custom elements
@@ -9,8 +12,17 @@ import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/co
   templateUrl: './generar-polizas.component.html',
   styleUrls: ['./generar-polizas.component.css']
 })
-export class GenerarPolizasComponent implements OnInit, OnDestroy{
+export class GenerarPolizasComponent implements OnInit{
 
+
+  formData = {
+    initialDate: '',
+    finalDate: ''
+  };
+
+
+  prueba : Boolean = false;
+  paises : Catalogo[] =[];
   
   @ViewChild('tagInput') tagInput?: ElementRef;
   @ViewChild('tagList') tagList?: ElementRef;
@@ -19,28 +31,47 @@ export class GenerarPolizasComponent implements OnInit, OnDestroy{
   maxTags: number = 10;
   tags: string[] = [];
 
-  countTags() {
-    this.tagInput?.nativeElement.focus();
-    this.tagNumber.nativeElement.innerText = this.maxTags - this.tags.length;
+
+  initialDate: string= '';
+
+  
+  constructor(
+    
+    private catalogoService : CatalogosService
+
+  ) {
+   }
+
+  ngOnInit(): void {
+    
+    this.catalogoService.getPaises().subscribe(
+      (data)=> {
+        this.paises = data.filter(item => item.status === 1);
+      })
+
+
   }
 
-  createTag() {
-    if(this.tagList){
-      this.tagList.nativeElement.innerHTML = '';
-      this.tags.slice().reverse().forEach(tag => {
-        let liTag = `<li>${tag} <i class="uit uit-multiply" (click)="remove(tag)"></i></li>`;
-        this.tagList?.nativeElement.insertAdjacentHTML('afterbegin', liTag);
-        console.log("Hola");
-      });
-      this.countTags();
-    }
-    
+
+  onSubmit() {
+    console.log("Hola mundo")
+    console.log('Form data:', this.formData);
+    // You can perform any further actions with the form data here
   }
+
+  loadForm(){
+    console.log("Hola mundo");
+  }
+
+  
+
+  
+  
 
   remove(tag: string) {
     let index = this.tags.indexOf(tag);
     this.tags = [...this.tags.slice(0, index), ...this.tags.slice(index + 1)];
-    this.createTag();
+    
   }
 
   addTag(event: any) {
@@ -55,14 +86,19 @@ export class GenerarPolizasComponent implements OnInit, OnDestroy{
     if(tag!=="pais"){
 
       if (tag.length > 1 && !this.tags.includes(tag)) {
-        if (this.tags.length < 10) {
+        if (this.tags.length < 20) {
           tag.split(',').forEach(tag => {
             this.tags.push(tag);
-            this.createTag();
           });
         }
       }
     }
+  }
+
+
+  comprobarIngresoDatos(){
+    console.log(this.tags);
+    console.log(this.initialDate);
   }
 
   onSelect(event: Event) {
@@ -77,96 +113,10 @@ export class GenerarPolizasComponent implements OnInit, OnDestroy{
 
 
 
-  // formStepsNum = 0;
-  // progressSteps?: NodeListOf<Element>;
-  // formSteps?: NodeListOf<Element>;
-  // progress?: HTMLElement | null ;
 
 
-  // formsTitle : string[] = [
-  //   "Elegir Poliza",
-  //   "Agregar extensible",
-  //   "Llenar datos"
-  // ]
 
-  // formTitle: string = this.formsTitle[0];
-
- 
-
-  constructor() {
-   }
-
-  ngOnInit(): void {
-    
-  }
-
-  ngOnDestroy(): void {
-    
-  }
-
-  ngAfterViewInit() {
-    
-      // this.progressSteps = document.querySelectorAll(".progress-step");
-      // this.formSteps = document.querySelectorAll(".form-step");
-      // this.progress = document.getElementById("progress");
-        
-      // const prevBtns = document.querySelectorAll(".btn-prev");
-      // const nextBtns = document.querySelectorAll(".btn-next");
   
-      // rest of your code here
-      // nextBtns.forEach(btn => {
-      //   btn.addEventListener("click", ()=> {
-      //     this.formStepsNum++;
-      //     this.formTitle = this.formsTitle[this.formStepsNum];
-      //     this.updateFormSteps();
-      //     this.updateProgressbar();
-      //   })
-      // })
-  
-      // prevBtns.forEach(btn => {
-      //   btn.addEventListener("click", ()=> {
-      //     this.formStepsNum--;
-      //     this.formTitle = this.formsTitle[this.formStepsNum];
-      //     this.updateFormSteps();
-      //     this.updateProgressbar();
-      //   })
-      // })
-    
-
-    
-  }
-
-  // updateFormSteps(){
-
-    
-  //   // this.formSteps?.forEach(formStep =>  {
-  //   //   formStep.classList.contains("form-step-active") &&
-  //   //   formStep.classList.remove("form-step-active")
-  //   // })
-  //   // if(this.formSteps){
-  //   //   this.formSteps[this.formStepsNum].classList.add("form-step-active")
-  //   // }
-    
-  // }
-
-  // updateProgressbar(){
-
-    
-  //   // this.progressSteps?.forEach((progressStep, idx) => {
-  //   //   if(idx < this.formStepsNum + 1){
-  //   //     progressStep.classList.add("progress-step-active")
-  //   //   } else {
-  //   //     progressStep.classList.remove("progress-step-active")
-  //   //   }
-  //   // });
-
-  //   // const progressActive = document.querySelectorAll(".progress-step-active");
-  //   // if (this.progress) {
-  //   //   this.progress.style.width = ((progressActive.length - 1) / (this.progressSteps!.length - 1)) * 100 + "%";
-  //   // }
-    
-    
-  // }
 
   
 }
