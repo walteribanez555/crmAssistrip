@@ -10,7 +10,8 @@ import { ServicesModule } from 'src/app/services/services.module';
 import { PipesModule } from 'src/app/pipes/pipes.module';
 import { ListCardComponent } from 'src/app/components/listCard/list-card.component';
 import { ClienteFormularioComponent } from 'src/app/components/cliente-formulario/cliente-formulario.component';
-import { FormsModule, ReactiveFormsModule  } from "@angular/forms"
+import { FormsModule, } from "@angular/forms"
+
 
 
 
@@ -21,7 +22,7 @@ import { FormsModule, ReactiveFormsModule  } from "@angular/forms"
     GenerarPolizasComponent,
     GenerarCotizacionComponent,
     ListCardComponent,
-    ClienteFormularioComponent
+    ClienteFormularioComponent,
     
     
   ],
@@ -31,7 +32,6 @@ import { FormsModule, ReactiveFormsModule  } from "@angular/forms"
     PolizasRoutingModule,
     ServicesModule,
     PipesModule,
-    ReactiveFormsModule,
     FormsModule
     
   ],

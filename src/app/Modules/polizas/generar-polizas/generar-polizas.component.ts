@@ -17,11 +17,15 @@ export class GenerarPolizasComponent implements OnInit{
 
   formData = {
     initialDate: '',
-    finalDate: ''
+    finalDate: '',
+    
   };
 
 
-  prueba : Boolean = false;
+  datos: any = {}
+
+
+  diffDays = -1;
   paises : Catalogo[] =[];
   
   @ViewChild('tagInput') tagInput?: ElementRef;
@@ -32,7 +36,7 @@ export class GenerarPolizasComponent implements OnInit{
   tags: string[] = [];
 
 
-  initialDate: string= '';
+  
 
   
   constructor(
@@ -53,16 +57,42 @@ export class GenerarPolizasComponent implements OnInit{
   }
 
 
-  onSubmit() {
-    console.log("Hola mundo")
-    console.log('Form data:', this.formData);
-    // You can perform any further actions with the form data here
-  }
+  agregar() {
+    
 
-  loadForm(){
-    console.log("Hola mundo");
-  }
+    const { initialDate, finalDate} = this.formData;
+    const paises = this.tags;
+    
 
+    this.datos = {
+      initialDate,
+      finalDate,
+      paises
+
+    }
+ }  
+
+
+  changeDate(event : any){ 
+    console.log(event.target.value);
+ }
+
+ comparar(){
+  const date1: Date = new Date(this.formData.initialDate);
+  const date2: Date = new Date(this.formData.finalDate);
+
+    // Get the difference in milliseconds
+    const diffInMs = Math.abs(date2.getTime() - date1.getTime());
+
+    // Convert the difference to days
+    const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
+
+    if(!isNaN(diffInDays)){
+      this.diffDays= diffInDays;
+    }
+ }
+
+ 
   
 
   
@@ -96,10 +126,7 @@ export class GenerarPolizasComponent implements OnInit{
   }
 
 
-  comprobarIngresoDatos(){
-    console.log(this.tags);
-    console.log(this.initialDate);
-  }
+  
 
   onSelect(event: Event) {
     const target = event.target as HTMLSelectElement;
