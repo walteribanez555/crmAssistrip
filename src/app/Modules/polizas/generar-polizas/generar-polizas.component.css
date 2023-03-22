@@ -24,7 +24,7 @@ body{
 
 .grid-container {
     display: grid;
-
+    padding: 20px;
     grid-template-columns: 2fr 1fr; /* set column widths to 2/3 and 1/3 of the available space */
     grid-gap: 10px; /* set gap between grid items */
   }
@@ -34,8 +34,16 @@ body{
     padding: 10px;
   }
   .grid-item-2 {
+    height: 75vh;
+    width: 400px;
+    position: absolute;
+    right: 20px;
+    margin-right: 20px;
+    background: var(--body-bg);
+    border-radius: 10px;
+    padding: 18px 25px 20px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.06);
     
-    padding: 10px;
   }
   /* apply responsive styles */
   @media (max-width: 768px) {
@@ -46,6 +54,11 @@ body{
     .options .listado{
         width: 100%;
         color: black;  
+      }
+      .grid-item-2{
+        position:relative;
+        height: 100%;
+        width: 100%;
       }
   }
 
@@ -92,7 +105,10 @@ form.secActive .form.second{
     opacity: 1;
     pointer-events: auto;
     transform: translateX(0);
+    
 }
+
+
 form.secActive .form.first{
     opacity: 0;
     pointer-events: none;
@@ -326,3 +342,61 @@ form .buttons button , .backBtn{
   .details button:hover{
     background: var(--main-color);
   }
+
+
+
+  .listPolicies { 
+    width: 100%;
+    height: 100%;
+}
+
+.listPolicies  .contentBx{
+    
+    margin: 10px 20px;
+    border: 1px solid var(--text-color);
+
+}
+
+.headerPolicie{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+}
+
+
+.listPolicies .contentBx .label{
+    position:  relative;
+    padding: 10px;
+    
+   
+    
+    cursor: pointer;
+}
+
+
+
+
+
+
+.listPolicies  .contentBx .content { 
+    position: relative;
+    
+    background: var(--body-bg);
+    height: 0;
+    overflow: hidden;
+    
+    overflow-y: auto;
+
+}
+
+
+.listPolicies .contentBx.active .content
+{
+    height: fit-content;
+    padding:  10px;
+}
+
+
+
+

@@ -21,9 +21,11 @@
   <ul class="sidebar-menu">
       <li class="sidebar-submenu" *ngFor="let menuItem of menuItems">
           <div class="sidebar-menu-dropdown" (click)="toggleDropdown(menuItem)">
-            <i class='bx bx-category '></i>
+            
             <span >{{ menuItem.label  }}</span>
-            <div class="dropdown-icon"></div>
+            <div class="dropdown-icon">
+                <i class='bx bx-category '></i>
+            </div>
           </div>
           <hr>
           <ul class="sidebar-menu sidebar-menu-dropdown-content" [style.height]="menuItem.dropdownHeight" [class.active]="menuItem.isDropdownOpen">

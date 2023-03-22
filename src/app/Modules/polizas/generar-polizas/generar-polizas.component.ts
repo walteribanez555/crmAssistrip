@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder,FormGroup,Validators } from '@angular/forms';
 import { Catalogo } from 'src/app/models/Data/Catalogo';
+import { policiesForm } from 'src/app/models/Pages/policiesForm.model';
 import { CatalogosService } from 'src/app/services/catalogos.service';
 
 
@@ -21,6 +22,53 @@ export class GenerarPolizasComponent implements OnInit{
     
   };
 
+
+
+  listPolicies : policiesForm[] = [
+    {
+      label: "Persona de prueba",
+      isDropdownOpen : false,
+      datos : [
+        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates nemo facere amet facilis aperiam minima, consequatur, dolore quasi magnam officia rerum veritatis sunt sint iure, incidunt assumenda commodi distinctio ducimus dignissimos. Accusantium odio recusandae iure soluta similique ducimus cupiditate blanditiis, id, esse aut sapiente explicabo. Mollitia dolores sit repellendus vero."
+
+      ]
+    },
+    {
+      label: "Persona de prueba 2",
+      isDropdownOpen : false,
+      datos : [
+        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates nemo facere amet facilis aperiam minima, consequatur, dolore quasi magnam officia rerum veritatis sunt sint iure, incidunt assumenda commodi distinctio ducimus dignissimos. Accusantium odio recusandae iure soluta similique ducimus cupiditate blanditiis, id, esse aut sapiente explicabo. Mollitia dolores sit repellendus vero."
+      ]
+    },
+    {
+      label: "Persona de prueba 2",
+      isDropdownOpen : false,
+      datos : [
+        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates nemo facere amet facilis aperiam minima, consequatur, dolore quasi magnam officia rerum veritatis sunt sint iure, incidunt assumenda commodi distinctio ducimus dignissimos. Accusantium odio recusandae iure soluta similique ducimus cupiditate blanditiis, id, esse aut sapiente explicabo. Mollitia dolores sit repellendus vero."
+      ]
+    },
+    {
+      label: "Persona de prueba 2",
+      isDropdownOpen : false,
+      datos : [
+        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates nemo facere amet facilis aperiam minima, consequatur, dolore quasi magnam officia rerum veritatis sunt sint iure, incidunt assumenda commodi distinctio ducimus dignissimos. Accusantium odio recusandae iure soluta similique ducimus cupiditate blanditiis, id, esse aut sapiente explicabo. Mollitia dolores sit repellendus vero."
+      ]
+    },
+    {
+      label: "Persona de prueba 2",
+      isDropdownOpen : false,
+      datos : [
+        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates nemo facere amet facilis aperiam minima, consequatur, dolore quasi magnam officia rerum veritatis sunt sint iure, incidunt assumenda commodi distinctio ducimus dignissimos. Accusantium odio recusandae iure soluta similique ducimus cupiditate blanditiis, id, esse aut sapiente explicabo. Mollitia dolores sit repellendus vero."
+      ]
+    },
+    {
+      label: "Persona de prueba 2",
+      isDropdownOpen : false,
+      datos : [
+        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates nemo facere amet facilis aperiam minima, consequatur, dolore quasi magnam officia rerum veritatis sunt sint iure, incidunt assumenda commodi distinctio ducimus dignissimos. Accusantium odio recusandae iure soluta similique ducimus cupiditate blanditiis, id, esse aut sapiente explicabo. Mollitia dolores sit repellendus vero."
+      ]
+    }
+  ]
 
   datos: any = {}
 
@@ -77,9 +125,13 @@ export class GenerarPolizasComponent implements OnInit{
     this.stepForm +=1;
  }  
 
+ togglePolicie(policie : any){
+  policie.isDropdownOpen = !policie.isDropdownOpen;
+ }
+
 
  agregarPolizas(){
-  
+
  }
 
  prevForm(){

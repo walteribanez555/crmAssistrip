@@ -90,18 +90,24 @@
                     </div>
 
                     <div class="form second"  *ngIf="stepForm === 2">
-                        <form   (ngSubmit)="agregar()">
+                        <form   (ngSubmit)="agregarPolizas()">
                             <div class="form second">
                                 <div class="details personal">
                                     <header>Listado de personas</header>
 
-                
-                                    
-                                    
-                                   
-    
-                                        
-                                    
+                                    <div class="listPolicies">
+                                        <div *ngFor="let policy of listPolicies" class="contentBx" [class.active]="policy.isDropdownOpen">
+                                            <div class="headerPolicie" (click)="togglePolicie(policy)" > 
+                                                <div class="label">{{policy.label}}</div>
+                                               <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24"><path d="M480 711 240 471l56-56 184 184 184-184 56 56-240 240Z"/></svg>
+                                            </div>
+                                            <div class="content"    >
+                                                <p>
+                                                   {{policy.datos}}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>       
                                 </div>
 
 
