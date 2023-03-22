@@ -87,11 +87,7 @@ header::before{
     background-color: var( --body-bg);
     transition: 0.3s ease;
 }
-.container_form form .form.second{
-    opacity: 0;
-    pointer-events: none;
-    transform: translateX(100%);
-}
+
 form.secActive .form.second{
     opacity: 1;
     pointer-events: auto;
@@ -160,7 +156,8 @@ form .fields .input-field{
     outline: none;
     color: #fff;
     border-radius: 5px;
-    margin: 25px 0;
+    margin: 10px;
+    padding: 10px;
     background-color: var(--logo-color);
     transition: all 0.3s linear;
     cursor: pointer;

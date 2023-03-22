@@ -34,7 +34,7 @@ export class GenerarPolizasComponent implements OnInit{
 
   maxTags: number = 10;
   tags: string[] = [];
-
+  stepForm: number = 1;
 
   
 
@@ -62,6 +62,9 @@ export class GenerarPolizasComponent implements OnInit{
 
     const { initialDate, finalDate} = this.formData;
     const paises = this.tags;
+
+
+    console.log(paises);
     
 
     this.datos = {
@@ -70,7 +73,18 @@ export class GenerarPolizasComponent implements OnInit{
       paises
 
     }
+
+    this.stepForm +=1;
  }  
+
+
+ agregarPolizas(){
+  
+ }
+
+ prevForm(){
+  this.stepForm -=1;
+ }
 
 
   changeDate(event : any){ 

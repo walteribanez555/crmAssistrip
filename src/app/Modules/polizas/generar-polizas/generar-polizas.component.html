@@ -3,8 +3,9 @@
         <div class="grid-container">
             <div class="grid-item-1">
                 <div class="container_form">    
-                    <header>Fechas y Destinos</header>
-                    <div class="form first">
+                    
+                    <div class="form first"  *ngIf="stepForm === 1">
+                        <header>Fechas y Destinos</header>
                         <form   (ngSubmit)="agregar()">
                             <div class="form first">
                                 <div class="details personal">
@@ -85,9 +86,47 @@
                           <!-- <button type="submit">Guardar</button> -->
                         </form>
 
-                        <div class="form second">
+                        
+                    </div>
+
+                    <div class="form second"  *ngIf="stepForm === 2">
+                        <form   (ngSubmit)="agregar()">
+                            <div class="form second">
+                                <div class="details personal">
+                                    <header>Listado de personas</header>
+
+                
+                                    
+                                    
+                                   
+    
+                                        
+                                    
+                                </div>
+
+
+                                <div class="buttonSpace">
+                                    
+                                        <button type="button"  (click)="prevForm()" class="backBtn">
+                                            <span class="btnText"  >Prev</span>
+                                        </button>
+                                        
+                                        <button type="submit" class="nextBtn">
+                                            <span class="btnText">Next</span>
+                                        </button>
+                                    
+
+                                </div>
+
+                                
+                                
+                                
+                            </div>
                             
-                        </div>
+                          <!-- <button type="submit">Guardar</button> -->
+                        </form>
+
+                        
                     </div>
                     
                 </div>
