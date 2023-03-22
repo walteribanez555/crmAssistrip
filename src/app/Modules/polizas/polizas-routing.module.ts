@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { FormsModule } from "@angular/forms";
+import { FormControl, FormGroup, FormsModule } from "@angular/forms";
 import { RouterModule, Routes } from "@angular/router";
 import { GenerarCotizacionComponent } from "./generar-cotizacion/generar-cotizacion.component";
 import { GenerarPolizasComponent } from "./generar-polizas/generar-polizas.component";
@@ -33,7 +33,8 @@ const routes : Routes = [
 @NgModule({
     imports: [
         RouterModule.forChild(routes),
-        FormsModule
+        FormsModule,
+        
         
     ],
     exports: [RouterModule],

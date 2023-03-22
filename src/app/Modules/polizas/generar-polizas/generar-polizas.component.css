@@ -37,7 +37,7 @@ body{
     height: 75vh;
     width: 400px;
     position: absolute;
-    right: 20px;
+    right: 10px;
     margin-right: 20px;
     background: var(--body-bg);
     border-radius: 10px;
@@ -46,7 +46,7 @@ body{
     
   }
   /* apply responsive styles */
-  @media (max-width: 768px) {
+  @media (max-width: 1050px) {
     .grid-container {
       grid-template-columns: 1fr; /* switch to one column layout for small screens */
     }
@@ -91,7 +91,7 @@ header::before{
 .container_form form{
     
     margin-top: 16px;
-    min-height: 490px;
+   
     background-color: var(--body-bg);
     
 }
@@ -318,6 +318,9 @@ form .buttons button , .backBtn{
 }
 
 
+
+
+
   
 
   
@@ -352,7 +355,7 @@ form .buttons button , .backBtn{
 
 .listPolicies  .contentBx{
     
-    margin: 10px 20px;
+    margin: 10px ;
     border: 1px solid var(--text-color);
 
 }
@@ -392,9 +395,30 @@ form .buttons button , .backBtn{
 
 
 .listPolicies .contentBx.active .content
-{
-    height: fit-content;
+{   box-sizing: border-box;
+    height: 100%;
     padding:  10px;
+    justify-content: center;
+}
+
+.policyForm{
+  height: 100%;
+  align-items: center;
+  width: fit-content;
+}
+
+
+.policyForm .fields .input-field{
+  width: calc(100% / 2 - 5px);
+}
+
+
+@media (max-width: 550px) {
+  .policyForm .fields .input-field{
+      width: 100%;
+  }
+
+  
 }
 
 

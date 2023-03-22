@@ -90,21 +90,62 @@
                     </div>
 
                     <div class="form second"  *ngIf="stepForm === 2">
-                        <form   (ngSubmit)="agregarPolizas()">
+                        <form   >
                             <div class="form second">
+                                <header>Listado de personas</header>
                                 <div class="details personal">
-                                    <header>Listado de personas</header>
+                                    
+
+                                    
 
                                     <div class="listPolicies">
                                         <div *ngFor="let policy of listPolicies" class="contentBx" [class.active]="policy.isDropdownOpen">
                                             <div class="headerPolicie" (click)="togglePolicie(policy)" > 
-                                                <div class="label">{{policy.label}}</div>
+                                                <div class="label">{{policy.poliza.name}} {{policy.poliza.lastName}} </div>
                                                <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24"><path d="M480 711 240 471l56-56 184 184 184-184 56 56-240 240Z"/></svg>
                                             </div>
-                                            <div class="content"    >
-                                                <p>
-                                                   {{policy.datos}}
-                                                </p>
+                                            <div class="content">
+
+                                                <form class="policyForm" [formGroup]="policy.poliza.itemForm" (ngSubmit)="onSubmit(policy)">
+                                                    <div class="fields">
+                                                        <div class="input-field">
+                                                            <label>Item Name:</label>
+                                                            <input type="text" formControlName="name">
+                     
+                                                        </div>
+                                                        <div class="input-field">
+                                                            <label>Item Quantity:</label>
+                                                            <input type="text" formControlName="lastName">
+                                                        </div>
+                                                        <div class="input-field">
+                                                            <label>Item Quantity:</label>
+                                                            <input type="text" formControlName="lastName">
+                                                        </div>
+                                                        <div class="input-field">
+                                                            <label>Item Quantity:</label>
+                                                            <input type="text" formControlName="lastName">
+                                                        </div>
+                                                        
+                                                        <!-- <div class="input-field">
+                                                            <label>Item Name:</label>
+                                                            <input type="text" formControlName="name">
+                     
+                                                        </div>
+                                                        <div class="input-field">
+                                                            <label>Item Quantity:</label>
+                                                            <input type="text" formControlName="lastName">
+                                                        </div> -->
+                                                        
+                                                    </div>
+
+                                                    <div class="buttonSpace">
+                                                        <button type="submit">Edit Item</button>
+                                                        <button (click)="deleteItem(policy)">Delete Item</button>
+                                                    </div>
+                                                </form>
+
+
+
                                             </div>
                                         </div>
                                     </div>       
@@ -112,12 +153,15 @@
 
 
                                 <div class="buttonSpace">
+                                        
                                     
                                         <button type="button"  (click)="prevForm()" class="backBtn">
                                             <span class="btnText"  >Prev</span>
                                         </button>
+
+                                        <button (click)="addItem()">Add Item</button>
                                         
-                                        <button type="submit" class="nextBtn">
+                                        <button type="submit" class="nextBtn"  (click)="comprobarInfo()">
                                             <span class="btnText">Next</span>
                                         </button>
                                     
@@ -143,9 +187,26 @@
             <div class="grid-item-2">
                 <header>Datos de las polizas</header>
 
+                <!-- <button (click)="addItem()">Add Item</button>
+
+                                    <div *ngFor="let item of items">
+                                    <form [formGroup]="item.itemForm" (ngSubmit)="onSubmit(item)">
+                                        <label>Item Name:</label>
+                                        <input type="text" formControlName="name">
+                                        <label>Item Quantity:</label>
+                                        <input type="number" formControlName="quantity">
+                                        <button type="submit">Edit Item</button>
+                                        <button (click)="deleteItem(item)">Delete Item</button>
+                                    </form>
+                                    </div> -->
+
                 <p>Fecha de salida : {{datos.initialDate}}</p>
                 <p>Fecha de llegada : {{datos.finalDate}}</p>
                 <p>Paises destino: {{datos.paises}}</p>
+
+
+
+              
 
 
             </div>

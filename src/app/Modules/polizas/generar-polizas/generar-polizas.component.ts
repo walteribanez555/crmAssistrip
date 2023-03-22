@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
-import { FormBuilder,FormGroup,Validators } from '@angular/forms';
+import { FormBuilder,FormGroup,Validators,FormControl } from '@angular/forms';
 import { Catalogo } from 'src/app/models/Data/Catalogo';
+
+import { policie } from 'src/app/models/Pages/policie.model';
 import { policiesForm } from 'src/app/models/Pages/policiesForm.model';
 import { CatalogosService } from 'src/app/services/catalogos.service';
 
@@ -16,58 +18,83 @@ import { CatalogosService } from 'src/app/services/catalogos.service';
 export class GenerarPolizasComponent implements OnInit{
 
 
+  
+  nextId = 0;
+  comprobarInfo(){
+    this.listPolicies.forEach(item => {
+      console.log(item.poliza.name);
+    });
+  }
+
+  createItemForm(): FormGroup {
+    return new FormGroup({
+      name: new FormControl(''),
+      lastName: new FormControl('')
+    });
+  }
+
+  addItem() {
+
+
+    const newItem: policie = {
+      name: 'Nueva Cliente',
+      lastName: "",
+      itemForm: this.createItemForm()
+    };
+
+
+    const  PolizaForm : policiesForm = {
+      id: this.nextId++,
+      isDropdownOpen : false,
+      poliza : newItem
+    }
+    this.listPolicies.push(PolizaForm);
+  }
+
+  onSubmit(item: policiesForm) {
+    console.log(`Editing item: ${item.poliza.name} (${item.poliza.lastName})`);
+    console.log(`Item form value:`, item.poliza.itemForm.value);
+    const formValue = item.poliza.itemForm.value;
+    item.poliza.name = formValue.name;
+    item.poliza.lastName = formValue.lastName;
+  }
+
+  deleteItem(item: policiesForm) {
+    const index = this.listPolicies.findIndex(i => i.id === item.id);
+    if (index !== -1) {
+      this.listPolicies.splice(index, 1);
+    }
+  }
+
+
   formData = {
     initialDate: '',
     finalDate: '',
     
   };
 
+  
+
+
+  itemForm: FormGroup;
+
 
 
   listPolicies : policiesForm[] = [
     {
-      label: "Persona de prueba",
-      isDropdownOpen : false,
-      datos : [
-        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates nemo facere amet facilis aperiam minima, consequatur, dolore quasi magnam officia rerum veritatis sunt sint iure, incidunt assumenda commodi distinctio ducimus dignissimos. Accusantium odio recusandae iure soluta similique ducimus cupiditate blanditiis, id, esse aut sapiente explicabo. Mollitia dolores sit repellendus vero."
+      id: this.nextId++,
 
-      ]
-    },
-    {
-      label: "Persona de prueba 2",
       isDropdownOpen : false,
-      datos : [
-        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates nemo facere amet facilis aperiam minima, consequatur, dolore quasi magnam officia rerum veritatis sunt sint iure, incidunt assumenda commodi distinctio ducimus dignissimos. Accusantium odio recusandae iure soluta similique ducimus cupiditate blanditiis, id, esse aut sapiente explicabo. Mollitia dolores sit repellendus vero."
-      ]
+      poliza : {
+        
+        name: 'Este es un cliente',
+        lastName : '',
+        itemForm: this.createItemForm()
+      },
+
+      
     },
-    {
-      label: "Persona de prueba 2",
-      isDropdownOpen : false,
-      datos : [
-        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates nemo facere amet facilis aperiam minima, consequatur, dolore quasi magnam officia rerum veritatis sunt sint iure, incidunt assumenda commodi distinctio ducimus dignissimos. Accusantium odio recusandae iure soluta similique ducimus cupiditate blanditiis, id, esse aut sapiente explicabo. Mollitia dolores sit repellendus vero."
-      ]
-    },
-    {
-      label: "Persona de prueba 2",
-      isDropdownOpen : false,
-      datos : [
-        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates nemo facere amet facilis aperiam minima, consequatur, dolore quasi magnam officia rerum veritatis sunt sint iure, incidunt assumenda commodi distinctio ducimus dignissimos. Accusantium odio recusandae iure soluta similique ducimus cupiditate blanditiis, id, esse aut sapiente explicabo. Mollitia dolores sit repellendus vero."
-      ]
-    },
-    {
-      label: "Persona de prueba 2",
-      isDropdownOpen : false,
-      datos : [
-        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates nemo facere amet facilis aperiam minima, consequatur, dolore quasi magnam officia rerum veritatis sunt sint iure, incidunt assumenda commodi distinctio ducimus dignissimos. Accusantium odio recusandae iure soluta similique ducimus cupiditate blanditiis, id, esse aut sapiente explicabo. Mollitia dolores sit repellendus vero."
-      ]
-    },
-    {
-      label: "Persona de prueba 2",
-      isDropdownOpen : false,
-      datos : [
-        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates nemo facere amet facilis aperiam minima, consequatur, dolore quasi magnam officia rerum veritatis sunt sint iure, incidunt assumenda commodi distinctio ducimus dignissimos. Accusantium odio recusandae iure soluta similique ducimus cupiditate blanditiis, id, esse aut sapiente explicabo. Mollitia dolores sit repellendus vero."
-      ]
-    }
+    
   ]
 
   datos: any = {}
@@ -92,6 +119,11 @@ export class GenerarPolizasComponent implements OnInit{
     private catalogoService : CatalogosService
 
   ) {
+
+    this.itemForm = new FormGroup({
+      name: new FormControl(''),
+      email: new FormControl('')
+    });
    }
 
   ngOnInit(): void {

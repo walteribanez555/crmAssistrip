@@ -1,5 +1,8 @@
+import { policie } from "./policie.model"
+
 export interface policiesForm{
-    label: string,
+    id : number,
     isDropdownOpen :boolean,
-    datos : string[]
+    poliza : policie
+    
 }

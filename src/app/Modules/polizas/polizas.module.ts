@@ -10,7 +10,7 @@ import { ServicesModule } from 'src/app/services/services.module';
 import { PipesModule } from 'src/app/pipes/pipes.module';
 import { ListCardComponent } from 'src/app/components/listCard/list-card.component';
 import { ClienteFormularioComponent } from 'src/app/components/cliente-formulario/cliente-formulario.component';
-import { FormsModule, } from "@angular/forms"
+import { FormsModule,FormGroup, FormControl, ReactiveFormsModule } from "@angular/forms"
 
 
 
@@ -32,7 +32,9 @@ import { FormsModule, } from "@angular/forms"
     PolizasRoutingModule,
     ServicesModule,
     PipesModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
+        
     
   ],
   exports: [ 
