@@ -27,11 +27,14 @@
                                 </div>
                                 <div class="input-field">
                                     <label>Item Quantity:</label>
-                                    <input type="text" formControlName="lastName">
+                                    <input type="date" (change)="onDateChange($event, policy)"  formControlName="birthday" >
                                 </div>
                                 <div class="input-field">
                                     <label>Item Quantity:</label>
-                                    <input type="text" formControlName="lastName">
+                                    <select class="listado" name="listado" id="listadoId">
+                                        <option value="pais">Seleccione un plan</option>
+                                        <option  *ngFor="let plan of policy.listPlanes"  value={{plan.servicio_id}} > {{plan.servicio}}  </option>
+                                    </select>
                                 </div>
                                 
                                 <!-- <div class="input-field">

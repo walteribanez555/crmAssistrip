@@ -4,6 +4,6 @@ export interface policie{
    
     name: string;
     lastName: string;
-
+    birthday : string,
     itemForm: FormGroup;
 }

@@ -4,19 +4,19 @@
             <div class="grid-item-1">
                 <div class="container_form">    
                     
-                    <div class="form first"  *ngIf="stepForm === 2">
-                        <app-form-dates-destination  [countries]="paises"></app-form-dates-destination>  
+                    <div class="form first"  *ngIf="stepForm === 1">
+                        <app-form-dates-destination (myOutputEvent)="agregar($event)"  [countries]="paises"></app-form-dates-destination>  
                         <div class="buttonSpace">
                 
-                                <button type="submit" class="nextBtn btn"  (click)="comprobarInfo()">
+                                <button type="submit" class="nextBtn btn"  >
                                     <span class="btnText">Next</span>
                                 </button>
                             
                         </div>                    
                     </div>
 
-                    <div class="form second"  *ngIf="stepForm === 1">                        
-                        <app-list-policies-group></app-list-policies-group>
+                    <div class="form second"  *ngIf="stepForm === 2">                        
+                        <app-list-policies-group  [fechaFinal]="diaViaje" [planes]="planesCubren" ></app-list-policies-group>
                         <div class="buttonSpace">
                 
             
@@ -25,7 +25,7 @@
                             </button>
 
                             
-                            <button type="submit" class="nextBtn  btn"  (click)="comprobarInfo()">
+                            <button type="submit" class="nextBtn  btn"  >
                                 <span class="btnText">Next</span>
                             </button>
                         
@@ -39,9 +39,9 @@
             <div class="grid-item-2">
                 <header>Datos de las polizas</header>
 
-                <p>Fecha de salida : {{datos.initialDate}}</p>
-                <p>Fecha de llegada : {{datos.finalDate}}</p>
-                <p>Paises destino: {{datos.paises}}</p>
+                <p>Fecha de salida : {{dataFormDestiny.initialDate}}</p>
+                <p>Fecha de llegada : {{dataFormDestiny.finalDate}}</p>
+                <p>Paises destino: {{dataFormDestiny.tags}}</p>
 
             </div>
 

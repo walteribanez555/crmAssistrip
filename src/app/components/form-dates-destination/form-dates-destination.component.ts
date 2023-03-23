@@ -1,6 +1,7 @@
-import { Component, OnInit,Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit,Input,Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup,FormControl } from '@angular/forms';
 import { Catalogo } from 'src/app/models/Data/Catalogo';
+import { datesDestiny } from 'src/app/models/Pages/datesDestiny.model';
 import { CatalogosService } from 'src/app/services/catalogos.service';
 
 
@@ -12,7 +13,7 @@ import { CatalogosService } from 'src/app/services/catalogos.service';
 export class FormDatesDestinationComponent implements OnInit {
 
   @Input() countries: Catalogo[];
-
+  @Output() myOutputEvent = new EventEmitter<datesDestiny>();
 
   formData = {
     initialDate: '',
@@ -110,7 +111,17 @@ export class FormDatesDestinationComponent implements OnInit {
   
 
     agregar(){
-      console.log(this.formData);
+
+      const {initialDate, finalDate}= this.formData;
+
+      const data : datesDestiny = { 
+        initialDate,
+        finalDate,
+        tags : this.tags}
+     
+
+
+      this.myOutputEvent.emit(data);
     }
   
   

@@ -1,10 +1,14 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup,FormControl } from '@angular/forms';
+
 import { Catalogo } from 'src/app/models/Data/Catalogo';
+import { Servicio } from 'src/app/models/Data/Servicio';
+import { datesDestiny } from 'src/app/models/Pages/datesDestiny.model';
 
 import { policie } from 'src/app/models/Pages/policie.model';
 import { policiesForm } from 'src/app/models/Pages/policiesForm.model';
 import { CatalogosService } from 'src/app/services/catalogos.service';
+import { ServiciosService } from 'src/app/services/servicios.service';
 
 
 // register Swiper custom elements
@@ -20,11 +24,7 @@ export class GenerarPolizasComponent implements OnInit{
 
   
   nextId = 0;
-  comprobarInfo(){
-    this.listPolicies.forEach(item => {
-      console.log(item.poliza.name);
-    });
-  }
+  
 
   createItemForm(): FormGroup {
     return new FormGroup({
@@ -33,46 +33,14 @@ export class GenerarPolizasComponent implements OnInit{
     });
   }
 
-  addItem() {
+  
+  
 
-
-    const newItem: policie = {
-      name: 'Nueva Cliente',
-      lastName: "",
-      itemForm: this.createItemForm()
-    };
-
-
-    const  PolizaForm : policiesForm = {
-      id: this.nextId++,
-      isDropdownOpen : false,
-      poliza : newItem
-    }
-    this.listPolicies.push(PolizaForm);
-  }
-
-  onSubmit(item: policiesForm) {
-    console.log(`Editing item: ${item.poliza.name} (${item.poliza.lastName})`);
-    console.log(`Item form value:`, item.poliza.itemForm.value);
-    const formValue = item.poliza.itemForm.value;
-    item.poliza.name = formValue.name;
-    item.poliza.lastName = formValue.lastName;
-  }
-
-  deleteItem(item: policiesForm) {
-    const index = this.listPolicies.findIndex(i => i.id === item.id);
-    if (index !== -1) {
-      this.listPolicies.splice(index, 1);
-    }
-  }
-
-
-  formData = {
+  dataFormDestiny : datesDestiny = { 
     initialDate: '',
-    finalDate: '',
-    
-  };
-
+    finalDate : '',
+    tags : []
+  }
   
 
 
@@ -80,35 +48,17 @@ export class GenerarPolizasComponent implements OnInit{
 
 
 
-  listPolicies : policiesForm[] = [
-    {
-      id: this.nextId++,
-
-      isDropdownOpen : false,
-      poliza : {
-        
-        name: 'Este es un cliente',
-        lastName : '',
-        itemForm: this.createItemForm()
-      },
-
-      
-    },
-    
-  ]
 
   datos: any = {}
 
 
   diffDays = -1;
   paises : Catalogo[] =[];
+  listadoPlanes : Servicio[] = [];
+  planesCubren : Servicio[]= [];
+  diaViaje : string = "";
   
-  @ViewChild('tagInput') tagInput?: ElementRef;
-  @ViewChild('tagList') tagList?: ElementRef;
-  @ViewChild('tagNumber') tagNumber!: ElementRef;
-
-  maxTags: number = 10;
-  tags: string[] = [];
+  
   stepForm: number = 1;
 
   
@@ -116,7 +66,8 @@ export class GenerarPolizasComponent implements OnInit{
   
   constructor(
     
-    private catalogoService : CatalogosService
+    private catalogoService : CatalogosService,
+    private servicios : ServiciosService
 
   ) {
 
@@ -131,60 +82,60 @@ export class GenerarPolizasComponent implements OnInit{
     this.catalogoService.getPaises().subscribe(
       (data)=> {
         this.paises = data.filter(item => item.status === 1);
-      })
+      });
 
+      this.servicios.getServicios().subscribe(
+        (data)=> {
+          this.listadoPlanes = data.filter(item => item.status === 1);
+        });
 
   }
 
 
-  agregar() {
+  agregar(event : datesDestiny) {
     
 
-    const { initialDate, finalDate} = this.formData;
-    const paises = this.tags;
+    this.dataFormDestiny = event;
 
+    this.getDestinys();
 
-    console.log(paises);
+    this.diaViaje = this.dataFormDestiny.finalDate;
+
     
 
-    this.datos = {
-      initialDate,
-      finalDate,
-      paises
-
-    }
 
     this.stepForm +=1;
+    
  }  
 
  
 
 
- 
-
- prevForm(){
+  prevForm(){
   this.stepForm -=1;
- }
+  }
 
 
+  getDestinys(){
+
+     this.planesCubren = this.listadoPlanes.filter(plan => this.haveRequirements(plan) );
+      
+    
+
+  }
+
+
+  haveRequirements( plan : Servicio){
+    
+    if(!plan.disponibilidad){
+      return false;
+    }
+    
+    console.log(plan.disponibilidad);
+    const countries : string [] = plan.disponibilidad.split(",");
   
-
- 
-
- 
-  
-
-  
-  
-
-  
-  
-
-
-
-
-
-
+    return   this.dataFormDestiny.tags.every((string) => countries.includes(string));
+  }
 
 
   
