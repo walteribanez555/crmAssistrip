@@ -84,7 +84,7 @@ form button{
 
 .listPolicies  .contentBx{
     
-    margin: 10px ;
+    
     border: 1px solid var(--text-color);
 
 }
@@ -125,8 +125,8 @@ form button{
 
 .listPolicies .contentBx.active .content
 {   box-sizing: border-box;
-    height: 100%;
-    padding:  10px;
+    height: 90%;
+    padding:  5px;
     justify-content: center;
 }
 
