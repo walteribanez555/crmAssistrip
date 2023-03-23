@@ -84,7 +84,7 @@ form button{
 
 .listPolicies  .contentBx{
     
-    
+    padding-top: 10px;
     border: 1px solid var(--text-color);
 
 }
