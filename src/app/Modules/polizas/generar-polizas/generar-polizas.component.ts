@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
-import { FormBuilder,FormGroup,Validators,FormControl } from '@angular/forms';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { FormGroup,FormControl } from '@angular/forms';
 import { Catalogo } from 'src/app/models/Data/Catalogo';
 
 import { policie } from 'src/app/models/Pages/policie.model';
@@ -171,9 +171,7 @@ export class GenerarPolizasComponent implements OnInit{
  }
 
 
-  changeDate(event : any){ 
-    console.log(event.target.value);
- }
+  
 
  comparar(){
   const date1: Date = new Date(this.formData.initialDate);

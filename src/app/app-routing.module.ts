@@ -1,7 +1,7 @@
 
 import {  NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CommonModule } from '@angular/common';
+
 
 import { SitioWebRoutingModule } from './Modules/sitio-web/sitio-web-routes.module';
 
@@ -11,6 +11,8 @@ import { CampDescuentosModule } from './Modules/camp-descuentos/camp-descuentos.
 import { UsuariosModule } from './Modules/usuarios/usuarios.module';
 import { PolizasModule } from './Modules/polizas/polizas.module';
 import { ReportesModule } from './Modules/reportes/reportes.module';
+
+
 
 const routes : Routes = [
   {
@@ -42,7 +44,7 @@ const routes : Routes = [
     PolizasModule,
     ReportesModule,
     SitioWebRoutingModule,
-    CommonModule,
+    
   ],
   exports: [RouterModule]
 })

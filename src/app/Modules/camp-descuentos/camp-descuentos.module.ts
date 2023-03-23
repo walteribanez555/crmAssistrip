@@ -9,11 +9,13 @@ import { CampDescuentosRoutingModule } from './camp-descuentos-routing.module';
 @NgModule({
   declarations: [
     ListadoCampComponent,
-    CrearCampComponent
+    CrearCampComponent,
+    
   ],
   imports: [
     CommonModule,
-    CampDescuentosRoutingModule
+    CampDescuentosRoutingModule,
+    
   ],
   exports: [
     ListadoCampComponent,

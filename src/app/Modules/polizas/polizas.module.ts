@@ -8,9 +8,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { ExtractDatePipe } from 'src/app/pipes/extract-date.pipe';
 import { ServicesModule } from 'src/app/services/services.module';
 import { PipesModule } from 'src/app/pipes/pipes.module';
-import { ListCardComponent } from 'src/app/components/listCard/list-card.component';
-import { ClienteFormularioComponent } from 'src/app/components/cliente-formulario/cliente-formulario.component';
 import { FormsModule,FormGroup, FormControl, ReactiveFormsModule } from "@angular/forms"
+import { ComponentsModule } from 'src/app/components/components.module';
+
+
 
 
 
@@ -21,8 +22,8 @@ import { FormsModule,FormGroup, FormControl, ReactiveFormsModule } from "@angula
     ListadoPolizasComponent,
     GenerarPolizasComponent,
     GenerarCotizacionComponent,
-    ListCardComponent,
-    ClienteFormularioComponent,
+    
+    
     
     
   ],
@@ -30,10 +31,15 @@ import { FormsModule,FormGroup, FormControl, ReactiveFormsModule } from "@angula
     CommonModule,
     HttpClientModule,
     PolizasRoutingModule,
+    
     ServicesModule,
     PipesModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ComponentsModule
+    
+    
+    
         
     
   ],
