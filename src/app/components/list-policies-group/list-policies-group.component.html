@@ -1,0 +1,75 @@
+<form   >
+    <div class="form second">
+        <header>Listado de personas</header>
+        <div class="details personal">
+            
+
+            
+
+            <div class="listPolicies">
+                <div *ngFor="let policy of listPolicies" class="contentBx" [class.active]="policy.isDropdownOpen">
+                    <div class="headerPolicie" (click)="togglePolicie(policy)" > 
+                        <div class="label">{{policy.poliza.name}} {{policy.poliza.lastName}} </div>
+                       <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24"><path d="M480 711 240 471l56-56 184 184 184-184 56 56-240 240Z"/></svg>
+                    </div>
+                    <div class="content">
+
+                        <form class="policyForm" [formGroup]="policy.poliza.itemForm" (ngSubmit)="onSubmit(policy)">
+                            <div class="fields">
+                                <div class="input-field">
+                                    <label>Item Name:</label>
+                                    <input type="text" formControlName="name">
+
+                                </div>
+                                <div class="input-field">
+                                    <label>Item Quantity:</label>
+                                    <input type="text" formControlName="lastName">
+                                </div>
+                                <div class="input-field">
+                                    <label>Item Quantity:</label>
+                                    <input type="text" formControlName="lastName">
+                                </div>
+                                <div class="input-field">
+                                    <label>Item Quantity:</label>
+                                    <input type="text" formControlName="lastName">
+                                </div>
+                                
+                                <!-- <div class="input-field">
+                                    <label>Item Name:</label>
+                                    <input type="text" formControlName="name">
+
+                                </div>
+                                <div class="input-field">
+                                    <label>Item Quantity:</label>
+                                    <input type="text" formControlName="lastName">
+                                </div> -->
+                                
+                            </div>
+
+                            <div class="buttonSpace">
+                                <button type="submit">Edit Item</button>
+                                <button (click)="deleteItem(policy)">Delete Item</button>
+                            </div>
+                        </form>
+
+
+
+                    </div>
+                </div>
+            </div>       
+        </div>
+
+
+        <div class="buttonSpace">
+                
+                <button (click)="addItem()">Add Item</button>
+
+        </div>
+
+        
+        
+        
+    </div>
+    
+  <!-- <button type="submit">Guardar</button> -->
+</form>

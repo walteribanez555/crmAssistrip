@@ -1,24 +1,16 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { FormGroup,FormControl } from '@angular/forms';
-import { Catalogo } from 'src/app/models/Data/Catalogo';
-
+import { Component } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { policie } from 'src/app/models/Pages/policie.model';
 import { policiesForm } from 'src/app/models/Pages/policiesForm.model';
-import { CatalogosService } from 'src/app/services/catalogos.service';
-
-
-// register Swiper custom elements
-
 
 @Component({
-  selector: 'app-generar-polizas',
-  templateUrl: './generar-polizas.component.html',
-  styleUrls: ['./generar-polizas.component.css']
+  selector: 'app-list-policies-group',
+  templateUrl: './list-policies-group.component.html',
+  styleUrls: ['./list-policies-group.component.css']
 })
-export class GenerarPolizasComponent implements OnInit{
+export class ListPoliciesGroupComponent {
 
 
-  
   nextId = 0;
   comprobarInfo(){
     this.listPolicies.forEach(item => {
@@ -67,19 +59,6 @@ export class GenerarPolizasComponent implements OnInit{
   }
 
 
-  formData = {
-    initialDate: '',
-    finalDate: '',
-    
-  };
-
-  
-
-
-  itemForm: FormGroup;
-
-
-
   listPolicies : policiesForm[] = [
     {
       id: this.nextId++,
@@ -97,97 +76,18 @@ export class GenerarPolizasComponent implements OnInit{
     
   ]
 
-  datos: any = {}
+  itemForm: FormGroup;
 
-
-  diffDays = -1;
-  paises : Catalogo[] =[];
-  
-  @ViewChild('tagInput') tagInput?: ElementRef;
-  @ViewChild('tagList') tagList?: ElementRef;
-  @ViewChild('tagNumber') tagNumber!: ElementRef;
-
-  maxTags: number = 10;
-  tags: string[] = [];
-  stepForm: number = 1;
-
-  
-
-  
-  constructor(
-    
-    private catalogoService : CatalogosService
-
-  ) {
-
+  constructor() {
     this.itemForm = new FormGroup({
       name: new FormControl(''),
       email: new FormControl('')
     });
-   }
-
-  ngOnInit(): void {
-    
-    this.catalogoService.getPaises().subscribe(
-      (data)=> {
-        this.paises = data.filter(item => item.status === 1);
-      })
-
-
   }
 
 
-  agregar() {
-    
-
-    const { initialDate, finalDate} = this.formData;
-    const paises = this.tags;
-
-
-    console.log(paises);
-    
-
-    this.datos = {
-      initialDate,
-      finalDate,
-      paises
-
-    }
-
-    this.stepForm +=1;
- }  
-
- 
-
-
- 
-
- prevForm(){
-  this.stepForm -=1;
- }
-
-
-  
-
- 
-
- 
-  
-
-  
-  
-
-  
-  
-
-
-
-
-
-
-
-
-  
-
+  togglePolicie(policie : any){
+    policie.isDropdownOpen = !policie.isDropdownOpen;
+   }
   
 }

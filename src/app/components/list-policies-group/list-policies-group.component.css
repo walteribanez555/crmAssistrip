@@ -1,0 +1,189 @@
+
+
+form {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(0);
+    
+}
+
+
+form .title{
+    display: block;
+    margin-bottom: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    margin: 6px 0;
+    color: var(--text-color);
+}
+form .fields{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+form .fields .input-field{
+    display: flex;
+    width: calc(100% / 2 - 15px);
+    flex-direction: column;
+    margin: 4px 0;
+}
+.input-field label{
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-color);
+}
+.input-field input, select{
+    outline: none;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--text-color);
+    border-radius: 5px;
+    border: 1px solid #aaa;
+    padding: 0 15px;
+    height: 42px;
+    margin: 8px 0;
+}
+.input-field input :focus,
+.input-field select:focus{
+    box-shadow: 0 3px 6px rgba(0,0,0,0.13);
+}
+.input-field select,
+.input-field input[type="date"]{
+    color: #707070;
+}
+.input-field input[type="date"]:valid{
+    color: var(--text-color);
+}
+
+
+form button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 45px;
+    max-width: 200px;
+    width: 100%;
+    border: none;
+    outline: none;
+    color: #fff;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 10px;
+    background-color: var(--logo-color);
+    transition: all 0.3s linear;
+    cursor: pointer;
+}
+
+form button:hover{
+    background-color: #265df2;
+}
+
+
+.listPolicies { 
+    width: 100%;
+    height: 100%;
+}
+
+.listPolicies  .contentBx{
+    
+    margin: 10px ;
+    border: 1px solid var(--text-color);
+
+}
+
+.headerPolicie{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+}
+
+
+.listPolicies .contentBx .label{
+    position:  relative;
+    padding: 10px;
+    
+   
+    
+    cursor: pointer;
+}
+
+
+
+
+
+
+.listPolicies  .contentBx .content { 
+    position: relative;
+    
+    background: var(--body-bg);
+    height: 0;
+    overflow: hidden;
+    
+    overflow-y: auto;
+
+}
+
+
+.listPolicies .contentBx.active .content
+{   box-sizing: border-box;
+    height: 100%;
+    padding:  10px;
+    justify-content: center;
+}
+
+.policyForm{
+  height: 100%;
+  align-items: center;
+  width: fit-content;
+}
+
+
+.policyForm .fields .input-field{
+  width: calc(100% / 2 - 5px);
+}
+
+
+@media (max-width: 550px) {
+  .policyForm .fields .input-field{
+      width: 100%;
+  }
+
+  
+}
+
+@media (max-width: 750px){
+    form{
+        overflow-y: scroll;
+    }
+
+    form::-webkit-scrollbar{
+        display: none;
+     }
+     form .fields .input-field{
+        width: calc(100% / 2 - 15px);
+    }
+}
+
+@media (max-width: 550px) {
+    form .fields .input-field{
+        width: 100%;
+    }
+
+    
+}
+
+.buttonSpace{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+@media (max-width: 750px){
+    .options .listado{
+        width: 100%;
+         
+      }
+}
