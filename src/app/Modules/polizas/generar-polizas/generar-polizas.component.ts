@@ -38,7 +38,7 @@ export class GenerarPolizasComponent implements OnInit{
   }
 
 
-  finalTags : string[] = [];
+  finalTags : string = "";
   
 
 
@@ -97,9 +97,9 @@ export class GenerarPolizasComponent implements OnInit{
     this.getDestinys();
 
     this.diaViaje = this.dataFormDestiny.finalDate;
-    console.log(this.finalTags);
-    this.finalTags = this.dataFormDestiny.tags;
-
+    
+    this.finalTags = this.dataFormDestiny.tags.toString();
+    
     this.stepForm +=1;
 
 
@@ -132,10 +132,9 @@ export class GenerarPolizasComponent implements OnInit{
       return false;
     }
 
-
+    const countries : string [] = plan.disponibilidad.split(",");
 
     
-    const countries : string [] = plan.disponibilidad.split(",");
     
   
     return   this.dataFormDestiny.tags.every((string) => countries.includes(string));
