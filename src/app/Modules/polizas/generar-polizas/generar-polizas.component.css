@@ -72,6 +72,16 @@ body{
     background: var(--body-bg);
     
 }
+
+.form  { 
+  display: none;
+}
+
+.activeForm{
+
+  display: grid;
+}
+
 header{
     position: relative;
     font-size: 20px;
@@ -118,7 +128,9 @@ header::before{
     
 }
 
-
+.btn:focus{
+  background-color: var(--blue);
+}
   
 
   

@@ -9,7 +9,7 @@
             <div class="listPolicies">
                 <div *ngFor="let policy of listPolicies" class="contentBx" [class.active]="policy.isDropdownOpen">
                     <div class="headerPolicie" (click)="togglePolicie(policy)" > 
-                        <div class="label">{{policy.poliza.name}} {{policy.poliza.lastName}} </div>
+                        <div class="label">{{policy.poliza.name}} {{policy.poliza.lastName}} - {{policy.polizaNombre}} </div>
                        <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24"><path d="M480 711 240 471l56-56 184 184 184-184 56 56-240 240Z"/></svg>
                     </div>
                     <div class="content">
@@ -31,9 +31,9 @@
                                 </div>
                                 <div class="input-field">
                                     <label>Item Quantity:</label>
-                                    <select class="listado" name="listado" id="listadoId">
+                                    <select  class="listado" name="listado" id="listadoId" formControlName="plan">
                                         <option value="pais">Seleccione un plan</option>
-                                        <option  *ngFor="let plan of policy.listPlanes"  value={{plan.servicio_id}} > {{plan.servicio}}  </option>
+                                        <option  *ngFor="let plan of policy.listPlanes"  value={{plan.servicio_id}}  > {{plan.servicio}}  </option>
                                     </select>
                                 </div>
                                 

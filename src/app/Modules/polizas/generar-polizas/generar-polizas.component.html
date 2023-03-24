@@ -4,7 +4,7 @@
             <div class="grid-item-1">
                 <div class="container_form">    
                     
-                    <div class="form first"  *ngIf="stepForm === 1">
+                    <div class="form first"   [class.activeForm]="stepForm===1"  >
                         <app-form-dates-destination (myOutputEvent)="agregar($event)"  [countries]="paises"></app-form-dates-destination>  
                         <div class="buttonSpace">
                 
@@ -15,13 +15,13 @@
                         </div>                    
                     </div>
 
-                    <div class="form second"  *ngIf="stepForm === 2">                        
+                    <div class="form second"  *ngIf="highestPostForm >= 2"   [class.activeForm]="stepForm===2">                        
                         <app-list-policies-group  [fechaFinal]="diaViaje" [planes]="planesCubren" ></app-list-policies-group>
                         <div class="buttonSpace">
                 
             
-                            <button type="button"  class="backBtn btn">
-                                <span class="btnText"  >Prev</span>
+                            <button type="button" (click)="prevForm()"    class="backBtn btn">
+                                <span class="btnText"  >Back to the prev</span>
                             </button>
 
                             
@@ -41,7 +41,7 @@
 
                 <p>Fecha de salida : {{dataFormDestiny.initialDate}}</p>
                 <p>Fecha de llegada : {{dataFormDestiny.finalDate}}</p>
-                <p>Paises destino: {{dataFormDestiny.tags}}</p>
+                <p>Paises destino: {{finalTags}}</p>
 
             </div>
 

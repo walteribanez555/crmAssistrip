@@ -5,5 +5,6 @@ export interface policie{
     name: string;
     lastName: string;
     birthday : string,
+    plan : string,
     itemForm: FormGroup;
 }

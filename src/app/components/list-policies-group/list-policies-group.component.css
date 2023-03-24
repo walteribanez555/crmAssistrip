@@ -97,6 +97,13 @@ form button{
 }
 
 
+.form button:focus{
+    background-color: var(--blue);
+}
+
+
+
+
 .listPolicies .contentBx .label{
     position:  relative;
     padding: 5px;

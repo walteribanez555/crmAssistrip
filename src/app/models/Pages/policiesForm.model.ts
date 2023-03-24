@@ -5,6 +5,7 @@ export interface policiesForm{
     id : number,
     isDropdownOpen :boolean,
     poliza : policie,
-    listPlanes : Servicio[]
+    listPlanes : Servicio[],
+    polizaNombre : string,
     
 }

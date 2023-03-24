@@ -26,12 +26,7 @@ export class GenerarPolizasComponent implements OnInit{
   nextId = 0;
   
 
-  createItemForm(): FormGroup {
-    return new FormGroup({
-      name: new FormControl(''),
-      lastName: new FormControl('')
-    });
-  }
+  
 
   
   
@@ -41,10 +36,13 @@ export class GenerarPolizasComponent implements OnInit{
     finalDate : '',
     tags : []
   }
+
+
+  finalTags : string[] = [];
   
 
 
-  itemForm: FormGroup;
+  
 
 
 
@@ -60,6 +58,8 @@ export class GenerarPolizasComponent implements OnInit{
   
   
   stepForm: number = 1;
+  
+  highestPostForm : number =1;
 
   
 
@@ -71,10 +71,7 @@ export class GenerarPolizasComponent implements OnInit{
 
   ) {
 
-    this.itemForm = new FormGroup({
-      name: new FormControl(''),
-      email: new FormControl('')
-    });
+   
    }
 
   ngOnInit(): void {
@@ -100,11 +97,15 @@ export class GenerarPolizasComponent implements OnInit{
     this.getDestinys();
 
     this.diaViaje = this.dataFormDestiny.finalDate;
-
-    
-
+    console.log(this.finalTags);
+    this.finalTags = this.dataFormDestiny.tags;
 
     this.stepForm +=1;
+
+
+    if(this.stepForm> this.highestPostForm){
+      this.highestPostForm = this.stepForm;
+    }
     
  }  
 
@@ -130,9 +131,12 @@ export class GenerarPolizasComponent implements OnInit{
     if(!plan.disponibilidad){
       return false;
     }
+
+
+
     
-    console.log(plan.disponibilidad);
     const countries : string [] = plan.disponibilidad.split(",");
+    
   
     return   this.dataFormDestiny.tags.every((string) => countries.includes(string));
   }

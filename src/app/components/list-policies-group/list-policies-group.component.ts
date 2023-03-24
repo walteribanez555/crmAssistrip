@@ -1,4 +1,4 @@
-import { Component, OnInit,Input,Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnChanges,Input,Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Servicio } from 'src/app/models/Data/Servicio';
 import { policie } from 'src/app/models/Pages/policie.model';
@@ -10,14 +10,14 @@ import { policiesForm } from 'src/app/models/Pages/policiesForm.model';
   styleUrls: ['./list-policies-group.component.css']
 })
 export class ListPoliciesGroupComponent implements OnInit {
-  itemForm: FormGroup;
+  // itemForm: FormGroup;
 
   @Input() planes: Servicio[];
 
   @Input()fechaFinal : string;
 
 
-  planesMostrar : Servicio[] = [];
+  
 
   nextId = 0;
   comprobarInfo(){
@@ -31,6 +31,7 @@ export class ListPoliciesGroupComponent implements OnInit {
       name: new FormControl(''),
       lastName: new FormControl(''),
       birthday : new FormControl(''),
+      plan : new FormControl(''),
     });
   }
 
@@ -38,28 +39,42 @@ export class ListPoliciesGroupComponent implements OnInit {
 
 
     const newItem: policie = {
-      name: 'Nuevo Cliente',
+      name: `Cliente nro: ${this.nextId +1}`,
       lastName: "",
       birthday : "",
+      plan : "",
       itemForm: this.createItemForm()
     };
 
 
     const  PolizaForm : policiesForm = {
       id: this.nextId++,
-      isDropdownOpen : false,
+      isDropdownOpen : true,
       poliza : newItem,
-      listPlanes: this.planes
+      listPlanes: this.planes,
+      polizaNombre : "Paquete del Cliente",
     }
     this.listPolicies.push(PolizaForm);
   }
 
   onSubmit(item: policiesForm) {
-    console.log(`Editing item: ${item.poliza.name} (${item.poliza.lastName}) (${item.poliza.birthday})`);
+    console.log(`Editing item: ${item.poliza.name} (${item.poliza.lastName}) (${item.poliza.birthday}) (${item.poliza.plan}) `);
     console.log(`Item form value:`, item.poliza.itemForm.value);
     const formValue = item.poliza.itemForm.value;
     item.poliza.name = formValue.name;
     item.poliza.lastName = formValue.lastName;
+    item.poliza.birthday = formValue.birthday;
+    item.poliza.plan = formValue.plan;
+   
+    item.polizaNombre =  item.listPlanes.filter(plan => {
+      if(plan.servicio_id === formValue.plan*1){
+        return true;
+      }
+      return false
+
+
+    })[0].servicio;
+    
   }
 
   deleteItem(item: policiesForm) {
@@ -79,11 +94,12 @@ export class ListPoliciesGroupComponent implements OnInit {
 
 
   constructor() {
-    this.itemForm = new FormGroup({
-      name: new FormControl(''),
-      lastName: new FormControl(''),
-      birthday : new FormControl('')
-    });
+    // this.itemForm = new FormGroup({
+    //   name: new FormControl(''),
+    //   lastName: new FormControl(''),
+    //   birthday : new FormControl(''),
+    //   plan : new FormControl(''),
+    // });
 
 
     this.planes = [];
@@ -91,10 +107,16 @@ export class ListPoliciesGroupComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.planesMostrar = this.planes;
+    
     this.addItem();
   }
 
+  ngOnChanges():void { 
+    
+    
+    this.comprobarPlanes();
+    
+  }
 
   togglePolicie(policie : any){
     policie.isDropdownOpen = !policie.isDropdownOpen;
@@ -118,7 +140,7 @@ export class ListPoliciesGroupComponent implements OnInit {
     policy.listPlanes = this.planes
     
     policy.listPlanes = policy.listPlanes.filter(plan => this.haveRequirements(plan, differenceInYears))
-    console.log(policy.listPlanes);
+    
 
     // Do something with the selected date
     
@@ -127,22 +149,31 @@ export class ListPoliciesGroupComponent implements OnInit {
 
 
   haveRequirements( plan : Servicio , differenceInYears :number){
-    console.log(plan.edad_base, plan.edad_limite);
+    
 
     const { edad_base, edad_limite} = plan;
 
     
     
    if(edad_base <= differenceInYears && differenceInYears <= edad_limite){
-    console.log("Si entra");
+    
     return true
    }
 
    return false
     
-    
-    
   }
+
+
+
+  comprobarPlanes(){
+    this.listPolicies.forEach(policies => {
+      policies.listPlanes =  this.planes;
+    })
+  }
+
+
+  
 
 
 

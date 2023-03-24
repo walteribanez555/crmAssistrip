@@ -236,6 +236,9 @@ option {
     }
 }
 
+.form button:focus{
+  background-color: var(--blue);
+}
 
 
 

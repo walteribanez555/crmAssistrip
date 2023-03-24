@@ -10,7 +10,7 @@ import { CatalogosService } from 'src/app/services/catalogos.service';
   templateUrl: './form-dates-destination.component.html',
   styleUrls: ['./form-dates-destination.component.css']
 })
-export class FormDatesDestinationComponent implements OnInit {
+export class FormDatesDestinationComponent {
 
   @Input() countries: Catalogo[];
   @Output() myOutputEvent = new EventEmitter<datesDestiny>();
@@ -32,22 +32,13 @@ export class FormDatesDestinationComponent implements OnInit {
 
   constructor(
     
-    private catalogoService : CatalogosService
+    
 
   ){
     this.countries = [];
   }
 
-  ngOnInit(): void {
-    
-    // this.catalogoService.getPaises().subscribe(
-    //   (data)=> {
-    //     this.paises = data.filter(item => item.status === 1);
-    //   })
-
-
-  }
-
+  
 
   comparar(){
     const date1: Date = new Date(this.formData.initialDate);
@@ -110,7 +101,9 @@ export class FormDatesDestinationComponent implements OnInit {
     }
   
 
-    agregar(){
+    agregar(event : Event){
+
+      event.preventDefault();
 
       const {initialDate, finalDate}= this.formData;
 
