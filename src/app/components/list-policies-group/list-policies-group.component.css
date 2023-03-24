@@ -62,8 +62,8 @@ form .buttonSpace button{
     align-items: center;
     justify-content: center;
     height: min-content;
-    max-width: 200px;
-    width: 60%;
+    ;
+    width: 100px;
     border: none;
     outline: none;
     color: #fff;
@@ -226,9 +226,9 @@ form .buttonSpace button.checkBtn {
 }
 
 
-form .buttonSpace button:hover,
-form .buttonSpace button:focus{
-    
+form .buttonSpace button.checkBtn:hover,
+form .buttonSpace button.checkBtn:focus{
+    width: 200px;
 }
 
 
