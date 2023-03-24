@@ -106,13 +106,25 @@ export class GenerarPolizasComponent implements OnInit{
     if(this.stepForm> this.highestPostForm){
       this.highestPostForm = this.stepForm;
     }
+
+
+    
     
  }  
 
- 
+ agregarPolizas(event : Event){
+      this.stepForm +=1;
+      console.log("Aumento");
+ }
+
+  onPressComponentPrevForm(){
+    
+    this.prevForm();
+  }
 
 
   prevForm(){
+    
   this.stepForm -=1;
   }
 

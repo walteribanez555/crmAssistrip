@@ -17,9 +17,23 @@ export class ListPoliciesGroupComponent implements OnInit {
   @Input()fechaFinal : string;
 
 
+  @Output() backPrevBtn = new EventEmitter();
+  @Output() nextBtn = new EventEmitter();
+
+
   
 
   nextId = 0;
+
+  backPrev(){
+    
+    this.backPrevBtn.emit();
+  }
+
+  next(){
+    this.nextBtn.emit();
+  }
+
   comprobarInfo(){
     this.listPolicies.forEach(item => {
       console.log(item.poliza.name);
@@ -101,7 +115,7 @@ export class ListPoliciesGroupComponent implements OnInit {
     //   plan : new FormControl(''),
     // });
 
-
+    
     this.planes = [];
     this.fechaFinal = "";
   }

@@ -10,21 +10,10 @@
                     </div>
 
                     <div class="form second"  *ngIf="highestPostForm >= 2"   [class.activeForm]="stepForm===2">                        
-                        <app-list-policies-group  [fechaFinal]="diaViaje" [planes]="planesCubren" ></app-list-policies-group>
-                        <div class="buttonSpace">
-                
-            
-                            <button type="button" (click)="prevForm()"    class="backBtn btn">
-                                <span class="btnText"  >Back to the prev</span>
-                            </button>
+                        <app-list-policies-group  [fechaFinal]="diaViaje" (nextBtn)="agregarPolizas($event)" (backPrevBtn)="prevForm()" [planes]="planesCubren" ></app-list-policies-group>
 
-                            
-                            <button type="submit" class="nextBtn  btn"  >
-                                <span class="btnText">Next</span>
-                            </button>
-                        
-            
-                    </div>                     
+                    
+                                        
                     </div>  
 
                 </div>

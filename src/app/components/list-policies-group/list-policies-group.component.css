@@ -57,19 +57,19 @@ form .fields .input-field{
 }
 
 
-form button{
+form .buttonSpace button{
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 45px;
+    height: min-content;
     max-width: 200px;
-    width: 100%;
+    width: 60%;
     border: none;
     outline: none;
     color: #fff;
     border-radius: 5px;
-    margin: 10px;
-    padding: 10px;
+    margin: 5px;
+    padding: 5px;
     background-color: var(--logo-color);
     transition: all 0.3s linear;
     cursor: pointer;
@@ -97,7 +97,7 @@ form button{
 }
 
 
-.form button:focus{
+.form .buttonSpace button:focus{
     background-color: var(--blue);
 }
 
@@ -191,3 +191,52 @@ form button{
          
       }
 }
+
+button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+button.addItem{
+    
+    fill: var(--logo-color);
+    font-size: medium;
+    color: var(--logo-color);
+    border: none;
+    margin: 10px;
+    padding: 10px;
+    background-color: var(--body-bg);
+    transition: all 0.3s linear;
+    cursor: pointer;
+}
+
+form .buttonSpace button.checkBtn { 
+   display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;    
+    background-color: var(--body-bg);
+    color: #2dcc1f;
+    fill: #2dcc1f;
+    border-radius: 5px;
+    border: 2px solid #2dcc1f;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    
+}
+
+
+form .buttonSpace button:hover,
+form .buttonSpace button:focus{
+    
+}
+
+
+
+
+
+button.addItem:hover,
+button.addItem:focus{
+    font-size: large;
+}
+
