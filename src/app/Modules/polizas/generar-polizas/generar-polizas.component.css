@@ -131,7 +131,11 @@ header::before{
 .btn:focus{
   background-color: var(--blue);
 }
-  
+
+.grid-item-2 p {
+  font-size: 16px; /* Ajuste el tamaño de fuente según sus necesidades */
+  word-wrap: break-word; /* Permite que las palabras se rompan si son demasiado largas para caber en una línea */
+}
 
   
 

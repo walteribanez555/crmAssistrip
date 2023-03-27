@@ -79,11 +79,11 @@ export class FormDatesDestinationComponent {
       if(tag!=="pais"){
   
         if (tag.length > 1 && !this.tags.includes(tag)) {
-          if (this.tags.length < 20) {
+          
             tag.split(',').forEach(tag => {
               this.tags.push(tag);
             });
-          }
+          
         }
       }
     }

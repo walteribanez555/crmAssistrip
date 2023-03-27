@@ -62,8 +62,7 @@ form .buttonSpace button{
     align-items: center;
     justify-content: center;
     height: min-content;
-    ;
-    width: 100px;
+    width: 140px;
     border: none;
     outline: none;
     color: #fff;
@@ -97,9 +96,6 @@ form .buttonSpace button{
 }
 
 
-.form .buttonSpace button:focus{
-    background-color: var(--blue);
-}
 
 
 
@@ -211,32 +207,97 @@ button.addItem{
     cursor: pointer;
 }
 
-form .buttonSpace button.checkBtn { 
+form .buttonSpace button { 
    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;    
     background-color: var(--body-bg);
-    color: #2dcc1f;
-    fill: #2dcc1f;
-    border-radius: 5px;
-    border: 2px solid #2dcc1f;
-    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+
+    transition: all 0.3s linear;
+    cursor: pointer;
+    border: 2px solid var(--main-color);
+    color: var(--main-color);
     
 }
 
 
-form .buttonSpace button.checkBtn:hover,
-form .buttonSpace button.checkBtn:focus{
-    width: 200px;
+form .buttonSpace button:hover{
+  background-color: var(--main-color);
+  color: white;
+  cursor: pointer;
+  border: 2px solid var(--main-color);
+}
+
+form .buttonSpace button:focus{
+  
+    background-color: var(--main-color);
+    color: white;
+    cursor: pointer;
+    border: 2px solid var(--main-color);
+  }
+
+    .cardContainer { 
+        
+        display: flex;
+        
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 16px;
+        }
+    .card {
+        display: flex;
+        position: relative;
+        align-items: center;
+        justify-content: center;
+
+        width: 150px;
+        
+        border-radius: 4px;
+        height : 150px;
+        margin: 12px;
+        text-decoration: none;
+        
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(38,38,38,0.2);
+   
+    }
+    .card.gray {
+        opacity: 0.5;
+    }
+    .check-icon {
+        position: absolute;
+        
+        
+        width: 100px;
+        height: 100px;
+        opacity: 1;
+        transition: opacity 0.3s ease;
+        
+
+        }
+
+.listCard { 
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
 }
 
 
 
-
-
-button.addItem:hover,
-button.addItem:focus{
-    font-size: large;
+.card-content {
+    padding: 16px;
 }
+.card-title {
+    font-size: 15px;
+    margin: 0;
+    margin-bottom: 8px;
+}
+.card-text {
+    font-size: 10px;
+    color: #666;
+    margin: 0;
+}
+
 

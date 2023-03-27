@@ -1,6 +1,9 @@
 import { Component, OnInit, OnChanges,Input,Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Extra } from 'src/app/models/Data/Extra';
+
 import { Servicio } from 'src/app/models/Data/Servicio';
+import { ExtraForm } from 'src/app/models/Pages/extra.model';
 import { policie } from 'src/app/models/Pages/policie.model';
 import { policiesForm } from 'src/app/models/Pages/policiesForm.model';
 
@@ -15,6 +18,8 @@ export class ListPoliciesGroupComponent implements OnInit {
   @Input() planes: Servicio[];
 
   @Input()fechaFinal : string;
+
+  @Input()extraList : Extra[];
 
 
   @Output() backPrevBtn = new EventEmitter();
@@ -57,16 +62,19 @@ export class ListPoliciesGroupComponent implements OnInit {
       lastName: "",
       birthday : "",
       plan : "",
-      itemForm: this.createItemForm()
+      itemForm: this.createItemForm(),
+      extras: [],
     };
 
 
     const  PolizaForm : policiesForm = {
       id: this.nextId++,
       isDropdownOpen : true,
+      isPlainSelected: false,
       poliza : newItem,
       listPlanes: this.planes,
       polizaNombre : "Paquete del Cliente",
+      listExtras : []
     }
     this.listPolicies.push(PolizaForm);
   }
@@ -118,6 +126,7 @@ export class ListPoliciesGroupComponent implements OnInit {
     
     this.planes = [];
     this.fechaFinal = "";
+    this.extraList = [];
   }
 
   ngOnInit(): void {
@@ -185,6 +194,53 @@ export class ListPoliciesGroupComponent implements OnInit {
       policies.listPlanes =  this.planes;
     })
   }
+
+
+  toggleExtra( policy: policiesForm, id : number){
+    policy.listExtras[id].checked = !policy.listExtras[id].checked;
+    
+
+  }
+
+  togglePlain(event: Event ,policy : policiesForm){
+    const inputElement  = event.target as HTMLInputElement;
+    
+    if(inputElement.value === "pais" ){
+      return;
+    }
+
+    const valueAsNumber = parseFloat(inputElement.value);
+
+    if (isNaN(valueAsNumber)) {
+      // Manejar el caso en el que el valor del elemento de entrada no es un número válido
+      return;
+    }
+
+    policy.listExtras = this.showExtras(policy, valueAsNumber);
+
+    policy.isPlainSelected = true;
+  }
+
+  showExtras(policy : policiesForm, plain : number): ExtraForm[]{
+    const extrasFiltered : ExtraForm[] = this.extraList.map((extra,index) => {
+      return {
+        id : index,
+        extra,
+        checked : false
+      }
+    });
+
+
+    return extrasFiltered
+
+
+  }
+
+ 
+    
+    
+    
+  
 
 
   

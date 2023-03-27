@@ -1,5 +1,6 @@
 import { FormGroup } from "@angular/forms";
 
+
 export interface policie{
    
     name: string;
@@ -7,4 +8,5 @@ export interface policie{
     birthday : string,
     plan : string,
     itemForm: FormGroup;
+    extras: number[];
 }

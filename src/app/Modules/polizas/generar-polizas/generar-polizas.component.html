@@ -10,7 +10,7 @@
                     </div>
 
                     <div class="form second"  *ngIf="highestPostForm >= 2"   [class.activeForm]="stepForm===2">                        
-                        <app-list-policies-group  [fechaFinal]="diaViaje" (nextBtn)="agregarPolizas($event)" (backPrevBtn)="prevForm()" [planes]="planesCubren" ></app-list-policies-group>
+                        <app-list-policies-group  [extraList]="extraList"  [fechaFinal]="diaViaje" (nextBtn)="agregarPolizas($event)" (backPrevBtn)="prevForm()" [planes]="planesCubren" ></app-list-policies-group>
 
                     
                                         
@@ -20,11 +20,17 @@
 
             </div>
             <div class="grid-item-2">
+                
+
+
+                    
                 <header>Datos de las polizas</header>
 
                 <p>Fecha de salida : {{dataFormDestiny.initialDate}}</p>
                 <p>Fecha de llegada : {{dataFormDestiny.finalDate}}</p>
                 <p>Paises destino: {{finalTags}}</p>
+
+                
 
             </div>
 

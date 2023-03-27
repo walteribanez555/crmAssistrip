@@ -100,18 +100,19 @@ form .fields .input-field{
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 45px;
+  height: fit-content;
   max-width: 200px;
-  width: 100%;
+  width: 150px;
   border: none;
   outline: none;
-  color: #fff;
+  color: var(--main-color);
   border-radius: 5px;
   margin: 10px;
   padding: 10px;
-  background-color: var(--logo-color);
+  background-color: var(--body-bg);
   transition: all 0.3s linear;
   cursor: pointer;
+  border: 2px solid var(--main-color);
 }
  form .btnText{
   font-size: 14px;
@@ -236,8 +237,15 @@ option {
     }
 }
 
-.form button:focus{
-  background-color: var(--blue);
+
+.nextBtn:hover,
+.nextBtn:focus{
+  
+  background-color: var(--main-color);
+
+  color: white;
+  cursor: pointer;
+  border: 2px solid var(--main-color);
 }
 
 
@@ -263,9 +271,14 @@ option {
   border-radius: 5px;
   background: var(--logo-color);
   transition: background 0.3s ease;
+  
 }
  button:hover{
-  background: var(--main-color);
+
+  padding: 9px 15px;
+  border-radius: 5px;
+  background: var(--logo-color);
+  transition: background 0.3s ease;
 }
 
 

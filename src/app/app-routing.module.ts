@@ -11,6 +11,7 @@ import { CampDescuentosModule } from './Modules/camp-descuentos/camp-descuentos.
 import { UsuariosModule } from './Modules/usuarios/usuarios.module';
 import { PolizasModule } from './Modules/polizas/polizas.module';
 import { ReportesModule } from './Modules/reportes/reportes.module';
+import { PipesModule } from './pipes/pipes.module';
 
 
 
@@ -44,6 +45,7 @@ const routes : Routes = [
     PolizasModule,
     ReportesModule,
     SitioWebRoutingModule,
+    PipesModule
     
   ],
   exports: [RouterModule]
