@@ -17,20 +17,20 @@
                         <form class="policyForm" [formGroup]="policy.poliza.itemForm" (ngSubmit)="onSubmit(policy)">
                             <div class="fields">
                                 <div class="input-field">
-                                    <label>Item Name:</label>
+                                    <label>Nombre(s):</label>
                                     <input type="text" formControlName="name">
 
                                 </div>
                                 <div class="input-field">
-                                    <label>Item Quantity:</label>
+                                    <label>Apellido(s):</label>
                                     <input type="text" formControlName="lastName">
                                 </div>
                                 <div class="input-field">
-                                    <label>Item Quantity:</label>
+                                    <label>Fecha de nacimiento:</label>
                                     <input type="date" (change)="onDateChange($event, policy)"  formControlName="birthday" >
                                 </div>
                                 <div class="input-field">
-                                    <label>Item Quantity:</label>
+                                    <label>Plan a elegir:</label>
                                     <select  (change)="togglePlain($event, policy)" class="listado" name="listado" id="listadoId" formControlName="plan">
                                         <option value="pais">Seleccione un plan</option>
                                         <option  *ngFor="let plan of policy.listPlanes"     value={{plan.servicio_id}}  > {{plan.servicio}}  </option>

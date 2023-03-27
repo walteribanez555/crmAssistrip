@@ -83,6 +83,9 @@ export class ListPoliciesGroupComponent implements OnInit {
     console.log(`Editing item: ${item.poliza.name} (${item.poliza.lastName}) (${item.poliza.birthday}) (${item.poliza.plan}) `);
     console.log(`Item form value:`, item.poliza.itemForm.value);
     const formValue = item.poliza.itemForm.value;
+
+
+    item.isDropdownOpen  = false;
     item.poliza.name = formValue.name;
     item.poliza.lastName = formValue.lastName;
     item.poliza.birthday = formValue.birthday;
