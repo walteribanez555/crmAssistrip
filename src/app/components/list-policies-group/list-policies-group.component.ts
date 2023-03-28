@@ -1,5 +1,6 @@
 import { Component, OnInit, OnChanges,Input,Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Catalogo } from 'src/app/models/Data/Catalogo';
 import { Extra } from 'src/app/models/Data/Extra';
 
 import { Servicio } from 'src/app/models/Data/Servicio';
@@ -22,8 +23,14 @@ export class ListPoliciesGroupComponent implements OnInit {
   @Input()extraList : Extra[];
 
 
+  @Input() countries: Catalogo[];
+
+
   @Output() backPrevBtn = new EventEmitter();
   @Output() nextBtn = new EventEmitter();
+
+  @Output() addPolicie = new EventEmitter<policiesForm>();
+  @Output() deletePolicie = new EventEmitter<number>();
 
 
   
@@ -51,6 +58,13 @@ export class ListPoliciesGroupComponent implements OnInit {
       lastName: new FormControl(''),
       birthday : new FormControl(''),
       plan : new FormControl(''),
+      ci : new FormControl(''),
+      passport : new FormControl(''),
+      country : new FormControl(''),
+      email : new FormControl(''),
+      phone : new FormControl(''),
+      gender : new FormControl(''),
+      nationality : new FormControl(''),
     });
   }
 
@@ -63,7 +77,7 @@ export class ListPoliciesGroupComponent implements OnInit {
       birthday : "",
       plan : "",
       itemForm: this.createItemForm(),
-      extras: [],
+      
     };
 
 
@@ -71,6 +85,7 @@ export class ListPoliciesGroupComponent implements OnInit {
       id: this.nextId++,
       isDropdownOpen : true,
       isPlainSelected: false,
+      date  : "",
       poliza : newItem,
       listPlanes: this.planes,
       polizaNombre : "Paquete del Cliente",
@@ -80,8 +95,7 @@ export class ListPoliciesGroupComponent implements OnInit {
   }
 
   onSubmit(item: policiesForm) {
-    console.log(`Editing item: ${item.poliza.name} (${item.poliza.lastName}) (${item.poliza.birthday}) (${item.poliza.plan}) `);
-    console.log(`Item form value:`, item.poliza.itemForm.value);
+    
     const formValue = item.poliza.itemForm.value;
 
 
@@ -96,15 +110,16 @@ export class ListPoliciesGroupComponent implements OnInit {
         return true;
       }
       return false
-
-
     })[0].servicio;
+
+    this.addPolicie.emit(item);
     
   }
 
   deleteItem(item: policiesForm) {
     const index = this.listPolicies.findIndex(i => i.id === item.id);
     if (index !== -1) {
+      this.deletePolicie.emit(item.id);
       this.listPolicies.splice(index, 1);
     }
   }
@@ -130,6 +145,7 @@ export class ListPoliciesGroupComponent implements OnInit {
     this.planes = [];
     this.fechaFinal = "";
     this.extraList = [];
+    this.countries = [];
   }
 
   ngOnInit(): void {
@@ -151,7 +167,22 @@ export class ListPoliciesGroupComponent implements OnInit {
 
    onDateChange(event: Event ,policy : policiesForm) {
     const inputElement = event.target as HTMLInputElement;
-    const selectedDate  =   new Date(inputElement.value);
+    
+
+    policy.date = inputElement.value;
+
+    
+    
+    policy.listPlanes = this.showPlains(policy);
+     
+    
+  }
+
+
+  showPlains( policy : policiesForm): Servicio[]{
+    
+
+    const selectedDate  =   new Date(policy.date);
     
 
     const fechaViaje = new Date(this.fechaFinal);
@@ -162,15 +193,23 @@ export class ListPoliciesGroupComponent implements OnInit {
     const differenceInMilliseconds = fechaViaje.getTime() - selectedDate.getTime();
     const differenceInYears = differenceInMilliseconds / (1000 * 60 * 60 * 24 * 365.25);
 
-
-    policy.listPlanes = this.planes
     
-    policy.listPlanes = policy.listPlanes.filter(plan => this.haveRequirements(plan, differenceInYears))
-    
+    policy.listPlanes = this.planes    
 
     // Do something with the selected date
     
+
+    if(policy.date !== ""){
+      
+      
+      return policy.listPlanes.filter(plan => this.haveRequirements(plan, differenceInYears));
+    }
+
     
+
+    
+
+    return  this.planes;
   }
 
 
@@ -180,8 +219,10 @@ export class ListPoliciesGroupComponent implements OnInit {
     const { edad_base, edad_limite} = plan;
 
     
+
     
-   if(edad_base <= differenceInYears && differenceInYears <= edad_limite){
+    
+   if(  edad_base <= differenceInYears && differenceInYears <= edad_limite){
     
     return true
    }
@@ -193,8 +234,10 @@ export class ListPoliciesGroupComponent implements OnInit {
 
 
   comprobarPlanes(){
+
     this.listPolicies.forEach(policies => {
-      policies.listPlanes =  this.planes;
+      
+      policies.listPlanes =  this.showPlains(policies);
     })
   }
 
@@ -202,7 +245,7 @@ export class ListPoliciesGroupComponent implements OnInit {
   toggleExtra( policy: policiesForm, id : number){
     policy.listExtras[id].checked = !policy.listExtras[id].checked;
     
-
+    
   }
 
   togglePlain(event: Event ,policy : policiesForm){
@@ -243,7 +286,7 @@ export class ListPoliciesGroupComponent implements OnInit {
     
     
     
-  
+   
 
 
   

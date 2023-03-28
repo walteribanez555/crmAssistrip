@@ -3,6 +3,9 @@ export interface  Precio{
     servicio_id: number,
     precio : number,
     limite_inferior : number,
-    limite_superior : number
+    limite_superior : number,
+    pendiente : number,
+    intercepto : number,
+    tipo_ecuacion : number,
 
 }

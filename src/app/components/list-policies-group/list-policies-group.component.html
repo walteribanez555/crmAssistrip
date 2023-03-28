@@ -17,18 +17,52 @@
                         <form class="policyForm" [formGroup]="policy.poliza.itemForm" (ngSubmit)="onSubmit(policy)">
                             <div class="fields">
                                 <div class="input-field">
+                                    <label>Ci:</label>
+                                    <input type="text" formControlName="ci" value="Ci" placeholder="000000000" >
+                                </div>
+                                <div class="input-field">
+                                    <label >Pasaporte: </label>
+                                    <input type="number" formControlName="passport" placeholder="000000000">
+                                </div>
+
+                                <div class="input-field">
+                                    <label> Genero : </label>
+                                    <select  formControlName="gender"  >
+                                        <option value="1">Masculino</option>
+                                        <option value="2">Femenino</option>
+                                    </select>
+                                </div>
+                                <div class="input-field">
+                                    <label>Pais de Origen</label>
+                                    <select formControlName="nationality"  placeholder="Bolivia">
+                                        <option *ngFor="let country of countries" value={{country.etiqueta}}> {{country.etiqueta}}</option>
+                                    </select>
+                                </div>
+                                <div class="input-field">
+                                    <label >Email: </label>
+                                    <input type="email" formControlName="email" placeholder="email@gmail.com">
+                                </div>
+                                <div class="input-field">
+                                    <label>Telefono:</label>
+                                    <input type="number" formControlName="phone" placeholder="0000000000">
+                                </div>
+                                <div class="input-field">
                                     <label>Nombre(s):</label>
-                                    <input type="text" formControlName="name">
+                                    <input type="text" formControlName="name" >
 
                                 </div>
                                 <div class="input-field">
                                     <label>Apellido(s):</label>
                                     <input type="text" formControlName="lastName">
                                 </div>
+                                
                                 <div class="input-field">
                                     <label>Fecha de nacimiento:</label>
-                                    <input type="date" (change)="onDateChange($event, policy)"  formControlName="birthday" >
+                                    <input type="date" (change)="onDateChange($event, policy)"    formControlName="birthday" >
                                 </div>
+
+                                
+
                                 <div class="input-field">
                                     <label>Plan a elegir:</label>
                                     <select  (change)="togglePlain($event, policy)" class="listado" name="listado" id="listadoId" formControlName="plan">
@@ -66,9 +100,13 @@
                                             <div class="card-content">
 
                                                 <h2 class="card-title">{{extraItem.extra.descripcion}}</h2>
-                                                <p class="card-text">
-                                                    {{extraItem.extra.cobertura}} 
+                                                <p class="card-text" *ngIf="extraItem.extra.cobertura !== null">
+                                                   Cobertura:  {{extraItem.extra.cobertura | currency:'USD':true:'1.2-2'}} 
                                                 </p>
+                                                <p class="card-text">
+                                                    Costo por dia : {{extraItem.extra.complemento | currency:'USD':true:'1.2-2'}}
+                                                </p>
+
 
                                             </div>
                                            
@@ -87,7 +125,7 @@
 
                             <div class="buttonSpace">
                                 <button  class="checkBtn" type="submit">
-                                    agregar cliente
+                                    Confirmar/Editar
                                 </button>
                                 <button (click)="deleteItem(policy)">Delete Item</button>
                             </div>
@@ -104,12 +142,12 @@
 
         <button class="addItem" (click)="addItem()">  
             <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24"><path d="M440 856V616H200v-80h240V296h80v240h240v80H520v240h-80Z"/></svg>
-            Add Item
+            Agregar nuevo cliente
         </button>
         <div class="buttonSpace">
-                <button (click)="backPrev()" >  Prev</button>
+                <button (click)="backPrev()" >Volver</button>
                 
-                <button (click)="next()">Add Item</button>
+                <button (click)="next()">Siguiente paso</button>
 
 
         </div>

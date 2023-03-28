@@ -8,5 +8,5 @@ export interface policie{
     birthday : string,
     plan : string,
     itemForm: FormGroup;
-    extras: number[];
+    
 }
