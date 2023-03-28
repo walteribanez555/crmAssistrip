@@ -9,6 +9,7 @@ import { PlanesService } from './planes.service';
 import { PolizasService } from './polizas.service';
 import { PreciosService } from './precios.service';
 import { ServiciosService } from './servicios.service';
+import { GetLocationService } from './get-location.service';
 
 
 
@@ -23,6 +24,7 @@ import { ServiciosService } from './servicios.service';
     PolizasService,
     PreciosService,
     ServiciosService,
+    GetLocationService
   ],
   
 })

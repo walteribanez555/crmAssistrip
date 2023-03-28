@@ -11,6 +11,7 @@ import { policie } from 'src/app/models/Pages/policie.model';
 import { policiesForm } from 'src/app/models/Pages/policiesForm.model';
 import { CatalogosService } from 'src/app/services/catalogos.service';
 import { ExtrasService } from 'src/app/services/extras.service';
+import { GetLocationService } from 'src/app/services/get-location.service';
 import { PreciosService } from 'src/app/services/precios.service';
 import { ServiciosService } from 'src/app/services/servicios.service';
 
@@ -41,15 +42,7 @@ export class GenerarPolizasComponent implements OnInit{
     tags : []
   }
 
-
   finalTags : string = "";
-  
-
-
-  
-
-
-
 
   datos: any = {}
 
@@ -64,11 +57,15 @@ export class GenerarPolizasComponent implements OnInit{
   diaViaje : string = "";
   listPolicies : policiesForm[] = [];
   precios : Precio[] = [];
-  
+  latitude :number =0;
+  longitude : number =0;
+  locationCountry : string = "";
   
   stepForm: number = 1;
   
   highestPostForm : number =1;
+
+  
 
   
 
@@ -79,6 +76,7 @@ export class GenerarPolizasComponent implements OnInit{
     private servicios : ServiciosService,
     private extras : ExtrasService,
     private preciosService : PreciosService,
+    private location : GetLocationService,
 
   ) {
 
@@ -107,7 +105,33 @@ export class GenerarPolizasComponent implements OnInit{
       (data)=> {
         this.precios = data;
       }
-    )
+    );
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        
+      
+
+        this.location.getLocation(position.coords.latitude, position.coords.longitude).subscribe(
+          (data)=> {
+            
+            const features = data as { features: any[] };
+            console.log(features.features);
+            const country = features.features[0].text;
+            this.locationCountry = country;
+          }
+        );
+      });
+
+      
+
+      
+
+    } else {
+      console.log('Geolocation is not supported by this browser.');
+    }
+
+    
 
 
   }
@@ -117,7 +141,7 @@ export class GenerarPolizasComponent implements OnInit{
     
 
 
-    console.log("Hola");
+    
     this.dataFormDestiny = event;
 
 
@@ -150,7 +174,7 @@ export class GenerarPolizasComponent implements OnInit{
 
  agregarPolizas(event : Event){
       this.stepForm +=1;
-      console.log("Aumento");
+      
  }
 
 
@@ -229,6 +253,9 @@ export class GenerarPolizasComponent implements OnInit{
       this.listPolicies.push(event);
     }
 
+
+    console.log(this.listPolicies);
+
     
     
     
@@ -237,8 +264,12 @@ export class GenerarPolizasComponent implements OnInit{
 
   deletePolicie( event : number){
 
+
     const elementIndex = this.listPolicies.findIndex(poliza => poliza.id === event);
-    this.listPolicies.splice(elementIndex,1);
+    if(elementIndex !== -1){
+      this.listPolicies.splice(elementIndex,1);
+    }
+    
   }
 
 
@@ -278,15 +309,51 @@ export class GenerarPolizasComponent implements OnInit{
   obtenerCostoPoliza( poliza : policiesForm){
 
 
-    const precios =  this.precios.find(precio => precio.servicio_id === poliza.poliza.itemForm.value.plan*1); 
+    const rangoPrecio =  this.precios.find(precio => precio.servicio_id === poliza.poliza.itemForm.value.plan*1  && this.betweenTheRange(precio.limite_inferior, precio.limite_superior)); 
     
 
+    if(rangoPrecio){
+      this.realizarCalculo(rangoPrecio);
+    }
 
-    const rangoPrecio   = this.precios.find(precio => this.betweenTheRange(precio.limite_inferior, precio.limite_superior));
 
     
-    console.log(rangoPrecio);
+
     
+    
+    
+  }
+
+
+
+
+  realizarCalculo(rangoPrecio : Precio){
+    let precio :number = 0;
+    if(rangoPrecio.tipo_ecuacion ===1){
+      precio=this.ecuacionCurva(rangoPrecio, this.diffDays);
+    }
+    if(rangoPrecio.tipo_ecuacion ===2){
+      precio = this.ecuacionRecta(rangoPrecio, this.diffDays);
+    }
+
+  }
+
+
+  ecuacionCurva(rangoPrecio : Precio, dias : number){
+    const valor = Math.pow(dias, rangoPrecio.intercepto)
+    return valor*rangoPrecio.pendiente;
+
+  }
+
+
+  ecuacionRecta( rangoPrecio : Precio, dias: number){
+      
+      
+  
+      const valor = (rangoPrecio.pendiente*dias) + rangoPrecio.intercepto;
+  
+      return valor;
+  
   }
 
 

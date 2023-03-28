@@ -12,7 +12,7 @@
                     <div class="form second"  *ngIf="highestPostForm >= 2"   [class.activeForm]="stepForm===2">                        
                         <app-list-policies-group    [countries]="paises" [extraList]="extraList"  [fechaFinal]="diaViaje" (deletePolicie)="deletePolicie($event)"  (addPolicie)="addPolicie($event)" (nextBtn)="agregarPolizas($event)" (backPrevBtn)="prevForm()" [planes]="planesCubren" ></app-list-policies-group>
 
-                    
+                        
                                         
                     </div>  
 
@@ -25,7 +25,7 @@
 
                     
                 <header>Datos de las polizas</header>
-
+                <p>Pais de emision : {{locationCountry}}</p>
                 <p>Fecha de salida : {{dataFormDestiny.initialDate}}</p>
                 <p>Fecha de llegada : {{dataFormDestiny.finalDate}}</p>
                 <p>Paises destino: {{finalTags}}</p>
