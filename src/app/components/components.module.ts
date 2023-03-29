@@ -4,6 +4,7 @@ import { FormDatesDestinationComponent } from './form-dates-destination/form-dat
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ListPoliciesGroupComponent } from './list-policies-group/list-policies-group.component';
 import { PipesModule } from '../pipes/pipes.module';
+import { ClienteFormComponent } from './cliente-form/cliente-form.component';
 
 
 
@@ -11,6 +12,7 @@ import { PipesModule } from '../pipes/pipes.module';
     declarations: [
       FormDatesDestinationComponent,
       ListPoliciesGroupComponent,
+      ClienteFormComponent,
       
     ],
     imports: [
@@ -23,7 +25,8 @@ import { PipesModule } from '../pipes/pipes.module';
     ],
     exports: [
       FormDatesDestinationComponent,
-      ListPoliciesGroupComponent
+      ListPoliciesGroupComponent,
+      ClienteFormComponent
     ]
   })
   export class ComponentsModule { }

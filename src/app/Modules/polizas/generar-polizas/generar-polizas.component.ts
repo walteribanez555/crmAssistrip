@@ -6,8 +6,10 @@ import { Extra } from 'src/app/models/Data/Extra';
 import { Precio } from 'src/app/models/Data/Precio';
 import { Servicio } from 'src/app/models/Data/Servicio';
 import { datesDestiny } from 'src/app/models/Pages/datesDestiny.model';
+import { extraCostForm} from 'src/app/models/Pages/extasForm.model';
+import { ExtraForm } from 'src/app/models/Pages/extra.model';
+import { policiesData } from 'src/app/models/Pages/policiesData.model';
 
-import { policie } from 'src/app/models/Pages/policie.model';
 import { policiesForm } from 'src/app/models/Pages/policiesForm.model';
 import { CatalogosService } from 'src/app/services/catalogos.service';
 import { ExtrasService } from 'src/app/services/extras.service';
@@ -56,10 +58,22 @@ export class GenerarPolizasComponent implements OnInit{
   planesCubren : Servicio[]= [];
   diaViaje : string = "";
   listPolicies : policiesForm[] = [];
+  listPoliciesData : policiesData[] = [];
   precios : Precio[] = [];
   latitude :number =0;
   longitude : number =0;
   locationCountry : string = "";
+  cliente = {
+    nombre: "",
+    apellido: "",
+    nit  : 0,
+    telf : 0,
+    origen : "",
+    email : ""
+  
+  };
+  
+
   
   stepForm: number = 1;
   
@@ -78,7 +92,8 @@ export class GenerarPolizasComponent implements OnInit{
     private preciosService : PreciosService,
     private location : GetLocationService,
 
-  ) {
+  ) 
+  {
 
    
    }
@@ -174,6 +189,10 @@ export class GenerarPolizasComponent implements OnInit{
 
  agregarPolizas(event : Event){
       this.stepForm +=1;
+
+      if(this.stepForm> this.highestPostForm){
+        this.highestPostForm = this.stepForm;
+      }
       
  }
 
@@ -249,12 +268,40 @@ export class GenerarPolizasComponent implements OnInit{
     
     if (existingElementIndex !== -1) {
       this.listPolicies[existingElementIndex] = event;
+      
+
     } else {
       this.listPolicies.push(event);
     }
 
 
-    console.log(this.listPolicies);
+    const listCostExtras : extraCostForm[] = this.getListCost(event);
+
+    const existingElementDataIndex = this.listPoliciesData.findIndex( poliza => poliza.id === event.id);
+    const costoPoliza = this.obtenerCostoPoliza(event);
+    const costoTotal : number =  costoPoliza + listCostExtras.reduce((acc, curr)=> acc+curr.costroExtra,0)
+    if(existingElementDataIndex!==-1){
+      this.listPoliciesData[existingElementDataIndex] ={
+        id : event.id,
+        costoTotal : costoTotal,
+        costoPoliza : costoPoliza,
+        extras : listCostExtras
+      };
+
+
+    }else{
+      this.listPoliciesData.push({
+        id : event.id,
+        costoTotal : costoTotal,
+        costoPoliza : costoPoliza,
+        extras : listCostExtras
+      })
+    }
+
+
+      
+
+      
 
     
     
@@ -268,6 +315,7 @@ export class GenerarPolizasComponent implements OnInit{
     const elementIndex = this.listPolicies.findIndex(poliza => poliza.id === event);
     if(elementIndex !== -1){
       this.listPolicies.splice(elementIndex,1);
+      this.listPoliciesData.splice(elementIndex,1);
     }
     
   }
@@ -313,9 +361,11 @@ export class GenerarPolizasComponent implements OnInit{
     
 
     if(rangoPrecio){
-      this.realizarCalculo(rangoPrecio);
+      return this.realizarCalculo(rangoPrecio) ;
     }
 
+
+    return 0;
 
     
 
@@ -330,11 +380,13 @@ export class GenerarPolizasComponent implements OnInit{
   realizarCalculo(rangoPrecio : Precio){
     let precio :number = 0;
     if(rangoPrecio.tipo_ecuacion ===1){
-      precio=this.ecuacionCurva(rangoPrecio, this.diffDays);
+      precio=this.ecuacionCurva(rangoPrecio, this.diffDays) * this.diffDays;
     }
     if(rangoPrecio.tipo_ecuacion ===2){
-      precio = this.ecuacionRecta(rangoPrecio, this.diffDays);
+      precio = this.ecuacionRecta(rangoPrecio, this.diffDays) *this.diffDays;
     }
+
+    return precio;
 
   }
 
@@ -388,6 +440,65 @@ export class GenerarPolizasComponent implements OnInit{
   }
 
 
+  getListCost(policie : policiesForm) : extraCostForm[]{
 
+      const listExtras : ExtraForm[] = policie.listExtras.filter(extra => extra.checked);
+
+      
+
+      const listCostExtras : extraCostForm[] = listExtras.map(extrafrm => {
+
+        
+        if(extrafrm.extra.complemento){
+
+
+
+          const dataExtra : extraCostForm = { 
+
+            idExtra: extrafrm.extra.beneficio_id,
+            costroExtra : parseFloat(extrafrm.extra.complemento)*this.diffDays,
+            
+          }
+
+          return dataExtra;
+          
+        }
+
+        const dataExtra: extraCostForm = {
+          idExtra : 0,
+          costroExtra : 0,
+        };
+          return  dataExtra;
+        
+        
+
+       });
+
+
+       return listCostExtras;
+  }
+
+  loadFormCliente(event : FormGroup){
+    this.cliente = {
+      nombre : event.value.nombre,
+      apellido : event.value.apellido,
+      nit : parseInt(event.value.nit),
+      telf : parseInt(event.value.telf),
+      email : event.value.email,
+      origen : event.value.origen
+    }
+
+
+    this.stepForm +=1;
+
+      if(this.stepForm> this.highestPostForm){
+        this.highestPostForm = this.stepForm;
+      }
+  }
+
+
+  guardarVenta(){
+
+  }
   
 }

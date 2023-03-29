@@ -45,6 +45,38 @@ body{
     box-shadow: 0 0 30px rgba(0,0,0,0.06);
     
   }
+
+  
+
+
+  .containerData {
+    display: flex;
+    
+  }
+
+  .containerTitular { 
+    margin-bottom: 100px;
+  }
+  
+  .column {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items : start;
+    
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    
+  }
+
+  .text {
+    white-space: pre-wrap;
+    margin: 0;
+   
+    overflow: hidden;
+    text-align: start;
+  }
   /* apply responsive styles */
   @media (max-width: 1050px) {
     .grid-container {
@@ -60,6 +92,27 @@ body{
         height: 100%;
         width: 100%;
       }
+      .grid-item-2.last {
+        position:relative;
+        left: 5px;
+        height: 100%;
+        width: 100%;
+      }
+
+      .column {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 100%;
+        
+      }
+
+      .prevBtn { 
+        display: flex ;
+      }
+      
+    
+      
   }
 
 
@@ -137,7 +190,70 @@ header::before{
   word-wrap: break-word; /* Permite que las palabras se rompan si son demasiado largas para caber en una línea */
 }
 
+.buttonSpace{
+  position: absolute;
+  flex-direction: row;
+  bottom: 10px;
+  left: 20%;
+  right: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.buttonSpace button { 
+  display: flex;
+   flex-direction: row;
+   align-items: center;
+   justify-content: center;    
+   margin: 10px;
+   width: 70px;
+   height: 40px;
+   background-color: var(--body-bg);
+  
+   transition: all 0.3s linear;
+   cursor: pointer;
+   border: 2px solid var(--main-color);
+   color: var(--main-color);
+   
+}
+
+.buttonSpace button:hover{
+  background-color: var(--main-color);
+  color: white;
+  cursor: pointer;
+  border: 2px solid var(--main-color);
+}
+
+
+.buttonSpace button:focus{
+  
+  background-color: var(--main-color);
+  color: white;
+  cursor: pointer;
+  border: 2px solid var(--main-color);
+}
   
 
+.prev { 
+  display: none;
+}
+
+.next{ 
+  display: none;
+}
+
+.last{ 
+  position:absolute;
+        height: 85%;
+        width: 75%;
+        right: 20px;
+        bottom: 20px;
+    background: var(--body-bg);
+    border-radius: 10px;
+    padding: 18px 25px 20px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.06);
+}
   
 

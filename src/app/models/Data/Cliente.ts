@@ -10,3 +10,5 @@ export interface Cliente{
     nro_contacto: string,
     status: number
 }
+
+

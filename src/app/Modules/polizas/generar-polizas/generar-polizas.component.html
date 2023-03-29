@@ -16,10 +16,17 @@
                                         
                     </div>  
 
+                    <div class="form third"  *ngIf="highestPostForm >= 3"   [class.activeForm]="stepForm>=3"  [class.next]="stepForm===4" >                        
+                        <app-cliente-form  (loadCliente)="loadFormCliente($event)"   (backButton)="prevForm()"  [countries]="paises" ></app-cliente-form>
+
+                        
+                                        
+                    </div>  
+
                 </div>
 
             </div>
-            <div class="grid-item-2">
+            <div class="grid-item-2"  [class.last]="stepForm===4">
                 
 
 
@@ -33,9 +40,36 @@
                 <p *ngIf="diffDays>0" >Dias de viaje: {{diffDays}}</p>
 
                 <Header>Polizas Agregadas</Header>
-                <p *ngFor="let poliza of listPolicies">Cliente: {{poliza.poliza.itemForm.value.name}} {{poliza.poliza.itemForm.value.lastName}} </p>
-
                 
+                <div class="containerData">
+                    <div class="column">
+                        <label for="">Cliente: </label>
+                        <p  class="text" *ngFor="let poliza of listPolicies">{{poliza.poliza.itemForm.value.name}} {{poliza.poliza.itemForm.value.lastName}} </p>
+
+                    </div>
+                    <div class="column">
+                        <label for="">Costo: </label>
+                        <p class="text" *ngFor="let data of listPoliciesData"> {{data.costoTotal | currency:'USD':true:'1.2-2'}}  </p>
+
+                    </div>
+                  </div>
+
+                  <div class="containerTitular">
+                    <header>Titular de las polizas</header>
+                    <p> {{cliente.nombre}} {{cliente.apellido}} </p>
+                  </div>
+
+                  
+
+
+                  <div class="buttonSpace"  *ngIf="highestPostForm >= 4">
+                    <button type="button" *ngIf="stepForm===4" (click)="prevForm()" [class.active]="stepForm===4" class="prevBtn">
+                        <span class="btnText">Volver al anterior</span>
+                    </button>
+                    <button type="button" (click)="guardarVenta()" class="nextBtn">
+                        <span class="btnText">Siguiente</span>
+                    </button>
+                  </div>
 
             </div>
 
