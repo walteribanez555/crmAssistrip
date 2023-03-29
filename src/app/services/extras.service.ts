@@ -9,7 +9,7 @@ import { Extra } from '../models/Data/Extra';
 })
 export class ExtrasService {
 
-  apiUrl = environment.apiUrl + 'extras';
+  private apiUrl = '/api/extras';
 
 
   constructor(private http : HttpClient) { }
@@ -31,4 +31,6 @@ export class ExtrasService {
     return this.http.get<Extra>(this.apiUrl,{params});
 
   }
+
+  
 }

@@ -9,7 +9,7 @@ import { Beneficio } from '../models/Data/Beneficio';
 })
 export class BeneficiosService {
 
-  apiUrl = environment.apiUrl + 'beneficios';
+  private apiUrl = '/api/beneficios';
 
   constructor(private http : HttpClient) { }
 

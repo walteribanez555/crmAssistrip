@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Poliza } from '../models/Data/Poliza';
+import { Poliza, PolizaResp } from '../models/Data/Poliza';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Injectable({
@@ -10,7 +10,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 export class PolizasService {
 
 
-  apiUrl = environment.apiUrl + 'polizas';
+  private apiUrl = '/api/polizas';
 
   constructor(private http : HttpClient) { }
 
@@ -31,7 +31,29 @@ export class PolizasService {
 
     return this.http.get<Poliza>(this.apiUrl,{params});
 
+  }
 
+
+            //  data.ventaId = ventaId;
+            // const poliza = await polizas.post( data );
+            // poliza.cantidad = cantidad;
+            // poliza.precio = precio;
+            // poliza.total = total;
+            // poliza.descuento = descuento;
+            // poliza.totalPago = totalPago;
+
+
+  postPolizas(venta_id: number, servicio_id : number, destino : string,fecha_salida : string, fecha_retorno : string, extra:number):Observable<PolizaResp>{
+
+
+    return this.http.post<PolizaResp>(this.apiUrl, {
+      venta_id,
+      servicio_id,
+      destino,
+      fecha_salida,
+      fecha_retorno,
+      extra
+    })
 
   }
   

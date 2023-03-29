@@ -12,3 +12,19 @@ export interface Cliente{
 }
 
 
+
+
+
+
+
+export interface ClientePost extends Omit<Cliente, 'cliente_id'|'status'|'tipo_cliente' | 'fecha_registro'>{
+
+
+}
+
+
+export interface ClienteResp extends Omit<Cliente, 'fecha_registro' | 'cliente_id'>{
+    id : number;
+    
+}
+

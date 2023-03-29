@@ -78,7 +78,11 @@ body{
     text-align: start;
   }
   /* apply responsive styles */
-  @media (max-width: 1050px) {
+
+  
+
+
+  @media (max-width: 1280px) {
     .grid-container {
       grid-template-columns: 1fr; /* switch to one column layout for small screens */
     }

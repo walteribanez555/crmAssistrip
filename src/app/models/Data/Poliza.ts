@@ -23,3 +23,11 @@ export interface Poliza {
     extra: number,
     fecha_emision : string,
 }
+
+
+export interface PolizaResp extends Omit<Poliza, 'poliza_id'>{
+    id : number;
+    
+}
+
+

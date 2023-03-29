@@ -9,7 +9,7 @@ import { Plan } from '../models/Data/Plan';
 })
 export class PlanesService {
 
-  apiUrl = environment.apiUrl+'planes';
+  private apiUrl = '/api/planes';
 
   constructor(private http : HttpClient) { }
 

@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
+
 import { Catalogo } from '../models/Data/Catalogo';
 
 @Injectable({
@@ -9,7 +9,7 @@ import { Catalogo } from '../models/Data/Catalogo';
 })
 export class CatalogosService {
   
-  apiUrl  = environment.apiUrl + 'catalogos';
+  private apiUrl  = '/api/catalogos';
 
   constructor( private http : HttpClient) {  }
 

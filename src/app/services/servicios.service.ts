@@ -8,13 +8,15 @@ import { Servicio } from '../models/Data/Servicio';
   providedIn: 'root'
 })
 export class ServiciosService {
-  apiUrl = environment.apiUrl + 'servicios';
+  private apiUrl = '/api/servicios';
 
   constructor(private http: HttpClient) { }
 
    getServicios(): Observable<Servicio[]>{
 
       
+
+      console.log(this.http.get<Servicio[]>(this.apiUrl))
 
       return this.http.get<Servicio[]>(this.apiUrl);
 

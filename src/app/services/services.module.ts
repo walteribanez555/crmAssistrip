@@ -10,6 +10,8 @@ import { PolizasService } from './polizas.service';
 import { PreciosService } from './precios.service';
 import { ServiciosService } from './servicios.service';
 import { GetLocationService } from './get-location.service';
+import { VentasService } from './ventas.service';
+import { ExtrasPolizasService } from './beneficiosExtras.service';
 
 
 
@@ -24,7 +26,9 @@ import { GetLocationService } from './get-location.service';
     PolizasService,
     PreciosService,
     ServiciosService,
-    GetLocationService
+    GetLocationService,
+    VentasService,
+    ExtrasPolizasService,
   ],
   
 })
