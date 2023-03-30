@@ -10,6 +10,7 @@ import { ServicesModule } from 'src/app/services/services.module';
 import { PipesModule } from 'src/app/pipes/pipes.module';
 import { FormsModule,FormGroup, FormControl, ReactiveFormsModule } from "@angular/forms"
 import { ComponentsModule } from 'src/app/components/components.module';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 
 
@@ -36,7 +37,8 @@ import { ComponentsModule } from 'src/app/components/components.module';
     PipesModule,
     FormsModule,
     ReactiveFormsModule,
-    ComponentsModule
+    ComponentsModule,
+    SweetAlert2Module,
     
     
     

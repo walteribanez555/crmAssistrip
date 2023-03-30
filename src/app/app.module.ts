@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 
 
@@ -18,6 +19,7 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
+    SweetAlert2Module.forRoot(),
     AppRoutingModule,
   
     

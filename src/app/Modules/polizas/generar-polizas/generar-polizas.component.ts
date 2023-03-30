@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup,FormControl } from '@angular/forms';
 
 import { Catalogo } from 'src/app/models/Data/Catalogo';
-import { Cliente, ClientePost, ClienteResp } from 'src/app/models/Data/Cliente';
+import { ClientePost, ClienteResp } from 'src/app/models/Data/Cliente';
 import { Extra } from 'src/app/models/Data/Extra';
 import { Precio } from 'src/app/models/Data/Precio';
 import { Servicio } from 'src/app/models/Data/Servicio';
@@ -10,7 +10,6 @@ import { datesDestiny } from 'src/app/models/Pages/datesDestiny.model';
 import { extraCostForm} from 'src/app/models/Pages/extasForm.model';
 import { ExtraForm } from 'src/app/models/Pages/extra.model';
 import { policiesData } from 'src/app/models/Pages/policiesData.model';
-import {HttpErrorResponse} from '@angular/common/http';
 import { policiesForm } from 'src/app/models/Pages/policiesForm.model';
 import { CatalogosService } from 'src/app/services/catalogos.service';
 import { ClientesService } from 'src/app/services/clientes.service';
@@ -18,16 +17,13 @@ import { ExtrasService } from 'src/app/services/extras.service';
 import { GetLocationService } from 'src/app/services/get-location.service';
 import { PreciosService } from 'src/app/services/precios.service';
 import { ServiciosService } from 'src/app/services/servicios.service';
-import { switchMap } from 'rxjs/operators';
 import { VentasService } from 'src/app/services/ventas.service';
 import { PolizasService } from 'src/app/services/polizas.service';
 import { Venta } from 'src/app/models/Data/Venta.model';
-import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
-import { policie } from 'src/app/models/Pages/policie.model';
-import { Poliza, PolizaResp } from 'src/app/models/Data/Poliza';
+import {PolizaResp } from 'src/app/models/Data/Poliza';
 import { ExtrasPolizasService } from 'src/app/services/beneficiosExtras.service';
 import { BeneficiariosService } from 'src/app/services/beneficiarios.service';
+import Swal from 'sweetalert2';
 
 // register Swiper custom elements
 
@@ -84,6 +80,10 @@ export class GenerarPolizasComponent implements OnInit{
     email : ""
   
   };
+
+
+  loadDataCatalogo = false;
+  loadDataServicios = false;
   
 
   
@@ -116,25 +116,39 @@ export class GenerarPolizasComponent implements OnInit{
    }
 
   ngOnInit(): void {
+
     
+   
     this.catalogoService.getPaises().subscribe(
       (data)=> {
+        
         this.paises = data.filter(item => item.status === 1);
+        this.loadDataCatalogo = true
+
+        
       });
 
     this.servicios.getServicios().subscribe(
       (data)=> {
+        
+
         this.listadoPlanes = data.filter(item => item.status === 1);
+        this.loadDataServicios = true
+        
       });
 
     this.extras.getExtras().subscribe(
       (data)=> {
+        
+
         this.extraList = data;
       }
     );
 
     this.preciosService.getPrecios().subscribe(
       (data)=> {
+        
+
         this.precios = data;
       }
     );
@@ -156,7 +170,7 @@ export class GenerarPolizasComponent implements OnInit{
       });
 
       
-
+      
       
 
     } else {
@@ -169,10 +183,11 @@ export class GenerarPolizasComponent implements OnInit{
   }
 
 
+  
+
+
   agregar(event : datesDestiny) {
     
-
-
     
     this.dataFormDestiny = event;
 
@@ -185,11 +200,13 @@ export class GenerarPolizasComponent implements OnInit{
     
     this.finalTags = this.dataFormDestiny.tags.toString();
     
-    this.stepForm +=1;
+    
 
 
 
     this.getDestinys();
+
+    
 
     
     
@@ -253,8 +270,20 @@ export class GenerarPolizasComponent implements OnInit{
 
      this.planesCubren = this.listadoPlanes.filter(plan => this.haveRequirements(plan) );
      this.planesCubren = this.planesCubren.filter(plan =>  this.haveRange(plan));
-     
 
+     
+     
+    if(!(this.planesCubren.length>0)){
+      
+      Swal.fire({
+        title: 'Warning',
+        text: 'No hay planes para esos destinos en conjunto',
+        icon : 'warning',
+        confirmButtonText: 'Cool'
+      })
+    }else{
+      this.stepForm +=1;
+    }
      
 
   }
@@ -667,7 +696,7 @@ export class GenerarPolizasComponent implements OnInit{
   }
 
 
-  mapearPoliza(){
+  prueba(){
 
   }
   
