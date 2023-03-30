@@ -274,7 +274,7 @@ export class GenerarPolizasComponent implements OnInit{
      
      
     if(!(this.planesCubren.length>0)){
-      
+      console.log(this.planesCubren);
       Swal.fire({
         title: 'Warning',
         text: 'No hay planes para esos destinos en conjunto',
