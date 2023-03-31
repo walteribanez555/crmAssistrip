@@ -18,7 +18,7 @@ import { PipesModule } from './pipes/pipes.module';
 const routes : Routes = [
   {
     path : '**',
-    redirectTo: 'usuarios/agregar-usuarios',
+    redirectTo: 'polizas/generar-polizas',
     pathMatch : 'full'
 
   },

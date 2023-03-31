@@ -1,8 +1,10 @@
 import { Component, OnInit,Input,Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup,FormControl } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 import { Catalogo } from 'src/app/models/Data/Catalogo';
 import { datesDestiny } from 'src/app/models/Pages/datesDestiny.model';
 import { CatalogosService } from 'src/app/services/catalogos.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -15,9 +17,12 @@ export class FormDatesDestinationComponent {
   @Input() countries: Catalogo[];
   @Output() myOutputEvent = new EventEmitter<datesDestiny>();
 
+  inputValue: string ="";
+
   formData = {
     initialDate: '',
     finalDate: '',
+    inputValue : '',
     
   };
 
@@ -43,6 +48,9 @@ export class FormDatesDestinationComponent {
   comparar(){
     const date1: Date = new Date(this.formData.initialDate);
     const date2: Date = new Date(this.formData.finalDate);
+
+
+    
   
       // Get the difference in milliseconds
       const diffInMs = Math.abs(date2.getTime() - date1.getTime());
@@ -96,14 +104,34 @@ export class FormDatesDestinationComponent {
       if (target) {
         const selectedValue = target.value;
         this.insertTag(selectedValue);
+
+        target.value = "pais";
+        
+        
         // Do something with the selected value here
       }
+    
     }
   
 
     agregar(event : Event){
 
       event.preventDefault();
+
+
+      if(!(this.tags.length>0)){
+        this.errorMessage("Se necesita al menos un destino");
+        return;
+      }
+
+      if(!this.comprobarFecha(this.formData.initialDate)){
+        this.errorMessage("Error en el formato de la fecha de salida");
+        return;
+      }
+      if(!this.comprobarFecha(this.formData.finalDate)){
+        this.errorMessage("Error en el formato de la fecha de llegada")
+        return;
+      }
 
       const {initialDate, finalDate}= this.formData;
 
@@ -118,5 +146,28 @@ export class FormDatesDestinationComponent {
     }
   
   
+
+    errorMessage(errorMsg : string){
+
+      Swal.fire({
+        title: 'Error',
+        text: errorMsg,
+        icon : 'error',
+        confirmButtonText: 'Continuar'
+      })
+
+    }
+
+    comprobarFecha( fecha : string): boolean{
+
+      const timestamp = Date.parse(fecha);
+
+      if (isNaN(timestamp)) {
+        return false
+      } else {
+        return true
+      }
+
+    }
 
 }

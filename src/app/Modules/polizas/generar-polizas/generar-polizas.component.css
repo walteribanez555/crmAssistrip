@@ -82,7 +82,7 @@ body{
   
 
 
-  @media (max-width: 1280px) {
+  @media (max-width: 1300px) {
     .grid-container {
       grid-template-columns: 1fr; /* switch to one column layout for small screens */
     }

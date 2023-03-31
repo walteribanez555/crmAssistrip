@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ListPoliciesGroupComponent } from './list-policies-group/list-policies-group.component';
 import { PipesModule } from '../pipes/pipes.module';
 import { ClienteFormComponent } from './cliente-form/cliente-form.component';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 
 
@@ -19,7 +20,8 @@ import { ClienteFormComponent } from './cliente-form/cliente-form.component';
       CommonModule,
       FormsModule,
       ReactiveFormsModule,
-      PipesModule
+      PipesModule,
+      SweetAlert2Module,
       
       
     ],

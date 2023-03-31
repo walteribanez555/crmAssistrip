@@ -22,19 +22,19 @@
                                 </div>
                                 <div class="input-field">
                                     <label >Pasaporte: </label>
-                                    <input type="number" formControlName="passport" placeholder="000000000">
+                                    <input type="number" formControlName="passport" value="passport" placeholder="000000000">
                                 </div>
 
                                 <div class="input-field">
                                     <label> Genero : </label>
-                                    <select  formControlName="gender"  >
+                                    <select  formControlName="gender" value="gender"  >
                                         <option value="1">Masculino</option>
                                         <option value="2">Femenino</option>
                                     </select>
                                 </div>
                                 <div class="input-field">
                                     <label>Pais de Origen</label>
-                                    <select formControlName="nationality"  placeholder="Bolivia">
+                                    <select formControlName="nationality" value="nationality" placeholder="Bolivia">
                                         <option *ngFor="let country of countries" value={{country.etiqueta}}> {{country.etiqueta}}</option>
                                     </select>
                                 </div>
@@ -44,11 +44,11 @@
                                 </div>
                                 <div class="input-field">
                                     <label>Telefono:</label>
-                                    <input type="number" formControlName="phone" placeholder="0000000000">
+                                    <input type="text" formControlName="phone" placeholder="0000000000">
                                 </div>
                                 <div class="input-field">
                                     <label>Nombre(s):</label>
-                                    <input type="text" formControlName="name" >
+                                    <input type="text" formControlName="name" value="name">
 
                                 </div>
                                 <div class="input-field">

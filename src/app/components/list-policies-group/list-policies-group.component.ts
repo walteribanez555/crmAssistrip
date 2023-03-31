@@ -7,6 +7,8 @@ import { Servicio } from 'src/app/models/Data/Servicio';
 import { ExtraForm } from 'src/app/models/Pages/extra.model';
 import { policie } from 'src/app/models/Pages/policie.model';
 import { policiesForm } from 'src/app/models/Pages/policiesForm.model';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-list-policies-group',
@@ -43,7 +45,20 @@ export class ListPoliciesGroupComponent implements OnInit {
   }
 
   next(){
+
+
+
+    if(!this.listPolicies.every(policie => policie.isFinished)){
+      this.errorMessage("Debe confirmar cada poliza");
+      return;
+      
+    }
     this.nextBtn.emit();
+    return;
+
+    
+
+    
   }
 
   comprobarInfo(){
@@ -85,6 +100,7 @@ export class ListPoliciesGroupComponent implements OnInit {
       id: this.nextId++,
       isDropdownOpen : true,
       isPlainSelected: false,
+      isFinished : false,
       date  : "",
       poliza : newItem,
       listPlanes: this.planes,
@@ -98,12 +114,69 @@ export class ListPoliciesGroupComponent implements OnInit {
     
     const formValue = item.poliza.itemForm.value;
 
+    
+    if(!(formValue.passport>0)){
+      this.errorMessage("Por favor rellenar el campo de pasaporte");
+      return;
+    }
+
+
+     
+    if(!(formValue.name.length>0)){
+      this.errorMessage("Por favor rellenar el campo del nombre");
+      return;
+    }
+
+    if(!(formValue.lastName.length>0)){
+      this.errorMessage("Por favor rellenar el campo del apellido");
+      return;
+    }
+
+    
+    if(!this.comprobarFecha(formValue.birthday)){
+     
+      this.errorMessage("Por favor escribir correctamente la fecha del cumpleaños");
+      return;
+    }
+
+
+    if(!(formValue.plan.length>0)){
+      this.errorMessage("Debe escoger un plan");
+      return;
+    }
+
+    
+    
+    if(!(formValue.email.length>0)){
+      this.errorMessage("Debe insertar el email");
+      return;
+    }
+    if(!(formValue.phone.length>0)){
+      this.errorMessage("Debe insertar el numero");
+      return;
+    }
+    if(!(formValue.gender.length>0)){
+      this.errorMessage("Debe insertar el genero");
+      return;
+    }
+    if(!(formValue.ci.length>0)){
+      this.errorMessage("Debe insertar el ci de la persona");
+      return;
+    }
+
+    if(!(formValue.nationality.length>0)){
+      this.errorMessage("Debe insertar la nacionalidad de la persona");
+      return;
+    }
+    
+
 
     item.isDropdownOpen  = false;
     item.poliza.name = formValue.name;
     item.poliza.lastName = formValue.lastName;
     item.poliza.birthday = formValue.birthday;
     item.poliza.plan = formValue.plan;
+    item.isFinished = true;
    
     item.polizaNombre =  item.listPlanes.filter(plan => {
       if(plan.servicio_id === formValue.plan*1){
@@ -285,10 +358,30 @@ export class ListPoliciesGroupComponent implements OnInit {
  
     
     
-    
+    comprobarFecha( fecha : string): boolean{
+
+      const timestamp = Date.parse(fecha);
+      console.log(timestamp);
+      if (isNaN(timestamp)) {
+        
+        return false
+      } else {
+        return true
+      }
+
+    }
    
 
+    errorMessage(errorMsg : string){
 
+      Swal.fire({
+        title: 'Error',
+        text: errorMsg,
+        icon : 'error',
+        confirmButtonText: 'Continuar'
+      })
+
+    }
   
 
 

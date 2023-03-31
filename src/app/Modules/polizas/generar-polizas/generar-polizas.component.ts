@@ -58,6 +58,7 @@ export class GenerarPolizasComponent implements OnInit{
 
   extraList : Extra[]= [];
 
+  isSwalVisible = false;
 
   diffDays = -1;
   paises : Catalogo[] =[];
@@ -117,7 +118,20 @@ export class GenerarPolizasComponent implements OnInit{
 
   ngOnInit(): void {
 
+    Swal.fire({
+      
+      text: 'Espere un momento mientras se procesa la informacion',
+      imageUrl: 'https://cdn.pixabay.com/animation/2022/10/11/03/16/03-16-39-160_512.gif',
+      
+      showConfirmButton : false,
+      
+      imageWidth: 200,
+      imageHeight: 200,
+      imageAlt: 'Custom image',
+    })
     
+   
+
    
     this.catalogoService.getPaises().subscribe(
       (data)=> {
@@ -134,6 +148,7 @@ export class GenerarPolizasComponent implements OnInit{
 
         this.listadoPlanes = data.filter(item => item.status === 1);
         this.loadDataServicios = true
+        Swal.close();
         
       });
 
@@ -544,9 +559,30 @@ export class GenerarPolizasComponent implements OnInit{
       }
   }
 
+  
+
 
   guardarVenta(){
+
+    Swal.fire({
+      
+      text: 'Espere un momento mientras se procesa la informacion',
+      imageUrl: 'https://cdn.pixabay.com/animation/2022/10/11/03/16/03-16-39-160_512.gif',
+      
+      showConfirmButton : false,
+      
+      imageWidth: 200,
+      imageHeight: 200,
+      imageAlt: 'Custom image',
+    })
     
+
+    
+
+    
+    
+
+    let proceso_Finalizado   = false;
 
     const clienteDatos : ClientePost = { 
       nombre : this.normalizeSpaces(this.cliente.nombre),
@@ -562,11 +598,10 @@ export class GenerarPolizasComponent implements OnInit{
     this.clienteservice.postCliente(clienteDatos)
     .subscribe(
       (clientedata : ClienteResp)=>{
-        
-        
-        
+             
         if(!clientedata.id){
-          console.log("Email Repetido");
+          
+          this.errorMessage("Email no encontrado");
         }else { 
 
           const costoPolizaTotal : number = this.listPoliciesData.reduce((acc,policie) => acc + policie.costoTotal,0 )
@@ -588,7 +623,8 @@ export class GenerarPolizasComponent implements OnInit{
                       this.extrasPolizas.postPolizaExtra(response.id,extra.idExtra,extra.costroExtra)
                       .subscribe(
                         response => {
-                          console.log(response);
+                          
+                          
                         }
                       )
                       
@@ -622,13 +658,14 @@ export class GenerarPolizasComponent implements OnInit{
                       .subscribe(
                         (response)=> {
                           console.log(response);
+                          proceso_Finalizado = true;
                         }
                       )
 
                   }
                 )
 
-
+                this.successMessage(`venta realizada correctamente`);
 
               })
 
@@ -640,48 +677,23 @@ export class GenerarPolizasComponent implements OnInit{
 
       },
       (error) => {
-        console.log("Hay un error");
+        this.errorMessage(error);
       }
+
+
+      
+
+      
 
 
 
     )
 
-
-    // this.clienteservice.postCliente(clienteDatos).subscribe(
-    //   (cliente : ClienteResp)=> {
-    //     if(!cliente.nombre){
-    //       console.log("Ya existe el usuario");
-    //     }
-    //   }
-
       
-      // (cliente : ClienteResp) => {
-
-      //   console.log(cliente);
-        
-
-      //   // return this.ventaService.postVenta(cliente.cliente_id,this.listPolicies.length,0,this.inicioViaje, this.diaViaje)
-  
-        
-      // }
-    // ).subscribe( ( response : Venta) => { 
-
-    //   const venta_id = response.id;
-
-    //   this.listPolicies.forEach( policie => {
-
-    //     const elementIndex = this.listPoliciesData.findIndex(poliza => poliza.id === policie.id );
-    //     this.polizasService.postPolizas(venta_id,policie.poliza.itemForm.value.plan,this.finalTags,this.inicioViaje,this.diaViaje, this.listPoliciesData[elementIndex].extras.length )
-        
-    //   }   
-    //   );
-    // }, error => {
-    //   console.error(error);
-    // });
+    
     
 
-    
+
     
   }
 
@@ -698,6 +710,25 @@ export class GenerarPolizasComponent implements OnInit{
 
   prueba(){
 
+  }
+
+
+  errorMessage(err : string){
+    Swal.close();
+    Swal.fire({
+      title: 'Ups, ocurrio un error',
+      icon: 'error',
+      text : err,
+    })
+  }
+
+  successMessage(msg : string){
+    Swal.close();
+    Swal.fire({
+      title: 'Venta registrada correctamente',
+      icon:  'success',
+      text: msg
+    })
   }
   
 }

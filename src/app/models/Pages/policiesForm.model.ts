@@ -6,6 +6,7 @@ export interface policiesForm{
     id : number,
     isDropdownOpen :boolean,
     isPlainSelected: boolean,
+    isFinished: boolean,
     poliza : policie,
     date : string,
     listPlanes : Servicio[],
