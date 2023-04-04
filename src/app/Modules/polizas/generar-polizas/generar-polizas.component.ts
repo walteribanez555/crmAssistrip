@@ -58,7 +58,7 @@ export class GenerarPolizasComponent implements OnInit{
 
   extraList : Extra[]= [];
 
-  isSwalVisible = false;
+
 
   diffDays = -1;
   paises : Catalogo[] =[];
@@ -575,12 +575,6 @@ export class GenerarPolizasComponent implements OnInit{
       imageHeight: 200,
       imageAlt: 'Custom image',
     })
-    
-
-    
-
-    
-    
 
     let proceso_Finalizado   = false;
 

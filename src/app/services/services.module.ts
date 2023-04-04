@@ -12,6 +12,7 @@ import { ServiciosService } from './servicios.service';
 import { GetLocationService } from './get-location.service';
 import { VentasService } from './ventas.service';
 import { ExtrasPolizasService } from './beneficiosExtras.service';
+import { BeneficiariosService } from './beneficiarios.service';
 
 
 
@@ -29,6 +30,9 @@ import { ExtrasPolizasService } from './beneficiosExtras.service';
     GetLocationService,
     VentasService,
     ExtrasPolizasService,
+    BeneficiariosService,
+    ServicesModule
+
   ],
   
 })

@@ -3,34 +3,99 @@ import {  NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 
-import { SitioWebRoutingModule } from './Modules/sitio-web/sitio-web-routes.module';
 
-import { PlanesModule } from './Modules/planes/planes.module';
-import { CuponesModule } from './Modules/cupones/cupones.module';
-import { CampDescuentosModule } from './Modules/camp-descuentos/camp-descuentos.module';
-import { UsuariosModule } from './Modules/usuarios/usuarios.module';
-import { PolizasModule } from './Modules/polizas/polizas.module';
-import { ReportesModule } from './Modules/reportes/reportes.module';
 import { PipesModule } from './pipes/pipes.module';
+
+import { LandingPageComponent } from './pages/landing-page/landing-page.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { ServicesModule } from './services/services.module';
+import { HomeComponent } from './components/home/home.component';
+import { AboutUsComponent } from './components/about-us/about-us.component';
+import { HelpComponent } from './components/help/help.component';
+import { CotizarComponent } from './components/cotizar/cotizar.component';
+
+
 
 
 
 const routes : Routes = [
+  
   {
-    path : '**',
-    redirectTo: 'polizas/generar-polizas',
-    pathMatch : 'full'
-
-  },
-  {
-    path: '',
-    redirectTo : 'usuarios/agregar-usuarios',
+    path: '**',
+    redirectTo : 'main',
     pathMatch: 'full',
   },
   {
     path: '',
-    loadChildren: () => import('./Modules/sitio-web/sitio-web-routes.module').then(m => m.SitioWebRoutingModule)
-  }
+    redirectTo : 'home',
+    pathMatch: 'full',
+  },
+  
+  {
+    path: '',
+    component: LandingPageComponent,
+    children : [
+      {
+        path : 'home',
+        component : HomeComponent,
+      },
+      {
+        path : 'about-us',
+        component : AboutUsComponent
+
+      },
+      {
+        path:'help',
+        component : HelpComponent
+
+      },
+      {
+        path: 'cotizar',
+        component: CotizarComponent,
+      }
+    ]
+  },
+  {
+    path:'dashboard',
+    redirectTo: 'dashboard/planes/listado-planes',
+    pathMatch: 'full',
+  },
+
+  {
+    path: 'dashboard',
+    component:  DashboardComponent,
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('./Modules/polizas/polizas.module').then(m => m.PolizasModule)
+      },
+      {
+        path: '',
+        loadChildren: () => import('./Modules/sitio-web/sitio-web-routes.module').then(m => m.SitioWebRoutingModule)
+      },
+      {
+        path: '',
+        loadChildren: () => import('./Modules/usuarios/usuarios.module').then(m => m.UsuariosModule)
+      },
+      {
+        path: '',
+        loadChildren : () => import('./Modules/planes/planes.module').then(m => m.PlanesModule)
+      },
+      {
+        path: '',
+        loadChildren : () => import('./Modules/cupones/cupones.module').then(m => m.CuponesModule)
+      },
+      {
+        path : '',
+        loadChildren : ()=> import('./Modules/camp-descuentos/camp-descuentos.module').then(m => m.CampDescuentosModule)
+      }
+      
+    ]
+    
+  },
+  
+  
+  
 
 
 ]
@@ -38,14 +103,10 @@ const routes : Routes = [
 @NgModule({
   imports: [
     RouterModule.forRoot(routes),
-    UsuariosModule,
-    CampDescuentosModule,
-    CuponesModule,
-    PlanesModule,
-    PolizasModule,
-    ReportesModule,
-    SitioWebRoutingModule,
-    PipesModule
+    ServicesModule,
+    PipesModule,
+    
+    
     
   ],
   exports: [RouterModule]

@@ -1,0 +1,55 @@
+.grid-container {
+    
+    width: 100%;
+    height: 90%;
+    display: grid;
+    
+    
+   
+
+    grid-template-columns: 1fr 2fr; /* set column widths to 2/3 and 1/3 of the available space */
+    grid-gap: 0px; /* set gap between grid items */
+  }
+  .grid-item-1 {
+   
+    background-color: var(--body-bg);
+    
+
+  }
+  .grid-item-2 {
+    width: 100%;
+    padding-right: 20px;
+    
+    
+  }
+
+
+  .image-container {
+    width: 100%;
+    height: 100%;
+  
+    }
+
+img {
+  width: 100%;
+  height: 100%;
+  max-width: 120%;
+  max-height: 120%;
+  object-fit: cover;
+}
+
+  @media (max-width: 768px) {
+    .grid-container {
+      grid-template-columns: 1fr; /* switch to one column layout for small screens */
+    }
+
+    img {
+        max-width: 100%;
+         height: auto;
+      }
+
+    
+
+}
+
+

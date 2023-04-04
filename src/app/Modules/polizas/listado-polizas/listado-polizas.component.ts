@@ -6,7 +6,7 @@ import { PolizasService } from 'src/app/services/polizas.service';
 @Component({
   selector: 'app-listado-polizas',
   templateUrl: './listado-polizas.component.html',
-  styleUrls: ['./listado-polizas.component.css']
+  styleUrls: ['../../../css/tables.css']
 })
 export class ListadoPolizasComponent implements OnInit {
 

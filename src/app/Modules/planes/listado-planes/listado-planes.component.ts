@@ -1,25 +1,16 @@
 
-import { Component, HostListener, ElementRef,OnInit } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 import { Servicio } from 'src/app/models/Data/Servicio';
 import { ServiciosService } from 'src/app/services/servicios.service';
-import { trigger,  style, animate, transition } from '@angular/animations';
 
 @Component({
   selector: 'app-listado-planes',
   templateUrl: './listado-planes.component.html',
-  styleUrls: ['./listado-planes.component.css'],
-  animations: [ 
-    trigger('slideIn', [
-      transition(':enter', [
-        style({ transform: 'translateX(100%)' }),
-        animate('500ms ease', style({ transform: 'translateX(0)' }))
-      ]),
-      transition(':leave', [
-        animate('500ms ease', style({ transform: 'translateX(100%)' }))
-      ])
-    ]),
-
-  ]
+  styleUrls: [
+        
+        '../../../css/tables.css'  
+],
+  
   
 })
 export class ListadoPlanesComponent implements OnInit {
@@ -34,7 +25,7 @@ export class ListadoPlanesComponent implements OnInit {
   }
 
   constructor(
-      private elRef: ElementRef,
+      
       private servicios : ServiciosService
       ) {}
 
@@ -47,27 +38,7 @@ export class ListadoPlanesComponent implements OnInit {
           })
       }
 
-  @HostListener('window:scroll', [])
-  onWindowScroll() {
-    const tableContainer = this.elRef.nativeElement.querySelector('.table-container');
-    const tableHeader = tableContainer.querySelector('thead');
-    const tableRows = tableContainer.querySelectorAll('tbody tr');
-
-    const containerRect = tableContainer.getBoundingClientRect();
-    const headerRect = tableHeader.getBoundingClientRect();
-    const lastRowRect = tableRows[tableRows.length - 1].getBoundingClientRect();
-
-    if (containerRect.top + headerRect.height > window.innerHeight ||
-        containerRect.bottom - lastRowRect.height < 0) {
-      tableHeader.style.visibility = 'hidden';
-      
-    } else {
-      tableHeader.style.visibility = 'visible';
-      for (let i = 0; i < tableRows.length; i++) {
-        tableRows[i].style.visibility = 'visible';
-      }
-    }
-  }
+ 
 
   
 

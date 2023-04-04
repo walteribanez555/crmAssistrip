@@ -30,9 +30,6 @@ export class FormDatesDestinationComponent {
   diffDays = -1;
   paises : Catalogo[] =[];
   
-  @ViewChild('tagInput') tagInput?: ElementRef;
-  @ViewChild('tagList') tagList?: ElementRef;
-  @ViewChild('tagNumber') tagNumber!: ElementRef;
 
 
   constructor(
@@ -106,7 +103,8 @@ export class FormDatesDestinationComponent {
         this.insertTag(selectedValue);
 
         target.value = "pais";
-        
+        this.formData.inputValue = 'pais';
+        console.log(this.formData.inputValue);
         
         // Do something with the selected value here
       }
@@ -169,5 +167,8 @@ export class FormDatesDestinationComponent {
       }
 
     }
+
+
+   
 
 }

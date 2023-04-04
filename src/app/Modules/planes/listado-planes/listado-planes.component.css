@@ -1,5 +1,25 @@
 
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 0px;
+  padding-bottom: 10px;
+  width: 100%;
+  overflow: auto;
+  
+}
 
+
+.col-12 {
+  width: 100%;
+  height: 85vh;
+}
+
+table th,
+table td {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border-color);
+}
 
 
 table {

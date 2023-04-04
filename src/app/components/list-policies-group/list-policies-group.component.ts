@@ -335,12 +335,12 @@ export class ListPoliciesGroupComponent implements OnInit {
       return;
     }
 
-    policy.listExtras = this.showExtras(policy, valueAsNumber);
+    policy.listExtras = this.showExtras();
 
     policy.isPlainSelected = true;
   }
 
-  showExtras(policy : policiesForm, plain : number): ExtraForm[]{
+  showExtras(): ExtraForm[]{
     const extrasFiltered : ExtraForm[] = this.extraList.map((extra,index) => {
       return {
         id : index,

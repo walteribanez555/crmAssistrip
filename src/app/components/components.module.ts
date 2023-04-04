@@ -6,6 +6,9 @@ import { ListPoliciesGroupComponent } from './list-policies-group/list-policies-
 import { PipesModule } from '../pipes/pipes.module';
 import { ClienteFormComponent } from './cliente-form/cliente-form.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { CotizacionComponentComponent } from './cotizacion-component/cotizacion-component.component';
+import { DataCotizadorComponent } from './data-cotizador/data-cotizador.component';
+
 
 
 
@@ -14,6 +17,11 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
       FormDatesDestinationComponent,
       ListPoliciesGroupComponent,
       ClienteFormComponent,
+      CotizacionComponentComponent,
+      DataCotizadorComponent
+      
+      
+      
       
     ],
     imports: [
@@ -28,7 +36,10 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     exports: [
       FormDatesDestinationComponent,
       ListPoliciesGroupComponent,
-      ClienteFormComponent
+      ClienteFormComponent,
+      CotizacionComponentComponent,
+      DataCotizadorComponent
+      
     ]
   })
   export class ComponentsModule { }

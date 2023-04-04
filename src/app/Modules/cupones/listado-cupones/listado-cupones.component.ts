@@ -6,7 +6,7 @@ import { CuponesService } from 'src/app/services/cupones.service';
 @Component({
   selector: 'app-listado-cupones',
   templateUrl: './listado-cupones.component.html',
-  styleUrls: ['./listado-cupones.component.css']
+  styleUrls: ['../../../css/tables.css']
 })
 export class ListadoCuponesComponent  implements OnInit{
   
