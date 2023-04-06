@@ -1,9 +1,9 @@
 <div class="container-form">
     <form (ngSubmit)="agregar($event)">
         <div class="wrapper">
-            <div class="options" >
+            <div class="options  w-100" >
                 <h2>Pais de origen</h2>
-                <select name="origen" id="origen" [(ngModel)]="formData.origen"  >
+                <select class="origenSelect" name="origen" id="origen" [(ngModel)]="formData.origen"  >
                     <option value="Bolivia">Bolivia</option>
                     <option value="Venezuela">Venezuela</option>
 
@@ -28,7 +28,7 @@
                 </ul>
             </div>
         
-            <div class="options  mt-15  flex" >
+            <div class="options  mt-15  flex bg-btn" >
                 <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 96 960 960" width="20"><path d="M444 816V612H240v-72h204V336h72v204h204v72H516v204h-72Z"/></svg>
                 <select class="listado"  (change)="onSelect($event)" >
                     <option value="pais">

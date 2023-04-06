@@ -1,7 +1,10 @@
+
+
 .btn_field{
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
 }
 
 
@@ -10,14 +13,7 @@
   color: red;
 }
 
-.container_form{
-    
-    
-    width: 90%;
-    height: 100%;
-    background: var(--body-bg);
-    
-  }
+
   header{
     position: relative;
     font-size: 25px;
@@ -88,6 +84,7 @@
    form .fields{
     background-color: var(--body-bg);
     padding: 5px;
+    margin-right: 15px;
     padding-left: 15px;
     padding-right: 15px;
     display: flex;
@@ -97,7 +94,7 @@
   }
   form .fields .input-field{
     display: flex;
-    width: calc(100% / 2 - 5px);
+    width: calc(100% / 2 - 10px);
     flex-direction: column;
     margin: 0px 0;
   }
@@ -120,11 +117,13 @@
     color: var(--main-color);
     border-radius: 5px;
     border: 1px solid var(--main-color);
-    
+    background: var(--body-bg);
     padding: 0 5px;
     height: 40px;
     margin: 5px 0;
   }
+
+  
   
 
   .wrapper .input-field input{
@@ -163,7 +162,7 @@
     background: url(https://cdn3.iconfinder.com/data/icons/linecons-free-vector-icons-pack/32/calendar-16.png) center/80% no-repeat;
     color: var(--main-color);
   }
-   form button, .backBtn{
+    .backBtn{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -205,13 +204,14 @@
  
 .cotizar_btn { 
     display: flex;
+    
     flex-direction: row;
     fill: #fff;
     color: #fff;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
     background-image: linear-gradient(to right, #1D0F9F, #DF085A);
-    
+    height: 40px;
     
     color: white;
     cursor: pointer;
@@ -222,10 +222,10 @@
     border: none;
     
     margin-top: 10px;
-    width: 150px;
+    width: 100%;
   }
   .cotizar_btn:hover{ 
-    scale: 1.1;
+    scale: 1.05;
    }
   
   
@@ -270,8 +270,11 @@
     font-size: 14px;
     height: 30px;
     border: 1px solid var(--main-color);
-    width: 50px;
+    width: 70px;
   }
+
+
+  
 
 
   .wrapper :where(.title, li, li i, .details){
@@ -331,9 +334,19 @@
   .options { 
     
     
-    width: 100%;
+    width: fit-content;
     margin: 0px;
   }
+
+  
+
+
+  .options.w-100{
+    width: 100%;
+  }
+
+  
+  
 
   .mt-15{
     margin-top: -20px;
@@ -388,6 +401,9 @@
     align-items: center;
     
   }
+
+
+
   
   @media (max-width: 980px){
     .options .listado{
@@ -418,9 +434,10 @@
     cursor: pointer;
     padding: 9px 15px;
     border-radius: 5px;
-    background: var(--logo-color);
-    transition: background 0.3s ease;
     
+    transition: background 0.3s ease;
+    margin-top: 10px;
+    margin-bottom: 30px;
   }
    
 
@@ -439,7 +456,7 @@
    .cotizar_btn{
        margin-top: 10px;
        font-size: 12px;
-       width: 100px;
+       width: 100%;
    }
 
    
