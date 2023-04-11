@@ -323,42 +323,22 @@ export class CotizacionComponentComponent  {
     }
 
     showPlains( cotizacion : cotizacionForm): Servicio[]{
-    
 
-      
-      
-  
-  
-      
       cotizacion.listPlanes = this.planes    
-  
-      // Do something with the selected date
 
-      
-      
   
       if(cotizacion.age > 0){
 
         return cotizacion.listPlanes.filter(plan => this.haveRequirements(plan, cotizacion.itemForm.value.age));
       }
-  
-      
-      
-      
-  
       return  this.planes;
     }
 
 
     haveRequirements( plan : Servicio , differenceInYears :number){
     
-
-      const { edad_base, edad_limite} = plan;
-  
-      
-  
-      
-      
+    const { edad_base, edad_limite} = plan;
+ 
      if(  edad_base <= differenceInYears && differenceInYears < edad_limite){
       
       return true
@@ -370,7 +350,6 @@ export class CotizacionComponentComponent  {
   
 
     ngOnChanges():void { 
-    
     
       this.comprobarPlanes();
       

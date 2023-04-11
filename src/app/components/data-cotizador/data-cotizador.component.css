@@ -133,12 +133,17 @@
   
 
   .wrapper .listado{
-    border: none;
-    padding: 0;
-    -webkit-appearance: none;
-    -moz-appearance: none;
     appearance: none;
     color: var(--main-color);
+    background-color: var(--main-color);
+    width: fit-content;
+    height: fit-content;
+    color: white;
+    border: none;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    appearance:none;
+    transition: 0.8 all ease
 
   }
 
@@ -288,6 +293,18 @@
   .wrapper .content{
     margin: 5px 0;
     border: none;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .wrapper .content .list-item{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 2px;
+    align-items: center;
+
   }
   .tagList { 
     border: none;
@@ -301,7 +318,6 @@
     flex-wrap: wrap;
     padding: 7px;
     border-radius: 5px;
-    border : 1px solid var(--main-color);
   }
   .content ul  li{
     color: var(--main-color);
@@ -338,6 +354,17 @@
     margin: 0px;
   }
 
+
+  .list {
+    padding: 2px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: fit-content;
+    background: var(--main-color);
+    border-radius: 10px;
+  }
   
 
 
@@ -348,9 +375,7 @@
   
   
 
-  .mt-15{
-    margin-top: -20px;
-  }
+  
 
   .flex{
     display: flex;
@@ -359,15 +384,24 @@
   }
 
   .options svg  {
-    fill: var(--main-color);
-    margin-top: 10px;
+    fill:white;
   }
   .options .listado{
-    padding-top: 10px;
-    
+
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--main-color);
+    color: white;  
     width: 100%;
-    background: none;
-    color: var(--main-color);  
+    height: fit-content;
+  }
+
+
+  .options .listado option{
+    background-color: white;
+    width: 100%;
   }
 
   .btn-seeMore{

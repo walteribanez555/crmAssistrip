@@ -13,6 +13,7 @@ import { CotizarComponent } from './components/cotizar/cotizar.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { HelpComponent } from './components/help/help.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -34,7 +35,9 @@ import { HttpClientModule } from '@angular/common/http';
     SweetAlert2Module.forRoot(),
     AppRoutingModule,
     ComponentsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule
     
     
   

@@ -32,6 +32,17 @@ export class DataCotizadorComponent implements OnInit {
     telefono : '',
   };
 
+  receivedData: FormCotizarModel= {
+    initialDate: '',
+    finalDate: '',
+    tags: [],
+    origen: '',
+    listCotizaciones : [],
+    email: '',
+    telefono: '',
+
+  };
+
   
   diffDays = -1;
 
@@ -46,16 +57,32 @@ export class DataCotizadorComponent implements OnInit {
   
 
   ngOnInit(): void {
-    
-    this.catalogoService.getPaises().subscribe(
-      (data)=> {
-        
-        this.paises = data.filter(item => item.status === 1);
-        
+    console.log("Hola mundo");
 
-        
+    this.catalogoService.getPaises().subscribe(
+      (data)=> {  
+        this.paises = data.filter(item => item.status === 1);
       });
 
+
+      this.receivedData = this.dataService.sharedData;
+
+      this.remplazarData(this.receivedData);
+      
+      
+
+  }
+
+
+  remplazarData(data: FormCotizarModel){
+    this.formData.initialDate = data.initialDate;
+    this.formData.finalDate = data.finalDate;
+    this.formData.origen = data.origen;
+    this.formData.email = data.email;
+    this.formData.telefono = data.telefono;
+    this.tags = data.tags;
+    this.listCotizaciones = data.listCotizaciones;
+    this.comparar();
   }
   
 
