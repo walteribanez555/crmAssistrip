@@ -99,7 +99,7 @@ export class DataCotizadorComponent implements OnInit {
       const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
   
       if(!isNaN(diffInDays)){
-        this.diffDays= diffInDays;
+        this.diffDays= diffInDays+1;
       }
    }
   

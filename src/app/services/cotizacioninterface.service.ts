@@ -26,4 +26,9 @@ export class cotizacionIntefaceService {
 
   listExtras : ExtraForm[]= [];
 
+
+
+  listPolizas : number[] = [];
+  listClientes : number[] = [];
+
 }

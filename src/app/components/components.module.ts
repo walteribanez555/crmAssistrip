@@ -8,6 +8,7 @@ import { ClienteFormComponent } from './cliente-form/cliente-form.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { CotizacionComponentComponent } from './cotizacion-component/cotizacion-component.component';
 import { DataCotizadorComponent } from './data-cotizador/data-cotizador.component';
+import { ListPolizasComponent } from './list-polizas/list-polizas.component';
 
 
 

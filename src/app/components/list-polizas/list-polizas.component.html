@@ -1,0 +1,25 @@
+<h1>Historial de las polizas</h1>
+
+
+<!-- poliza_id: number,
+    venta_id: number,
+    servicio_id : number,
+    destino: string,
+    fecha_salida : string,
+    fecha_retorno: string,
+    nro_poliza : number,
+    nro_dias: number,
+    extra: number,
+    fecha_emision : string, -->
+
+<div class="listPolizas">
+    <div *ngFor="let poliza of listPolizas" class="poliza">
+        {{poliza.id}}
+        {{poliza.destino}}
+        {{poliza.fecha_salida}}
+        poliza
+    </div>
+</div>
+
+
+

@@ -14,6 +14,7 @@ import { AboutUsComponent } from './components/about-us/about-us.component';
 import { HelpComponent } from './components/help/help.component';
 import { CotizarComponent } from './components/cotizar/cotizar.component';
 import { DatosPolizasComponent } from './components/datos-polizas/datos-polizas.component';
+import { ListPolizasComponent } from './components/list-polizas/list-polizas.component';
 
 
 
@@ -59,6 +60,10 @@ const routes : Routes = [
       {
         path: 'datos-polizas',
         component : DatosPolizasComponent
+      },
+      {
+        path : 'listado-polizas',
+        component : ListPolizasComponent
       }
       
     ]

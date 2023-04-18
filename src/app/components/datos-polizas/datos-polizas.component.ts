@@ -10,12 +10,16 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 import { Precio } from 'src/app/models/Data/Precio';
 import { CuponesService } from 'src/app/services/cupones.service';
 import { Cupon, CuponAplicado } from 'src/app/models/Data/Cupon';
-import { switchMap } from 'rxjs';
+import { forkJoin, map, switchMap } from 'rxjs';
 import { ExtraForm } from 'src/app/models/Pages/extra.model';
 import Swal from 'sweetalert2';
 import { ClientesService } from 'src/app/services/clientes.service';
 import { VentasService } from 'src/app/services/ventas.service';
 import { ClientePost } from 'src/app/models/Data/Cliente';
+import { PolizasService } from 'src/app/services/polizas.service';
+import { Beneficiario } from 'src/app/models/Data/Beneficiario';
+import { BeneficiariosService } from 'src/app/services/beneficiarios.service';
+import { ExtrasPolizasService } from 'src/app/services/beneficiosExtras.service';
 
 
 
@@ -106,6 +110,9 @@ export class DatosPolizasComponent implements OnInit {
     private cuponesService : CuponesService,
     private clientesService : ClientesService,
     private ventasService : VentasService,
+    private polizasService : PolizasService,
+    private beneficiarioService : BeneficiariosService,
+    private polizasPlusService : ExtrasPolizasService,
     private router : Router
   ){
 
@@ -221,13 +228,14 @@ export class DatosPolizasComponent implements OnInit {
     return new FormGroup({
       nombres: new FormControl('',Validators.required),
       apellidos: new FormControl('',Validators.required),
-      age: new FormControl(0,Validators.required),
+      age: new FormControl('',Validators.required),
       ci : new FormControl('', Validators.required),
       passport: new FormControl('',Validators.required),
       email : new FormControl('',Validators.required),
       telf : new FormControl('',Validators.required),
       origen: new FormControl('',Validators.required),
       titular : new FormControl(false,Validators.required),
+      gender : new FormControl('', Validators.required)
     });
   }
 
@@ -307,6 +315,22 @@ export class DatosPolizasComponent implements OnInit {
     }
 
 
+   
+    Swal.fire({
+      
+      text: 'Espere un momento mientras se procesa la informacion',
+      imageUrl: 'https://cdn.pixabay.com/animation/2022/10/11/03/16/03-16-39-160_512.gif',
+      
+      showConfirmButton : false,
+      allowOutsideClick: false,
+      
+      imageWidth: 200,
+      imageHeight: 200,
+      imageAlt: 'Custom image',
+    })
+
+      
+
     this.clientesService
   .getClienteById(polizas[0].form.value.ci)
   .pipe(
@@ -346,18 +370,162 @@ export class DatosPolizasComponent implements OnInit {
           })
         );
       }
+    }),
+    switchMap((data)=> { 
+      const venta_id = data.id;
+      const requests : any[]= [];
+
+
+      this.listPolizas.forEach(poliza => {
+        requests.push(poliza);
+      });
+
+
+      return forkJoin(
+        requests.map((request)=> { 
+          return this.polizasService.postPolizas(venta_id, request.servicio.servicio_id, this.datosCotizacion.tags.join(','), this.datosCotizacion.initialDate, this.datosCotizacion.finalDate, this.listExtras.length).pipe(
+            map((response) => {
+              return { request, response };
+            })
+          );
+        })
+      );
+    }),
+    switchMap((data)=>{
+
+      const request : any[] = [];
+
+
+      return forkJoin(
+        data.map ( (response) => {
+
+          this.dataService.listPolizas.push(response.response.id);
+
+          const names = this.splitFirstWord(response.request.form.value.nombres);
+
+          const firstName = names.firsWord;
+          const secondName= names.resOfWord;
+          
+          const lastNames= this.splitFirstWord(response.request.form.value.apellidos);
+
+          const firtLastName = lastNames.firsWord;
+          const seconLastName = lastNames.resOfWord;
+
+
+
+          return this.beneficiarioService.postBeneficiario(
+            response.response.id,
+            firtLastName,seconLastName,
+            firstName,secondName,
+            response.request.form.value.ci, 
+            response.request.form.value.passport,
+            response.request.form.value.age,
+            response.request.form.value.gender,
+            response.request.form.value.origen,
+            response.request.form.value.email,
+            response.request.form.value.telf ).pipe(
+              map((beneficiario)=> {
+                return { response, beneficiario}
+              })
+            )
+        })
+      )
+     
+    }),
+
+    switchMap((data)=> {
+      const requests : any[] = [];
+
+
+      data.forEach(
+        response => {
+          this.dataService.listClientes.push(response.beneficiario.id);
+          this.dataExtra.forEach(
+            extra => {
+              requests.push( {
+                extra : extra.extra,
+                poliza_id : response.response.response.id,
+                costo : extra.costo
+
+              })
+            }
+          )
+        }
+      )
+      
+
+
+      return forkJoin(
+        requests.map((request)=> {
+          return this.polizasPlusService.postPolizaExtra(request.poliza_id, request.extra.beneficio_id,request.costo)
+        })
+      )
     })
+
+    
   )
   .subscribe((data) => {
-    console.log(data);
+
+
+    Swal.close();
+
+    this.successMessage('Se ha registrado la venta correctamente');
+
+
   });
 
   }
 
 
+  splitFirstWord(input: string) : {firsWord : string , resOfWord : string} {
+
+
+    const inputNormalized:  string =  this.normalizeSpaces(input);
+
+    const firstSpaceIndex = inputNormalized.indexOf(' ');
+  
+    if (firstSpaceIndex === -1) {
+      // No hay espacios en el string, así que se devuelve el string en un array
+      return {firsWord : input , resOfWord : ""};
+    }
+  
+    const firstWord = inputNormalized.slice(0, firstSpaceIndex);
+    const restOfString = inputNormalized.slice(firstSpaceIndex + 1);
+  
+    return {firsWord : firstWord , resOfWord : restOfString.trimEnd()}
+  }
+
   backPrev(){
     this.router.navigate(['./cotizar']);
   }
+
+  successMessage(msg : string){
+    Swal.close();
+   
+
+    Swal.fire({
+      title: 'Venta registrada correctamente',
+      icon:  'success',
+      text: msg,
+      showCancelButton: true,
+      confirmButtonColor: '#16F80B',
+      cancelButtonColor: '#d33',
+      denyButtonText: `Finalizar`,
+      confirmButtonText: 'Dirigir a listado',
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        this.router.navigate(['./polizas']);
+      } else if (result.isDenied) {
+        console.log("Termino");
+      }
+    })
+    
+    
+  }
+
+
+  
 
 
   obtenerCostoPoliza( ){
@@ -486,6 +654,20 @@ export class DatosPolizasComponent implements OnInit {
         parteEntera,
         parteDecimal
       })
+    }
+
+
+    normalizeSpaces(input: string): string {
+      // Dividir el string en palabras, utilizando un espacio como separador
+      const words = input.split(' ');
+    
+      // Filtrar palabras vacías (espacios adicionales)
+      const nonEmptyWords = words.filter(word => word !== '');
+    
+      // Unir las palabras con un solo espacio entre ellas
+      const normalizedString = nonEmptyWords.join(' ');
+    
+      return normalizedString;
     }
 
 

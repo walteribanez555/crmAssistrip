@@ -15,6 +15,7 @@ import { HelpComponent } from './components/help/help.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DatosPolizasComponent } from './components/datos-polizas/datos-polizas.component';
+import { ListPolizasComponent } from './components/list-polizas/list-polizas.component';
 
 
 
@@ -29,7 +30,8 @@ import { DatosPolizasComponent } from './components/datos-polizas/datos-polizas.
     CotizarComponent,
     AboutUsComponent,
     HelpComponent,
-    DatosPolizasComponent
+    DatosPolizasComponent,
+    ListPolizasComponent,
 
   ],
   imports: [
