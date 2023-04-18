@@ -27,12 +27,20 @@
     
 } 
 
+.container-cards{
+  height: 100%;
+  width: 800px;
+  display: grid;
+  background: var(--body-bg);
+    overflow-y: auto;
+    transition: all 0.5s ease;
+}
+
 
 
 .cotizacionHeader{
  
     width: 100%;
-    height: 20vh;
     background-color: white;
     position: fixed;
     z-index: 10;
@@ -362,6 +370,54 @@ h2{
     gap: 10px;
 }
 
+.listExtras { 
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+}
+.cardContainer { 
+        
+  display: flex;
+  
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  }
+.extra {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+
+  width: 150px;
+  
+  border-radius: 4px;
+  height : 150px;
+  margin: 12px;
+  text-decoration: none;
+  
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(38,38,38,0.2);
+
+}
+.extra.gray {
+  opacity: 0.5;
+}
+.check-icon {
+  position: absolute;
+  
+  
+  width: 100px;
+  height: 100px;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+  margin-top: -150px;
+    margin-left: 25px;
+  
+
+  }
+
 .dropdown-list{
   background-color: #EDE8F3;
   display: flex;
@@ -370,6 +426,8 @@ h2{
   align-items: center;
   border-radius: 5px;
   border: none;
+  position: absolute;
+  width: 100px;
 
 }
 
@@ -418,10 +476,12 @@ h2{
 
 
 .cotizacionMain{  
+    position: relative;
+    top: 25vh;
+    padding-bottom: 160px;
     width: 100%;
     background: var(--body-bg);
-    height: 100%;
-    padding-top: 23vh;
+    height: fit-content;
     padding-left: 2vh;
     padding-right: 2vh;
     transition: all 0.5s ease;
@@ -433,15 +493,39 @@ h2{
   display: flex;
   width: 96vw;
   height: 100%;
-  border : 1px solid var(--main-color);
+}
+
+
+.row.center{
+  padding-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.row.center button{
+  width: 150px;
+  height: 50px;
+  background-color: var(--body-bg);
+  border: 1px solid var(--main-color);
+  border-radius: 5px;
+  color: var(--main-color);
+  transition: 0.3 all ease-in-out;
+}
+
+.row.center button.active{
+  background-color: var(--main-color);
+  color: white;
+  cursor: pointer;
+  scale: 1.1;
+  transition: 0.3 all ease-in-out;
 }
 
 .cotizacionMain .row .column { 
   padding: 10px;
   display: flex;
-  
+  flex-direction: column;
   width: 100%;
-  height: 300px;
 }
 
 .row .container{
@@ -450,30 +534,89 @@ h2{
   height: fit-content;
 } 
 .block{
-  display: flex; /* Use flexbox layout for cards */
   padding: 10px;
+}
+
+
+.block.mobile{
+  display: none;
 }
 
 
 .card {
-  flex: 0 0 100px;
+  display: flex;
+  flex-direction: column;
   margin-right: 10px;
+  margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  background-color: #fff;
-  box-shadow: 2px 2px 5px #ccc;
+  background-color: #ECE6F1;
   padding: 10px;
+  width: 300px;
   height: fit-content;  /* Add padding inside cards */
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s ease;
 }
 
 .card h2 {
   font-size: 15px; /* Add font size to card title */
+  font-weight: bold;
 }
 
 .card p {
-  font-size: 10px; /* Add font size to card content */
+  margin-top: 20px;
+  height: fit-content;
+  width: 145px;
+  color: var(--main-color);
 }
 
+.card span{
+  color: var(--main-color);
+  font-weight: bold;
+}
+
+.card span.red { 
+  color: red;
+}
+
+.card span.price{
+  font-weight: bold;
+  color: var(--main-color);
+
+}
+
+
+.card .btn-select{
+
+  background-color: var(--main-color);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  fill: white;
+  color: white;
+  width: 80%;
+  padding: 0 20px 0 20px;
+  border-radius: 5px;
+  height: 40px;
+  border: none;
+}
+
+.card .btn-detalles{
+  background: none;
+  border: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--main-color);
+  fill: var(--main-color);
+}
+
+.card:hover .btn-select{
+  scale: 1.05;
+}
 
 
 
@@ -578,10 +721,18 @@ h2{
   padding: 10px;
   width: 70%;
   height: 30px;
-  border: none;
+  border: 1px solid var(--main-color);
   border-radius: 10px;
+  background-color: var(--body-bg);
+  color: var(--main-color);
+  
+}
+
+.contain-pagar button.active{
+  
   background-color: var(--main-color);
   color: white;
+  border: none;
 }
 
 .containBottom{
@@ -607,15 +758,160 @@ hr{
 }
 
 
+.cotizacionMain .row.desktop{ 
+  display: flex;
+}
+.cotizacionMain .row.mobile{
+  display: none;
+}
+
+
+
+.btn-age{ 
+  display: flex;
+  padding-left: 50px;
+  padding-right: 50px;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-age button  {
+  display:  flex;
+  font-size: 12px;
+  background-color: var(--body-bg);
+  color: var(--main-color);
+  border : 1px solid var(--main-color);
+  padding: 15px;
+  scale: none;
+}
+
+.btn-age button.active{
+  background-color: var(--main-color);
+  color: white;
+  border: none;
+  scale: 1.15;
+
+}
+
+ hr { 
+  width: 100%;
+  border-color: var(--main-color);
+  margin-top: 10px;
+  padding: 0 30px 0px 30px;
+  margin-bottom: 10px;
+}
+
+
+.list{
+  display: flex;
+  padding-top: 20px;
+  flex-direction: row;
+  align-items: flex-start;
+
+}
+
+.listCards{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.alert { 
+  display: flex;
+  padding: 10px;
+  margin: 10px;
+  background-color:  #CCF4F9;
+  border: 1px solid var(--main-color);
+  color:  var(--main-color);
+  
+}
+
+.listadoBeneficio{
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+
+.list-beneficios{
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
+  height: fit-content;
+
+}
+
+.card .listado{
+  padding-top: 10px;
+  width: 100%;
+
+}
+
+.beneficio-btn{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items:flex-start;
+  width: 100%;
+}
+
+.expand-btn{
+  position: relative;
+  right: 2px;
+}
+
+
+.btn-pagar{
+  position: relative;
+  bottom: 10px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  bottom: 10px;
+}
+
+.btn-pay{
+  background-color: var(--body-bg);
+  color: var(--main-color);
+  border: 1px solid var(--main-color);
+}
+
+.btn-pay.active{
+  
+  background-color: var(--main-color);
+  color: white;
+  border: none;
+}
+
+
 @media (max-width: 768px){
-    
+
+   
+    .border-1{
+      border :1px solid var(--main-color);
+      background-color: var(--main-color);
+      color: var(--main-color);
+      height: fit-content;
+      width: 100%;
+      padding-bottom: 20px;
+    }
 
     .cotizacionMain{
-        padding-top: 21vh;
+        position: fixed;
+        top: 32vh;
         padding-left: 10px;
         padding-right: 10px;
-        height: 82vh;
-        overflow: auto;
+        height: calc(68vh - 10px);
+        overflow-y: auto;
+        overflow-x: hidden;
         
     }
     
@@ -646,6 +942,7 @@ hr{
         height: 100%;
         color: white;
         overflow-x: auto;
+        overflow-y: auto;
     }
 
 
@@ -711,6 +1008,10 @@ hr{
       margin-left: 5px;
     }
 
+    .subitem span.red{
+      color: red;
+    }
+
     .btn-editar{ 
       display: flex;
       flex-direction: row;
@@ -723,6 +1024,34 @@ hr{
       color: white;
       align-items: center;
     }
+
+    
+
+    .cotizacionMain .row.desktop{ 
+      display: none;
+    }
+    .cotizacionMain .row.mobile{
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+
+    }
+
+    .list{
+      padding-top: 20px;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+
+    .card{
+      width: 100%;
+    }
+
+
+    
+
+    
 }
 
 

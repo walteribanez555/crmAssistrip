@@ -9,7 +9,7 @@
         </h1>
         
         <div  class="list-row">
-            <form (ngSubmit)="btnCotizar()" >
+            <form (ngSubmit)="reloadData()">
 
                 <div class="list-item">
                 
@@ -186,40 +186,273 @@
      </div>
 
      <div class="cotizacionMain">
-        <div class="row">
+        <div class="row desktop">
             <div class="column">
-                
-                <h2>NUESTROS PLANES</h2>
-            </div>
-
-            <div class="container">
-                <div class="block">
-                        <div *ngFor="let plan of planesCubren" class="card">
-                            <h2>{{plan.descripcion}}</h2>
-
+                <div class="row">
+                    <div class="column">
+                    
+                        <h2>NUESTROS PLANES</h2>
+        
                         
-                      </div>
+                    </div>
+        
+                    
+                    
+                    <div class="listCards">
+                        <div  *ngIf="minPlanes>1" class="alert">
+                            <span>Debe elegir un plan para los menores de 75 años y un plan para los mayores de 75 años</span>
+                        </div>
+        
+                        <div class="btn-age">
+                            <button type="button" [class.active]="!isOld"  (click)="toggleListPlanBtn(false)" >
+                                Menores de 75
+                            </button>
+                            <button type="button" [class.active]="isOld"   (click)="toggleListPlanBtn(true)" >
+                                Mayores de 75
+                            </button>
+                            
+        
+                        </div>
+                        <hr>
+                        <div class="container-cards">
+                            <div class="block">
+                                <div  *ngIf="!isOld"  class="list">
+                                    <div *ngFor="let plan of listadoMenor" class="card">
+                                        <h2>Plan {{plan.serv?.servicio_id}}</h2>
+                                        <h2>{{plan.serv?.servicio}}</h2>
+                                        <button *ngIf="plan.serv" (click)="toggleListPlan(plan.serv)" class="btn-select">
+                                            Seleccionar
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24"><path d="m480 896-57-56 224-224H160v-80h487L423 312l57-56 320 320-320 320Z"/></svg>
+                                        </button>
+                                            <p>Cobertura global de <span class="price">${{plan.serv?.cobertura_global}}</span> por persona</p>
+                                            <hr>
+                                        <button (click)="toggleDetails(plan)"  class="btn-detalles"  >
+                                            <span>Ver detalles</span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24"><path d="M480 736q75 0 127.5-52.5T660 556q0-75-52.5-127.5T480 376q-75 0-127.5 52.5T300 556q0 75 52.5 127.5T480 736Zm0-72q-45 0-76.5-31.5T372 556q0-45 31.5-76.5T480 448q45 0 76.5 31.5T588 556q0 45-31.5 76.5T480 664Zm0 192q-146 0-266-81.5T40 556q54-137 174-218.5T480 256q146 0 266 81.5T920 556q-54 137-174 218.5T480 856Zm0-300Zm0 220q113 0 207.5-59.5T832 556q-50-101-144.5-160.5T480 336q-113 0-207.5 59.5T128 556q50 101 144.5 160.5T480 776Z"/></svg>
+                                        </button>
+                                        <div *ngIf="plan.isDropdownOpen" class="listado">
+                                            <div   class="listadoBeneficio"  *ngFor="let beneficio_cat of plan.beneficios">
+                                                <div class="beneficio-btn" (click)="toggleBeneficioDetails(plan, beneficio_cat)"  >
+                                                    <span>{{beneficio_cat.tipo_beneficio.etiqueta }}</span>
+                                                    <svg  class="expand-btn"  xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24"><path d="M480 711 240 471l56-56 184 184 184-184 56 56-240 240Z"/></svg>
+                                                </div>
+                                                <hr>
+                                                <div  *ngIf="beneficio_cat.isSubDropdownOpen">
+                                                        <div *ngFor="let beneficio of beneficio_cat.beneficios" class="list-beneficios">
+                                                            <p>{{beneficio.beneficio}}-<span  *ngIf="beneficio.complemento ; else noContent ">Viene incluido</span>
+                                                                <ng-template #noContent>
+                                                                <span class="red">No viene incluido</span>
+                                                                </ng-template> 
+                                                            </p>
+                                                            
+                                                            
+                                                        </div>                                    
+                                                </div>
+                    
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                   
+                                </div>
+                                
+                                <div *ngIf="isOld" class="list">
+                                    <div *ngFor="let plan of listadoMayor" class="card">
+                                        <h2>Plan {{plan.serv?.servicio_id}}</h2>
+                                        <h2>{{plan.serv?.servicio}}</h2>
+                                        <button *ngIf="plan.serv" (click)="toggleListPlan(plan.serv)" class="btn-select">
+                                            Seleccionar
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24"><path d="m480 896-57-56 224-224H160v-80h487L423 312l57-56 320 320-320 320Z"/></svg>
+                                        </button>
+                                            <p>Cobertura global de <span class="price">${{plan.serv?.cobertura_global}}</span> por persona</p>
+                                            <hr>
+                                        <button (click)="toggleDetails(plan)"  class="btn-detalles"  >
+                                            <span>Ver detalles</span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24"><path d="M480 736q75 0 127.5-52.5T660 556q0-75-52.5-127.5T480 376q-75 0-127.5 52.5T300 556q0 75 52.5 127.5T480 736Zm0-72q-45 0-76.5-31.5T372 556q0-45 31.5-76.5T480 448q45 0 76.5 31.5T588 556q0 45-31.5 76.5T480 664Zm0 192q-146 0-266-81.5T40 556q54-137 174-218.5T480 256q146 0 266 81.5T920 556q-54 137-174 218.5T480 856Zm0-300Zm0 220q113 0 207.5-59.5T832 556q-50-101-144.5-160.5T480 336q-113 0-207.5 59.5T128 556q50 101 144.5 160.5T480 776Z"/></svg>
+                                        </button>
+                                        <div *ngIf="plan.isDropdownOpen" class="listado">
+                                            <div   class="listadoBeneficio"  *ngFor="let beneficio_cat of plan.beneficios">
+                                                <div class="beneficio-btn" (click)="toggleBeneficioDetails(plan, beneficio_cat)"  >
+                                                    <span>{{beneficio_cat.tipo_beneficio.etiqueta }}</span>
+                                                    <svg  class="expand-btn"  xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24"><path d="M480 711 240 471l56-56 184 184 184-184 56 56-240 240Z"/></svg>
+                                                </div>
+                                                <hr>
+                                                <div  *ngIf="beneficio_cat.isSubDropdownOpen">
+                                                        <div *ngFor="let beneficio of beneficio_cat.beneficios" class="list-beneficios">
+                                                            <span>{{beneficio.beneficio}}  </span>
+                                                            <span  *ngIf="beneficio.complemento ; else noContent ">Viene incluido</span>
+                                                            <ng-template #noContent>
+                                                                <span class="red">No viene incluido</span>
+                                                            </ng-template>
+                                                        </div>                                    
+                                                </div>
+                    
+                                            </div>
+                                        </div>
+                
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="listExtras">
+                                
+                            <div class="extraContainer" *ngFor="let extraItem of cardExtras" (click)="toggleExtra(extraItem)"  >
+                                
+                                    <div class="extra" [class.gray]="extraItem.checked"   >
+                                        <div class="extra-content">
+
+                                            <h2 class="extra-title">{{extraItem.extra.descripcion}}</h2>
+                                            <p class="extra-text" *ngIf="extraItem.extra.cobertura !== null">
+                                               Cobertura:  {{extraItem.extra.cobertura | currency:'USD':true:'1.2-2'}} 
+                                            </p>
+                                            <p class="extra-text">
+                                                Costo por dia : {{extraItem.extra.complemento | currency:'USD':true:'1.2-2'}}
+                                            </p>
+
+
+                                        </div>
+                                       
+                                        
+                            
+                                    
+                                    </div>
+                                    <svg  *ngIf="extraItem.checked" class="check-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M9 16.17L4.83 12L3.4 13.41L9 19L21 7L19.59 5.59L9 16.17Z" fill="#4CAF50"/>
+                                    </svg>
+                                
+                            </div>
+                        </div>
+                        
+                        
+        
+                        
+                        
                       
+                    </div>
+                </div>
+                <div class="row center">
+                    <button  (disable)="!btn_pagar" [class.active]="btn_pagar"  (click)="siguiente()" >Siguiente paso</button>
+                </div>
+    
+            </div>
+            
+
+            
+
+        </div>
+
+        <div class="row mobile">
+            <div class="listCards">
+                <div  *ngIf="minPlanes>1" class="alert">
+                    <span>Debe elegir un plan para los menores de 75 años y un plan para los mayores de 75 años</span>
                 </div>
 
-            </div>
+                <div class="btn-age">
+                    <button type="button" [class.active]="!isOld"  (click)="toggleListPlanBtn(false)" >
+                        Menores de 75
+                    </button>
+                    <button type="button" [class.active]="isOld"   (click)="toggleListPlanBtn(true)" >
+                        Mayores de 75
+                    </button>
+
+                </div>
+                <hr>
+
+                <div  *ngIf="!isOld"  class="list">
+                    <div *ngFor="let plan of listadoMenor" class="card">
+                        <h2>Plan {{plan.serv?.servicio_id}}</h2>
+                        <h2>{{plan.serv?.servicio}}</h2>
+                        <button *ngIf="plan.serv" (click)="toggleListPlan(plan.serv)" class="btn-select">
+                            Seleccionar
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24"><path d="m480 896-57-56 224-224H160v-80h487L423 312l57-56 320 320-320 320Z"/></svg>
+                        </button>
+                            <p>Cobertura global de <span class="price">${{plan.serv?.cobertura_global}}</span> por persona</p>
+                            <hr>
+                        <button (click)="toggleDetails(plan)"  class="btn-detalles"  >
+                            <span>Ver detalles</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24"><path d="M480 736q75 0 127.5-52.5T660 556q0-75-52.5-127.5T480 376q-75 0-127.5 52.5T300 556q0 75 52.5 127.5T480 736Zm0-72q-45 0-76.5-31.5T372 556q0-45 31.5-76.5T480 448q45 0 76.5 31.5T588 556q0 45-31.5 76.5T480 664Zm0 192q-146 0-266-81.5T40 556q54-137 174-218.5T480 256q146 0 266 81.5T920 556q-54 137-174 218.5T480 856Zm0-300Zm0 220q113 0 207.5-59.5T832 556q-50-101-144.5-160.5T480 336q-113 0-207.5 59.5T128 556q50 101 144.5 160.5T480 776Z"/></svg>
+                        </button>
+                        <div *ngIf="plan.isDropdownOpen" class="listado">
+                            <div   class="listadoBeneficio"  *ngFor="let beneficio_cat of plan.beneficios">
+                                <div class="beneficio-btn" (click)="toggleBeneficioDetails(plan, beneficio_cat)"  >
+                                    <span>{{beneficio_cat.tipo_beneficio.etiqueta }}</span>
+                                    <svg  class="expand-btn"  xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24"><path d="M480 711 240 471l56-56 184 184 184-184 56 56-240 240Z"/></svg>
+                                </div>
+                                <hr>
+                                <div  *ngIf="beneficio_cat.isSubDropdownOpen">
+                                        <div *ngFor="let beneficio of beneficio_cat.beneficios" class="list-beneficios">
+                                            <span>{{beneficio.beneficio}}  </span>
+                                            <span  *ngIf="beneficio.complemento ; else noContent ">Viene incluido</span>
+                                            <ng-template #noContent>
+                                                <span class="red">No viene incluido</span>
+                                            </ng-template>
+                                        </div>                                    
+                                </div>
+    
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+                
+                <div *ngIf="isOld" class="list">
+                    <div *ngFor="let plan of listadoMayor" class="card">
+                        <h2>Plan {{plan.serv?.servicio_id}}</h2>
+                        <h2>{{plan.serv?.servicio}}</h2>
+                        <button *ngIf="plan.serv" (click)="toggleListPlan(plan.serv)" class="btn-select">
+                            Seleccionar
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24"><path d="m480 896-57-56 224-224H160v-80h487L423 312l57-56 320 320-320 320Z"/></svg>
+                        </button>
+                            <p>Cobertura global de <span class="price">${{plan.serv?.cobertura_global}}</span> por persona</p>
+                            <hr>
+                        <button (click)="toggleDetails(plan)"  class="btn-detalles"  >
+                            <span>Ver detalles</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24"><path d="M480 736q75 0 127.5-52.5T660 556q0-75-52.5-127.5T480 376q-75 0-127.5 52.5T300 556q0 75 52.5 127.5T480 736Zm0-72q-45 0-76.5-31.5T372 556q0-45 31.5-76.5T480 448q45 0 76.5 31.5T588 556q0 45-31.5 76.5T480 664Zm0 192q-146 0-266-81.5T40 556q54-137 174-218.5T480 256q146 0 266 81.5T920 556q-54 137-174 218.5T480 856Zm0-300Zm0 220q113 0 207.5-59.5T832 556q-50-101-144.5-160.5T480 336q-113 0-207.5 59.5T128 556q50 101 144.5 160.5T480 776Z"/></svg>
+                        </button>
+                        <div *ngIf="plan.isDropdownOpen" class="listado">
+                            <div   class="listadoBeneficio"  *ngFor="let beneficio_cat of plan.beneficios">
+                                <div class="beneficio-btn" (click)="toggleBeneficioDetails(plan, beneficio_cat)"  >
+                                    <span>{{beneficio_cat.tipo_beneficio.etiqueta }}</span>
+                                    <svg  class="expand-btn"  xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24"><path d="M480 711 240 471l56-56 184 184 184-184 56 56-240 240Z"/></svg>
+                                </div>
+                                <hr>
+                                <div  *ngIf="beneficio_cat.isSubDropdownOpen">
+                                        <div *ngFor="let beneficio of beneficio_cat.beneficios" class="list-beneficios">
+                                            <span>{{beneficio.beneficio}}  </span>
+                                            <span  *ngIf="beneficio.complemento ; else noContent ">Viene incluido</span>
+                                            <ng-template #noContent>
+                                                <span class="red">No viene incluido</span>
+                                            </ng-template>
+                                        </div>                                    
+                                </div>
+    
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 
 
-
+                
+                
+              
+            </div>
+            <div class="border-1">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam aut accusantium, repellendus neque tempore rem aspernatur officia, dolor iure porro ut ex, totam officiis molestias excepturi soluta ratione eaque? Officiis expedita, reprehenderit vitae id in pariatur dolorum molestias nemo neque quaerat! Rerum, ad numquam explicabo placeat qui dolorum deleniti repellendus rem nulla suscipit modi enim tempore vero ab voluptatibus. Harum, deserunt. Rem dignissimos fugit ullam dicta cum aspernatur nemo aliquid corporis fuga enim iste perspiciatis vero officiis asperiores commodi quo quibusdam sit nostrum eaque ipsum, blanditiis laudantium mollitia itaque repudiandae! Impedit explicabo repellendus veritatis quos possimus, sint et voluptas culpa!
+            </div>
         </div>
 
         
-        <div class="row">
-
-        </div>
+       
 
 
-        <p  *ngFor="let plan of planesCubren">
-            {{plan.descripcion}}
-        </p>        
+                
      </div>
 
-     <div class="cotizacionBottom z-index-25"  [style.height.px]="itemHeight" >
+
+
+     <div class="cotizacionBottom "  [style.height.px]="itemHeight" >
         <div class="expandir"  *ngIf="stateBottom!=3" 
         (touchstart)="onTouchStart($event)"
         (touchmove)="onTouchMove($event)"
@@ -229,7 +462,7 @@
         >
          <button class="btn_expandir">
              <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24"><path d="M280 976q-33 0-56.5-23.5T200 896q0-33 23.5-56.5T280 816q33 0 56.5 23.5T360 896q0 33-23.5 56.5T280 976Zm400 0q-33 0-56.5-23.5T600 896q0-33 23.5-56.5T680 816q33 0 56.5 23.5T760 896q0 33-23.5 56.5T680 976ZM246 336l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692 574q-11 20-29.5 31T622 616H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z"/></svg>
-             <p  *ngIf="stateBottom<3">Ver mi carrito</p> 
+             <p  > <span></span>  Ver mi carrito</p> 
              <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24"><path d="M480 711 240 471l56-56 184 184 184-184 56 56-240 240Z"/></svg>
          </button>
          
@@ -237,7 +470,7 @@
       
         <div class="containBottom"  *ngIf="!minHeightReached"  >
         
-         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quam vero illo molestias nam debitis in, ipsam voluptate perspiciatis provident fuga voluptatibus harum blanditiis libero eos fugit aliquid id dignissimos veniam.
+         <!-- Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quam vero illo molestias nam debitis in, ipsam voluptate perspiciatis provident fuga voluptatibus harum blanditiis libero eos fugit aliquid id dignissimos veniam.
          Nemo, vitae rerum distinctio tempore ea voluptatum doloremque ratione ab. Non deserunt vitae quis autem recusandae nemo error dolores itaque, eaque iusto ipsa tempora, officia libero. Quas fugiat neque nemo!
          Temporibus quisquam molestias, cumque minus repellat hic soluta quam cupiditate voluptatibus tempore laudantium perspiciatis dolor provident sapiente nulla consectetur, tenetur eligendi saepe omnis reiciendis eaque nesciunt! Corporis unde accusantium sit?
          Repellat porro placeat est suscipit quisquam dolore ipsam, quasi sequi, corrupti, asperiores in a. Provident reiciendis animi distinctio? Corrupti ipsum maxime officiis culpa corporis esse nulla eos necessitatibus perspiciatis nobis.
@@ -246,13 +479,13 @@
          Sequi, labore nemo, alias iste tempora totam sunt, corrupti vero ex iusto mollitia laudantium. Laborum exercitationem tempora repellat, consequatur corrupti doloribus quas consectetur dolor totam laudantium laboriosam, suscipit sed esse?
          Tempore, placeat possimus? Adipisci delectus corporis incidunt vitae veritatis nam molestiae suscipit error ad facilis quia est necessitatibus alias tenetur quam, laborum minima mollitia deleniti provident consequatur! Illum, incidunt maxime.
          Modi odit fuga vitae sequi provident, culpa eos excepturi omnis est enim tempore amet quia, unde nesciunt at ullam voluptatibus consequuntur dolor distinctio ducimus. Veritatis assumenda ipsum reprehenderit vel alias.
-         Dolor, esse illo est commodi qui veritatis optio saepe labore magni, iste soluta corrupti impedit earum voluptates exercitationem modi quis natus ducimus a? Quis nulla ipsa odit magnam! Totam, porre.`
+         Dolor, esse illo est commodi qui veritatis optio saepe labore magni, iste soluta corrupti impedit earum voluptates exercitationem modi quis natus ducimus a? Quis nulla ipsa odit magnam! Totam, porre.` -->
         </div>
 
 
         <div class="contain-pagar">
-            <button>
-                Pagar
+            <button   (disable)="!btn_pagar" [class.active]="btn_pagar"  (click)="siguiente()">
+                Siguiente paso
             </button>
         </div>
         

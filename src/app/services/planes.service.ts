@@ -22,13 +22,13 @@ export class PlanesService {
   }
 
 
-  getPlanById(id : number): Observable<Plan>{
+  getPlanById(id : number): Observable<Plan[]>{
 
     let params = new HttpParams;
 
     params = params.append('id', id);
 
-    return this.http.get<Plan>(this.apiUrl, { params });
+    return this.http.get<Plan[]>(this.apiUrl, { params });
 
   }
 

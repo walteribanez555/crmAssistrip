@@ -57,7 +57,6 @@ export class DataCotizadorComponent implements OnInit {
   
 
   ngOnInit(): void {
-    console.log("Hola mundo");
 
     this.catalogoService.getPaises().subscribe(
       (data)=> {  
@@ -241,7 +240,6 @@ export class DataCotizadorComponent implements OnInit {
     }
 
     changeAgeInpt(event: any, item: cotizacionDataForm) {
-      console.log(event.target.value)
       
       const index = this.listCotizaciones.findIndex(i => i.id === item.id);
       ;

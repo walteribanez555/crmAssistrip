@@ -88,9 +88,14 @@ li{
   }
 
   .navbar .toggle_btn { 
-    color: #fff;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    color: var(--text-color);
     fill : #000;
-    font-size: 1.5rem;
+    font-size: 15px;
     cursor: pointer;
     display: none;
   }
@@ -214,7 +219,7 @@ li{
 
 
     .navbar .toggle_btn { 
-      display: block;
+      display: flex;
     }
 
 

@@ -22,12 +22,12 @@ export class ClientesService {
   }
 
 
-  getClienteById(id : number): Observable<Cliente>{ 
+  getClienteById(id : number): Observable<Cliente[]>{ 
      let params  = new HttpParams;
 
      params = params.append('id', id);
      
-     return this.http.get<Cliente>(this.apiUrl,{params});
+     return this.http.get<Cliente[]>(this.apiUrl,{params});
   }
 
   postCliente(cliente : ClientePost) :Observable<ClienteResp>{

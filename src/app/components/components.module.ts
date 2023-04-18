@@ -18,7 +18,7 @@ import { DataCotizadorComponent } from './data-cotizador/data-cotizador.componen
       ListPoliciesGroupComponent,
       ClienteFormComponent,
       CotizacionComponentComponent,
-      DataCotizadorComponent
+      DataCotizadorComponent,
       
       
       

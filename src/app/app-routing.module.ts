@@ -13,6 +13,7 @@ import { HomeComponent } from './components/home/home.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { HelpComponent } from './components/help/help.component';
 import { CotizarComponent } from './components/cotizar/cotizar.component';
+import { DatosPolizasComponent } from './components/datos-polizas/datos-polizas.component';
 
 
 
@@ -52,7 +53,14 @@ const routes : Routes = [
       {
         path: 'cotizar',
         component: CotizarComponent,
+        
+        
+      },
+      {
+        path: 'datos-polizas',
+        component : DatosPolizasComponent
       }
+      
     ]
   },
   {

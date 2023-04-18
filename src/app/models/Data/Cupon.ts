@@ -11,3 +11,11 @@ export interface Cupon {
     
     
 }
+
+
+export interface CuponAplicado { 
+    cupon : Cupon,
+    monto : number,
+    montoTotal: number,
+
+}

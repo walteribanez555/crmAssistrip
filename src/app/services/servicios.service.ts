@@ -16,7 +16,6 @@ export class ServiciosService {
 
       
 
-      console.log(this.http.get<Servicio[]>(this.apiUrl))
 
       return this.http.get<Servicio[]>(this.apiUrl);
 
