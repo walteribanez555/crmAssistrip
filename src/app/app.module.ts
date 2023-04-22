@@ -10,12 +10,17 @@ import { ServicesModule } from './services/services.module';
 import { ComponentsModule } from './components/components.module';
 import { HomeComponent } from './components/home/home.component';
 import { CotizarComponent } from './components/cotizar/cotizar.component';
-import { AboutUsComponent } from './components/about-us/about-us.component';
-import { HelpComponent } from './components/help/help.component';
+
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DatosPolizasComponent } from './components/datos-polizas/datos-polizas.component';
 import { ListPolizasComponent } from './components/list-polizas/list-polizas.component';
+import { PolizasDetallesComponent } from './components/polizas-detalles/polizas-detalles.component';
+import { DateOnlyPipe } from './pipes/getDateOnly.pipe';
+
+import { CommonModule } from '@angular/common';
+import { ListadoBeneficiariosComponent } from './components/listado-beneficiarios/listado-beneficiarios.component';
+import { PolizaComponent } from './components/poliza/poliza.component';
 
 
 
@@ -28,10 +33,13 @@ import { ListPolizasComponent } from './components/list-polizas/list-polizas.com
     LandingPageComponent,
     HomeComponent,
     CotizarComponent,
-    AboutUsComponent,
-    HelpComponent,
+    
     DatosPolizasComponent,
     ListPolizasComponent,
+    PolizasDetallesComponent,
+    DateOnlyPipe,
+    ListadoBeneficiariosComponent,
+    PolizaComponent
 
   ],
   imports: [
@@ -41,13 +49,16 @@ import { ListPolizasComponent } from './components/list-polizas/list-polizas.com
     ComponentsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    CommonModule
     
     
   
     
   ],
-  providers: [],
+  providers: [
+    DateOnlyPipe
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -23,13 +23,13 @@ export class PolizasService {
     return this.http.get<Poliza[]>(this.apiUrl);
   }
 
-  getPolizasById(id: number) : Observable<Poliza>{
+  getPolizasById(id: number) : Observable<Poliza[]>{
 
     let params = new HttpParams;
 
     params = params.append('id', id);
 
-    return this.http.get<Poliza>(this.apiUrl,{params});
+    return this.http.get<Poliza[]>(this.apiUrl,{params});
 
   }
 

@@ -70,6 +70,29 @@ li{
     font-weight: bold;
   }
 
+  .navbar .logo {
+    transition: scale 0.3s ease;
+
+  }
+
+  .navbar .logo:hover { 
+    scale: 1.15;
+  }
+
+  .navbar .logo a h1{
+    font-size: 30px;
+  }
+  h1 .trip{
+    font-weight: bold;
+    font-size: 35px;
+    margin-left: -5px;
+
+  }
+  h1 .com{
+    color: #DF085A;
+    font-size: 20px;
+  }
+
   
 
   .navbar .routes { 
@@ -85,6 +108,16 @@ li{
   .navbar .links{
     display: flex;
     gap: 2rem;
+
+  }
+
+
+  .navbar .links li {
+    transition: scale 0.3s ease;
+  }
+
+  .navbar .links li:hover  { 
+    scale: 1.15;
   }
 
   .navbar .toggle_btn { 
@@ -230,9 +263,24 @@ li{
         font-size: small;
     }
 
-    .navbar .logo  a img { 
+    .navbar .logo  a  { 
         width: 100px;
     }
+
+    .navbar .logo a h1{
+      font-size: 20px;
+    }
+    h1 .trip{
+      font-weight: bold;
+      font-size: 25px;
+      margin-left: -5px;
+  
+    }
+    h1 .com{
+      color: #DF085A;
+      font-size: 15px;
+    }
+  
 
     .routes .assistrip_btn { 
         display: none;

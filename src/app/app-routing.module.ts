@@ -10,11 +10,13 @@ import { LandingPageComponent } from './pages/landing-page/landing-page.componen
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ServicesModule } from './services/services.module';
 import { HomeComponent } from './components/home/home.component';
-import { AboutUsComponent } from './components/about-us/about-us.component';
-import { HelpComponent } from './components/help/help.component';
+
 import { CotizarComponent } from './components/cotizar/cotizar.component';
 import { DatosPolizasComponent } from './components/datos-polizas/datos-polizas.component';
 import { ListPolizasComponent } from './components/list-polizas/list-polizas.component';
+import { PolizasDetallesComponent } from './components/polizas-detalles/polizas-detalles.component';
+import { ListadoBeneficiariosComponent } from './components/listado-beneficiarios/listado-beneficiarios.component';
+import { PolizaComponent } from './components/poliza/poliza.component';
 
 
 
@@ -41,16 +43,7 @@ const routes : Routes = [
         path : 'home',
         component : HomeComponent,
       },
-      {
-        path : 'about-us',
-        component : AboutUsComponent
-
-      },
-      {
-        path:'help',
-        component : HelpComponent
-
-      },
+      
       {
         path: 'cotizar',
         component: CotizarComponent,
@@ -62,8 +55,26 @@ const routes : Routes = [
         component : DatosPolizasComponent
       },
       {
-        path : 'listado-polizas',
-        component : ListPolizasComponent
+        path : 'polizas',
+        component : ListPolizasComponent,
+        children: [
+          {
+            path: 'listado-polizas',
+            component : PolizasDetallesComponent,
+           
+          },
+          {
+            path: 'listado-beneficiarios',
+            component : ListadoBeneficiariosComponent,
+          },
+          {
+            path: 'poliza/:id',
+            component : PolizaComponent,
+          }
+          
+
+
+        ]
       }
       
     ]

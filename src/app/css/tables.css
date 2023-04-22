@@ -24,7 +24,8 @@
   
   table {
     width: 100%;
-    min-width: 1000px;
+    padding: 30px;
+    overflow-x: auto;
     
     
     
@@ -97,6 +98,11 @@
       
   
   @media only screen and (max-width: 850px) {
+    table{ 
+      font-size: small;
+      min-width: 1000px;
+    }
+
     .table-container {
       height: 80vh;
     }

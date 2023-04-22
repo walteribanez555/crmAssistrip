@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { Catalogo } from '../models/Data/Catalogo';
+import { BeneficioExtra } from '../models/Data/BeneficioExtra.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,10 @@ export class ExtrasPolizasService {
 
    }
 
+
+   getPolizasExtras(): Observable<BeneficioExtra[]>{
+    return this.http.get<BeneficioExtra[]>(this.apiUrl);
+   }
 
 
    postPolizaExtra(poliza_id : number, beneficio_id: number , monto_adicional: number) {

@@ -2,15 +2,15 @@
     <header>
         <div class="navbar">
             <div class="logo"><a routerLink="/home">
-                <img src="../../../assets/images/Logo_assistrip.png" alt="">
+                <h1>assis<span class="trip" >Trip</span><span class="com">.com</span></h1>
     
             </a></div>
     
     
             <div class="routes">
                 <ul class="links">
-                    <li><a routerLink="/about-us">Sobre nosotros</a></li>
-                    <li><a routerLink="/help">Ayuda</a></li>
+                    <li><a href="#about-us">Sobre nosotros</a></li>
+                    <li><a href="#help">Ayuda</a></li>
                 </ul>
                 
                 <!-- <a routerLink="/cotizar" class="cotizar_btn" >
@@ -30,8 +30,8 @@
     
     
         <div class="dropdown_menu "  [class.open]="isDropDownOpen">
-                <li><a href="/about-us">Sobre nosotros</a></li>
-                <li><a href="/help">Ayuda</a></li>
+                <li><a href="#about-us">Sobre nosotros</a></li>
+                <li><a href="#help">Ayuda</a></li>
                 
                 <a  class="assistrip_btn" routerLink="/dashboard" >
                     MI ASSISTRIP

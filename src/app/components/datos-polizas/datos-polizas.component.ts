@@ -376,14 +376,23 @@ export class DatosPolizasComponent implements OnInit {
       const requests : any[]= [];
 
 
-      this.listPolizas.forEach(poliza => {
-        requests.push(poliza);
-      });
+      const listMenoresPolizas : any[] = this.listPolizas.filter(poliza => poliza.type===1);
+      const listMayoresPolizas : any[] = this.listPolizas.filter(poliza => poliza.type===2);
 
+      if(listMenoresPolizas.length>0){
+        requests.push({ listPolizas : listMenoresPolizas, servicio : this.servicioMenores?.servicio_id});
+      }
+      if(listMayoresPolizas.length>0){
+        requests.push({ listPolizas : listMayoresPolizas, servicio : this.servicioMayores?.servicio_id});
+      }
+
+
+
+      console.log(requests);
 
       return forkJoin(
         requests.map((request)=> { 
-          return this.polizasService.postPolizas(venta_id, request.servicio.servicio_id, this.datosCotizacion.tags.join(','), this.datosCotizacion.initialDate, this.datosCotizacion.finalDate, this.listExtras.length).pipe(
+          return this.polizasService.postPolizas(venta_id, request.servicio , this.datosCotizacion.tags.join(','), this.datosCotizacion.initialDate, this.datosCotizacion.finalDate, this.listExtras.length).pipe(
             map((response) => {
               return { request, response };
             })
@@ -393,73 +402,128 @@ export class DatosPolizasComponent implements OnInit {
     }),
     switchMap((data)=>{
 
-      const request : any[] = [];
+      const requests : any[] = [];
 
 
-      return forkJoin(
-        data.map ( (response) => {
+      data.forEach(  response => {
+        this.dataService.listPolizas.push(response.response.id);
 
-          this.dataService.listPolizas.push(response.response.id);
+        const polizas : any[] = response.request.listPolizas;
 
-          const names = this.splitFirstWord(response.request.form.value.nombres);
+        polizas.forEach(poliza => {
+                    
+
+          const names = this.splitFirstWord(poliza.form.value.nombres);
 
           const firstName = names.firsWord;
           const secondName= names.resOfWord;
           
-          const lastNames= this.splitFirstWord(response.request.form.value.apellidos);
+          const lastNames= this.splitFirstWord(poliza.form.value.apellidos);
 
           const firtLastName = lastNames.firsWord;
           const seconLastName = lastNames.resOfWord;
 
 
 
-          return this.beneficiarioService.postBeneficiario(
+          requests.push(
+            this.beneficiarioService.postBeneficiario(
             response.response.id,
             firtLastName,seconLastName,
             firstName,secondName,
-            response.request.form.value.ci, 
-            response.request.form.value.passport,
-            response.request.form.value.age,
-            response.request.form.value.gender,
-            response.request.form.value.origen,
-            response.request.form.value.email,
-            response.request.form.value.telf ).pipe(
+            poliza.form.value.ci, 
+            poliza.form.value.passport,
+            poliza.form.value.age,
+            poliza.form.value.gender,
+            poliza.form.value.origen,
+            poliza.form.value.email,
+            poliza.form.value.telf ).pipe(
               map((beneficiario)=> {
                 return { response, beneficiario}
               })
-            )
+            ));
         })
-      )
+
+      })
+
+
+      return forkJoin(requests);
+
+
+      // return forkJoin(
+      //   data.map ( (response) => {
+
+      //     this.dataService.listPolizas.push(response.response.id);
+
+          
+
+      //     const names = this.splitFirstWord(response.request.form.value.nombres);
+
+      //     const firstName = names.firsWord;
+      //     const secondName= names.resOfWord;
+          
+      //     const lastNames= this.splitFirstWord(response.request.form.value.apellidos);
+
+      //     const firtLastName = lastNames.firsWord;
+      //     const seconLastName = lastNames.resOfWord;
+
+
+
+      //     return this.beneficiarioService.postBeneficiario(
+      //       response.response.id,
+      //       firtLastName,seconLastName,
+      //       firstName,secondName,
+      //       response.request.form.value.ci, 
+      //       response.request.form.value.passport,
+      //       response.request.form.value.age,
+      //       response.request.form.value.gender,
+      //       response.request.form.value.origen,
+      //       response.request.form.value.email,
+      //       response.request.form.value.telf ).pipe(
+      //         map((beneficiario)=> {
+      //           return { response, beneficiario}
+      //         })
+      //       )
+      //   })
+      // )
      
     }),
 
     switchMap((data)=> {
-      const requests : any[] = [];
 
 
-      data.forEach(
-        response => {
-          this.dataService.listClientes.push(response.beneficiario.id);
-          this.dataExtra.forEach(
-            extra => {
-              requests.push( {
-                extra : extra.extra,
-                poliza_id : response.response.response.id,
-                costo : extra.costo
+      if(this.dataExtra.length>0){
+        const requests : any[] = [];
 
-              })
-            }
-          )
-        }
-      )
+        console.log(data);
+
+        data.forEach(
+          response => {
+            this.dataService.listClientes.push(response.beneficiario.id);
+            this.dataExtra.forEach(
+              extra => {
+                requests.push( {
+                  extra : extra.extra,
+                  poliza_id : response.response.response.id,
+                  costo : extra.costo
+
+                })
+              }
+            )
+          }
+        )
+        return forkJoin(
+          requests.map((request)=> {
+            return this.polizasPlusService.postPolizaExtra(request.poliza_id, request.extra.beneficio_id,request.costo)
+          })
+        )
+      }
+      
       
 
+      return "ok";
 
-      return forkJoin(
-        requests.map((request)=> {
-          return this.polizasPlusService.postPolizaExtra(request.poliza_id, request.extra.beneficio_id,request.costo)
-        })
-      )
+      
+      
     })
 
     
