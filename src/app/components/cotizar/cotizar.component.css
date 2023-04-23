@@ -32,8 +32,7 @@
   width: 800px;
   display: grid;
   background: var(--body-bg);
-    overflow-y: auto;
-    transition: all 0.5s ease;
+  transition: all 0.5s ease;
 }
 
 
@@ -476,16 +475,30 @@ h2{
 
 
 .cotizacionMain{  
-    position: relative;
-    top: 25vh;
-    padding-bottom: 160px;
+   
     width: 100%;
     background: var(--body-bg);
     height: fit-content;
-    padding-left: 2vh;
-    padding-right: 2vh;
-    transition: all 0.5s ease;
     
+    transition: all 0.5s ease;
+    overflow-y: auto;
+    position: fixed;
+   
+    height: 75vh;
+    
+}
+
+.footer-desktop{
+     display: flex;
+    position: fixed;
+    bottom: 0;
+    height: 15vh;
+    background-color: var(--body-bg);
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.1);
 }
 
 
@@ -493,6 +506,68 @@ h2{
   display: flex;
   width: 96vw;
   height: 100%;
+}
+
+.row.sticky{
+  position: sticky;
+  top: 17vh;
+  z-index: 2;
+  background-color: var(--body-bg);
+  padding-top: 30px;
+}
+
+.row.pt-20 {
+  padding-top: 20vh;
+}
+
+.column.sticky{
+
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.title-cat{
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--main-color);
+  margin: 10px;
+
+}
+
+.sub-cat{
+  font-size: 15px;
+  font-weight: bold;
+  color: var(--main-color);
+  margin: 10px 30px 10px 50px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end
+
+}
+
+.full-width{
+  width: 100%;
+}
+
+.sub-cat span{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+
+.sub-cat hr{
+  width: 100%;
+  height: 1px;
+  background-color: var(--main-color);
+  margin: 10px 0px 10px 0px;
 }
 
 
@@ -526,6 +601,7 @@ h2{
   display: flex;
   flex-direction: column;
   width: 100%;
+  min-width: 600px;
 }
 
 .row .container{
@@ -534,7 +610,7 @@ h2{
   height: fit-content;
 } 
 .block{
-  padding: 10px;
+  padding: 0px;
 }
 
 
@@ -760,6 +836,7 @@ hr{
 
 .cotizacionMain .row.desktop{ 
   display: flex;
+  height: fit-content;
 }
 .cotizacionMain .row.mobile{
   display: none;
@@ -804,7 +881,7 @@ hr{
 
 .list{
   display: flex;
-  padding-top: 20px;
+  padding-top: 0px;
   flex-direction: row;
   align-items: flex-start;
 
@@ -815,6 +892,7 @@ hr{
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  padding-top: 10px;
 }
 
 .alert { 
@@ -1045,7 +1123,12 @@ hr{
     }
 
     .card{
-      width: 100%;
+      width: 90%;
+      margin: 20px
+    }
+
+    .footer-desktop{
+      display: none;
     }
 
 

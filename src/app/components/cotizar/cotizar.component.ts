@@ -169,7 +169,7 @@ export class CotizarComponent implements OnInit{
 
     if(this.dataService.sharedData.listCotizaciones.length === 0){
       Swal.close();
-       this.router.navigate(['/home']);
+       //this.router.navigate(['/home']);
     }
 
     this.receivedData = this.dataService.sharedData;
@@ -214,6 +214,8 @@ export class CotizarComponent implements OnInit{
           this.beneficiosData = data.filter(item => item.status === 1);
           this.listBeneficiosCat = this.mapListBeneficioCat(this.listBeneficios);
 
+          console.log(this.listBeneficiosCat);
+
 
 
           const requests : any[]  = [];
@@ -229,6 +231,7 @@ export class CotizarComponent implements OnInit{
                 map((response) =>{
 
                   this.cardExtras= this.showExtras()
+
                   
 
                   return ({
@@ -317,6 +320,9 @@ export class CotizarComponent implements OnInit{
     this.listCotizaciones = data.listCotizaciones;
     this.listTags = this.tags.join(', ');
     this.diffDays =this.comparar();
+
+    this.nextId = this.listCotizaciones.length;
+
 
   }
 
@@ -574,7 +580,7 @@ export class CotizarComponent implements OnInit{
       const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
   
       if(!isNaN(diffInDays)){
-        return diffInDays;
+        return diffInDays+1;
         
       }
       return -1;

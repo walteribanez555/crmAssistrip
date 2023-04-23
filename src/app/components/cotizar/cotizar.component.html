@@ -188,7 +188,7 @@
      <div class="cotizacionMain">
         <div class="row desktop">
             <div class="column">
-                <div class="row">
+                <div class="row sticky">
                     <div class="column">
                     
                         <h2>NUESTROS PLANES</h2>
@@ -224,35 +224,11 @@
                                             Seleccionar
                                             <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24"><path d="m480 896-57-56 224-224H160v-80h487L423 312l57-56 320 320-320 320Z"/></svg>
                                         </button>
-                                            <p>Cobertura global de <span class="price">${{plan.serv?.cobertura_global}}</span> por persona</p>
                                             <hr>
-                                        <button (click)="toggleDetails(plan)"  class="btn-detalles"  >
-                                            <span>Ver detalles</span>
-                                            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24"><path d="M480 736q75 0 127.5-52.5T660 556q0-75-52.5-127.5T480 376q-75 0-127.5 52.5T300 556q0 75 52.5 127.5T480 736Zm0-72q-45 0-76.5-31.5T372 556q0-45 31.5-76.5T480 448q45 0 76.5 31.5T588 556q0 45-31.5 76.5T480 664Zm0 192q-146 0-266-81.5T40 556q54-137 174-218.5T480 256q146 0 266 81.5T920 556q-54 137-174 218.5T480 856Zm0-300Zm0 220q113 0 207.5-59.5T832 556q-50-101-144.5-160.5T480 336q-113 0-207.5 59.5T128 556q50 101 144.5 160.5T480 776Z"/></svg>
-                                        </button>
-                                        <div *ngIf="plan.isDropdownOpen" class="listado">
-                                            <div   class="listadoBeneficio"  *ngFor="let beneficio_cat of plan.beneficios">
-                                                <div class="beneficio-btn" (click)="toggleBeneficioDetails(plan, beneficio_cat)"  >
-                                                    <span>{{beneficio_cat.tipo_beneficio.etiqueta }}</span>
-                                                    <svg  class="expand-btn"  xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24"><path d="M480 711 240 471l56-56 184 184 184-184 56 56-240 240Z"/></svg>
-                                                </div>
-                                                <hr>
-                                                <div  *ngIf="beneficio_cat.isSubDropdownOpen">
-                                                        <div *ngFor="let beneficio of beneficio_cat.beneficios" class="list-beneficios">
-                                                            <p>{{beneficio.beneficio}}-<span  *ngIf="beneficio.complemento ; else noContent ">Viene incluido</span>
-                                                                <ng-template #noContent>
-                                                                <span class="red">No viene incluido</span>
-                                                                </ng-template> 
-                                                            </p>
-                                                            
-                                                            
-                                                        </div>                                    
-                                                </div>
-                    
-                                            </div>
-                                        </div>
+                                        
                                         
                                     </div>
+                                    
                                    
                                 </div>
                                 
@@ -264,65 +240,14 @@
                                             Seleccionar
                                             <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24"><path d="m480 896-57-56 224-224H160v-80h487L423 312l57-56 320 320-320 320Z"/></svg>
                                         </button>
-                                            <p>Cobertura global de <span class="price">${{plan.serv?.cobertura_global}}</span> por persona</p>
                                             <hr>
-                                        <button (click)="toggleDetails(plan)"  class="btn-detalles"  >
-                                            <span>Ver detalles</span>
-                                            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24"><path d="M480 736q75 0 127.5-52.5T660 556q0-75-52.5-127.5T480 376q-75 0-127.5 52.5T300 556q0 75 52.5 127.5T480 736Zm0-72q-45 0-76.5-31.5T372 556q0-45 31.5-76.5T480 448q45 0 76.5 31.5T588 556q0 45-31.5 76.5T480 664Zm0 192q-146 0-266-81.5T40 556q54-137 174-218.5T480 256q146 0 266 81.5T920 556q-54 137-174 218.5T480 856Zm0-300Zm0 220q113 0 207.5-59.5T832 556q-50-101-144.5-160.5T480 336q-113 0-207.5 59.5T128 556q50 101 144.5 160.5T480 776Z"/></svg>
-                                        </button>
-                                        <div *ngIf="plan.isDropdownOpen" class="listado">
-                                            <div   class="listadoBeneficio"  *ngFor="let beneficio_cat of plan.beneficios">
-                                                <div class="beneficio-btn" (click)="toggleBeneficioDetails(plan, beneficio_cat)"  >
-                                                    <span>{{beneficio_cat.tipo_beneficio.etiqueta }}</span>
-                                                    <svg  class="expand-btn"  xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24"><path d="M480 711 240 471l56-56 184 184 184-184 56 56-240 240Z"/></svg>
-                                                </div>
-                                                <hr>
-                                                <div  *ngIf="beneficio_cat.isSubDropdownOpen">
-                                                        <div *ngFor="let beneficio of beneficio_cat.beneficios" class="list-beneficios">
-                                                            <span>{{beneficio.beneficio}}  </span>
-                                                            <span  *ngIf="beneficio.complemento ; else noContent ">Viene incluido</span>
-                                                            <ng-template #noContent>
-                                                                <span class="red">No viene incluido</span>
-                                                            </ng-template>
-                                                        </div>                                    
-                                                </div>
-                    
-                                            </div>
-                                        </div>
-                
                                     </div>
                                 </div>
+
                             </div>
                         </div>
 
-                        <div class="listExtras">
-                                
-                            <div class="extraContainer" *ngFor="let extraItem of cardExtras" (click)="toggleExtra(extraItem)"  >
-                                
-                                    <div class="extra" [class.gray]="extraItem.checked"   >
-                                        <div class="extra-content">
-
-                                            <h2 class="extra-title">{{extraItem.extra.descripcion}}</h2>
-                                            <p class="extra-text" *ngIf="extraItem.extra.cobertura !== null">
-                                               Cobertura:  {{extraItem.extra.cobertura | currency:'USD':true:'1.2-2'}} 
-                                            </p>
-                                            <p class="extra-text">
-                                                Costo por dia : {{extraItem.extra.complemento | currency:'USD':true:'1.2-2'}}
-                                            </p>
-
-
-                                        </div>
-                                       
-                                        
-                            
-                                    
-                                    </div>
-                                    <svg  *ngIf="extraItem.checked" class="check-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M9 16.17L4.83 12L3.4 13.41L9 19L21 7L19.59 5.59L9 16.17Z" fill="#4CAF50"/>
-                                    </svg>
-                                
-                            </div>
-                        </div>
+                        
                         
                         
         
@@ -331,9 +256,58 @@
                       
                     </div>
                 </div>
-                <div class="row center">
-                    <button  (disable)="!btn_pagar" [class.active]="btn_pagar"  (click)="siguiente()" >Siguiente paso</button>
+                <div class="row pt-20">
+
+                    <div class="column sticky">
+                        <div  class="type-beneficio" *ngFor="let typeBeneficio of listBeneficiosCat ">
+                            <span class="title-cat">
+                                {{typeBeneficio.tipo_beneficio.etiqueta}}
+                            </span>
+                            <hr class="full-width">
+                            <div class="sub-cat" *ngFor="let beneficio of typeBeneficio.beneficios" >
+                                <span>
+                                    {{beneficio.descripcion}}
+                                </span>
+    
+                            </div>
+    
+                        </div>
+                    </div>
+                    <div class="column">
+
+                    </div>
+
                 </div>
+
+                <div class="listExtras">
+                                
+                    <div class="extraContainer" *ngFor="let extraItem of cardExtras" (click)="toggleExtra(extraItem)"  >
+                        
+                            <div class="extra" [class.gray]="extraItem.checked"   >
+                                <div class="extra-content">
+
+                                    <h2 class="extra-title">{{extraItem.extra.descripcion}}</h2>
+                                    <p class="extra-text" *ngIf="extraItem.extra.cobertura !== null">
+                                       Cobertura:  {{extraItem.extra.cobertura | currency:'USD':true:'1.2-2'}} 
+                                    </p>
+                                    <p class="extra-text">
+                                        Costo por dia : {{extraItem.extra.complemento | currency:'USD':true:'1.2-2'}}
+                                    </p>
+
+
+                                </div>
+                               
+                                
+                    
+                            
+                            </div>
+                            <svg  *ngIf="extraItem.checked" class="check-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M9 16.17L4.83 12L3.4 13.41L9 19L21 7L19.59 5.59L9 16.17Z" fill="#4CAF50"/>
+                            </svg>
+                        
+                    </div>
+                </div>
+                
     
             </div>
             
@@ -451,9 +425,16 @@
      </div>
 
 
+     <div class="footer-desktop">
+        <div class="row center">
+            <button  (disable)="!btn_pagar" [class.active]="btn_pagar"  (click)="siguiente()" >Siguiente paso</button>
+        </div>
+     </div>
+
+
 
      <div class="cotizacionBottom "  [style.height.px]="itemHeight" >
-        <div class="expandir"  *ngIf="stateBottom!=3" 
+        <!-- <div class="expandir"  *ngIf="stateBottom!=3" 
         (touchstart)="onTouchStart($event)"
         (touchmove)="onTouchMove($event)"
         (touchend)="onTouchEnd($event)"
@@ -466,7 +447,7 @@
              <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24"><path d="M480 711 240 471l56-56 184 184 184-184 56 56-240 240Z"/></svg>
          </button>
          
-        </div>
+        </div> -->
       
         <div class="containBottom"  *ngIf="!minHeightReached"  >
         
