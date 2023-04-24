@@ -39,8 +39,8 @@
     min-width: 100%;
     background: var(--body-bg);
     height: 75vh;
-    padding-left: 2vh;
-    padding-right: 2vh;
+    /* padding-left: 2vh; */
+    /* padding-right: 2vh; */
     transition: all 0.5s ease;
     overflow-y: auto;
     
@@ -512,7 +512,7 @@ span.descuento,
 @media only screen and (max-width: 768px) {
     .main-polizas {
       grid-template-columns: 1fr;
-      height: 65vh;
+      height: calc(100vh - 225px);
       justify-content: center;
       align-items: center;
       padding-left: 0;

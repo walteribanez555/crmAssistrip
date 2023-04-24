@@ -169,7 +169,7 @@ export class CotizarComponent implements OnInit{
 
     if(this.dataService.sharedData.listCotizaciones.length === 0){
       Swal.close();
-       //this.router.navigate(['/home']);
+      this.router.navigate(['/home']);
     }
 
     this.receivedData = this.dataService.sharedData;
@@ -214,7 +214,6 @@ export class CotizarComponent implements OnInit{
           this.beneficiosData = data.filter(item => item.status === 1);
           this.listBeneficiosCat = this.mapListBeneficioCat(this.listBeneficios);
 
-          console.log(this.listBeneficiosCat);
 
 
 
@@ -249,7 +248,6 @@ export class CotizarComponent implements OnInit{
               this.cotizar();
               // this.listadoPlanBeneficio = response;
               
-              console.log(this.listadoMenor);
 
               Swal.close();
 
@@ -601,6 +599,7 @@ export class CotizarComponent implements OnInit{
    }
 
    cotizar(){
+    this.minPlanes = 1;
 
      this.planesCubren = this.listadoPlanes.filter(plan => this.haveRequirements(plan) );
      this.planesCubren = this.planesCubren.filter(plan =>  this.haveRange(plan));

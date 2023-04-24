@@ -29,10 +29,11 @@
 
 .container-cards{
   height: 100%;
-  width: 800px;
-  display: grid;
-  background: var(--body-bg);
-  transition: all 0.5s ease;
+    width: fit-content;
+    min-width: 800px;
+    display: grid;
+    background: var(--body-bg);
+    transition: all 0.5s ease;
 }
 
 
@@ -504,7 +505,7 @@ h2{
 
 .cotizacionMain .row{
   display: flex;
-  width: 96vw;
+  width: fit-content;
   height: 100%;
 }
 
@@ -513,7 +514,7 @@ h2{
   top: 17vh;
   z-index: 2;
   background-color: var(--body-bg);
-  padding-top: 30px;
+  padding-top: 40px;
 }
 
 .row.pt-20 {
@@ -521,10 +522,11 @@ h2{
 }
 
 .column.sticky{
-
+  width: 600px;
+  min-width: 600px;
   position: sticky;
   left: 0;
-  z-index: 1;
+  z-index: 5;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -535,19 +537,24 @@ h2{
   font-size: 20px;
   font-weight: bold;
   color: var(--main-color);
-  margin: 10px;
 
 }
 
+
+
 .sub-cat{
+ 
   font-size: 15px;
   font-weight: bold;
   color: var(--main-color);
-  margin: 10px 30px 10px 50px;
+  margin: 10px 30px 10px 0px;
+  /* border-bottom: 1px solid var(--text-color); */
   width: 100%;
   display: flex;
   flex-direction: row;
-  align-items: flex-end
+  align-items: flex-end;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  height: 20px;
 
 }
 
@@ -560,6 +567,7 @@ h2{
   flex-direction: row;
   align-items: flex-end;
   justify-content: flex-end;
+  padding-left: 20px;
 }
 
 
@@ -597,11 +605,9 @@ h2{
 }
 
 .cotizacionMain .row .column { 
-  padding: 10px;
   display: flex;
-  flex-direction: column;
-  width: 100%;
-  min-width: 600px;
+    flex-direction: column;
+    background-color: var(--body-bg);
 }
 
 .row .container{
@@ -624,16 +630,24 @@ h2{
   flex-direction: column;
   margin-right: 10px;
   margin-bottom: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #ECE6F1;
   border-radius: 5px;
   background-color: #ECE6F1;
-  padding: 10px;
   width: 300px;
   height: fit-content;  /* Add padding inside cards */
   justify-content: center;
   align-items: center;
   transition: all 0.5s ease;
 }
+
+.card.bg-white{
+  background-color: var(--body-bg);
+  border-color: var(--body-bg);
+}
+
+
+
+
 
 .card h2 {
   font-size: 15px; /* Add font size to card title */
@@ -648,12 +662,26 @@ h2{
 }
 
 .card span{
-  color: var(--main-color);
   font-weight: bold;
 }
 
-.card span.red { 
-  color: red;
+.title-cat.c-white{
+  color: #ECE6F1;
+}
+
+
+.card.bg-white .title-cat.c-white{
+  color: var(--body-bg);
+}
+
+
+
+.card svg.red{
+  fill: red;
+}
+
+.card svg.green { 
+  fill: green;
 }
 
 .card span.price{
@@ -893,6 +921,7 @@ hr{
   justify-content: center;
   flex-direction: column;
   padding-top: 10px;
+  width: fit-content;
 }
 
 .alert { 
@@ -920,9 +949,19 @@ hr{
   display: flex;
   align-items: flex-start;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   height: fit-content;
 
+}
+
+.beneficio-estado{
+  display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: row;
+    padding-top: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    width: 100%;
 }
 
 .card .listado{
@@ -937,7 +976,11 @@ hr{
   flex-direction: row;
   align-items:flex-start;
   width: 100%;
+  font-size: 15px;
+  margin-top: 25px;
 }
+
+
 
 .expand-btn{
   position: relative;
@@ -960,6 +1003,7 @@ hr{
   background-color: var(--body-bg);
   color: var(--main-color);
   border: 1px solid var(--main-color);
+  
 }
 
 .btn-pay.active{
@@ -967,6 +1011,25 @@ hr{
   background-color: var(--main-color);
   color: white;
   border: none;
+}
+
+.sub-cat.desktop{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  padding-left: 20px;
+}
+
+.type-beneficio{
+  width: 100%;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    justify-content: center;
+    /* padding-left: 20px; */
+    padding: 10px 20px 20px 30px;
 }
 
 
@@ -1032,6 +1095,10 @@ hr{
     .list-row{
       display: none;
       
+    }
+
+    .listCards{
+        width: 100%;
     }
 
     .item-list-first{
@@ -1124,11 +1191,19 @@ hr{
 
     .card{
       width: 90%;
-      margin: 20px
+      margin: 20px;
+      padding: 10px;
     }
 
     .footer-desktop{
       display: none;
+    }
+
+    .title-cat{
+      font-size: 20px;
+      font-weight: bold;
+      color: var(--main-color);
+      margin: 10px;
     }
 
 

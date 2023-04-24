@@ -44,7 +44,7 @@
                                     </div>
                                     <div class="field">
                                         <label for="age">Fecha de nacimiento</label>
-                                        <input class="date-input" formControlName="age"  type="date" name="age" id="age" value="" placeholder="00/00/0000">
+                                        <input class="date-input"  [min]="fechaLimite" formControlName="age"  type="date" name="age" id="age" value="" placeholder="00/00/0000">
                                     </div>
                                    
                                     <div class="field">
@@ -141,7 +141,7 @@
                                 </div>
                                 <div class="field">
                                     <label for="age">Fecha de nacimiento</label>
-                                    <input class="date-input" formControlName="age"  type="date" name="age" id="age" value="" placeholder="00/00/0000">
+                                    <input class="date-input" [max]="fechaLimite" formControlName="age"  type="date" name="age" id="age" value="" placeholder="00/00/0000">
                                 </div>
                                
                                 <div class="field">

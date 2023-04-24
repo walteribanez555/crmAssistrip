@@ -95,10 +95,13 @@ export class DatosPolizasComponent implements OnInit {
   stateBottom : 1| 2 | 3 = 1;
 
   listExtras : ExtraForm[]= [];
-  dataExtra : any[] = []
+  dataExtra : any[] = [];
 
 
-  listDescuentos : CuponAplicado[] =[] 
+
+  listDescuentos : CuponAplicado[] =[] ;
+
+  fechaLimite : string = "";
 
   
 
@@ -132,6 +135,26 @@ export class DatosPolizasComponent implements OnInit {
 
 
     this.comparar(this.datosCotizacion.initialDate,this.datosCotizacion.finalDate);
+
+
+    
+
+
+    //Las polizas limitamos a las edades de 75 años
+
+    const fecha = new Date(this.datosCotizacion.finalDate); // fecha del viaje
+    const anosARestar = 75;
+
+    const nuevaFecha = new Date(
+      fecha.getFullYear() - anosARestar,
+      fecha.getMonth(),
+      Math.min(fecha.getDate(), new Date(fecha.getFullYear() - anosARestar, fecha.getMonth() + 1, 0).getDate())
+    );
+
+
+    nuevaFecha.setDate(fecha.getDate() + 2);
+
+    this.fechaLimite = nuevaFecha.toISOString().split('T')[0];
 
 
     this.datosCotizacionMayores.forEach(element => {
@@ -579,7 +602,7 @@ export class DatosPolizasComponent implements OnInit {
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        this.router.navigate(['./polizas']);
+        this.router.navigate(['./polizas/listado-polizas']);
       } else if (result.isDenied) {
         console.log("Termino");
       }
@@ -667,7 +690,7 @@ export class DatosPolizasComponent implements OnInit {
         this.diffDays= diffInDays;
       }
   
-      this.diffDays = diffInDays;
+      this.diffDays = diffInDays +1;
    }
 
 

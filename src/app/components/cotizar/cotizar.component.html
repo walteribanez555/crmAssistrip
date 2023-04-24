@@ -189,7 +189,7 @@
         <div class="row desktop">
             <div class="column">
                 <div class="row sticky">
-                    <div class="column">
+                    <div class="column sticky">
                     
                         <h2>NUESTROS PLANES</h2>
         
@@ -229,8 +229,10 @@
                                         
                                     </div>
                                     
+                                    
                                    
                                 </div>
+                                
                                 
                                 <div *ngIf="isOld" class="list">
                                     <div *ngFor="let plan of listadoMayor" class="card">
@@ -274,7 +276,80 @@
                         </div>
                     </div>
                     <div class="column">
+                        <div class="block">
+                            <div  *ngIf="!isOld"  class="list">
+                                <ng-container *ngFor="let plan of listadoMenor;  let itemCard = index  ">
+                                    <div  class="card"  [class.bg-white]="itemCard % 2 ===1">
+                                        <span class="title-cat">
+                                            Cobertura global de ${{plan.serv?.cobertura_global }}  
+                                        </span>
+                                        <div  class="type-beneficio" *ngFor="let typeBeneficio of plan.beneficios ; let i = index ">
+                                            <span *ngIf="i>0" class="title-cat  c-white">
+                                                {{plan.serv?.cobertura_global }} 
+                                            </span>
+                                            <hr class="full-width">
+                                            <div class="sub-cat desktop" *ngFor="let beneficio of typeBeneficio.beneficios" >
 
+                                                <svg  class="green" *ngIf="beneficio.complemento" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24"><path d="m424 760 282-282-56-56-226 226-114-114-56 56 170 170Zm56 216q-83 0-156-31.5T197 859q-54-54-85.5-127T80 576q0-83 31.5-156T197 293q54-54 127-85.5T480 176q83 0 156 31.5T763 293q54 54 85.5 127T880 576q0 83-31.5 156T763 859q-54 54-127 85.5T480 976Z"/></svg>
+                                                <span  *ngIf="beneficio.cobertura ; else noCobertura ">
+                                                    ${{beneficio.cobertura}}
+                                                </span>
+    
+                                                
+                                                <ng-template #noCobertura>
+                                                    <span  *ngIf="beneficio.complemento ; else noContent ">Incluye</span>
+                                                    <ng-template #noContent>
+                                                        <svg class="red" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24"><path d="m336 776 144-144 144 144 56-56-144-144 144-144-56-56-144 144-144-144-56 56 144 144-144 144 56 56Zm144 200q-83 0-156-31.5T197 859q-54-54-85.5-127T80 576q0-83 31.5-156T197 293q54-54 127-85.5T480 176q83 0 156 31.5T763 293q54 54 85.5 127T880 576q0 83-31.5 156T763 859q-54 54-127 85.5T480 976Z"/></svg>
+                                                        <span class="red">N/A</span>
+                                                    </ng-template>
+                                                </ng-template>
+                    
+                                            </div>
+                    
+                                        </div>
+                                        
+                                        
+                                    </div>
+                                </ng-container>
+                                
+                                
+                               
+                            </div>
+                            
+                            <div *ngIf="isOld" class="list">
+                                <ng-container *ngFor="let plan of listadoMayor;  let itemCard = index  ">
+                                    <div  class="card"  [class.bg-white]="itemCard % 2 ===1">
+                                        <span class="title-cat">
+                                            Cobertura global de ${{plan.serv?.cobertura_global }}  
+                                        </span>
+                                        <div  class="type-beneficio" *ngFor="let typeBeneficio of plan.beneficios ; let i = index ">
+                                            <span *ngIf="i>0" class="title-cat  c-white">
+                                                Cobertura global de ${{plan.serv?.cobertura_global }} 
+                                            </span>
+                                            <hr class="full-width">
+                                            <div class="sub-cat desktop" *ngFor="let beneficio of typeBeneficio.beneficios" >
+                                                <span  *ngIf="beneficio.cobertura ; else noCobertura ">${{beneficio.cobertura}}</span>
+    
+                                                
+                                                <ng-template #noCobertura>
+                                                    <span  *ngIf="beneficio.complemento ; else noContent ">Incluye</span>
+                                                    <ng-template #noContent>
+                                                        <span class="red">N/A</span>
+                                                    </ng-template>
+                                                </ng-template>
+                    
+                                            </div>
+                    
+                                        </div>
+                                        
+                                        
+                                    </div>
+                                </ng-container>
+                                
+                            </div>
+
+                        </div>
+                        
                     </div>
 
                 </div>
@@ -357,10 +432,22 @@
                                 <div  *ngIf="beneficio_cat.isSubDropdownOpen">
                                         <div *ngFor="let beneficio of beneficio_cat.beneficios" class="list-beneficios">
                                             <span>{{beneficio.beneficio}}  </span>
-                                            <span  *ngIf="beneficio.complemento ; else noContent ">Viene incluido</span>
-                                            <ng-template #noContent>
-                                                <span class="red">No viene incluido</span>
-                                            </ng-template>
+                                            <div class="beneficio-estado">
+                                                <svg  class="green" *ngIf="beneficio.complemento" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24"><path d="m424 760 282-282-56-56-226 226-114-114-56 56 170 170Zm56 216q-83 0-156-31.5T197 859q-54-54-85.5-127T80 576q0-83 31.5-156T197 293q54-54 127-85.5T480 176q83 0 156 31.5T763 293q54 54 85.5 127T880 576q0 83-31.5 156T763 859q-54 54-127 85.5T480 976Z"/></svg>
+                                                <span  *ngIf="beneficio.cobertura ; else noCobertura ">
+                                                    ${{beneficio.cobertura}}
+                                                </span>
+    
+                                                
+                                                <ng-template #noCobertura>
+                                                    <span  *ngIf="beneficio.complemento ; else noContent ">Incluye</span>
+                                                    <ng-template #noContent>
+                                                        <svg class="red" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24"><path d="m336 776 144-144 144 144 56-56-144-144 144-144-56-56-144 144-144-144-56 56 144 144-144 144 56 56Zm144 200q-83 0-156-31.5T197 859q-54-54-85.5-127T80 576q0-83 31.5-156T197 293q54-54 127-85.5T480 176q83 0 156 31.5T763 293q54 54 85.5 127T880 576q0 83-31.5 156T763 859q-54 54-127 85.5T480 976Z"/></svg>
+                                                        <span class="red">N/A</span>
+                                                    </ng-template>
+                                                </ng-template>
+                                            </div>
+                                            
                                         </div>                                    
                                 </div>
     
@@ -393,13 +480,24 @@
                                 </div>
                                 <hr>
                                 <div  *ngIf="beneficio_cat.isSubDropdownOpen">
-                                        <div *ngFor="let beneficio of beneficio_cat.beneficios" class="list-beneficios">
-                                            <span>{{beneficio.beneficio}}  </span>
-                                            <span  *ngIf="beneficio.complemento ; else noContent ">Viene incluido</span>
-                                            <ng-template #noContent>
-                                                <span class="red">No viene incluido</span>
+                                    <div *ngFor="let beneficio of beneficio_cat.beneficios" class="list-beneficios">
+                                        <span>{{beneficio.beneficio}}  </span>
+                                        <div class="beneficio-estado">
+                                            <svg  class="green" *ngIf="beneficio.complemento" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24"><path d="m424 760 282-282-56-56-226 226-114-114-56 56 170 170Zm56 216q-83 0-156-31.5T197 859q-54-54-85.5-127T80 576q0-83 31.5-156T197 293q54-54 127-85.5T480 176q83 0 156 31.5T763 293q54 54 85.5 127T880 576q0 83-31.5 156T763 859q-54 54-127 85.5T480 976Z"/></svg>
+                                            <span  *ngIf="beneficio.cobertura ; else noCobertura ">
+                                                ${{beneficio.cobertura}}
+                                            </span>
+
+                                            
+                                            <ng-template #noCobertura>
+                                                <span  *ngIf="beneficio.complemento ; else noContent ">Incluye</span>
+                                                <ng-template #noContent>
+                                                    <svg class="red" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24"><path d="m336 776 144-144 144 144 56-56-144-144 144-144-56-56-144 144-144-144-56 56 144 144-144 144 56 56Zm144 200q-83 0-156-31.5T197 859q-54-54-85.5-127T80 576q0-83 31.5-156T197 293q54-54 127-85.5T480 176q83 0 156 31.5T763 293q54 54 85.5 127T880 576q0 83-31.5 156T763 859q-54 54-127 85.5T480 976Z"/></svg>
+                                                    <span class="red">N/A</span>
+                                                </ng-template>
                                             </ng-template>
-                                        </div>                                    
+                                        </div>
+                                    </div>                                     
                                 </div>
     
                             </div>

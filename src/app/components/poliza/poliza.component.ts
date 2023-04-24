@@ -9,11 +9,13 @@ import { BeneficiariosService } from 'src/app/services/beneficiarios.service';
 import { ExtrasPolizasService } from 'src/app/services/beneficiosExtras.service';
 import { ExtrasService } from 'src/app/services/extras.service';
 import { PolizasService } from 'src/app/services/polizas.service';
+import { DateOnlyPipe } from 'src/app/pipes/getDateOnly.pipe';
 
 @Component({
   selector: 'app-poliza',
   templateUrl: './poliza.component.html',
-  styleUrls: ['./poliza.component.css']
+  styleUrls: ['./poliza.component.css'],
+  providers: [DateOnlyPipe] 
 })
 export class PolizaComponent implements OnInit {
     id: number = 0;
