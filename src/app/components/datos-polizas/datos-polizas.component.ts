@@ -352,6 +352,9 @@ export class DatosPolizasComponent implements OnInit {
       imageAlt: 'Custom image',
     })
 
+
+    
+    
       
 
     this.clientesService
@@ -382,6 +385,8 @@ export class DatosPolizasComponent implements OnInit {
         return this.clientesService.postCliente(nuevoCliente).pipe(
           switchMap((data) => {
             cliente_id = data.id;
+
+            this.dataService.titular = data;
             return this.ventasService.postVenta(
               cliente_id,
               this.listPolizas.length,
@@ -555,8 +560,11 @@ export class DatosPolizasComponent implements OnInit {
 
 
     Swal.close();
+    this.dataService.haveData = true;
+
 
     this.successMessage('Se ha registrado la venta correctamente');
+
 
 
   });

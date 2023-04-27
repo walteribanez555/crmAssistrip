@@ -22,6 +22,7 @@ export class PolizaComponent implements OnInit {
     listBeneficiarios : Beneficiario[] = [];
     listExtras : BeneficioExtra[] = [];
     poliza : Poliza | null = null;
+    nombre : string = "Mireya Alejandra Barriga Lopez";
 
 
   constructor(

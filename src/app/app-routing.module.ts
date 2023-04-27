@@ -26,7 +26,7 @@ const routes : Routes = [
   
   {
     path: '**',
-    redirectTo : 'main',
+    redirectTo : 'landing-page',
     pathMatch: 'full',
   },
   {
