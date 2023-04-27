@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-
+import { environment } from 'src/environments/environment';
 import { Catalogo } from '../models/Data/Catalogo';
 import { BeneficioExtra } from '../models/Data/BeneficioExtra.model';
 
@@ -10,7 +10,9 @@ import { BeneficioExtra } from '../models/Data/BeneficioExtra.model';
 })
 export class ExtrasPolizasService {
   
-  private apiUrl  = '/api/polizasExtras';
+  // private apiUrl  = '/api/polizasExtras';
+
+  private apiUrl = environment.apiUrl + '/polizasExtras';
 
   constructor( private http : HttpClient) { 
 

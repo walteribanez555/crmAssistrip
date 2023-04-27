@@ -9,7 +9,8 @@ import { Cupon } from '../models/Data/Cupon';
 })
 export class CuponesService {
 
-  private apiUrl = '/api/cupones'
+  // private apiUrl = '/api/cupones'
+  private apiUrl = environment.apiUrl + '/cupones';
 
   constructor(private http : HttpClient) { }
 

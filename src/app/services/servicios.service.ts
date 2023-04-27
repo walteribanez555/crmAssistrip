@@ -8,7 +8,8 @@ import { Servicio } from '../models/Data/Servicio';
   providedIn: 'root'
 })
 export class ServiciosService {
-  private apiUrl = '/api/servicios';
+//   private apiUrl = '/api/servicios';
+   private apiUrl = environment.apiUrl + '/servicios';
 
   constructor(private http: HttpClient) { }
 

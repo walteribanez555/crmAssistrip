@@ -10,7 +10,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 export class PolizasService {
 
 
-  private apiUrl = '/api/polizas';
+  // private apiUrl = '/api/polizas';
+  private apiUrl = environment.apiUrl + '/polizas';
 
   constructor(private http : HttpClient) { }
 

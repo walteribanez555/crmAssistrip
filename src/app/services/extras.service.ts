@@ -9,7 +9,8 @@ import { Extra } from '../models/Data/Extra';
 })
 export class ExtrasService {
 
-  private apiUrl = '/api/extras';
+  // private apiUrl = '/api/extras';
+  private apiUrl = environment.apiUrl + '/extras';
 
 
   constructor(private http : HttpClient) { }

@@ -2,6 +2,7 @@ import { HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http'
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Cliente, ClientePost, ClienteResp } from '../models/Data/Cliente';
+import { environment } from 'src/environments/environment';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
@@ -11,7 +12,8 @@ import { throwError } from 'rxjs';
 })
 export class ClientesService {
 
-  private apiUrl : string = '/api/clientes';
+  // private apiUrl : string = '/api/clientes';
+  private apiUrl = environment.apiUrl + '/clientes';
 
   constructor(private http: HttpClient) {
     
