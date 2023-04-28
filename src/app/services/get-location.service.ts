@@ -11,8 +11,6 @@ export class GetLocationService {
 
   constructor(private http : HttpClient) {
 
-    
-
    }
 
 
