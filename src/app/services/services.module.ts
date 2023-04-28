@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BeneficiosService } from './beneficios.service';
-import { CatalogosService } from './catalogos.service';
-import { ClientesService } from './clientes.service';
-import { CuponesService } from './cupones.service';
-import { ExtrasService } from './extras.service';
-import { PlanesService } from './planes.service';
-import { PolizasService } from './polizas.service';
-import { PreciosService } from './precios.service';
-import { ServiciosService } from './servicios.service';
+import { BeneficiosService } from './requests/beneficios.service';
+import { CatalogosService } from './requests/catalogos.service';
+import { ClientesService } from './requests/clientes.service';
+import { CuponesService } from './requests/cupones.service';
+import { ExtrasService } from './requests/extras.service';
+import { PlanesService } from './requests/planes.service';
+import { PolizasService } from './requests/polizas.service';
+import { PreciosService } from './requests/precios.service';
+import { ServiciosService } from './requests/servicios.service';
 import { GetLocationService } from './get-location.service';
-import { VentasService } from './ventas.service';
-import { ExtrasPolizasService } from './beneficiosExtras.service';
-import { BeneficiariosService } from './beneficiarios.service';
+import { VentasService } from './requests/ventas.service';
+import { ExtrasPolizasService } from './requests/beneficiosExtras.service';
+import { BeneficiariosService } from './requests/beneficiarios.service';
 
 
 

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { FormCotizarModel } from '../models/Pages/formCotizar.model';
-import { Servicio } from '../models/Data/Servicio';
-import { cotizacionDataForm } from '../models/Pages/cotizacionDataForm.model';
-import { ExtraForm } from '../models/Pages/extra.model';
-import { Cliente, ClienteResp } from '../models/Data/Cliente';
+import { FormCotizarModel } from '../../models/Pages/formCotizar.model';
+import { Servicio } from '../../models/Data/Servicio';
+import { cotizacionDataForm } from '../../models/Pages/cotizacionDataForm.model';
+import { ExtraForm } from '../../models/Pages/extra.model';
+import { Cliente, ClienteResp } from '../../models/Data/Cliente';
 
 @Injectable({
   providedIn: 'root'

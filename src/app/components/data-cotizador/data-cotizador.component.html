@@ -6,15 +6,12 @@
                 <select class="origenSelect" name="origen" id="origen" [(ngModel)]="formData.origen"  >
                     <option value="Bolivia">Bolivia</option>
                     <option value="Venezuela">Venezuela</option>
-
                 </select>
-                
             </div>
         </div>
         
         <div class="wrapper">
             <div class="title">
-                
                 <h2>Destino(s)</h2>
             </div>
             <div class="content">
@@ -38,53 +35,34 @@
                                 <option value="Oceania">Oceania</option>
                                 <option value="Africa">Africa</option>
                                 <option value="Antartida">Antartida</option>
-            
                                 <option  *ngFor="let pais of paises"   value={{pais.etiqueta}} > {{pais.etiqueta}}  </option>
-                                
-                                
                             </select>
-                            
                         </div>
                 </div>
-                
             </div>
-        
-            
         </div>
         <h2>Fechas del viaje</h2>
         <div class="fields travel">
             <div class="input-field">
                 <label  for="fechaSalida" >Fecha de salida</label>
                 <input type="date" [min]="minDate" [(ngModel)]="formData.initialDate" name="initialDate" placeholder="Ingresar la fecha de salida" id="fechaSalida"  (change)="comparar()">
-    
             </div>
-    
             <div class="input-field">
                 <label for="fechaLlegada">Fecha de llegada</label>
                 <input type="date" [min]="minDate" [(ngModel)]="formData.finalDate" name="finalDate" placeholder="Ingresar la fecha de llegada" id="fechaLlegada"  (change)="comparar()">
             </div>
-            
-    
-    
             <div *ngIf="diffDays>=0">
                 <span>La cantidad de dias es: {{diffDays}} </span>
             </div>
-
-            
-    
-            
-              
-            
-    
-            
         </div>
 
         <div class="wrapper">
-            <h2      >Pasajeros: {{listCotizaciones.length}}   </h2>
+            <h2 >Pasajeros: {{listCotizaciones.length}}   </h2>
             <div *ngIf="!seeAges; else elseBlock" (click)="seeDetails()"  class="btn-seeMore">
                 <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 96 960 960" width="20"><path d="M444 816V612H240v-72h204V336h72v204h204v72H516v204h-72Z"/></svg>
                 <span   for="">Ver detalles  </span>
             </div>
+
             <ng-template #elseBlock>
                 <div class="btn-seeMore" (click)="seeDetails()" >
                     <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 96 960 960" width="20"><path d="M240 612v-72h480v72H240Z"/></svg>
@@ -99,27 +77,22 @@
                 </li>
             </ul>
 
-
             <button  *ngIf="seeAges" type="button" class="btn_add_cliente"  (click)="addItem()">
                 <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 96 960 960" width="20"><path d="M237 771q54-38 115.5-56.5T480 696q66 0 127.5 18.5T723 771q35-41 52-91t17-104q0-129.675-91.23-220.838Q609.541 264 479.77 264 350 264 259 355.162 168 446.325 168 576q0 54 17 104t52 91Zm243-123q-60 0-102-42t-42-102q0-60 42-102t102-42q60 0 102 42t42 102q0 60-42 102t-102 42Zm.276 312Q401 960 331 930q-70-30-122.5-82.5T126 725.042q-30-69.959-30-149.5Q96 496 126 426.5t82.5-122Q261 252 330.958 222q69.959-30 149.5-30Q560 192 629.5 222t122 82.5Q804 357 834 426.724q30 69.725 30 149Q864 655 834 725q-30 70-82.5 122.5T629.276 930q-69.725 30-149 30ZM480 888q52 0 100-16.5t90-48.5q-43-27-91-41t-99-14q-51 0-99.5 13.5T290 823q42 32 90 48.5T480 888Zm0-312q30 0 51-21t21-51q0-30-21-51t-51-21q-30 0-51 21t-21 51q0 30 21 51t51 21Zm0-72Zm0 319Z"/></svg>
                 Agregar pasajero
-            
             </button>
 
-            
         </div>
 
         <div class="wrapper">
             <div class="input-field">
                 <h2>Email de contacto</h2>
                 <input type="text" placeholder="email@gmail.com" [(ngModel)]="formData.email"  name="email" >
-
             </div>
         </div>
 
         <div class="wrapper">
             <div class="input-field">
-
                 <h2>Telefono de contacto (opcional)</h2>
                 <input type="text" placeholder="+591 77777777" [(ngModel)]="formData.telefono" name="telefono" >
             </div>
@@ -131,11 +104,5 @@
                 <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24"><path d="m480 896-57-56 224-224H160v-80h487L423 312l57-56 320 320-320 320Z"/></svg>
             </button>
         </div>
-
-        
-
-
     </form>
-    
-    
 </div>

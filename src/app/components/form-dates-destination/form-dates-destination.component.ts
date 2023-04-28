@@ -3,7 +3,7 @@ import { FormGroup,FormControl } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { Catalogo } from 'src/app/models/Data/Catalogo';
 import { datesDestiny } from 'src/app/models/Pages/datesDestiny.model';
-import { CatalogosService } from 'src/app/services/catalogos.service';
+import { CatalogosService } from 'src/app/services/requests/catalogos.service';
 import Swal from 'sweetalert2';
 
 

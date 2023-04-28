@@ -2,20 +2,18 @@
     width: 10px;
   }
 
-  ::-webkit-scrollbar-track {
-    background-color: #f1f1f1;
-  }
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
 
-  ::-webkit-scrollbar-thumb {
-    background-color: #888;
-    border-radius: 5px;
-  }
+::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 5px;
+}
 
-  ::-webkit-scrollbar-thumb:hover {
-    background-color: #555;
-  }
-
-
+::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
 
 .container { 
     width: 100%;
@@ -36,33 +34,24 @@
     transition: all 0.5s ease;
 }
 
-
-
 .cotizacionHeader{
- 
     width: 100%;
     background-color: white;
     position: fixed;
     z-index: 10;
     display: flex;
-    
     flex-direction: column;
     padding-left: 20px;
     padding-top: 5px;
-
     top: 10vh;
     transition: all 0.5s ease;
-    
-    
 }
 
 .header-title{
-    
     font-size: 15px;
     font-weight: bold;
     color: var(--main-color);
     margin-bottom: 10px;
-    
 }
 
 .list-row{
@@ -74,7 +63,6 @@
     align-items: center;
 }
 
-
 .list-row form{
   display: flex;
     flex-direction: row;
@@ -82,10 +70,6 @@
     width: 100%;
     align-items: center;
 }
-
-
-
-
 
 .list-item{
     display: flex;
@@ -131,7 +115,6 @@
   background-color: var(--main-color);
   display: flex;
   justify-content: center;
-  
   color: white;
   fill: white;
   width: 100%;
@@ -162,15 +145,11 @@ button span {
   padding-left: 5px;
 }
 
-
 .origen,
 .destino
 {
     padding: 10px;
-
 }
-
-
 
 h2{
     font-size: 15px;
@@ -187,13 +166,12 @@ h2{
   fill: var(--main-color);
 }
 
-
 .origen .select-space svg{
   position: relative;
   left: 25px;
   top: 2px;
-
 }
+
 .origen .select-space select{
     margin-top: 5px;
     width: 100%;
@@ -203,42 +181,39 @@ h2{
     color: var(--main-color);
     font-size: 10px;
     font-weight: bold;
-
-    
     background-repeat: no-repeat;
     background-position: left center;
     padding-left: 30px;
-  
-
 }
 
 .origen .select-space select option{
   font-size: 15px;
 }
 
-
-.container-data{
-    
+.container-data{ 
     width: 100%;
     height: 100%;
-    
 }
 
 .wrapper{
     width: 100%;
   }
+
   .wrapper :where(.title, li, li i, .details){
     display: flex;
     align-items: center;
   }
+
   .title img{
     max-width: 21px;
   }
+
   .title h2{
     font-size: 21px;
     font-weight: 600;
     margin-left: 8px;
   }
+
   .wrapper .content{
     display: flex;
     flex-wrap: wrap;
@@ -249,15 +224,18 @@ h2{
     gap: 2px;
 
   }
+
   .content p{
     font-size: 15px;
   }
+
   .content ul{
     display: flex;
     flex-wrap: wrap;
     border-radius: 5px;
     gap: 2px;
   }
+
   .content ul  li{
     color: var(--main-color);
     list-style: none;
@@ -268,6 +246,7 @@ h2{
     padding: 3px 5px 3px 6px;
     border: 1px solid var(--main-color);
   }
+
   .content ul li svg{
     height: 20px;
     width: 20px;
@@ -276,9 +255,9 @@ h2{
     font-size: 12px;
     cursor: pointer;
     border-radius: 50%;
-    
     justify-content: center;
   }
+
   .content ul input{
     flex: 1;
     padding: 3px;
@@ -288,7 +267,6 @@ h2{
   }
 
   .options { 
-    
     display: flex;
     height: fit-content;
     flex-direction: row;
@@ -298,14 +276,12 @@ h2{
     border: 1px solid var(--main-color);
     border-radius: 5px;
     transition: 0.3 all ease-in-out;
-    
-
   }
 
   .options svg{ 
     fill: white;
-
   }
+
   .options .listado{
     padding-left: 5px;
     background-color: var(--main-color);
@@ -318,25 +294,16 @@ h2{
     appearance:none;
   }
 
- 
-
-  
-
-
   .overflow{
     overflow-y: auto;
     height: 10vh;
   }
 
-  
-  
-  
   option { 
     color: black;
     background-color: white;
   }
   
-
 .flex-row{
     display: flex;
     flex-direction: row;
@@ -348,14 +315,12 @@ h2{
 .flex-column{
     display: flex;
     flex-direction: column;
-    
 }
 
 .title{
     font-size: 15px;
     font-weight: bold;
     color: var(--text-color);
-    
 }
 
 .cotizaciones-list{
@@ -376,47 +341,41 @@ h2{
   justify-content: center;
   gap: 16px;
 }
-.cardContainer { 
-        
+
+.cardContainer {       
   display: flex;
-  
   flex-wrap: wrap;
   justify-content: center;
   gap: 16px;
   }
+
 .extra {
   display: flex;
   position: relative;
   align-items: center;
   justify-content: center;
-
   width: 150px;
-  
   border-radius: 4px;
   height : 150px;
   margin: 12px;
   text-decoration: none;
-  
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(38,38,38,0.2);
-
 }
+
 .extra.gray {
   opacity: 0.5;
 }
+
 .check-icon {
   position: absolute;
-  
-  
   width: 100px;
   height: 100px;
   opacity: 1;
   transition: opacity 0.3s ease;
   margin-top: -150px;
-    margin-left: 25px;
-  
-
-  }
+  margin-left: 25px;
+}
 
 .dropdown-list{
   background-color: #EDE8F3;
@@ -428,13 +387,7 @@ h2{
   border: none;
   position: absolute;
   width: 100px;
-
 }
-
-
-
-
-
 
 .dropdown-list  .btn_add_cliente{
   background-color: var(--main-color);
@@ -443,15 +396,12 @@ h2{
   width: fit-content;
   border-radius: 5px;
   margin: 2px;
-  
-
 }
 
 .btn-seeMore{
   display: flex;
   margin: 5px;
   border-radius: 10px ;
-  
   justify-content: center;
   align-items: center;
   flex-direction: row;
@@ -469,28 +419,18 @@ h2{
   cursor: pointer;
 }
 
-
-
-
-
-
-
-.cotizacionMain{  
-   
-    width: 100%;
-    background: var(--body-bg);
-    height: fit-content;
-    
-    transition: all 0.5s ease;
-    overflow-y: auto;
-    position: fixed;
-   
-    height: 75vh;
-    
+.cotizacionMain {
+  width: 100%;
+  background: var(--body-bg);
+  height: fit-content;
+  transition: all 0.5s ease;
+  overflow-y: auto;
+  position: fixed;
+  height: 75vh;
 }
 
 .footer-desktop{
-     display: flex;
+    display: flex;
     position: fixed;
     bottom: 0;
     height: 15vh;
@@ -502,23 +442,30 @@ h2{
     box-shadow: 0 0 10px 0 rgba(0,0,0,0.1);
 }
 
-
-.cotizacionMain .row{
+.cotizacionMain .row {
   display: flex;
   width: fit-content;
   height: 100%;
 }
 
-.row.sticky{
-  position: sticky;
-  top: 17vh;
-  z-index: 2;
+.row.top{
+  margin-top: 17vh;
   background-color: var(--body-bg);
   padding-top: 40px;
+  height: 50%;
+
+}
+
+.row.top.sticky{
+  top: 16vh;
+  z-index: 11;
+  position: sticky;
+
 }
 
 .row.pt-20 {
-  padding-top: 20vh;
+  padding-top: 120px;
+  z-index: 9;
 }
 
 .column.sticky{
@@ -540,15 +487,11 @@ h2{
 
 }
 
-
-
 .sub-cat{
- 
   font-size: 15px;
   font-weight: bold;
   color: var(--main-color);
   margin: 10px 30px 10px 0px;
-  /* border-bottom: 1px solid var(--text-color); */
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -570,14 +513,12 @@ h2{
   padding-left: 20px;
 }
 
-
 .sub-cat hr{
   width: 100%;
   height: 1px;
   background-color: var(--main-color);
   margin: 10px 0px 10px 0px;
 }
-
 
 .row.center{
   padding-top: 20px;
@@ -615,15 +556,14 @@ h2{
   overflow-x: auto;
   height: fit-content;
 } 
+
 .block{
   padding: 0px;
 }
 
-
 .block.mobile{
   display: none;
 }
-
 
 .card {
   display: flex;
@@ -645,10 +585,6 @@ h2{
   border-color: var(--body-bg);
 }
 
-
-
-
-
 .card h2 {
   font-size: 15px; /* Add font size to card title */
   font-weight: bold;
@@ -669,12 +605,9 @@ h2{
   color: #ECE6F1;
 }
 
-
 .card.bg-white .title-cat.c-white{
   color: var(--body-bg);
 }
-
-
 
 .card svg.red{
   fill: red;
@@ -690,9 +623,7 @@ h2{
 
 }
 
-
 .card .btn-select{
-
   background-color: var(--main-color);
   display: flex;
   flex-direction: row;
@@ -722,38 +653,18 @@ h2{
   scale: 1.05;
 }
 
-
-
-
-
-/* main img{
-    object-fit: cover;
-    height: 90%;
-    width: 90%;
-} */
-
-
 .cotizacionBottom{
     display: none;
-    
     background-color: var(--body-bg);
     overflow: hidden;
-    
     width: 100%;
-   
     position: fixed;
     bottom: 0;
     align-items: center ;
     flex-direction: column;
-    
-   
-    
     box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
     color: wheat;
     padding: 20px;
-
-   
-    
 }
 
 .expandir{
@@ -766,9 +677,7 @@ h2{
 
 }
 
-
 .expandir .btn_expandir{
-    
     display: flex;
     justify-content: center;
     width: 100%;
@@ -780,22 +689,17 @@ h2{
     color: var(--main-color);
     font-size: 15px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-
-    
 }
 
 .cotizacionBottom .BottomFooter{
     position: absolute;
     bottom: 10px;
-    
-    
     margin-right: 15px;
     margin-bottom: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
-    
     z-index: 5;
 }
 
@@ -924,6 +828,10 @@ hr{
   width: fit-content;
 }
 
+.listCards.sticky{
+  padding-top: 0px;
+}
+
 .alert { 
   display: flex;
   padding: 10px;
@@ -933,6 +841,15 @@ hr{
   color:  var(--main-color);
   
 }
+
+.btn-age.sticky {
+  display: none;
+  }
+  
+  .alert.sticky {
+  display: none;
+  }
+
 
 .listadoBeneficio{
   display: flex;

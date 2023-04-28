@@ -39,7 +39,7 @@ import { PolizaComponent } from './components/poliza/poliza.component';
     PolizasDetallesComponent,
     DateOnlyPipe,
     ListadoBeneficiariosComponent,
-    PolizaComponent
+    PolizaComponent,
 
   ],
   imports: [

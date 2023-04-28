@@ -1,7 +1,7 @@
 
 import { Component,OnInit } from '@angular/core';
 import { Servicio } from 'src/app/models/Data/Servicio';
-import { ServiciosService } from 'src/app/services/servicios.service';
+import { ServiciosService } from 'src/app/services/requests/servicios.service';
 
 @Component({
   selector: 'app-listado-planes',

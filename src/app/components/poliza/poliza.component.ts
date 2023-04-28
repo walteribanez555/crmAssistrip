@@ -5,10 +5,10 @@ import { Beneficiario } from 'src/app/models/Data/Beneficiario';
 import { BeneficioExtra } from 'src/app/models/Data/BeneficioExtra.model';
 import { Extra } from 'src/app/models/Data/Extra';
 import { Poliza } from 'src/app/models/Data/Poliza';
-import { BeneficiariosService } from 'src/app/services/beneficiarios.service';
-import { ExtrasPolizasService } from 'src/app/services/beneficiosExtras.service';
-import { ExtrasService } from 'src/app/services/extras.service';
-import { PolizasService } from 'src/app/services/polizas.service';
+import { BeneficiariosService } from 'src/app/services/requests/beneficiarios.service';
+import { ExtrasPolizasService } from 'src/app/services/requests/beneficiosExtras.service';
+import { ExtrasService } from 'src/app/services/requests/extras.service';
+import { PolizasService } from 'src/app/services/requests/polizas.service';
 import { DateOnlyPipe } from 'src/app/pipes/getDateOnly.pipe';
 
 @Component({

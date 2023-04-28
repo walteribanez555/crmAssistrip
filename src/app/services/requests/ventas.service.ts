@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Venta } from '../models/Data/Venta.model';
+import { Venta } from '../../models/Data/Venta.model';
 
 @Injectable({
   providedIn: 'root'
@@ -10,10 +10,10 @@ import { Venta } from '../models/Data/Venta.model';
 export class VentasService {
 
 
-    // private apiUrl  = '/api/ventas';
+    private apiUrl  = '/api/ventas';
 
 
-    private apiUrl = environment.apiUrl + '/ventas';
+    // private apiUrl = environment.apiUrl + '/ventas';
 
 
   constructor(private http : HttpClient) {

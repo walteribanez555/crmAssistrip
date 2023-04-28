@@ -1,8 +1,8 @@
 import { Component, OnInit, ElementRef, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { forkJoin } from 'rxjs';
 import { Poliza } from 'src/app/models/Data/Poliza';
-import { cotizacionIntefaceService } from 'src/app/services/cotizacioninterface.service';
-import { PolizasService } from 'src/app/services/polizas.service';
+import { cotizacionIntefaceService } from 'src/app/services/interfaces/cotizacioninterface.service';
+import { PolizasService } from 'src/app/services/requests/polizas.service';
 import { Router } from '@angular/router';
 import { jsPDF } from "jspdf";
 import html2canvas from 'html2canvas';
@@ -122,6 +122,11 @@ export class PolizasDetallesComponent implements OnInit {
     console.log(this.nombre);
 
     }
+    else{
+      this.nombre= "Walter Ronny Ibañez Saucedo";
+    }
+
+  
     return
   }
 

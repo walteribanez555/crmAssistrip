@@ -9,7 +9,7 @@
         </h1>
         
         <div  class="list-row">
-            <form (ngSubmit)="reloadData()">
+            <form (ngSubmit)="reloadView()">
 
                 <div class="list-item">
                 
@@ -73,13 +73,13 @@
                 <div class="list-item">
                     <div class="item-space">
                         <h2>Salida</h2>
-                        <input type="date" [(ngModel)]="formData.initialDate" name="initialDate" placeholder="Ingresar la fecha de salida" id="fechaSalida"  (change)="comparar()">
+                        <input type="date" [(ngModel)]="formData.initialDate" name="initialDate" placeholder="Ingresar la fecha de salida" id="fechaSalida"  (change)="onChangeInputDates()">
 
                         <span>{{diffDays}} dias de diferencia</span>
                     </div>
                     <div class="item-space">
                         <h2>Retorno</h2>
-                        <input type="date" [(ngModel)]="formData.finalDate" name="finalDate" placeholder="Ingresar la fecha de llegada" id="fechaLlegada"  (change)="comparar()">
+                        <input type="date" [(ngModel)]="formData.finalDate" name="finalDate" placeholder="Ingresar la fecha de llegada" id="fechaLlegada"  (change)="onChangeInputDates()">
     
                     </div>
                     <div class="item-space">
@@ -186,24 +186,24 @@
      </div>
 
      <div class="cotizacionMain">
-        <div class="row desktop">
+        <div class="row desktop" >
             <div class="column">
-                <div class="row sticky">
-                    <div class="column sticky">
+                <div class="row top" #rowTop [class.sticky]="isSticky">
+                    <div class="column sticky" >
                     
-                        <h2>NUESTROS PLANES</h2>
+                        <h2 *ngIf="!isSticky" >NUESTROS PLANES</h2>
         
                         
                     </div>
         
                     
                     
-                    <div class="listCards">
-                        <div  *ngIf="minPlanes>1" class="alert">
+                    <div class="listCards"  [class.sticky]="isSticky">
+                        <div  *ngIf="minPlanes>1 && !isSticky" class="alert">
                             <span>Debe elegir un plan para los menores de 75 años y un plan para los mayores de 75 años</span>
                         </div>
         
-                        <div class="btn-age">
+                        <div *ngIf="!isSticky" class="btn-age ">
                             <button type="button" [class.active]="!isOld"  (click)="toggleListPlanBtn(false)" >
                                 Menores de 75
                             </button>
@@ -213,7 +213,7 @@
                             
         
                         </div>
-                        <hr>
+                        <hr *ngIf="!isSticky" >
                         <div class="container-cards">
                             <div class="block">
                                 <div  *ngIf="!isOld"  class="list">
@@ -258,7 +258,8 @@
                       
                     </div>
                 </div>
-                <div class="row pt-20">
+                <!-- sticky -->
+                <div class="row " [class.pt-20]="isSticky">
 
                     <div class="column sticky">
                         <div  class="type-beneficio" *ngFor="let typeBeneficio of listBeneficiosCat ">
@@ -353,6 +354,8 @@
                     </div>
 
                 </div>
+
+                <!-- pt-20 -->
 
                 <div class="listExtras">
                                 
@@ -532,35 +535,9 @@
 
 
      <div class="cotizacionBottom "  [style.height.px]="itemHeight" >
-        <!-- <div class="expandir"  *ngIf="stateBottom!=3" 
-        (touchstart)="onTouchStart($event)"
-        (touchmove)="onTouchMove($event)"
-        (touchend)="onTouchEnd($event)"
-        (click)="expand()"
         
-        >
-         <button class="btn_expandir">
-             <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24"><path d="M280 976q-33 0-56.5-23.5T200 896q0-33 23.5-56.5T280 816q33 0 56.5 23.5T360 896q0 33-23.5 56.5T280 976Zm400 0q-33 0-56.5-23.5T600 896q0-33 23.5-56.5T680 816q33 0 56.5 23.5T760 896q0 33-23.5 56.5T680 976ZM246 336l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692 574q-11 20-29.5 31T622 616H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z"/></svg>
-             <p  > <span></span>  Ver mi carrito</p> 
-             <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24"><path d="M480 711 240 471l56-56 184 184 184-184 56 56-240 240Z"/></svg>
-         </button>
-         
-        </div> -->
       
-        <div class="containBottom"  *ngIf="!minHeightReached"  >
-        
-         <!-- Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quam vero illo molestias nam debitis in, ipsam voluptate perspiciatis provident fuga voluptatibus harum blanditiis libero eos fugit aliquid id dignissimos veniam.
-         Nemo, vitae rerum distinctio tempore ea voluptatum doloremque ratione ab. Non deserunt vitae quis autem recusandae nemo error dolores itaque, eaque iusto ipsa tempora, officia libero. Quas fugiat neque nemo!
-         Temporibus quisquam molestias, cumque minus repellat hic soluta quam cupiditate voluptatibus tempore laudantium perspiciatis dolor provident sapiente nulla consectetur, tenetur eligendi saepe omnis reiciendis eaque nesciunt! Corporis unde accusantium sit?
-         Repellat porro placeat est suscipit quisquam dolore ipsam, quasi sequi, corrupti, asperiores in a. Provident reiciendis animi distinctio? Corrupti ipsum maxime officiis culpa corporis esse nulla eos necessitatibus perspiciatis nobis.
-         Culpa, illo. Sapiente, possimus? Dolor laborum neque quo quam temporibus voluptatum impedit voluptas numquam non fugit soluta nemo corrupti molestias excepturi similique architecto id doloribus deleniti, consequatur doloremque consectetur? Impedit!
-         Consequatur natus temporibus ea, omnis provident enim voluptatibus, atque similique earum, totam error. Fugit delectus expedita ipsum, voluptatibus suscipit amet, harum possimus quidem minima adipisci ducimus magni libero beatae natus?
-         Sequi, labore nemo, alias iste tempora totam sunt, corrupti vero ex iusto mollitia laudantium. Laborum exercitationem tempora repellat, consequatur corrupti doloribus quas consectetur dolor totam laudantium laboriosam, suscipit sed esse?
-         Tempore, placeat possimus? Adipisci delectus corporis incidunt vitae veritatis nam molestiae suscipit error ad facilis quia est necessitatibus alias tenetur quam, laborum minima mollitia deleniti provident consequatur! Illum, incidunt maxime.
-         Modi odit fuga vitae sequi provident, culpa eos excepturi omnis est enim tempore amet quia, unde nesciunt at ullam voluptatibus consequuntur dolor distinctio ducimus. Veritatis assumenda ipsum reprehenderit vel alias.
-         Dolor, esse illo est commodi qui veritatis optio saepe labore magni, iste soluta corrupti impedit earum voluptates exercitationem modi quis natus ducimus a? Quis nulla ipsa odit magnam! Totam, porre.` -->
-        </div>
-
+       
 
         <div class="contain-pagar">
             <button   (disable)="!btn_pagar" [class.active]="btn_pagar"  (click)="siguiente()">

@@ -3,23 +3,23 @@ import { Router } from '@angular/router';
 import { Servicio } from 'src/app/models/Data/Servicio';
 import { cotizacionDataForm } from 'src/app/models/Pages/cotizacionDataForm.model';
 import { FormCotizarModel } from 'src/app/models/Pages/formCotizar.model';
-import { cotizacionIntefaceService } from 'src/app/services/cotizacioninterface.service';
-import { PreciosService } from 'src/app/services/precios.service';
+import { cotizacionIntefaceService } from 'src/app/services/interfaces/cotizacioninterface.service';
+import { PreciosService } from 'src/app/services/requests/precios.service';
 import { FormGroup,FormControl, Validators } from '@angular/forms';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { Precio } from 'src/app/models/Data/Precio';
-import { CuponesService } from 'src/app/services/cupones.service';
+import { CuponesService } from 'src/app/services/requests/cupones.service';
 import { Cupon, CuponAplicado } from 'src/app/models/Data/Cupon';
 import { forkJoin, map, switchMap } from 'rxjs';
 import { ExtraForm } from 'src/app/models/Pages/extra.model';
 import Swal from 'sweetalert2';
-import { ClientesService } from 'src/app/services/clientes.service';
-import { VentasService } from 'src/app/services/ventas.service';
+import { ClientesService } from 'src/app/services/requests/clientes.service';
+import { VentasService } from 'src/app/services/requests/ventas.service';
 import { ClientePost } from 'src/app/models/Data/Cliente';
-import { PolizasService } from 'src/app/services/polizas.service';
+import { PolizasService } from 'src/app/services/requests/polizas.service';
 import { Beneficiario } from 'src/app/models/Data/Beneficiario';
-import { BeneficiariosService } from 'src/app/services/beneficiarios.service';
-import { ExtrasPolizasService } from 'src/app/services/beneficiosExtras.service';
+import { BeneficiariosService } from 'src/app/services/requests/beneficiarios.service';
+import { ExtrasPolizasService } from 'src/app/services/requests/beneficiosExtras.service';
 
 
 

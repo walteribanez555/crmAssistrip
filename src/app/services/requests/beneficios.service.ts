@@ -2,15 +2,15 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Beneficio } from '../models/Data/Beneficio';
+import { Beneficio } from '../../models/Data/Beneficio';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BeneficiosService {
 
-  // private apiUrl = '/api/beneficios';
-  private apiUrl = environment.apiUrl + '/beneficios';
+  private apiUrl = '/api/beneficios';
+  // private apiUrl = environment.apiUrl + '/beneficios';
 
   constructor(private http : HttpClient) { }
 

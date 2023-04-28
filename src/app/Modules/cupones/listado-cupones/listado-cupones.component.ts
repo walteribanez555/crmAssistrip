@@ -1,7 +1,7 @@
 
 import { Cupon } from 'src/app/models/Data/Cupon';
 import { Component, HostListener, ElementRef,OnInit } from '@angular/core';
-import { CuponesService } from 'src/app/services/cupones.service';
+import { CuponesService } from 'src/app/services/requests/cupones.service';
 
 @Component({
   selector: 'app-listado-cupones',

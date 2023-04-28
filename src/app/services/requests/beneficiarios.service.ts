@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Beneficiario, BeneficiarioResp } from '../models/Data/Beneficiario';
+import { Beneficiario, BeneficiarioResp } from '../../models/Data/Beneficiario';
 import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
@@ -13,8 +13,8 @@ export class BeneficiariosService {
 
   ) { }
 
-  // private apiUrl  = '/api/beneficiarios';
-  private apiUrl = environment.apiUrl + '/beneficiarios';
+  private apiUrl  = '/api/beneficiarios';
+  // private apiUrl = environment.apiUrl + '/beneficiarios';
 
   getBeneficiario(): Observable<Beneficiario[]>{
 

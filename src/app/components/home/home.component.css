@@ -1,6 +1,5 @@
 
 .grid-container {
-  /* background-image: linear-gradient(to bottom, rgba(255,255,255,0.5), rgba(242,242,242,0.5)), url(../../../assets/images/2.jpg); */
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
@@ -12,6 +11,7 @@
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 0px;
   scroll-behavior: smooth;
+  font-style: 'Lato',san-serif;
 }
 
 .container-about-us{
@@ -70,8 +70,6 @@
 
 }
 
-
-
 .cotizar_btn { 
   display: flex;
   
@@ -95,10 +93,10 @@
   width: fit-content;
   border-radius: 8px;
 }
+
 .cotizar_btn:hover{ 
   scale: 1.05;
  }
-
 
  .container-about{
   display: flex;
@@ -108,16 +106,6 @@
 
  }
 
-
-
-
-
-
-  .grid-container .grid-item-1 {
-   
-    
-
-  }
   .grid-container .grid-item-2 {
     width: 100%;
     padding-right: 0px;
@@ -125,12 +113,12 @@
     
     
   }
+
   .grid-container .grid-item-3{
     width: 100%;
     padding-left: 0px;
     
   }
-
 
   .parallax-container {
     background-image: none;
@@ -145,7 +133,6 @@
   .parallax-image {
     width: 100%;
     height: 100%;
-   
   }
 
   .parallax-image img{
@@ -175,8 +162,6 @@
     background: rgba(0, 0, 0, 0.4);
   }
   
-  
-
 .descriptionContainer{
   background-color: var(--main-color);  
   display: flex;
@@ -233,6 +218,7 @@
 
   border-radius: 12px;
 }
+
 .list-position{
   width: 100%;
   height: fit-content;
@@ -258,6 +244,7 @@
   height: 50vh;
   overflow: hidden;
 }
+
 .container.slider{
   width: 60%;
   border-radius: 18px 0px 0px 18px;
@@ -282,6 +269,7 @@
   font-weight: bold;
   padding: 0px 20px 0px 20px;
 }
+
 .wrapper svg.button {
   position: absolute;
   top: 50%;
@@ -299,17 +287,19 @@
   z-index: 100;
   cursor: pointer;
 }
+
 svg.button:active {
   transform: scale(0.94) translateY(-50%);
 }
+
 svg#prev {
   left: 25px;
   padding-left: 10px;
 }
+
 svg#next {
   right: 25px;
 }
-
 
 @keyframes slide-in {
   from {
@@ -319,6 +309,7 @@ svg#next {
     transform: translateX(-25%);
   }
 }
+
 .container .image-container {
   height: 100%;
   width: 400%;
@@ -337,12 +328,12 @@ svg#next {
   width: 100%;
   transition: all 0.4s ease;
 }
+
 .carousel img {
   height: 100%;
   width: 100%;
   object-fit: cover;
 }
-
 
 .container-procedimiento{
   display: flex;
@@ -367,7 +358,6 @@ svg#next {
   justify-content: center;
   align-items: center;
   width: 100%;
-  
   font-size: 15px;
   font-weight: bold;
   text-align: center;
@@ -382,8 +372,6 @@ svg#next {
   background-color: aliceblue;
   height: 50vh;
   border-radius: 20px;
-
-
 }
 
 .lista-procedimiento .procedimiento{
@@ -413,7 +401,6 @@ svg#next {
   text-align: center;
   padding: 0px 0px 20px 0px;
 }
-
 
 .container-ayuda{
   width: 100%;
@@ -509,7 +496,6 @@ svg#next {
 
 .container .image{
   display: flex;
-  
   width: 100%;
   border-radius: 20px;
 }
@@ -521,18 +507,14 @@ svg#next {
   object-fit: cover;
 }
 
-
 .footer{
-
   height: 30vh;
   width: 100%;
   background-color: var(--main-color);
   display: flex;
   flex-direction: column;
   padding: 20px;
-
 }
-
 
 .footer .top{
   display: flex;
@@ -584,7 +566,6 @@ svg#next {
   justify-content: space-between;
   width: 100%;
   color: white;
-
 }
 
 .routes a{
@@ -608,15 +589,10 @@ svg#next {
   transition: 0.5s all ease-in-out;
 }
 
-
-
-
   @media (max-width: 768px) {
     .grid-container {
       grid-template-columns: 1fr; /* switch to one column layout for small screens */
       padding-top: 0px;
-      background-color: var(--body-bg);
-      background-image: none;
     }
 
     .grid-container .grid-item-2{
@@ -634,8 +610,8 @@ svg#next {
       overflow: hidden;
       transition: 0.5 all ease-in-out;
       border-radius: 10px 10px 0 0;
-      
     }
+
     .description h2 {
       font-size: 2.5rem;
       font-weight: bold;
@@ -646,31 +622,26 @@ svg#next {
       font-size:  20px;
     }
 
-    
     .parallax-container {
       position: relative;
       height: 50vh; /* establece una altura en 100vh */
       overflow: hidden;
       transition: 0.5 all ease-in-out;
       border-radius: 0px 0px 10px 10px;
-
     }
 
     .controls .arrow{
       position: absolute;
       top: 250%;
       cursor: pointer;
-    
     }
 
     .container.slider{
       width: 100%;
       border-radius: 18px 18px 18px 18px;
-    
     }
     
     .container.information{
-      
       background: none;
       position: absolute;
       border-radius: 18px 18px 18px 18px;
@@ -697,7 +668,6 @@ svg#next {
       font-weight: bold;
     }
 
-
     .container-about-us{
       flex-direction: column;
       height: fit-content;
@@ -708,16 +678,12 @@ svg#next {
       width: 100%;
     }
     
-
     .container-about-us .image-container{
       height: 50vh;
-      
     }
     
-
     .container-procedimiento{
       height: fit-content;
-      
     }
 
     .container-about-us .image-container .image{
@@ -733,18 +699,13 @@ svg#next {
       flex-direction: column;
     }
     
-    
-    
-    
     .container-ayuda .container{
       flex-direction: column;
       height: fit-content;
     }
 
     .container .image img{
-     
       border-radius: 20px;
-
     }
 
     .footer { 
@@ -760,7 +721,6 @@ svg#next {
       font-size: 10px;
     }
     
-
     .top .list { 
       display: flex;
       flex-direction: column;
@@ -817,10 +777,6 @@ svg#next {
       font-weight: bold;
       padding: 0px 0px 0px 10px;
     }
-    
-    
-    
-
 }
 
 

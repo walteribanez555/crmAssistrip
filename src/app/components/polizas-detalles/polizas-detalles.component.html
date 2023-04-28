@@ -6,7 +6,7 @@
     <h1>Historial de las polizas</h1>
    
 
-    
+    <button (click)="downloadPDF()">Imprimir poliza</button>
 
     <div *ngIf="listPolizas.length>0" class="listPolizas">
         <div  *ngFor="let poliza of listPolizas" class="poliza">

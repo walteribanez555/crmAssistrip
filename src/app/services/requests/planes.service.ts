@@ -2,15 +2,15 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Plan } from '../models/Data/Plan';
+import { Plan } from '../../models/Data/Plan';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PlanesService {
 
-  // private apiUrl = '/api/planes';
-  private apiUrl = environment.apiUrl + '/planes';
+  private apiUrl = '/api/planes';
+  // private apiUrl = environment.apiUrl + '/planes';
 
   constructor(private http : HttpClient) { }
 

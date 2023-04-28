@@ -14,16 +14,16 @@ import { extraCostForm } from 'src/app/models/Pages/extasForm.model';
 import { ExtraForm } from 'src/app/models/Pages/extra.model';
 import { policiesData } from 'src/app/models/Pages/policiesData.model';
 import { policiesForm } from 'src/app/models/Pages/policiesForm.model';
-import { BeneficiariosService } from 'src/app/services/beneficiarios.service';
-import { ExtrasPolizasService } from 'src/app/services/beneficiosExtras.service';
-import { CatalogosService } from 'src/app/services/catalogos.service';
-import { ClientesService } from 'src/app/services/clientes.service';
-import { ExtrasService } from 'src/app/services/extras.service';
+import { BeneficiariosService } from 'src/app/services/requests/beneficiarios.service';
+import { ExtrasPolizasService } from 'src/app/services/requests/beneficiosExtras.service';
+import { CatalogosService } from 'src/app/services/requests/catalogos.service';
+import { ClientesService } from 'src/app/services/requests/clientes.service';
+import { ExtrasService } from 'src/app/services/requests/extras.service';
 import { GetLocationService } from 'src/app/services/get-location.service';
-import { PolizasService } from 'src/app/services/polizas.service';
-import { PreciosService } from 'src/app/services/precios.service';
-import { ServiciosService } from 'src/app/services/servicios.service';
-import { VentasService } from 'src/app/services/ventas.service';
+import { PolizasService } from 'src/app/services/requests/polizas.service';
+import { PreciosService } from 'src/app/services/requests/precios.service';
+import { ServiciosService } from 'src/app/services/requests/servicios.service';
+import { VentasService } from 'src/app/services/requests/ventas.service';
 import Swal from 'sweetalert2';
 
 @Component({

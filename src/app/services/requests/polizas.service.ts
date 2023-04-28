@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Poliza, PolizaResp } from '../models/Data/Poliza';
+import { Poliza, PolizaResp } from '../../models/Data/Poliza';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Injectable({
@@ -10,8 +10,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 export class PolizasService {
 
 
-  // private apiUrl = '/api/polizas';
-  private apiUrl = environment.apiUrl + '/polizas';
+  private apiUrl = '/api/polizas';
+  // private apiUrl = environment.apiUrl + '/polizas';
 
   constructor(private http : HttpClient) { }
 

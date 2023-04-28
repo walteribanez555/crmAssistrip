@@ -2,14 +2,14 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, ɵsetAllowDuplicateNgModuleIdsForTest } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Servicio } from '../models/Data/Servicio';
+import { Servicio } from '../../models/Data/Servicio';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ServiciosService {
-//   private apiUrl = '/api/servicios';
-   private apiUrl = environment.apiUrl + '/servicios';
+  private apiUrl = '/api/servicios';
+   // private apiUrl = environment.apiUrl + '/servicios';
 
   constructor(private http: HttpClient) { }
 

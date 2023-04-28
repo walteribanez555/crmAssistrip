@@ -1,6 +1,6 @@
 import { Poliza } from 'src/app/models/Data/Poliza';
 import { Component, HostListener, ElementRef,OnInit } from '@angular/core';
-import { PolizasService } from 'src/app/services/polizas.service';
+import { PolizasService } from 'src/app/services/requests/polizas.service';
 
 
 @Component({

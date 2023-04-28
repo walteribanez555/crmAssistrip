@@ -4,8 +4,8 @@ import {  Router } from '@angular/router';
 import { Catalogo } from 'src/app/models/Data/Catalogo';
 import { cotizacionDataForm } from 'src/app/models/Pages/cotizacionDataForm.model';
 import { datesDestiny } from 'src/app/models/Pages/datesDestiny.model';
-import { CatalogosService } from 'src/app/services/catalogos.service';
-import { cotizacionIntefaceService } from 'src/app/services/cotizacioninterface.service';
+import { CatalogosService } from 'src/app/services/requests/catalogos.service';
+import { cotizacionIntefaceService } from 'src/app/services/interfaces/cotizacioninterface.service';
 import { FormCotizarModel } from 'src/app/models/Pages/formCotizar.model';
 
 @Component({

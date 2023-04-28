@@ -8,7 +8,7 @@ import { cotizacionForm } from 'src/app/models/Pages/cotizacionForm.model';
 import { datesDestiny } from 'src/app/models/Pages/datesDestiny.model';
 import { ExtraForm } from 'src/app/models/Pages/extra.model';
 import { policiesForm } from 'src/app/models/Pages/policiesForm.model';
-import { CatalogosService } from 'src/app/services/catalogos.service';
+import { CatalogosService } from 'src/app/services/requests/catalogos.service';
 import Swal from 'sweetalert2';
 
 @Component({
