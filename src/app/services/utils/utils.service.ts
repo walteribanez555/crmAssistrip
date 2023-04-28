@@ -9,9 +9,7 @@ import { Precio } from '../../models/Data/Precio';
 })
 export class UtilsService {
 
-  constructor() {
-
-   }
+  constructor() {}
 
    //Generar los grupos para los menores de 75 y los mayores de 75
   DivideByAge(listCotizaciones : any[]){
@@ -40,7 +38,7 @@ export class UtilsService {
   }
 
   //Comparar las fechas
-  comparar(initialDate : string, finalDate : string){
+  compararFechas(initialDate : string, finalDate : string){
     const date1: Date = new Date(initialDate);
     const date2: Date = new Date(finalDate);
 
@@ -61,7 +59,7 @@ export class UtilsService {
    }
 
 
-   //llevar a utils y agregar los tags a los inputs
+   //Si el plan tiene los requisitos que en este caso son los paises destinos
    haveRequirements( plan : Servicio, tags : string[]){
     
     if(!plan.disponibilidad){
@@ -77,7 +75,7 @@ export class UtilsService {
   }
 
 
-
+  //Si el plan tiene los requisitos que en este caso son los dias necesarios
   haveRange(servicio : Servicio, diffDays: number, precios : Precio[] ):Boolean{
     const dias : number = diffDays;
       const haveArange : Precio[] =  precios.filter(precio => {
@@ -101,8 +99,6 @@ export class UtilsService {
   }
 
 
-
-
    //Crear un nuevo item para las edades
    createItemForm(): FormGroup{
     return new FormGroup({
@@ -111,16 +107,6 @@ export class UtilsService {
     });
   }
 
-
-
-
-
-
-
-
-
-
-   
    //Comprobar de que este en el rango un numero
   betweenTheRange( liInf: number, liSup: number, diffd : number ) : boolean{
     return diffd >= liInf && diffd <= liSup;

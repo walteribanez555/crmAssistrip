@@ -453,13 +453,15 @@ h2{
   background-color: var(--body-bg);
   padding-top: 40px;
   height: 50%;
-
+  transition: all 0.5s ease;
 }
 
 .row.top.sticky{
   top: 16vh;
   z-index: 11;
   position: sticky;
+  transition: all 0.5s ease;
+
 
 }
 
@@ -770,11 +772,10 @@ hr{
   display: flex;
   height: fit-content;
 }
+
 .cotizacionMain .row.mobile{
   display: none;
 }
-
-
 
 .btn-age{ 
   display: flex;
@@ -809,7 +810,6 @@ hr{
   padding: 0 30px 0px 30px;
   margin-bottom: 10px;
 }
-
 
 .list{
   display: flex;
@@ -850,7 +850,6 @@ hr{
   display: none;
   }
 
-
 .listadoBeneficio{
   display: flex;
   justify-content: flex-start;
@@ -860,7 +859,6 @@ hr{
   padding-left: 20px;
   padding-right: 20px;
 }
-
 
 .list-beneficios{
   display: flex;
@@ -897,13 +895,10 @@ hr{
   margin-top: 25px;
 }
 
-
-
 .expand-btn{
   position: relative;
   right: 2px;
 }
-
 
 .btn-pagar{
   position: relative;
@@ -949,10 +944,8 @@ hr{
     padding: 10px 20px 20px 30px;
 }
 
-
 @media (max-width: 768px){
 
-   
     .border-1{
       border :1px solid var(--main-color);
       background-color: var(--main-color);
@@ -976,7 +969,6 @@ hr{
     .cotizacionBottom{
         display: flex;
     }
-
 
     .cotizacionHeader{
         height: 20vh;
@@ -1002,7 +994,6 @@ hr{
         overflow-x: auto;
         overflow-y: auto;
     }
-
 
     .listCountries{
       font-size: 20px;
@@ -1031,7 +1022,6 @@ hr{
       margin-bottom: 10px;
     }
     
-
     .item-list-second{
       display: flex;
       flex-direction: row;
@@ -1041,7 +1031,6 @@ hr{
       width: 100%;
       height: 60%;
     }
-
 
     .subitem{
       width: 100%;
@@ -1087,11 +1076,10 @@ hr{
       align-items: center;
     }
 
-    
-
     .cotizacionMain .row.desktop{ 
       display: none;
     }
+
     .cotizacionMain .row.mobile{
       display: flex;
       flex-direction: column;
@@ -1122,11 +1110,6 @@ hr{
       color: var(--main-color);
       margin: 10px;
     }
-
-
-    
-
-    
 }
 
 

@@ -118,14 +118,16 @@ export class CotizarComponent implements OnInit, AfterViewInit{
   
 
   ngAfterViewInit() {
-    const main = document.querySelector('main');
-    const cotizacionMain = document.getElementsByClassName('cotizacionMain');
 
+    //Elementos de la vista que se van cambiando
+    const cotizacionMain = document.getElementsByClassName('cotizacionMain');
     const rowTop = document.querySelector('.cotizacionMain .row.top');
     const alert = document.querySelector('.alert'); 
     const btn_age = document.querySelector('.btn-age');
     
 
+
+    //Tamaño de la parte superior de el listado de los elementos
   let stickyRowTop: number;
 
   window.addEventListener('resize', () => {
@@ -140,7 +142,6 @@ export class CotizarComponent implements OnInit, AfterViewInit{
 
 
   cotizacionMain[0]?.addEventListener('scroll', () => {
-    console.log("Scrolling");
 
     if (cotizacionMain[0].scrollTop >= stickyRowTop) {
       rowTop?.classList.add('sticky');
@@ -156,19 +157,15 @@ export class CotizarComponent implements OnInit, AfterViewInit{
 
   }
 
-
-
-  
-  
- 
-
-
   stateBottom : 1| 2 | 3 = 1;
   
 
   constructor(
+    //interfaz para los datos del cliente
       private dataService: cotizacionIntefaceService,
+    //Para navegar entre las rutas
       private router : Router,
+    //Servicios consumidos, para obtener los datos de la base de datos
       private catalogoService : CatalogosService,
       private servicios : ServiciosService,
       private extras : ExtrasService,
@@ -177,26 +174,31 @@ export class CotizarComponent implements OnInit, AfterViewInit{
       private beneficioService :BeneficiosService,
       private extraService  : ExtrasService,
       private utils : UtilsService,
-      
-
     ) {}
 
   ngOnInit() {
     
+
+    //Mostrar la pantalla de carga
     this.loadInitialMessage();
 
+
+    //Si hay informacion en la interfaz significa que se esta siguiendo un procedimiento
     if(this.dataService.sharedData.listCotizaciones.length === 0){
       Swal.close();
       this.router.navigate(['/home']);
     }
 
+    //Si hay la informacion se lo procede a guardar en este componente
     this.receivedData = this.dataService.sharedData;
 
     
-   
-
+  
+    //reemplaza los datos para los usos en este componente
     this.remplazarData(this.receivedData);
 
+
+    //obtiene y mapear los datos que se llegaran a usar
     this.servicios.getServicios().pipe(
       switchMap(data => {
         const listData = data.filter(item => item.status === 1);
@@ -233,8 +235,7 @@ export class CotizarComponent implements OnInit, AfterViewInit{
           this.listBeneficiosCat = this.mapListBeneficioCat(this.listBeneficios);
 
 
-
-
+          //Se procede a hacer una consulta por cada plan 
           const requests : any[]  = [];
           this.listadoPlanes.forEach(plan => {
             requests.push(plan.servicio_id);
@@ -243,15 +244,22 @@ export class CotizarComponent implements OnInit, AfterViewInit{
           //Convertir response a un listado con un nombre y su sub hijo
           forkJoin(
             requests.map((request) =>
+
+            
               this.planesService.getPlanById(request).pipe(
 
                 map((response) =>{
 
+
+                  //Mostrar los extras que hay
                   this.cardExtras= this.showExtras()
 
-                  
+
+
+                  //Se procede a mapear la informacion de los beneficios por plan
 
                   return ({
+                    //Se procede a hacer la separacion de los planes y sus beneficios de acuerdo a si esos beneficios estan listados
                     serv :  this.listadoPlanes.find(plan => plan.servicio_id === request)? this.listadoPlanes.find(plan => plan.servicio_id === request) : null,
                     beneficios:  this.mapListBeneficio(response)
                   })
@@ -276,13 +284,7 @@ export class CotizarComponent implements OnInit, AfterViewInit{
               console.error(error);
             }
             
-          );
-
-
-
-          
-
-          
+          );      
       }
     
   
@@ -291,10 +293,7 @@ export class CotizarComponent implements OnInit, AfterViewInit{
   }
 
 
-
-
-  
-
+  //Listado de los extras que hay
   showExtras(): ExtraForm[]{
     const extrasFiltered : ExtraForm[] = this.listExtras.map((extra,index) => {
       return {
@@ -311,12 +310,15 @@ export class CotizarComponent implements OnInit, AfterViewInit{
   }
   
 
+  //Cuando se modifican los inputs de las fechas
   onChangeInputDates(){
-    this.diffDays = this.utils.comparar(this.formData.initialDate, this.formData.finalDate);
+    this.diffDays = this.utils.compararFechas(this.formData.initialDate, this.formData.finalDate);
   }
   
 
+  
 
+  //Reemplazar la informacion en local
   remplazarData(data: FormCotizarModel){
     this.formData.initialDate = data.initialDate;
     this.formData.finalDate = data.finalDate;
@@ -326,12 +328,11 @@ export class CotizarComponent implements OnInit, AfterViewInit{
     this.tags = data.tags;
     this.listCotizaciones = data.listCotizaciones;
     this.listTags = this.tags.join(', ');
-    this.diffDays =this.utils.comparar(data.initialDate, data.finalDate);
+    this.diffDays =this.utils.compararFechas(data.initialDate, data.finalDate);
     this.nextId = this.listCotizaciones.length;
   }
 
-
-
+  //Mapear los listados de beneficio por cada plan
    mapListBeneficio(listPlan : Plan[]){
 
     const listCatBeneficio : catalogoBeneficio[] = [];
@@ -348,6 +349,8 @@ export class CotizarComponent implements OnInit, AfterViewInit{
     return listCatBeneficio
    }
 
+
+   //Mapear los listados de beneficios por cada categoria
    mapListBeneficioCat(listBeneficios : Beneficio[]){
       const listCatBeneficio : catalogoBeneficioData[] = [];
       this.beneficiosData.forEach(cat=> {
@@ -366,13 +369,13 @@ export class CotizarComponent implements OnInit, AfterViewInit{
    }
 
 
+   //Volver a la ruta de home
   salir(){
     this.router.navigate(['/home']);
   }
 
-  
 
-  
+  //Al cambiar la edad de un input de las edades
   changeAgeInpt(event: any, item: cotizacionDataForm) {
     
     const index = this.listCotizaciones.findIndex(i => i.id === item.id);
@@ -384,6 +387,8 @@ export class CotizarComponent implements OnInit, AfterViewInit{
     
   }
 
+
+  //Volver a la ruta de home
   backHome(){
     const data: FormCotizarModel = {
       initialDate : this.formData.initialDate,
@@ -398,6 +403,8 @@ export class CotizarComponent implements OnInit, AfterViewInit{
     this.router.navigate(['/home']);
   }
 
+
+  //Para realizar la cotizacion nuevamente
    btnCotizar(){
     this.showEvent('Cotizando', 'Espere un momento por favor');
     this.cotizar();
@@ -405,6 +412,8 @@ export class CotizarComponent implements OnInit, AfterViewInit{
     Swal.close();
    }
 
+
+   //Mostrar un mensaje informativo
    showEvent( title: string ,descEvent : string){
     Swal.fire({
       title,
@@ -414,6 +423,8 @@ export class CotizarComponent implements OnInit, AfterViewInit{
     });
    }
 
+
+   //Realizar los procedimientos de cotizacion
    cotizar(){
      this.minPlanes = 1;
 
@@ -442,8 +453,8 @@ export class CotizarComponent implements OnInit, AfterViewInit{
 
    }
 
-  
-   
+
+   //Volver a cargar la vista con la informacion actualizada
    reloadView(){
     const cotizarForm : FormCotizarModel = {
       initialDate: this.formData.initialDate,
@@ -462,6 +473,8 @@ export class CotizarComponent implements OnInit, AfterViewInit{
 
    }
 
+
+   //Proceder a la siguiente parte del formulario
    siguiente(){
     if(this.minPlanes>1){
       if( this.servicioMayores && this.servicioMenores){
@@ -481,6 +494,8 @@ export class CotizarComponent implements OnInit, AfterViewInit{
    }
   }
 
+
+  //Guardar la informacion en la interfaz de datos
   guardarData(){
     this.dataService.servicioMayores = this.servicioMayores;
     this.dataService.servicioMenores = this.servicioMenores;
@@ -490,10 +505,6 @@ export class CotizarComponent implements OnInit, AfterViewInit{
     this.dataService.listExtras = this.cardExtras.filter(extra => extra.checked);
 
   }
-
-
-
-
 
 
 
@@ -522,7 +533,6 @@ export class CotizarComponent implements OnInit, AfterViewInit{
       imageAlt: 'Custom image',
     })
   }
-
 
 
   //Cambios en la vista, por manejo de usuario
@@ -569,7 +579,6 @@ export class CotizarComponent implements OnInit, AfterViewInit{
     }
     
   }
-
 
 
   remove(tag: string) {
@@ -656,14 +665,6 @@ export class CotizarComponent implements OnInit, AfterViewInit{
   toggleExtra( extra  : ExtraForm ){
     extra.checked = !extra.checked;
   }
-
-
-
-
-
-
-  
-
 
   //Aqui se maneja el sticky header
   onWindowScroll() {

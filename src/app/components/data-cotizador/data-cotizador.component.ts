@@ -7,6 +7,7 @@ import { datesDestiny } from 'src/app/models/Pages/datesDestiny.model';
 import { CatalogosService } from 'src/app/services/requests/catalogos.service';
 import { cotizacionIntefaceService } from 'src/app/services/interfaces/cotizacioninterface.service';
 import { FormCotizarModel } from 'src/app/models/Pages/formCotizar.model';
+import { UtilsService } from 'src/app/services/utils/utils.service';
 
 @Component({
   selector: 'app-data-cotizador',
@@ -51,7 +52,8 @@ export class DataCotizadorComponent implements OnInit {
   constructor(
     private catalogoService : CatalogosService,
     private router : Router,
-    private dataService: cotizacionIntefaceService 
+    private dataService: cotizacionIntefaceService,
+    private utils : UtilsService
   ){
     const today = new Date();
     this.minDate = today.toISOString().split('T')[0];
@@ -106,12 +108,7 @@ export class DataCotizadorComponent implements OnInit {
       }
    }
   
-   
-    
-  
-    
-    
-  
+   //Remover del listado de tags
     remove(tag: string) {
       let index = this.tags.indexOf(tag);
       this.tags = [...this.tags.slice(0, index), ...this.tags.slice(index + 1)];
@@ -124,6 +121,8 @@ export class DataCotizadorComponent implements OnInit {
       
     }
   
+
+    //Agregar un tag al listado
     addTag(event: any) {
       if (event.key === 'Enter') {
         let tag = event.target.value.replace(/\s+/g, ' ');
@@ -132,6 +131,8 @@ export class DataCotizadorComponent implements OnInit {
       }
     }
   
+
+    //Proceder a agregar en la lista de tags
     insertTag(tag: string) {
       if(tag!=="pais"){
   
@@ -145,33 +146,13 @@ export class DataCotizadorComponent implements OnInit {
       }
     }
 
-
-    
-  
-  
-    
-  
+    //Al momento de seleccionar un pais, confirma de que no sea el primero
     onSelect(event: Event) {
       const target = event.target as HTMLSelectElement;
       if (target) {
         const selectedValue = target.value;
         this.insertTag(selectedValue);
-
         target.value = "pais";
-
-        if(this.comprobarFecha(this.formData.initialDate) && this.comprobarFecha(this.formData.finalDate)){
-          const data : datesDestiny = { 
-            initialDate : this.formData.initialDate,
-            finalDate : this.formData.finalDate,
-            tags : this.tags}
-          // this.modifyTags.emit(data);
-
-        }
-        
-        
-        
-        
-        // Do something with the selected value here
       }
     
     }
@@ -189,21 +170,12 @@ export class DataCotizadorComponent implements OnInit {
 
     }
 
-
-
-    createItemForm(): FormGroup{
-      return new FormGroup({
-        age: new FormControl(''),
-        
-      });
-    }
-
     addItem(){
       
       const cotizacionfrm : cotizacionDataForm ={ 
         id :this.nextId++,
         age: 0,
-        item : this.createItemForm()
+        item : this.utils.createItemForm()
       }
 
       
