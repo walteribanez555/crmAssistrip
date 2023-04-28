@@ -19,7 +19,6 @@ import { PolizasDetallesComponent } from './components/polizas-detalles/polizas-
 import { DateOnlyPipe } from './pipes/getDateOnly.pipe';
 
 import { CommonModule } from '@angular/common';
-import { ListadoBeneficiariosComponent } from './components/listado-beneficiarios/listado-beneficiarios.component';
 import { PolizaComponent } from './components/poliza/poliza.component';
 
 
@@ -38,7 +37,6 @@ import { PolizaComponent } from './components/poliza/poliza.component';
     ListPolizasComponent,
     PolizasDetallesComponent,
     DateOnlyPipe,
-    ListadoBeneficiariosComponent,
     PolizaComponent,
 
   ],

@@ -19,10 +19,6 @@ import { DataCotizadorComponent } from './data-cotizador/data-cotizador.componen
       ClienteFormComponent,
       CotizacionComponentComponent,
       DataCotizadorComponent,
-      
-      
-      
-      
     ],
     imports: [
       CommonModule,
@@ -30,8 +26,6 @@ import { DataCotizadorComponent } from './data-cotizador/data-cotizador.componen
       ReactiveFormsModule,
       PipesModule,
       SweetAlert2Module,
-      
-      
     ],
     exports: [
       FormDatesDestinationComponent,
@@ -39,7 +33,6 @@ import { DataCotizadorComponent } from './data-cotizador/data-cotizador.componen
       ClienteFormComponent,
       CotizacionComponentComponent,
       DataCotizadorComponent
-      
     ]
   })
   export class ComponentsModule { }

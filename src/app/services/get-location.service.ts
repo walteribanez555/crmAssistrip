@@ -7,8 +7,6 @@ import { HttpClient } from '@angular/common/http';
 })
 export class GetLocationService {
 
-  
-  
   mapBox_Token = environment.mapBox_Token;
 
   constructor(private http : HttpClient) {

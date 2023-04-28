@@ -15,7 +15,6 @@ import { CotizarComponent } from './components/cotizar/cotizar.component';
 import { DatosPolizasComponent } from './components/datos-polizas/datos-polizas.component';
 import { ListPolizasComponent } from './components/list-polizas/list-polizas.component';
 import { PolizasDetallesComponent } from './components/polizas-detalles/polizas-detalles.component';
-import { ListadoBeneficiariosComponent } from './components/listado-beneficiarios/listado-beneficiarios.component';
 import { PolizaComponent } from './components/poliza/poliza.component';
 
 
@@ -63,10 +62,7 @@ const routes : Routes = [
             component : PolizasDetallesComponent,
            
           },
-          {
-            path: 'listado-beneficiarios',
-            component : ListadoBeneficiariosComponent,
-          },
+          
           {
             path: 'poliza/:id',
             component : PolizaComponent,
