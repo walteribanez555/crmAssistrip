@@ -293,6 +293,7 @@ export class CotizarComponent implements OnInit, AfterViewInit{
   }
 
 
+  
   //Listado de los extras que hay
   showExtras(): ExtraForm[]{
     const extrasFiltered : ExtraForm[] = this.listExtras.map((extra,index) => {
@@ -315,9 +316,6 @@ export class CotizarComponent implements OnInit, AfterViewInit{
     this.diffDays = this.utils.compararFechas(this.formData.initialDate, this.formData.finalDate);
   }
   
-
-  
-
   //Reemplazar la informacion en local
   remplazarData(data: FormCotizarModel){
     this.formData.initialDate = data.initialDate;
@@ -403,7 +401,6 @@ export class CotizarComponent implements OnInit, AfterViewInit{
     this.router.navigate(['/home']);
   }
 
-
   //Para realizar la cotizacion nuevamente
    btnCotizar(){
     this.showEvent('Cotizando', 'Espere un momento por favor');
@@ -411,7 +408,6 @@ export class CotizarComponent implements OnInit, AfterViewInit{
 
     Swal.close();
    }
-
 
    //Mostrar un mensaje informativo
    showEvent( title: string ,descEvent : string){
@@ -422,7 +418,6 @@ export class CotizarComponent implements OnInit, AfterViewInit{
       allowOutsideClick: false
     });
    }
-
 
    //Realizar los procedimientos de cotizacion
    cotizar(){
@@ -494,8 +489,8 @@ export class CotizarComponent implements OnInit, AfterViewInit{
    }
   }
 
-
   //Guardar la informacion en la interfaz de datos
+
   guardarData(){
     this.dataService.servicioMayores = this.servicioMayores;
     this.dataService.servicioMenores = this.servicioMenores;
@@ -506,10 +501,8 @@ export class CotizarComponent implements OnInit, AfterViewInit{
 
   }
 
-
-
   //Mensajes de carga y error
-  
+
   errorMessage(){
     Swal.fire({
       icon: 'error',
