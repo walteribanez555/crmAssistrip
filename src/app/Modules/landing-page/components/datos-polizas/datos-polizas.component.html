@@ -205,62 +205,76 @@
 
         </div>
         <div class="carrito">
-            <h2>Carrito</h2>
-            <span>Cantidad de dias : {{diffDays}}</span>
-            <div class="listado-carrito">
-                <span class="descuento">
-                    Planes
-                </span>
-                <ng-container *ngIf="datosCotizacionMenores.length>0">
-                    <div class="item-carrito">
-                        <span class="descripcion">{{servicioMenores?.servicio}} * {{precioMenores.cantidadPolizas}} / {{costoMenores | number:'1.0-3'}}</span>
-                        <span class="costo" >+{{precioMenores.precioTotal | number:'1.0-3'}}...</span>
-    
-                    </div>
-                </ng-container>
-                
-                <ng-container *ngIf="datosCotizacionMayores.length>0">
-                    <div class="item-carrito">
-                        <span class="descripcion">{{servicioMayores?.servicio}} * {{precioMayores.cantidadPolizas}} / {{costoMayores | number:'1.0-3'}}</span>
-                        <span class="costo" >+{{precioMayores.precioTotal | number:'1.0-3'}}...</span>
-    
-                    </div>
-                </ng-container>
 
-                <hr>
-                <span class="descuento" *ngIf="listExtras.length>0">
-                    Extras
-                </span>
-
-                <ng-container *ngFor="let extra of dataExtra">
-                    <div class="item-carrito">
-                        <span class="descripcion">{{extra.extra.descripcion}}*Dias: {{diffDays}} * Costo: {{extra.costo}} * Cantidad: {{extra.cantidad}} </span>
-                        <span class="costo" >+{{extra.costoTotal| number:'1.0-3'}}</span>
-    
-                    </div>
-                    <hr>
-                
-                </ng-container>
-                
-                <span class="descuento" *ngIf="listDescuentos.length>0">
-                    Descuentos
-                </span>
-                <ng-container *ngFor="let descuento of listDescuentos">
-                    <div class="item-carrito">
-                        <span class="descripcion">{{descuento.cupon.cupon_id}} * {{descuento.monto}} </span>
-                        <span class="costo" >-{{descuento.montoTotal | number:'1.0-3'}}</span>
-    
-                    </div>
-                    <hr>
-                
-                </ng-container>
-                
+            <div class="loading" [@loadingAnimation]="hasLoaded ? 'hide' : 'show'">
+                <img  
+                src="assets/svg/loading.svg" 
+                alt=""
+                >
+                <span>Espere un momento, cargando la informacion</span>
             </div>
             
-            <div class="total">
-                <span>Total</span>
-                <p>${{totalEnteros}}<span class="decimal">{{totalDecimales}}</span> <span class="type-money">USD</span></p>
-            </div>
+
+
+            <ng-container *ngIf="hasLoaded">
+
+                <h2>Carrito</h2>
+                <span>Cantidad de dias : {{diffDays}}</span>
+                <div class="listado-carrito">
+                    <span class="descuento">
+                        Planes
+                    </span>
+                    <ng-container *ngIf="datosCotizacionMenores.length>0">
+                        <div class="item-carrito">
+                            <span class="descripcion">{{servicioMenores?.servicio}} * {{precioMenores.cantidadPolizas}} / {{costoMenores | number:'1.0-3'}}</span>
+                            <span class="costo" >+{{precioMenores.precioTotal | currency:'USD':'$':'1.2-2' }}...</span>
+        
+                        </div>
+                    </ng-container>
+                    
+                    <ng-container *ngIf="datosCotizacionMayores.length>0">
+                        <div class="item-carrito">
+                            <span class="descripcion">{{servicioMayores?.servicio}} * {{precioMayores.cantidadPolizas}} / {{costoMayores | number:'1.0-3'}}</span>
+                            <span class="costo" >+{{precioMayores.precioTotal | currency:'USD':'$':'1.2-2' }}...</span>
+        
+                        </div>
+                    </ng-container>
+    
+                    <hr>
+                    <span class="descuento" *ngIf="listExtras.length>0">
+                        Extras
+                    </span>
+    
+                    <ng-container *ngFor="let extra of dataExtra">
+                        <div class="item-carrito">
+                            <span class="descripcion">{{extra.extra.descripcion}}*Dias: {{diffDays}} * Costo: {{extra.costo}} * Cantidad: {{extra.cantidad}} </span>
+                            <span class="costo" >+{{extra.costoTotal| currency:'USD':'$':'1.2-2' }}</span>
+        
+                        </div>
+                        <hr>
+                    
+                    </ng-container>
+                    
+                    <span class="descuento" *ngIf="listDescuentos.length>0">
+                        Descuentos
+                    </span>
+                    <ng-container *ngFor="let descuento of listDescuentos">
+                        <div class="item-carrito">
+                            <span class="descripcion">{{descuento.cupon.cupon_id}} * {{descuento.monto}} </span>
+                            <span class="costo" >-{{descuento.montoTotal | currency:'USD':'$':'1.2-2' }}</span>
+        
+                        </div>
+                        <hr>
+                    
+                    </ng-container>
+                    
+                </div>
+                
+                <div class="total">
+                    <span>Total</span>
+                    <p>${{totalEnteros}}<span class="decimal">{{totalDecimales}}</span> <span class="type-money">USD</span></p>
+                </div>
+            </ng-container>
         </div>
     </div>
     <div class="footer-polizas">
@@ -292,62 +306,72 @@
       
         <div class="containBottom"  *ngIf="!minHeightReached"  >
         
-            <h2>Carrito</h2>
-            <span>Cantidad de dias : {{diffDays}}</span>
-            <div class="listado-carrito">
-                <span class="descuento">
-                    Planes
-                </span>
-                <ng-container *ngIf="datosCotizacionMenores.length>0">
-                    <div class="item-carrito">
-                        <span class="descripcion">{{servicioMenores?.servicio}} * {{precioMenores.cantidadPolizas}} / {{costoMenores | number:'1.0-3'}}</span>
-                        <span class="costo" >+{{precioMenores.precioTotal | number:'1.0-3'}}...</span>
-    
-                    </div>
-                </ng-container>
-                
-                <ng-container *ngIf="datosCotizacionMayores.length>0">
-                    <div class="item-carrito">
-                        <span class="descripcion">{{servicioMayores?.servicio}} * {{precioMayores.cantidadPolizas}} / {{costoMayores | number:'1.0-3'}}</span>
-                        <span class="costo" >+{{precioMayores.precioTotal | number:'1.0-3'}}...</span>
-    
-                    </div>
-                </ng-container>
-
-                <hr>
-                <span class="descuento" *ngIf="listExtras.length>0">
-                    Extras
-                </span>
-
-                <ng-container *ngFor="let extra of dataExtra">
-                    <div class="item-carrito">
-                        <span class="descripcion">{{extra.extra.descripcion}}*Dias: {{diffDays}} * Costo: {{extra.costo}} * Cantidad: {{extra.cantidad}} </span>
-                        <span class="costo" >+{{extra.costoTotal| number:'1.0-3'}}</span>
-    
-                    </div>
-                    <hr>
-                
-                </ng-container>
-                
-                <span class="descuento" *ngIf="listDescuentos.length>0">
-                    Descuentos
-                </span>
-                <ng-container *ngFor="let descuento of listDescuentos">
-                    <div class="item-carrito">
-                        <span class="descripcion">{{descuento.cupon.cupon_id}} * {{descuento.monto}} </span>
-                        <span class="costo" >-{{descuento.montoTotal | number:'1.0-3'}}</span>
-    
-                    </div>
-                    <hr>
-                
-                </ng-container>
-                
+            <div class="loading" [@loadingAnimation]="hasLoaded ? 'hide' : 'show'">
+                <img  
+                src="assets/svg/loading.svg" 
+                alt=""
+                >
+                <span>Espere un momento, cargando la informacion</span>
             </div>
-            
-            <div class="total">
-                <span>Total</span>
-                <p>${{totalEnteros}}<span class="decimal">{{totalDecimales}}</span> <span class="type-money">USD</span></p>
-            </div>
+            <ng-container *ngIf="hasLoaded">
+
+                <h2>Carrito</h2>
+                <span>Cantidad de dias : {{diffDays}}</span>
+                <div class="listado-carrito">
+                    <span class="descuento">
+                        Planes
+                    </span>
+                    <ng-container *ngIf="datosCotizacionMenores.length>0">
+                        <div class="item-carrito">
+                            <span class="descripcion">{{servicioMenores?.servicio}} * {{precioMenores.cantidadPolizas}} / {{costoMenores | number:'1.0-3'}}</span>
+                            <span class="costo" >+{{precioMenores.precioTotal | number:'1.0-3'}}...</span>
+        
+                        </div>
+                    </ng-container>
+                    
+                    <ng-container *ngIf="datosCotizacionMayores.length>0">
+                        <div class="item-carrito">
+                            <span class="descripcion">{{servicioMayores?.servicio}} * {{precioMayores.cantidadPolizas}} / {{costoMayores | number:'1.0-3'}}</span>
+                            <span class="costo" >+{{precioMayores.precioTotal | number:'1.0-3'}}...</span>
+        
+                        </div>
+                    </ng-container>
+    
+                    <hr>
+                    <span class="descuento" *ngIf="listExtras.length>0">
+                        Extras
+                    </span>
+    
+                    <ng-container *ngFor="let extra of dataExtra">
+                        <div class="item-carrito">
+                            <span class="descripcion">{{extra.extra.descripcion}}*Dias: {{diffDays}} * Costo: {{extra.costo}} * Cantidad: {{extra.cantidad}} </span>
+                            <span class="costo" >+{{extra.costoTotal| number:'1.0-3'}}</span>
+        
+                        </div>
+                        <hr>
+                    
+                    </ng-container>
+                    
+                    <span class="descuento" *ngIf="listDescuentos.length>0">
+                        Descuentos
+                    </span>
+                    <ng-container *ngFor="let descuento of listDescuentos">
+                        <div class="item-carrito">
+                            <span class="descripcion">{{descuento.cupon.cupon_id}} * {{descuento.monto}} </span>
+                            <span class="costo" >-{{descuento.montoTotal | number:'1.0-3'}}</span>
+        
+                        </div>
+                        <hr>
+                    
+                    </ng-container>
+                    
+                </div>
+                
+                <div class="total">
+                    <span>Total</span>
+                    <p>${{totalEnteros}}<span class="decimal">{{totalDecimales}}</span> <span class="type-money">USD</span></p>
+                </div>
+            </ng-container>
         </div>
 
 

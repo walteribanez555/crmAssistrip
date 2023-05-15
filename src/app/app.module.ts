@@ -7,7 +7,6 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 
 
-import { DateOnlyPipe } from './Modules/shared/pipes/getDateOnly.pipe';
 
 import { CommonModule } from '@angular/common';
 import { BeneficiosService } from './Modules/shared/services/requests/beneficios.service';
@@ -25,9 +24,9 @@ import { ExtrasPolizasService } from './Modules/shared/services/requests/benefic
 import { BeneficiariosService } from './Modules/shared/services/requests/beneficiarios.service';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ExtractDatePipe } from './Modules/shared/pipes/extract-date.pipe';
-import { DollarPipe } from './Modules/shared/pipes/dolar.pipe';
 import { PipesModule } from './Modules/shared/pipes/pipes.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PopupComponent } from './Modules/shared/Components/popup/popup.component';
 
 
 
@@ -52,6 +51,7 @@ import { PipesModule } from './Modules/shared/pipes/pipes.module';
     ReactiveFormsModule,
     FormsModule,
     PipesModule,
+    BrowserAnimationsModule
     
     
     

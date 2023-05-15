@@ -5,6 +5,13 @@ import { CrearCuponesComponent } from './crear-cupones/crear-cupones.component';
 import { CuponesRoutingModule } from './cupones-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { PipesModule } from 'src/app/Modules/shared/pipes/pipes.module';
+import { ComponentsModule } from '../../components/components.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CuponComponent } from './cupon/cupon.component';
+import { EditCuponComponent } from './edit-cupon/edit-cupon.component';
+import { PopupComponent } from 'src/app/Modules/shared/Components/popup/popup.component';
+import { SharedModule } from 'src/app/Modules/shared/shared.module';
+
 
 
 
@@ -12,6 +19,8 @@ import { PipesModule } from 'src/app/Modules/shared/pipes/pipes.module';
   declarations: [
     ListadoCuponesComponent,
     CrearCuponesComponent,
+    CuponComponent,
+    EditCuponComponent,
     
   ],
   imports: [
@@ -19,6 +28,11 @@ import { PipesModule } from 'src/app/Modules/shared/pipes/pipes.module';
     HttpClientModule,
     CuponesRoutingModule,
     PipesModule,
+    ComponentsModule,
+    ReactiveFormsModule,
+    FormsModule,
+    PipesModule,
+    SharedModule
     
   ],
   exports:[

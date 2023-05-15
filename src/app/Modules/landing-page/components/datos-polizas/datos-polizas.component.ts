@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { forkJoin, map, switchMap } from 'rxjs';
+import { loadingAnimation } from 'src/app/Modules/shared/animations/loading.animation';
 import { ClientePost } from 'src/app/Modules/shared/models/Data/Cliente';
 import { Cupon, CuponAplicado } from 'src/app/Modules/shared/models/Data/Cupon';
 import { Precio } from 'src/app/Modules/shared/models/Data/Precio';
@@ -27,6 +28,7 @@ import Swal from 'sweetalert2';
   templateUrl: './datos-polizas.component.html',
   styleUrls: ['./datos-polizas.component.css'],
   animations: [
+    loadingAnimation,
     
 
   ]
@@ -102,6 +104,8 @@ export class DatosPolizasComponent implements OnInit {
 
   fechaLimite : string = "";
 
+
+  hasLoaded = true;
   
 
 
@@ -134,6 +138,9 @@ export class DatosPolizasComponent implements OnInit {
 
 
     this.comparar(this.datosCotizacion.initialDate,this.datosCotizacion.finalDate);
+
+
+    this.hasLoaded = false;
 
 
     
@@ -189,6 +196,7 @@ export class DatosPolizasComponent implements OnInit {
 
     ).subscribe(
       data => {
+        this.hasLoaded = true;
         this.listCupones = data.filter(cupon => cupon.status===1);
         console.log(this.listCupones);
         this.precioMayores={
@@ -228,6 +236,10 @@ export class DatosPolizasComponent implements OnInit {
 
          this.totalEnteros = parteEntera,
          this.totalDecimales = parteDecimal
+
+
+
+        
         
       }
     )

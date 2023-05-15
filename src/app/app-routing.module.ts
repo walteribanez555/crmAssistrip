@@ -31,6 +31,10 @@ const routes : Routes = [
 
   
   { path: 'home' , loadChildren: () => import('./Modules/landing-page/landing-page.module').then(m => m.LandingPageModule) },
+
+  { 
+    path: 'login' , loadChildren : () => import('./Modules/auth/auth.module').then(m => m.AuthModule),
+  },
   
 
   

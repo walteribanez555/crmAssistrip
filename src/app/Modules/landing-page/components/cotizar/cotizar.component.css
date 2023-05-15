@@ -580,6 +580,7 @@ h2{
   justify-content: center;
   align-items: center;
   transition: all 0.5s ease;
+  box-shadow: 0 0 10px 0 rgba(0,0,0,0.1);
 }
 
 .card.bg-white{
@@ -597,6 +598,7 @@ h2{
   height: fit-content;
   width: 145px;
   color: var(--main-color);
+  text-align: center;
 }
 
 .card span{

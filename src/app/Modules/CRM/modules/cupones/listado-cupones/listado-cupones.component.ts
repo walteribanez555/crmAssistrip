@@ -1,60 +1,63 @@
 
 import { Component, HostListener, ElementRef,OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { loadingAnimation } from 'src/app/Modules/shared/animations/loading.animation';
 import { Cupon } from 'src/app/Modules/shared/models/Data/Cupon';
 import { CuponesService } from 'src/app/Modules/shared/services/requests/cupones.service';
 
 @Component({
   selector: 'app-listado-cupones',
   templateUrl: './listado-cupones.component.html',
-  styleUrls: ['../../../css/tables.css']
+  styleUrls: ['./listado-cupones.component.css'],
+  animations : [
+    loadingAnimation
+  ]
 })
 export class ListadoCuponesComponent  implements OnInit{
   
   listado_Cupones : Cupon[] = [];
-  showComponent = false;
+  hasLoaded = true;
 
 
-  showDetails(){
-    this.showComponent = !this.showComponent;
-  }
+
+  
 
 
   constructor(
-    private elRef : ElementRef,
-    private cupones: CuponesService
+    private cupones: CuponesService,
+    private router : Router
   ){}
 
 
   ngOnInit(){
+  
+    this.hasLoaded = false
     this.cupones.getCupones().subscribe(
       (data)=>{
-        
+        this.hasLoaded= true;
         this.listado_Cupones = data.filter(item => item.status!=0);
       }
     )
   }
 
-  @HostListener('window:scroll', [])
-  onWindowScroll() {
-    const tableContainer = this.elRef.nativeElement.querySelector('.table-container');
-    const tableHeader = tableContainer.querySelector('thead');
-    const tableRows = tableContainer.querySelectorAll('tbody tr');
 
-    const containerRect = tableContainer.getBoundingClientRect();
-    const headerRect = tableHeader.getBoundingClientRect();
-    const lastRowRect = tableRows[tableRows.length - 1].getBoundingClientRect();
 
-    if (containerRect.top + headerRect.height > window.innerHeight ||
-        containerRect.bottom - lastRowRect.height < 0) {
-      tableHeader.style.visibility = 'hidden';
-      
-    } else {
-      tableHeader.style.visibility = 'visible';
-      for (let i = 0; i < tableRows.length; i++) {
-        tableRows[i].style.visibility = 'visible';
-      }
-    }
+  createCupones(){
+    this.router.navigate(['../dashboard/cupones/crear-cupones']);
   }
+
+  showDetails(idCupon : number){
+    this.router.navigate([`../dashboard/cupones/${idCupon}`]);
+
+  }
+
+
+  editDetails(idCupon : number){
+    this.router.navigate([`../dashboard/cupones/${idCupon}/editar`]);
+
+  }
+
+ 
 
 
 

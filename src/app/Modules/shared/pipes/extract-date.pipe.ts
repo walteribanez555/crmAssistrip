@@ -1,12 +1,14 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import { Pipe, PipeTransform , Injectable} from '@angular/core';
+import { UtilsService } from '../services/utils/utils.service';
 
 @Pipe({ name: 'extractDate' })
+
+@Injectable()
 export class ExtractDatePipe implements PipeTransform {
+
+  constructor(private utilsService: UtilsService) { }
+
   transform(value: string): string {
-    const date = new Date(value);
-    const year = date.getFullYear();
-    const month = date.getMonth() + 1;
-    const day = date.getDate();
-    return `${year}/${month}/${day}`;
+    return this.utilsService.getDate(value);
   }
 }

@@ -113,5 +113,25 @@ export class UtilsService {
   }
 
 
+  getDate(value : string){
+    const date = new Date(value);
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    return `${year}/${month}/${day}`; 
+  }
+
+  getDateDto(fechaDto : string){
+    const fechaString = this.getDate(fechaDto);
+    const partesFecha = fechaString.split('/');
+    const anio = Number(partesFecha[0]);
+    const mes = Number(partesFecha[1]) - 1; // Los meses en JavaScript empiezan en 0
+    const dia = Number(partesFecha[2]);
+    const fecha = new Date(anio, mes, dia);
+
+    return fecha;
+
+  }
+
 
 }

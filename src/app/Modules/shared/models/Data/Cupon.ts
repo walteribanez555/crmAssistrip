@@ -12,6 +12,19 @@ export interface Cupon {
     
 }
 
+    // "servicio_id" : 1,
+    // "tipo_valor" : 1,
+    // "valor" : 2,
+    // "fecha_desde" : "2023/03/10",
+    // "fecha_hasta" : "2023/03/30",
+    // "status" : 1
+
+export interface CuponPost extends Omit<Cupon, 'cupon_id'>{
+
+}
+
+
+
 
 export interface CuponAplicado { 
     cupon : Cupon,

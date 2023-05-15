@@ -13,7 +13,7 @@ import { DashboardComponent } from './dashboard.component';
 @NgModule({
   declarations: [
      //Componentes
-     DashboardComponent
+     DashboardComponent,
      
      
      

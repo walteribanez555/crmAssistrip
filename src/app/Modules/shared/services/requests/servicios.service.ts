@@ -22,12 +22,12 @@ export class ServiciosService {
 
    }
 
-   getServicioById(id : number): Observable<Servicio>{
+   getServicioById(id : number): Observable<Servicio[]>{
       let params = new HttpParams;
 
       params = params.append('id', id);
 
-      return this.http.get<Servicio>(this.apiUrl, {params});
+      return this.http.get<Servicio[]>(this.apiUrl, {params});
    }
 
 }

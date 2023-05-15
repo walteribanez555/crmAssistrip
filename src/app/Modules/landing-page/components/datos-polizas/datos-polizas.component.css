@@ -508,6 +508,24 @@ span.descuento,
   }
 
 
+  .loading {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .loading img {
+    width: 60px;
+    height: 60px;
+  }
+  
+  
+
+
 
 @media only screen and (max-width: 768px) {
     .main-polizas {
@@ -558,6 +576,16 @@ span.descuento,
     .cotizacion-main .field label,
     .cotizacion-main .field input{
       font-size: 12px;
+    }
+
+    .loading {
+      position: relative;
+      width: 100%;
+      height: 200px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
 
     
