@@ -4,22 +4,31 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { LandingPageComponent } from './pages/landing-page/landing-page.component';
-import { ServicesModule } from './services/services.module';
-import { ComponentsModule } from './components/components.module';
-import { HomeComponent } from './components/home/home.component';
-import { CotizarComponent } from './components/cotizar/cotizar.component';
 
-import { HttpClientModule } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { DatosPolizasComponent } from './components/datos-polizas/datos-polizas.component';
-import { ListPolizasComponent } from './components/list-polizas/list-polizas.component';
-import { PolizasDetallesComponent } from './components/polizas-detalles/polizas-detalles.component';
-import { DateOnlyPipe } from './pipes/getDateOnly.pipe';
+
+
 
 import { CommonModule } from '@angular/common';
-import { PolizaComponent } from './components/poliza/poliza.component';
+import { BeneficiosService } from './Modules/shared/services/requests/beneficios.service';
+import { CatalogosService } from './Modules/shared/services/requests/catalogos.service';
+import { ClientesService } from './Modules/shared/services/requests/clientes.service';
+import { CuponesService } from './Modules/shared/services/requests/cupones.service';
+import { ExtrasService } from './Modules/shared/services/requests/extras.service';
+import { PlanesService } from './Modules/shared/services/requests/planes.service';
+import { PolizasService } from './Modules/shared/services/requests/polizas.service';
+import { PreciosService } from './Modules/shared/services/requests/precios.service';
+import { ServiciosService } from './Modules/shared/services/requests/servicios.service';
+import { GetLocationService } from './Modules/shared/services/get-location.service';
+import { VentasService } from './Modules/shared/services/requests/ventas.service';
+import { ExtrasPolizasService } from './Modules/shared/services/requests/beneficiosExtras.service';
+import { BeneficiariosService } from './Modules/shared/services/requests/beneficiarios.service';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PipesModule } from './Modules/shared/pipes/pipes.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PopupComponent } from './Modules/shared/Components/popup/popup.component';
+
+
 
 
 
@@ -28,34 +37,41 @@ import { PolizaComponent } from './components/poliza/poliza.component';
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent,
-    LandingPageComponent,
-    HomeComponent,
-    CotizarComponent,
+
     
-    DatosPolizasComponent,
-    ListPolizasComponent,
-    PolizasDetallesComponent,
-    DateOnlyPipe,
-    PolizaComponent,
+    
 
   ],
   imports: [
     BrowserModule,
     SweetAlert2Module.forRoot(),
     AppRoutingModule,
-    ComponentsModule,
     HttpClientModule,
+    CommonModule,
     ReactiveFormsModule,
     FormsModule,
-    CommonModule
+    PipesModule,
+    BrowserAnimationsModule
+    
     
     
   
     
   ],
   providers: [
-    DateOnlyPipe
+    BeneficiosService,
+    CatalogosService,
+    ClientesService,
+    CuponesService,
+    ExtrasService,
+    PlanesService,
+    PolizasService,
+    PreciosService,
+    ServiciosService,
+    GetLocationService,
+    VentasService,
+    ExtrasPolizasService,
+    BeneficiariosService,
   ],
   bootstrap: [AppComponent]
 })

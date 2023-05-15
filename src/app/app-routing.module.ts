@@ -4,18 +4,8 @@ import { RouterModule, Routes } from '@angular/router';
 
 
 
-import { PipesModule } from './pipes/pipes.module';
 
-import { LandingPageComponent } from './pages/landing-page/landing-page.component';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { ServicesModule } from './services/services.module';
-import { HomeComponent } from './components/home/home.component';
 
-import { CotizarComponent } from './components/cotizar/cotizar.component';
-import { DatosPolizasComponent } from './components/datos-polizas/datos-polizas.component';
-import { ListPolizasComponent } from './components/list-polizas/list-polizas.component';
-import { PolizasDetallesComponent } from './components/polizas-detalles/polizas-detalles.component';
-import { PolizaComponent } from './components/poliza/poliza.component';
 
 
 
@@ -24,96 +14,35 @@ import { PolizaComponent } from './components/poliza/poliza.component';
 const routes : Routes = [
   
   {
-    path: '**',
-    redirectTo : 'landing-page',
-    pathMatch: 'full',
-  },
-  {
     path: '',
-    redirectTo : 'home',
-    pathMatch: 'full',
-  },
-  
-  {
-    path: '',
-    component: LandingPageComponent,
-    children : [
-      {
-        path : 'home',
-        component : HomeComponent,
-      },
-      
-      {
-        path: 'cotizar',
-        component: CotizarComponent,
-        
-        
-      },
-      {
-        path: 'datos-polizas',
-        component : DatosPolizasComponent
-      },
-      {
-        path : 'polizas',
-        component : ListPolizasComponent,
-        children: [
-          {
-            path: 'listado-polizas',
-            component : PolizasDetallesComponent,
-           
-          },
-          
-          {
-            path: 'poliza/:id',
-            component : PolizaComponent,
-          }
-          
-
-
-        ]
-      }
-      
-    ]
+    redirectTo : 'home/inicio',
+    pathMatch : 'full'
   },
   {
-    path:'dashboard',
-    redirectTo: 'dashboard/planes/listado-planes',
-    pathMatch: 'full',
+    path: 'home',
+    redirectTo : 'home/inicio',
   },
 
   {
     path: 'dashboard',
-    component:  DashboardComponent,
-    children: [
-      {
-        path: '',
-        loadChildren: () => import('./Modules/polizas/polizas.module').then(m => m.PolizasModule)
-      },
-      {
-        path: '',
-        loadChildren: () => import('./Modules/sitio-web/sitio-web-routes.module').then(m => m.SitioWebRoutingModule)
-      },
-      {
-        path: '',
-        loadChildren: () => import('./Modules/usuarios/usuarios.module').then(m => m.UsuariosModule)
-      },
-      {
-        path: '',
-        loadChildren : () => import('./Modules/planes/planes.module').then(m => m.PlanesModule)
-      },
-      {
-        path: '',
-        loadChildren : () => import('./Modules/cupones/cupones.module').then(m => m.CuponesModule)
-      },
-      {
-        path : '',
-        loadChildren : ()=> import('./Modules/camp-descuentos/camp-descuentos.module').then(m => m.CampDescuentosModule)
-      }
-      
-    ]
-    
+    redirectTo : 'dashboard/polizas/listado-polizas',
+  },
+  { path: 'dashboard', loadChildren: () => import('./Modules/CRM/crm.module').then(m => m.CrmModule) },
+
+  
+  { path: 'home' , loadChildren: () => import('./Modules/landing-page/landing-page.module').then(m => m.LandingPageModule) },
+
+  { 
+    path: 'login' , loadChildren : () => import('./Modules/auth/auth.module').then(m => m.AuthModule),
   },
   
+
+  
+
+  {
+    path : '**',
+    redirectTo : 'home/inicio',
+  },
   
   
 
@@ -123,8 +52,6 @@ const routes : Routes = [
 @NgModule({
   imports: [
     RouterModule.forRoot(routes),
-    ServicesModule,
-    PipesModule,
     
     
     
