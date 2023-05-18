@@ -15,13 +15,10 @@ const routes : Routes = [
   
   {
     path: '',
-    redirectTo : 'home/inicio',
+    redirectTo : 'auth/login',
     pathMatch : 'full'
   },
-  {
-    path: 'home',
-    redirectTo : 'home/inicio',
-  },
+  
 
   {
     path: 'dashboard',
@@ -30,18 +27,13 @@ const routes : Routes = [
   { path: 'dashboard', loadChildren: () => import('./Modules/CRM/crm.module').then(m => m.CrmModule) },
 
   
-  { path: 'home' , loadChildren: () => import('./Modules/landing-page/landing-page.module').then(m => m.LandingPageModule) },
 
-  { 
-    path: 'login' , loadChildren : () => import('./Modules/auth/auth.module').then(m => m.AuthModule),
-  },
-  
-
+  { path: 'auth' , loadChildren : () => import('./Modules/auth/auth.module').then(m => m.AuthModule) },
   
 
   {
     path : '**',
-    redirectTo : 'home/inicio',
+    redirectTo : 'auth/login',
   },
   
   

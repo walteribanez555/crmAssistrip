@@ -1,5 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit,  ElementRef, HostListener, ViewChild} from '@angular/core';
 import { routeSideNav } from 'src/app/Modules/shared/models/Pages/routes.model';
+import { AuthService } from '../shared/services/auth/auth.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -7,7 +9,7 @@ import { routeSideNav } from 'src/app/Modules/shared/models/Pages/routes.model';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
   title = 'assistrip';
 
   
@@ -19,6 +21,8 @@ export class DashboardComponent {
   lightActive = true;
   darkActive = false;
   
+  
+
 
 
   
@@ -218,15 +222,21 @@ export class DashboardComponent {
     
   ];
 
-  constructor(private cdr : ChangeDetectorRef,
-              private elementRef: ElementRef){
+  constructor(
+    private cdr : ChangeDetectorRef,
+    private elementRef: ElementRef,
+    private authService : AuthService,
+    private router : Router,){
     
   }
 
 
   ngOnInit(){
-    
     document.addEventListener('click', this.onDocumentClick.bind(this));
+
+    if(!this.authService.isLoggedIn()){
+      this.router.navigate(['login']);
+    }
   }
 
 
@@ -274,6 +284,12 @@ export class DashboardComponent {
 
   toggleSidenav(){
     this.display_sidenav = !this.display_sidenav;
+  }
+
+
+  logout(){
+    this.authService.logout();
+    this.router.navigate(['../../../auth/login']);
   }
 
 }

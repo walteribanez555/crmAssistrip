@@ -15,29 +15,42 @@ export class AuthService {
 
   constructor() { }
 
-  login(username: string, password: string, role: UserRole): boolean {
+  login(username: string, password: string): boolean {
     // Authentication logic using the enum UserRole
-    if (role === UserRole.Admin && username === 'admin' && password === 'admin123') {
+    if (username === 'walteribanez555@gmail.com' && password === 'Walteribane_8612') {
       this.isAuthenticated = true;
       this.currentUserRole = UserRole.Admin;
-      return true;
-    } else if (role === UserRole.User && username === 'user' && password === 'user123') {
+      this.currentUser = username;
+      localStorage.setItem('token', '123456789')
+    }
+
+    if (username === 'user' && password === 'user') {
       this.isAuthenticated = true;
       this.currentUserRole = UserRole.User;
-      return true;
-    } else {
-      return false;
+      this.currentUser = username;
+      localStorage.setItem('token', '123456789')
     }
+
+    return this.isAuthenticated;
+
+
   }
 
   logout(): void {
     this.isAuthenticated = false;
     this.currentUserRole = null;
     this.currentUser = null;
+    localStorage.clear();
   }
 
   isLoggedIn(): boolean {
-    return this.isAuthenticated;
+
+    if(!this.isAuthenticated  && !localStorage.getItem('token')  ){
+      return false;
+    }
+
+
+    return true;
   }
 
   getCurrentUserRole(): UserRole | null {
@@ -47,6 +60,10 @@ export class AuthService {
   hasRole(role: UserRole): boolean {
     return this.currentUserRole === role;
   }
+
+  
+
+  
 
   
 }
