@@ -11,10 +11,7 @@ const routes: Routes = [
         path: '',
         loadChildren: () => import('./modules/polizas/polizas.module').then(m => m.PolizasModule)
       },
-      {
-        path: '',
-        loadChildren: () => import('./modules/sitio-web/sitio-web-routes.module').then(m => m.SitioWebRoutingModule)
-      },
+
       {
         path: '',
         loadChildren: () => import('./modules/usuarios/usuarios.module').then(m => m.UsuariosModule)
@@ -24,17 +21,21 @@ const routes: Routes = [
         loadChildren : () => import('./modules/planes/planes.module').then(m => m.PlanesModule)
       },
       {
-        path: '',
-        loadChildren : () => import('./modules/cupones/cupones.module').then(m => m.CuponesModule)
+        path : '',
+        loadChildren : () => import('./modules/siniestros/siniestros.module').then(m=> m.SiniestrosModule)
       },
       {
         path : '',
-        loadChildren : ()=> import('./modules/camp-descuentos/camp-descuentos.module').then(m => m.CampDescuentosModule)
+        loadChildren : () => import('./modules/reembolsos/reembolsos.module').then(m=> m.ReembolsosModule),
+      },
+      {
+        path : '',
+        loadChildren : () => import('./modules/cupones/cupones.module').then(m => m.CuponesModule),
       }
     ]
   }
 
- 
+
 ];
 
 @NgModule({

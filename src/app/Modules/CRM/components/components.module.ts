@@ -8,6 +8,8 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PipesModule } from '../../shared/pipes/pipes.module';
 import { ListPoliciesGroupComponent } from './list-policies-group/list-policies-group.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 
 
@@ -18,6 +20,8 @@ import { ListPoliciesGroupComponent } from './list-policies-group/list-policies-
     FormDatesDestinationComponent,
     ListPolizasComponent,
     ListPoliciesGroupComponent,
+    SidebarComponent,
+    NavbarComponent,
 
 
   ],
@@ -35,7 +39,9 @@ import { ListPoliciesGroupComponent } from './list-policies-group/list-policies-
     CotizacionComponentComponent,
     FormDatesDestinationComponent,
     ListPolizasComponent,
-    ListPoliciesGroupComponent
+    ListPoliciesGroupComponent,
+    SidebarComponent,
+    NavbarComponent,
 
   ]
 })

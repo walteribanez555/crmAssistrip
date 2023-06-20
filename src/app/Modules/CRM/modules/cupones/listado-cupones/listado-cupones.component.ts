@@ -14,13 +14,13 @@ import { CuponesService } from 'src/app/Modules/shared/services/requests/cupones
   ]
 })
 export class ListadoCuponesComponent  implements OnInit{
-  
+
   listado_Cupones : Cupon[] = [];
   hasLoaded = true;
 
 
 
-  
+
 
 
   constructor(
@@ -30,12 +30,12 @@ export class ListadoCuponesComponent  implements OnInit{
 
 
   ngOnInit(){
-  
+
     this.hasLoaded = false
     this.cupones.getCupones().subscribe(
       (data)=>{
         this.hasLoaded= true;
-        this.listado_Cupones = data.filter(item => item.status!=0);
+        this.listado_Cupones = data.filter(item => item.status!=2);
       }
     )
   }
@@ -57,7 +57,7 @@ export class ListadoCuponesComponent  implements OnInit{
 
   }
 
- 
+
 
 
 

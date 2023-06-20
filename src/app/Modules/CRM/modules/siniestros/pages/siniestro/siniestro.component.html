@@ -1,0 +1,22 @@
+<div class="container"  *ngIf="!loading">
+    <div class="left">
+      <h2>Siniestro : {{1}}</h2>
+      <hr>
+      <div class="info">
+
+        <siniestro-data *ngIf="siniestro" [siniestro]="siniestro"  (beneficiarioEmit)="haveBeneficiario($event)"></siniestro-data>
+        <div class="message-container">
+          <mensaje-form [idSiniestro]="siniestroId"  (addMessage)="onAddMessage($event)" ></mensaje-form>
+          <hr>
+          <list-messages *ngIf="siniestro && beneficiario" [siniestro]="siniestro" [beneficiario]="beneficiario" [events]="addToChildMessage.asObservable()"></list-messages>
+        </div>
+      </div>
+    </div>
+    <div class="right">
+      <h2>Acciones</h2>
+      <hr>
+
+    </div>
+</div>
+
+<loading-div *ngIf="loading"></loading-div>

@@ -24,14 +24,14 @@ export class CuponesService {
   getCuponById(id : number): Observable<Cupon[]>{
     let params = new HttpParams;
 
-    params = params.append('id', id);    
+    params = params.append('id', id);
 
     return this.http.get<Cupon[]>(this.apiUrl, {params});
   }
 
 
 
-  
+
 
   postCupon(nuevoCupon : CuponPost) : Observable<Cupon>{
     return this.http.post<Cupon>(this.apiUrl, {
@@ -40,7 +40,8 @@ export class CuponesService {
       tipo_valor : nuevoCupon.tipo_valor,
       fecha_desde : nuevoCupon.fecha_desde,
       fecha_hasta : nuevoCupon.fecha_hasta,
-      status: nuevoCupon.status
+      status: nuevoCupon.status,
+      nombre : nuevoCupon.nombre,
 
     })
 
@@ -53,7 +54,7 @@ export class CuponesService {
 
     console.log(url);
 
-    params = params.append('id', id);    
+    params = params.append('id', id);
 
     return this.http.put<Cupon[]>(url,{
       servicio_id : cuponModificado.servicio_id,
@@ -61,8 +62,22 @@ export class CuponesService {
       tipo_valor : cuponModificado.tipo_valor,
       fecha_desde : cuponModificado.fecha_desde,
       fecha_hasta : cuponModificado.fecha_hasta,
-      status: cuponModificado.status
+      status: cuponModificado.status,
+
 
     }  );
   }
+
+  deleteCupon(id : number){
+
+    const url = `${this.apiUrl}?id=${id}`;
+
+    return this.http.put(url,{
+      status : 2,
+    })
+
+  }
 }
+
+
+

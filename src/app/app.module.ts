@@ -26,7 +26,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PipesModule } from './Modules/shared/pipes/pipes.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { PopupComponent } from './Modules/shared/Components/popup/popup.component';
+import { SiniestroService } from './Modules/shared/services/requests/siniestro.service';
+import { MensajeService } from './Modules/shared/services/requests/mensaje.service';
+import { TransformDataService } from './Modules/shared/services/utils/transform-data.service';
 
 
 
@@ -38,8 +40,8 @@ import { PopupComponent } from './Modules/shared/Components/popup/popup.componen
   declarations: [
     AppComponent,
 
-    
-    
+
+
 
   ],
   imports: [
@@ -52,11 +54,11 @@ import { PopupComponent } from './Modules/shared/Components/popup/popup.componen
     FormsModule,
     PipesModule,
     BrowserAnimationsModule
-    
-    
-    
-  
-    
+
+
+
+
+
   ],
   providers: [
     BeneficiosService,
@@ -72,6 +74,9 @@ import { PopupComponent } from './Modules/shared/Components/popup/popup.componen
     VentasService,
     ExtrasPolizasService,
     BeneficiariosService,
+    SiniestroService,
+    MensajeService,
+    TransformDataService,
   ],
   bootstrap: [AppComponent]
 })

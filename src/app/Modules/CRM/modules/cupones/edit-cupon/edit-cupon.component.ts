@@ -19,11 +19,12 @@ import { loadingAnimation } from 'src/app/Modules/shared/animations/loading.anim
   ]
 })
 export class EditCuponComponent {
-  
-  
+
+
   minDate           :    string = "";
   listado_servicios :     any[] = [];
-  initialDate!  :     string; 
+  nombre : string | null  = null;
+  initialDate!  :     string;
   finalDate!    :     string;
   checkbox1Value = true;
   checkbox2Value = false;
@@ -49,10 +50,10 @@ export class EditCuponComponent {
     this.minDate = today.toISOString().split('T')[0];
   }
 
-        
+
 
   ngOnInit(): void {
-    
+
 
     const cuponId = parseInt(this.route.snapshot.paramMap.get('id')??"0");
 
@@ -64,21 +65,22 @@ export class EditCuponComponent {
         cupones => {
           //Obtenemos el primer elemento
           this.cupon = cupones[0];
-        
-  
+
+
           //Establecemos los datos
-  
+
+          this.nombre         = this.cupon.nombre ? this.cupon.nombre : null,
           this.initialDate    = this.utilsService.getDateDto(this.cupon.fecha_desde).toISOString().slice(0, 10);
           this.finalDate      = this.utilsService.getDateDto(this.cupon.fecha_hasta).toISOString().slice(0, 10);
           this.monto          = this.cupon.valor;
           this.checkbox1Value = this.cupon.tipo_valor === 1 ? true : false;
           this.checkbox2Value = this.cupon.tipo_valor === 2 ? true : false;
-  
-  
+
+
           return this.serviciosService.getServicios()
         }
       )
-      
+
     ).subscribe(
       servicios => {
         servicios.forEach(servicio => {
@@ -89,17 +91,17 @@ export class EditCuponComponent {
           })
 
           this.hasLoaded = true;
-        
+
         })
-      } 
+      }
 
     )
-        
+
   }
 
 
   onCheckboxChange( type : number) {
-    
+
     if(type === 1){
       this.checkbox2Value =  false;
     }
@@ -111,15 +113,22 @@ export class EditCuponComponent {
   }
 
   onChangeForm(){
-    if(this.initialDate && this.finalDate && (this.checkbox1Value===true || this.checkbox2Value===true) && this.monto && this.oneAtLeast()  ){
+
+    if(this.nombre){
+      console.log("hola");
+    }
+
+
+
+    if(this.initialDate && this.finalDate && (this.checkbox1Value===true || this.checkbox2Value===true) && this.monto && this.oneAtLeast()  && this.nombre ){
       this.isReady = true;
 
-      return
+      return;
     }
 
     this.isReady= false;
     return
-    
+
   }
 
   selectItem(servicio : any){
@@ -167,6 +176,7 @@ export class EditCuponComponent {
             fecha_desde : this.initialDate.toString(),
             fecha_hasta : this.finalDate.toString(),
             servicio_id : servicio.servicio.servicio_id,
+            nombre : this.nombre,
             status: 1,
             tipo_valor : this.checkbox1Value ? 1 : 2,
             valor: this.monto,
@@ -197,21 +207,21 @@ export class EditCuponComponent {
 
 
 
-      return 
+      return
 
 
     }
-  
+
 
     showLoading(){
       Swal.fire({
-      
+
         text: 'Espere un momento mientras se procesa la informacion',
         imageUrl: "assets/svg/loading.svg",
-        
+
         showConfirmButton : false,
         allowOutsideClick: false,
-        
+
         imageWidth: 50,
         imageHeight: 50,
         imageAlt: 'Custom image',

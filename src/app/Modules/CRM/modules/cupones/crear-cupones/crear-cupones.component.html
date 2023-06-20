@@ -4,7 +4,7 @@
             <h2>Nuevo Cupon de descuento</h2>
             <hr >
             <div class="attributes">
-                
+
                 <div class="field">
                     <label>Desde</label>
                     <input [(ngModel)]="initialDate" (change)="onChangeForm()"  [min]="minDate" type="date">
@@ -13,7 +13,14 @@
                     <label>Hasta</label>
                     <input [(ngModel)]="finalDate"  (change)="onChangeForm()"  [min]="minDate" type="date">
                 </div>
-                <div class="field"> 
+                <div class="field">
+                  <label>Nombre</label>
+                  <input  [(ngModel)]="nombre" placeholder="Nombre del cupon"  type="text"  type="text">
+
+                </div>
+
+
+                <div class="field">
                     <label>Tipo de descuento</label>
                     <div class="option-checkbox">
                       <input type="checkbox"  [(ngModel)]="checkbox1Value" value="checkbox1Value"  (change)="onCheckboxChange(1)">
@@ -39,13 +46,13 @@
                 <div class="table-container">
                   <div class="table-data" [class.info]="hasLoaded">
                     <div class="loading" [@loadingAnimation]="hasLoaded ? 'hide' : 'show'">
-                      <img  
-                      src="assets/svg/loading.svg" 
+                      <img
+                      src="assets/svg/loading.svg"
                       alt=""
                       >
                       <span>Espere un momento, cargando la informacion</span>
                     </div>
-                    
+
                       <table [@loadingAnimation]="hasLoaded ? 'show' : 'hide'" >
                         <thead>
                           <tr>
@@ -65,7 +72,7 @@
                           </tr>
                         </tbody>
                       </table>
-            
+
                     </div>
                     <div class="table-selector">
                       <div class="pagination">
@@ -78,7 +85,7 @@
                         <div class="btn">
                              Siguiente
                         </div>
-            
+
                       </div>
                     </div>
                   </div>
@@ -86,8 +93,8 @@
 
         </div>
 
-        
-        
+
+
 
 
 
@@ -95,16 +102,16 @@
     <div class="actions">
         <h2>Acciones</h2>
         <hr>
-  
+
         <div class="buttons">
           <button  [class.active]="isReady"  (click)="createCupon()"   class="emitir ">
             Crear nueva cupon
           </button>
-          
+
           <button (click)="cancel()"   class="cancelar" >
             Cancelar
           </button>
-        </div>     
+        </div>
 
         <hr>
 

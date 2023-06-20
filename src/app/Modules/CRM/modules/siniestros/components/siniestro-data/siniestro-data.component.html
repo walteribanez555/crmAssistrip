@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="top">
+    <span>Siniestro : {{siniestro.siniestro_id}}</span>
+  </div>
+  <div class="data">
+    <div class="field row">
+
+      <div class="column">
+        <div class="title">
+          <span>Lugar</span>
+        </div>
+        <div class="description">
+          <span>{{siniestro.pais_ocurrencia}}</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="field column">
+        <div class="title">
+          <span>Tipo de siniestro</span>
+        </div>
+        <div class="description">
+          <span>{{tipoBeneficio?.etiqueta}}</span>
+        </div>
+
+
+    </div>
+
+    <div class="field">
+      <beneficiario *ngIf="beneficiario" [beneficiario]="beneficiario"  ></beneficiario>
+    </div>
+
+    <div class="item-description">
+
+      <div class="title">
+        <span>Descripcion del siniestro</span>
+      </div>
+
+      <div class="description">
+        <p class="">   {{siniestro.descripcion | zeroToMessage | signals_string}}</p>
+      </div>
+
+    </div>
+
+    <div class="item-description">
+
+      <div class="title">
+        <span>Archivo Adjunto</span>
+      </div>
+      <div class="description" >
+        <span class="fit-span" style="cursor: pointer;"  >{{'Click para descargar archivo'| zeroToMessage | signals_string }}</span>
+      </div>
+
+    </div>
+
+  </div>
+</div>

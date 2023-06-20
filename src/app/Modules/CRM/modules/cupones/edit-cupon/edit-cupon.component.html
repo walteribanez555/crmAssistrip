@@ -4,7 +4,7 @@
             <h2>Editar cupon ({{cupon?.cupon_id}})</h2>
             <hr >
             <div class="attributes">
-                
+
                 <div class="field">
                     <label>Desde</label>
                     <input [(ngModel)]="initialDate" (change)="onChangeForm()"  [min]="minDate" type="date">
@@ -13,7 +13,11 @@
                     <label>Hasta</label>
                     <input [(ngModel)]="finalDate"  (change)="onChangeForm()"  [min]="minDate" type="date">
                 </div>
-                <div class="field"> 
+                <div class="field">
+                  <label>Nombre</label>
+                  <input [(ngModel)]="nombre"  placeholder="Nombre"  type="text" (keyup)="onChangeForm()" >
+                </div>
+                <div class="field">
                     <label>Tipo de descuento</label>
                     <div class="option-checkbox">
                       <input type="checkbox"  [(ngModel)]="checkbox1Value" value="checkbox1Value"  (change)="onCheckboxChange(1)">
@@ -23,8 +27,7 @@
                       <input type="checkbox"  [(ngModel)]="checkbox2Value" value="checkbox2Value" (change)="onCheckboxChange(2)">
                       <span>Monto</span>
                     </div>
-
-                  </div>
+                </div>
                 <div class="field">
                     <label>Monto</label>
                     <input type="number" (change)="onChangeForm()"   [(ngModel)]="monto" placeholder="10000">
@@ -32,7 +35,7 @@
                 </div>
 
             </div>
-            
+
             <div class="servicios-data">
               <div class="information-container" *ngIf="hasLoaded">
                 <app-popup [@loadingAnimation]="hasLoaded ? 'show' : 'hide'" [message]="'Solamente puedes seleccionar un servicio'" [duration]="3000" ></app-popup>
@@ -40,15 +43,15 @@
               <div class="table-container">
                   <div class="table-data" [class.info]="hasLoaded">
                     <div class="loading" [@loadingAnimation]="hasLoaded ? 'hide' : 'show'">
-                      <img  
-                      src="assets/svg/loading.svg" 
+                      <img
+                      src="assets/svg/loading.svg"
                       alt=""
                       >
                       <span>Espere un momento, cargando la informacion</span>
                     </div>
-                    
-                    
-                    
+
+
+
                     <table   [@loadingAnimation]="hasLoaded ? 'show' : 'hide'" >
                       <thead>
                         <tr>
@@ -68,7 +71,7 @@
                         </tr>
                       </tbody>
                     </table>
-          
+
                   </div>
                   <div class="table-selector">
                     <div class="pagination">
@@ -81,7 +84,7 @@
                       <div class="btn">
                             Siguiente
                       </div>
-          
+
                     </div>
                   </div>
                 </div>
@@ -89,8 +92,8 @@
 
         </div>
 
-        
-        
+
+
 
 
 
@@ -98,16 +101,16 @@
     <div class="actions">
         <h2>Acciones</h2>
         <hr>
-  
+
         <div class="buttons">
           <button  [class.active]="isReady"  (click)="editCupon()"   class="emitir ">
             Editar
           </button>
-          
+
           <button (click)="cancel()"   class="cancelar" >
             Cancelar
           </button>
-        </div>     
+        </div>
 
         <hr>
 

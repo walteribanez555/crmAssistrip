@@ -1,0 +1,94 @@
+<div class="container">
+
+  <div class="field row">
+    <div class="column">
+      <div class="title">
+        <span>Nombres</span>
+      </div>
+      <div class="description" >
+        <span class="info">{{beneficiario.primer_nombre}} </span>
+        <span class="info" *ngIf="beneficiario.segundo_nombre!=='0'">{{beneficiario.segundo_nombre}} </span>
+
+      </div>
+
+    </div>
+    <div class="column">
+      <div class="title">
+        <span>Apellidos</span>
+      </div>
+      <div class="description">
+        <span class="info">{{beneficiario.primer_apellido}} </span>
+        <span class="info" *ngIf="beneficiario.segundo_apellido!=='0'">{{beneficiario.segundo_apellido}} </span>
+
+      </div>
+
+    </div>
+  </div>
+  <div class="field row">
+    <div class="column">
+      <div class="title">
+        <span>Fecha de nacimiento</span>
+      </div>
+      <div class="description">
+        <span>{{beneficiario.fecha_nacimiento  | dateOnly }}</span>
+
+      </div>
+
+    </div>
+    <div class="column">
+      <div class="title">
+        <span>Nro de pasaporte</span>
+      </div>
+      <div class="description">
+        <span>{{beneficiario.nro_identificacion}}</span>
+      </div>
+
+    </div>
+  </div>
+  <div class="field row">
+    <div class="column">
+      <div class="title">
+        <span>Nacionalidad</span>
+      </div>
+      <div class="description">
+        <span>{{beneficiario.origen}}</span>
+      </div>
+
+    </div>
+    <div class="column">
+      <div class="title">
+        <span>Nro de Whatsapp</span>
+      </div>
+      <div class="description">
+        <span>{{beneficiario.telefono}}</span>
+
+      </div>
+
+    </div>
+
+  </div>
+  <div class="field row">
+    <div class="column">
+      <div class="title">
+        <span>Email</span>
+      </div>
+      <div class="description">
+        <span>{{beneficiario.email}}</span>
+      </div>
+
+    </div>
+
+
+  </div>
+  <div class="field row">
+    <div class="column">
+      <div class="title">
+        <span>Nro Poliza</span>
+      </div>
+      <div class="description">
+        <span>{{beneficiario.poliza_id}}</span>
+
+      </div>
+    </div>
+  </div>
+</div>

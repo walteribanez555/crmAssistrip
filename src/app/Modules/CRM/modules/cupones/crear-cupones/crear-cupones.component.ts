@@ -21,10 +21,11 @@ import { loadingAnimation } from 'src/app/Modules/shared/animations/loading.anim
 })
 export class CrearCuponesComponent {
 
-  
+
   minDate           :    string = "";
   listado_servicios :     any[] = [];
-  initialDate!  :     Date; 
+  nombre : string | null = null;
+  initialDate!  :     Date;
   finalDate!    :     Date;
   checkbox1Value = true;
   checkbox2Value = false;
@@ -47,13 +48,13 @@ export class CrearCuponesComponent {
     this.minDate = today.toISOString().split('T')[0];
   }
 
-        
+
 
   ngOnInit(): void {
     this.hasLoaded = false;
     this.serviciosService.getServicios().subscribe(
-      servicios => { 
-        servicios.forEach(servicio => { 
+      servicios => {
+        servicios.forEach(servicio => {
           this.listado_servicios.push({
             selectedItem : false,
             servicio
@@ -62,14 +63,14 @@ export class CrearCuponesComponent {
 
 
         this.hasLoaded = true;
-         
+
       }
     )
   }
 
 
   onCheckboxChange( type : number) {
-    
+
     if(type === 1){
       this.checkbox2Value =  false;
     }
@@ -89,7 +90,7 @@ export class CrearCuponesComponent {
 
     this.isReady= false;
     return
-    
+
   }
 
   selectItem(servicio : any){
@@ -128,6 +129,7 @@ export class CrearCuponesComponent {
           const cupon : CuponPost = {
             fecha_desde : this.initialDate.toString(),
             fecha_hasta : this.finalDate.toString(),
+            nombre : this.nombre,
             servicio_id : servicio.servicio.servicio_id,
             status: 1,
             tipo_valor : this.checkbox1Value ? 1 : 2,
@@ -157,21 +159,21 @@ export class CrearCuponesComponent {
 
 
 
-      return 
+      return
 
 
     }
-  
+
 
     showLoading(){
       Swal.fire({
-      
+
         text: 'Espere un momento mientras se procesa la informacion',
         imageUrl: "assets/svg/loading.svg",
-        
+
         showConfirmButton : false,
         allowOutsideClick: false,
-        
+
         imageWidth: 50,
         imageHeight: 50,
         imageAlt: 'Custom image',
@@ -201,7 +203,7 @@ export class CrearCuponesComponent {
     }
 }
 
-  
+
 
 
 

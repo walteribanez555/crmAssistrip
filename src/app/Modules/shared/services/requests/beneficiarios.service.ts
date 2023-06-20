@@ -24,12 +24,12 @@ export class BeneficiariosService {
   }
 
 
-  getBeneficiarioById(id : number): Observable<Beneficiario>{
+  getBeneficiarioById(id : number): Observable<Beneficiario[]>{
     let params = new HttpParams;
 
     params = params.append('id', id);
 
-    return this.http.get<Beneficiario>(this.apiUrl, {params});
+    return this.http.get<Beneficiario[]>(this.apiUrl, {params});
 
   }
 

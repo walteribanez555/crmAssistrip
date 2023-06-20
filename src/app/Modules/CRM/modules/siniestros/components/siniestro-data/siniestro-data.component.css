@@ -1,0 +1,93 @@
+.container{
+  display: flex;
+  width: 100%;
+  border-radius: 2px;
+  flex-direction: column;
+  padding: 20px ;
+  background-color: #efedf7;
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
+  margin: 10px 0px;
+
+}
+
+.top{
+  font-size: 20px;
+  color: var(--main-color);
+
+}
+
+.data{
+  display: flex;
+  flex-direction: column;
+}
+
+.field{
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-evenly;
+  width: 100%;
+  padding: 20px 0px;
+  text-align: start;
+  color: var(--main-color);
+}
+
+.row{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.column{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+
+.description span,
+.description p{
+  font-weight: bold;
+  font-size: 20px;
+}
+
+
+
+.item-description{
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--main-color);
+}
+
+.description{
+  width: 100%;
+
+}
+
+.fit-span{
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+
+beneficiario{
+  width: 100%;
+  padding: 10px 50px;
+}
+
+
+@media (max-width:768px) {
+  beneficiario{
+    padding: 10px;
+  }
+
+}
+
+

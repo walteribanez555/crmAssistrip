@@ -8,11 +8,11 @@
         <app-popup [@loadingAnimation]="hasLoaded ? 'show' : 'hide'" [message]="'Igualmente se puede editar la informacion'" [duration]="3000" ></app-popup>
       </div>
       <div class="table-container">
-        
+
         <div class="table-data" [class.info]="hasLoaded" >
           <div class="loading" [@loadingAnimation]="hasLoaded ? 'hide' : 'show'">
-            <img  
-            src="assets/svg/loading.svg" 
+            <img
+            src="assets/svg/loading.svg"
             alt=""
             >
             <span>Espere un momento, cargando la informacion</span>
@@ -21,14 +21,15 @@
             <thead>
               <tr>
                 <th>cupon_id</th>
+                <th>Nombre</th>
                 <th>servicio_id</th>
-                <th>tipo_valor</th>
+
                 <th>valor</th>
                 <th>fecha_desde</th>
                 <th>fecha_hasta</th>
                 <th></th>
-  
-               
+
+
               </tr>
             </thead>
             <tbody>
@@ -39,19 +40,21 @@
 
                   </span>
                 </td>
+                <td *ngIf="cupon.nombre">{{cupon.nombre}}</td>
+                <td *ngIf="!cupon.nombre">No tiene nombre</td>
                 <td>{{cupon.servicio_id}}</td>
-                <td>{{cupon.tipo_valor}}</td>
-                <td>{{cupon.valor  | currency:'USD':'symbol':'1.2-2' }}</td>
+                <td  *ngIf="cupon.tipo_valor===1">{{cupon.valor+'%'}}</td>
+                <td  *ngIf="cupon.tipo_valor===2">{{cupon.valor  | currency:'USD':'symbol':'1.1-2' }}</td>
                 <td>{{cupon.fecha_desde | extractDate}}</td>
                 <td>{{cupon.fecha_hasta | extractDate }} </td>
                 <td class="link"  (click)="editDetails(cupon.cupon_id)" >
                   <span>Editar</span>
                 </td>
-                
-  
-  
+
+
+
               </tr>
-              
+
             </tbody>
           </table>
 
@@ -80,14 +83,14 @@
       <hr>
 
       <div class="buttons">
-        
-        
+
+
         <button (click)="createCupones()"  class="emitir" >
           Crear cupon
         </button>
-      </div>     
+      </div>
 
       <hr>
-    
+
     </div>
    </div>
