@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PipesModule } from '../shared/pipes/pipes.module';
 import { ComponentsModule } from './components/components.module';
 import { DashboardComponent } from './dashboard.component';
+import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 
 
 
@@ -14,23 +15,25 @@ import { DashboardComponent } from './dashboard.component';
   declarations: [
      //Componentes
      DashboardComponent,
-     
-     
-     
+
+
+
   ],
   imports: [
     CommonModule,
     CrmRoutingModule,
     ComponentsModule,
-    
-    
-   
+
+
+
     //Modulos
     ReactiveFormsModule,
     FormsModule,
     PipesModule,
-    
-    
+    NgxIntlTelInputModule,
+
+
+
 
 
   ]

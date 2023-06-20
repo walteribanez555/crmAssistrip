@@ -17,6 +17,7 @@ import { MensajeFormComponent } from './components/mensaje-form/mensaje-form.com
 import { ListMessagesComponent } from './components/list-messages/list-messages.component';
 import { SharedModule } from 'src/app/Modules/shared/shared.module';
 import { BeneficiarioComponent } from './components/beneficiario/beneficiario.component';
+import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 
 
 @NgModule({
@@ -44,6 +45,8 @@ import { BeneficiarioComponent } from './components/beneficiario/beneficiario.co
     SharedModule,
     ReactiveFormsModule,
     FormsModule,
+    NgxIntlTelInputModule,
+
 
   ]
 })
