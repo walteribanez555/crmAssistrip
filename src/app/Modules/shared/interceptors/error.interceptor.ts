@@ -43,7 +43,7 @@ export class ErrorInterceptor implements HttpInterceptor {
 
                 break;
 
-              case  HttpStatusCode.InvalidToken:
+              case  498:
                 Swal.fire({
                   position: 'top-end',
                   icon: 'info',
