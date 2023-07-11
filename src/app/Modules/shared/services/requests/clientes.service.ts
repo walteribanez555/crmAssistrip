@@ -1,10 +1,11 @@
-import { HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { HttpClient, HttpParams, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Cliente, ClientePost, ClienteResp } from '../../models/Data/Cliente';
 import { environment } from 'src/environments/environment';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { AuthService } from '../auth/auth.service';
 
 
 @Injectable({
@@ -13,29 +14,61 @@ import { throwError } from 'rxjs';
 export class ClientesService {
 
   private apiUrl : string = '/api/clientes';
+  private headers: HttpHeaders;
+  private authService = inject(AuthService);
   // private apiUrl = environment.apiUrl + '/clientes';
 
   constructor(private http: HttpClient) {
-    
-   }
+    this.headers = new HttpHeaders();
+    const token = this.authService.getToken();
 
-  getClientes(): Observable<Cliente[]> { 
+    if(token)
+        this.headers.set('Authorization',token);
+
+
+
+    try{
+
+
+    }catch(err){
+      console.log(err);
+    }
+  }
+
+  getClientes(): Observable<Cliente[]> {
     return this.http.get<Cliente[]>(this.apiUrl);
   }
 
 
-  getClienteById(id : number): Observable<Cliente[]>{ 
+  getClienteById(id : number): Observable<Cliente[]>{
      let params  = new HttpParams;
 
      params = params.append('id', id);
-     
-     return this.http.get<Cliente[]>(this.apiUrl,{params});
+
+     return this.http.get<Cliente[]>(this.apiUrl,{params}).pipe(
+        map(
+          data =>{
+            if(data.length> 0 ){
+              return data
+            }
+            else{
+              throw new Error("No se encontro ningun cliente")
+            }
+
+          }
+        ),
+        catchError(
+          err => throwError( () => err.error.message)
+        )
+
+
+     )
   }
 
   postCliente(cliente : ClientePost) :Observable<ClienteResp>{
 
 
-    const data = { 
+    const data = {
       tipo_cliente : 1,
       nombre : cliente.nombre,
       apellido : cliente.apellido,
@@ -66,5 +99,7 @@ export class ClientesService {
 
 
 
-  
+
+
+
 }

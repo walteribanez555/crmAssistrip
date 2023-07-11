@@ -1,0 +1,42 @@
+<div class="container">
+
+  <div class="table-container">
+    <div class="table-data" [class.info]="hasLoaded">
+      <div class="loading" [@loadingAnimation]="hasLoaded ? 'hide' : 'show'">
+        <img
+        src="assets/svg/loading.svg"
+        alt=""
+        >
+        <span>Espere un momento, cargando la informacion</span>
+      </div>
+
+        <table [@loadingAnimation]="hasLoaded ? 'show' : 'hide'" >
+          <thead>
+            <tr>
+              <th class="f-start">Tipo de Usuario</th>
+              <th>Estado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let rol of list_roles">
+              <td    class="f-start">
+                <span>{{rol.rol_name}}</span>
+              </td>
+              <td>
+                <div class="option">
+                  <input type="checkbox" [id]="rol.rol_name"  (change)="onChangeSelect(rol)" >
+                  <label class="button" [for]="rol.rol_name"></label>
+
+                </div>
+              </td>
+
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+
+    </div>
+
+
+</div>

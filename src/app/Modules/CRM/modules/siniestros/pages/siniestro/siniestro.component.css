@@ -10,8 +10,14 @@
   left: 0;
   padding: 10px;
   overflow-y: auto;
+  overflow-x: hidden;
+  animation: aparecerDesdeDerecha 0.5s ease-out;
 
 
+}
+
+.right{
+  width: 100%;
 }
 
 a{
@@ -48,6 +54,30 @@ siniestro-data,
   flex-direction: column;
   padding: 20px;
 }
+
+.actions{
+  width: 100%;
+  padding: 0px 30px;
+}
+
+  a{
+  display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    margin: 10px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+  a.reembolso{
+  width: 100%;
+  background-color: var(--main-color);
+  color: white;
+  border: 1px solid var(--main-color);
+}
+
 
 
 @media (max-width:1200px) {

@@ -14,12 +14,37 @@ a {
   height: 100vh;
   box-shadow: var(--shadow);
   overflow-y: auto;
-
+  z-index: 2;
   scrollbar-width: thin;
   scrollbar-color: #ccc #fff;
   scrollbar-track-color: #fff;
   scrollbar-thumb-color: #ccc;
   scrollbar-arrow-color: #666;
+}
+
+.sidebar-backdrop{
+
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  animation-name: displayBackground;
+      animation-duration: 0.4s;
+      animation-timing-function:cubic-bezier(0.445, 0.05, 0.55, 0.95);
+      animation-iteration-count: 1;
+      cursor: pointer;
+}
+
+.sidebar-backdrop.active{
+  display: flex;
 }
 
 .dark .sidebar {
@@ -34,6 +59,21 @@ a {
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+
+}
+
+
+.sidebar-logo:hover{
+  background-color: #ccc;
+  transition: all 0.3s ease-in-out;
+}
+
+.sidebar-logo:hover .icon_sidebar{
+  background-color: #ccc;
+  transition: all 0.3s ease-in-out;
+
 }
 
 .sidebar-logo img {
@@ -86,6 +126,46 @@ flex-direction: row;
 .main {
   padding-left: 0;
 }
+
+.logo a {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.navbar .logo {
+  transition: scale 0.3s ease;
+
+}
+
+.navbar .logo:hover {
+  scale: 1.15;
+}
+
+
+.logo{
+  padding: 0px 20px;
+}
+.logo a h1{
+  font-size: 25px;
+  color: var(--main-color);
+  letter-spacing: -1px;
+  font-weight: 500;
+}
+h1 .trip{
+  font-weight: bold;
+  font-size: 20px;
+  margin-left: -5px;
+  letter-spacing: 1px;
+  margin-left: 0.1px;
+
+}
+h1 .com{
+  color: #DF085A;
+  font-size: 15px;
+  letter-spacing: 1px;
+  font-weight: bold;
+}
+
 
 
 
@@ -164,6 +244,12 @@ nav .btn-outline{
 }
 
 
+.link-submenu:hover,
+.sidebar-menu-dropdown:hover{
+  background-color: #ccc;
+
+}
+
 
 .sidebar-menu {
     padding: 10px 0;
@@ -192,7 +278,7 @@ nav .btn-outline{
   }
 
 .sidebar-menu-dropdown{
-    width: 100%;
+    width: calc(100%-20px);
     padding-left:  20px;
     height: 45px;
     display: flex;
@@ -235,17 +321,38 @@ nav .btn-outline{
 
 
 .sidebar-menu > li > a.active {
-    background-color: var(--menu-item-active-bg);
+    background-color: var(--main-color);
     color: var(--main-color);
     border-right: 4px solid var(--main-color);
+    color: white;
+    transition: 0.1s all ease-in-out;
 }
+
+.sidebar-menu > li > a i{
+  background: none;
+  color: var(--main-color);
+  transition: 0.1s all ease-in-out;
+
+}
+
+.sidebar-menu > li > a.active i,
+.sidebar-menu > li > a.active span{
+  color: white;
+  fill:  white;
+  transition: 0.1s all ease-in-out;
+
+}
+
+.sidebar-menu > li > a.active span{
+  font-weight: 100;
+}
+
 
 .sidebar-menu > li > a:hover {
     color: var(--main-color);
 }
 
 .sidebar-menu > li > a > i {
-    font-size: 1.5rem;
     margin-right: 10px;
 }
 

@@ -1,0 +1,66 @@
+<div class="container">
+
+  <div class="process" >
+
+    <h2>Usuarios/{{usuarioId}}</h2>
+    <hr>
+    <div class="grid-columns" *ngIf="usuario">
+      <div class="left">
+        <div class="field">
+          <span class="title">
+            Nombre(s)
+          </span>
+          <span class="description">
+            {{usuario.first_name}}
+          </span>
+
+        </div>
+        <div class="field">
+          <span class="title">
+            Apellido(s)
+          </span>
+          <span class="description">
+            {{usuario.last_name}}
+          </span>
+
+        </div>
+        <div class="field">
+          <span class="title">
+            Telefono
+          </span>
+          <span class="description">
+            {{usuario.phone}}
+          </span>
+
+        </div>
+
+
+      </div>
+      <div class="right">
+        <rol-user [list_roles]="rols"></rol-user>
+
+
+      </div>
+
+
+
+    </div>
+
+
+  </div>
+
+  <div class="actions">
+    <h2>Acciones</h2>
+    <hr>
+    <div class="buttons">
+      <button class="edit" [routerLink]="['./edit']"  >
+        Editar Usuario
+      </button>
+      <button class="delete"  >
+        Inhabilitar usuario
+      </button>
+    </div>
+  </div>
+
+
+</div>

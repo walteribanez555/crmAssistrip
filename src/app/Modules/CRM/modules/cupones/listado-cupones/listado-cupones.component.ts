@@ -6,7 +6,6 @@ import { Cupon } from 'src/app/Modules/shared/models/Data/Cupon';
 import { CuponesService } from 'src/app/Modules/shared/services/requests/cupones.service';
 
 @Component({
-  selector: 'app-listado-cupones',
   templateUrl: './listado-cupones.component.html',
   styleUrls: ['./listado-cupones.component.css'],
   animations : [

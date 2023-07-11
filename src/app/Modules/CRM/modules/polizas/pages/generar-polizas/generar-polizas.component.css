@@ -10,7 +10,8 @@
   left: 0;
   padding: 10px;
   overflow-y: auto;
-
+  overflow-x: hidden;
+  animation: aparecerDesdeDerecha 0.5s ease-out;
 
 }
 

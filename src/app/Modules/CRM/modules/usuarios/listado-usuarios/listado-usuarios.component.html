@@ -1,1 +1,81 @@
-<p>listado-usuarios works!</p>
+
+<div class="container">
+  <div class="list">
+    <h2>Usuarios</h2>
+    <hr>
+    <input type="text" placeholder="Buscar">
+    <div class="information-container" *ngIf="hasLoaded">
+      <app-popup [@loadingAnimation]="hasLoaded ? 'show' : 'hide'" [message]="'Igualmente se puede editar la informacion'" [duration]="3000" ></app-popup>
+    </div>
+    <div class="table-container">
+
+      <div class="table-data" [class.info]="hasLoaded" >
+        <div class="loading" [@loadingAnimation]="hasLoaded ? 'hide' : 'show'">
+          <img
+          src="assets/svg/loading.svg"
+          alt=""
+          >
+          <span>Espere un momento, cargando la informacion</span>
+        </div>
+
+        <table [@loadingAnimation]="hasLoaded ? 'show' : 'hide'"  >
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Email</th>
+              <th>Estado de cuenta</th>
+
+              <th></th>
+
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of users" [routerLink]="['../usuario', user.username]"  >
+              <td>
+                {{user.username}}
+              </td>
+              <td>
+                {{user.email}}
+              </td>
+              <td *ngIf="user.status === 1 " >
+                <span class="state-active">Activa</span>
+              </td>
+              <td *ngIf="user.status === 2" >
+                <span class="state-inactive">Inactiva</span>
+              </td>
+              <td>
+                <div class="content-edit" style="color: var(--main-color); display: flex; flex-direction: column; align-items: center;justify-content: center;">
+                  <i class="fa-solid fa-hand-pointer fa-xl "  style="margin: 10px 0px;"></i>
+                  <span>Editar</span>
+                </div>
+              </td>
+            </tr>
+
+
+          </tbody>
+        </table>
+
+      </div>
+
+    </div>
+
+
+
+  </div>
+  <div class="actions">
+    <h2>Acciones</h2>
+    <hr>
+
+    <div class="buttons">
+
+      <!-- (click)="createCupones()"  -->
+      <a class="emitir" [routerLink]="['../agregar-usuarios']" >
+        Crear Usuario
+      </a>
+    </div>
+
+    <hr>
+
+  </div>
+</div>

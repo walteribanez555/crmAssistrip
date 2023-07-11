@@ -1,10 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 /* You can add global styles to this file, and also import other style files */
 @font-face {
-    font-family: 'Lato';
-    src: url('../src/assets/font/Raleway/static/Raleway-Bold.ttf') format('truetype');
-  }
+  font-family: 'Lato';
+  src: url('../src/assets/font/Lato-Regular.ttf') format('truetype');
+}
 
+
+@font-face{
+font-family: 'Poppins';
+src: url('../src/assets/font/Poppins-Bold.ttf') format('truetype');
+}
 
 
 :root {
@@ -54,7 +59,7 @@ html{
 body {
 
 
-    font-family: "Roboto", sans-serif;
+    font-family: "Lato", sans-serif;
     background-color: var(--body-bg);
     color: var(--text-color);
     position: relative;
@@ -68,4 +73,29 @@ body {
 
 .z-index-25{
     z-index: 25;
+}
+
+
+table{
+  border-spacing: 0px;
+}
+
+
+tbody tr:hover {
+  background-color: #ccc;
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+
+}
+
+
+@keyframes aparecerDesdeDerecha {
+  0% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }

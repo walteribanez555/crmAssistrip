@@ -7,7 +7,7 @@
 
         <h1>Ingreso</h1>
 
-        <input 
+        <input
              class="email"
              type="text"
              placeholder="Ingreso"
@@ -16,7 +16,7 @@
              name="email">
 
         <div class="password">
-            <input 
+            <input
              [type]="showPassword ? 'text' : 'password'"
              placeholder="Contraseña"
              required
@@ -31,26 +31,26 @@
               </button>
         </div>
 
-        
 
 
 
-        <button class="submit" [class.required]="loginForm.valid"  type="submit"  (click)="login()" >
+
+        <button class="submit" [class.required]="loginForm.valid"  type="submit"  (click)="onLogin()" >
             <span  >Ingresar</span>
-            
+
         </button>
 
         <div class="loading" [@loadingAnimation]="hasLoaded ? 'hide' : 'show'">
-            <img  
-            src="assets/svg/loading.svg" 
+            <img
+            src="assets/svg/loading.svg"
             alt=""
             >
             <span>Espere un momento, cargando la informacion</span>
         </div>
-        
 
 
-        
+
+
     </form>
-    
+
 </div>

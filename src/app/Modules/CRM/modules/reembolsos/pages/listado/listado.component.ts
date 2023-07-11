@@ -5,5 +5,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./listado.component.css']
 })
 export class ListadoComponent {
+  ngOnInit(): void {
 
+
+  }
+
+  hasLoaded = true;
 }

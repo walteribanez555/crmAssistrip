@@ -1,22 +1,30 @@
+
+
+
 .container {
   display: grid;
   grid-template-columns: 3fr 1fr; /* 3/4 and 1/4 ratio */
   grid-gap: 20px; /* gap between grid items */
-  position: absolute;
+  /* position: absolute; */
   width: 100%;
-  height: calc(100vh - (var(--main-header-height) + 20px));
-  margin-top: var(--main-header-height);
+  /* height: calc(100vh - (var(--main-header-height) + 20px)); */
+  /* margin-top: var(--main-header-height); */
   top: 0;
   left: 0;
   padding: 10px;
   overflow-y: auto;
+  overflow-x: hidden;
+  animation: aparecerDesdeDerecha 0.5s ease-out;
 }
+
+
 
 .list,
 .actions{
+
   background-color: var(--body-bg);
   padding: 10px;
-  height: 700px;
+  height: fit-content;
   border-radius: 2px;
   box-shadow: 0 0 5px 0 rgba(0,0,0,.2);
 }
@@ -204,9 +212,21 @@ hr{
 
 
 /* Tabla de datos */
+
+table{
+  border-spacing: 0px;
+}
+
 table td {
     padding: 20px 0;
     border-bottom: 1px solid var(--border-color);
+}
+
+tbody tr:hover {
+  background-color: #ccc;
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+
 }
 
 table th{
@@ -233,6 +253,8 @@ thead {
 table thead tr {
   text-align: left;
 }
+
+
 table th
 {
    font-size: small;
@@ -241,10 +263,17 @@ table th
    border-bottom: 1px solid var(--border-color);
 }
 
+
+
 table td{
  text-align: center;
  font-size: small;
 }
+
+/* tbody tr, td{
+  background-color: #ccc;
+  border: 1px solid #ccc;
+} */
 
 td.link{
   color: var(--main-color);
@@ -262,12 +291,18 @@ td.link span {
 
 
 
+
 @media screen and (max-width: 1280px) {
   .container {
     width: 100%;
     margin-left: 0;
 
   }
+
+  .table-data{
+    height: 325px;
+  }
+
 }
 
 @media screen and (max-width:768px){
@@ -277,6 +312,9 @@ td.link span {
     padding: 0;
   }
 
+  .table-data{
+    height: 300px;
+  }
   .list {
     background-color: var(--body-bg);
       padding: 10px;

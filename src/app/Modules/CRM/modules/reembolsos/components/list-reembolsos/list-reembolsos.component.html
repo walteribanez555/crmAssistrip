@@ -1,0 +1,13 @@
+<div class="info" *ngIf="listadoReembolsos.length > 0 ; else noFoundMessage ">
+
+
+
+
+</div>
+<ng-template #noFoundMessage>
+  <div class="container-message" style="width: 100%; display: flex;flex-direction: column; align-items: center; justify-content: center;">
+    <span>No se encontro ningun reembolso</span>
+
+  </div>
+
+</ng-template>

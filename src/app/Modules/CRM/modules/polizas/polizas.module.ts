@@ -10,6 +10,8 @@ import { ListadoPolizasComponent } from './pages/listado-polizas/listado-polizas
 import { GenerarPolizasComponent } from './pages/generar-polizas/generar-polizas.component';
 import { PolizaComponent } from './pages/poliza/poliza.component';
 import { EditComponent } from './pages/edit/edit.component';
+import { SharedModule } from 'src/app/Modules/shared/shared.module';
+import { BeneficiarioComponent } from './components/beneficiario/beneficiario.component';
 
 
 
@@ -25,6 +27,8 @@ import { EditComponent } from './pages/edit/edit.component';
     PolizaComponent,
     EditComponent,
 
+    BeneficiarioComponent,
+
 
 
 
@@ -38,6 +42,7 @@ import { EditComponent } from './pages/edit/edit.component';
     FormsModule,
     PipesModule,
     PolizasRoutingModule,
+    SharedModule,
 
 
 

@@ -22,13 +22,17 @@ import { GetLocationService } from './Modules/shared/services/get-location.servi
 import { VentasService } from './Modules/shared/services/requests/ventas.service';
 import { ExtrasPolizasService } from './Modules/shared/services/requests/beneficiosExtras.service';
 import { BeneficiariosService } from './Modules/shared/services/requests/beneficiarios.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PipesModule } from './Modules/shared/pipes/pipes.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SiniestroService } from './Modules/shared/services/requests/siniestro.service';
 import { MensajeService } from './Modules/shared/services/requests/mensaje.service';
 import { TransformDataService } from './Modules/shared/services/utils/transform-data.service';
+import { SessionInterceptor } from './Modules/shared/interceptors/session.interceptor';
+import { ErrorInterceptor } from './Modules/shared/interceptors/error.interceptor';
+import { RolService } from './Modules/shared/services/requests/rol.service';
+import { UserService } from './Modules/shared/services/requests/user.service';
 
 
 
@@ -77,6 +81,20 @@ import { TransformDataService } from './Modules/shared/services/utils/transform-
     SiniestroService,
     MensajeService,
     TransformDataService,
+    RolService,
+    UserService,
+    {
+      provide : HTTP_INTERCEPTORS,
+      useClass : SessionInterceptor,
+      multi : true,
+    },
+    {
+      provide : HTTP_INTERCEPTORS,
+      useClass : ErrorInterceptor,
+      multi : true,
+    }
+
+
   ],
   bootstrap: [AppComponent]
 })

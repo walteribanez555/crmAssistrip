@@ -3,6 +3,7 @@ import { cotizacionDataForm } from '../../models/Pages/cotizacionDataForm.model'
 import { FormControl, FormGroup } from '@angular/forms';
 import { Servicio } from '../../models/Data/Servicio';
 import { Precio } from '../../models/Data/Precio';
+import { Cupon } from '../../models/Data/Cupon';
 
 @Injectable({
   providedIn: 'root'
@@ -26,11 +27,11 @@ export class UtilsService {
       }
     });
 
-    if(cotizacionesMayores.length> 0) { 
+    if(cotizacionesMayores.length> 0) {
       minPlanes++;
     }
 
-    return { 
+    return {
       cotizacionesMenores : cotizaciones,
       cotizacionesMayores : cotizacionesMayores,
       minPlanes : minPlanes
@@ -43,17 +44,17 @@ export class UtilsService {
     const date2: Date = new Date(finalDate);
 
 
-    
-  
+
+
       // Get the difference in milliseconds
       const diffInMs = Math.abs(date2.getTime() - date1.getTime());
-  
+
       // Convert the difference to days
       const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
-  
+
       if(!isNaN(diffInDays)){
         return diffInDays+1;
-        
+
       }
       return -1;
    }
@@ -61,16 +62,16 @@ export class UtilsService {
 
    //Si el plan tiene los requisitos que en este caso son los paises destinos
    haveRequirements( plan : Servicio, tags : string[]){
-    
+
     if(!plan.disponibilidad){
       return false;
     }
 
     const countries : string [] = plan.disponibilidad.split(",");
 
-    
-    
-  
+
+
+
     return   tags.every((string) => countries.includes(string));
   }
 
@@ -84,17 +85,17 @@ export class UtilsService {
           }
           return false;
 
-      }); 
+      });
 
 
       if(haveArange.length>0){
-        
+
         return true
-        
+
 
       }
-      
-  
+
+
       return false;
   }
 
@@ -103,7 +104,7 @@ export class UtilsService {
    createItemForm(): FormGroup{
     return new FormGroup({
       age: new FormControl(''),
-      
+
     });
   }
 
@@ -118,7 +119,7 @@ export class UtilsService {
     const year = date.getFullYear();
     const month = date.getMonth() + 1;
     const day = date.getDate();
-    return `${year}/${month}/${day}`; 
+    return `${year}/${month}/${day}`;
   }
 
   getDateDto(fechaDto : string){
@@ -130,6 +131,27 @@ export class UtilsService {
     const fecha = new Date(anio, mes, dia);
 
     return fecha;
+
+  }
+
+  filterCouponsByDates( listCupones : Cupon[]) : Cupon[]{
+    const cupones : Cupon[] =listCupones.filter(
+      cupon => {
+        const fecha_actual = new Date();
+        const fecha_inicial = new Date(cupon.fecha_desde);
+        const fecha_final = new Date(cupon.fecha_hasta);
+
+
+        if( fecha_actual >= fecha_inicial && fecha_actual <= fecha_final){
+          return true;
+        }
+
+        return false;
+      }
+    )
+
+    return cupones;
+
 
   }
 

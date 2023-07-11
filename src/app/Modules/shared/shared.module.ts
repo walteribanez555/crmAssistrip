@@ -6,6 +6,7 @@ import { LoadingProcessComponent } from './Components/loading-process/loading-pr
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UploadFileDirective } from './directives/upload-file.directive';
 import { LoadingDivComponent } from './Components/loading-div/loading-div.component';
+import { SearchBoxComponent } from './Components/search-box/search-box.component';
 
 
 
@@ -15,8 +16,8 @@ import { LoadingDivComponent } from './Components/loading-div/loading-div.compon
     FileDropComponent,
     LoadingProcessComponent,
     UploadFileDirective,
-    LoadingDivComponent
-
+    LoadingDivComponent,
+    SearchBoxComponent,
 
 
   ],
@@ -31,7 +32,8 @@ import { LoadingDivComponent } from './Components/loading-div/loading-div.compon
     PopupComponent,
     FileDropComponent,
     LoadingProcessComponent,
-    LoadingDivComponent
+    LoadingDivComponent,
+    SearchBoxComponent,
 
   ]
 })

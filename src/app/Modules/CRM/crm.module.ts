@@ -7,7 +7,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PipesModule } from '../shared/pipes/pipes.module';
 import { ComponentsModule } from './components/components.module';
 import { DashboardComponent } from './dashboard.component';
-import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { SessionInterceptor } from '../shared/interceptors/session.interceptor';
+import { ErrorInterceptor } from '../shared/interceptors/error.interceptor';
 
 
 
@@ -30,11 +32,17 @@ import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
     ReactiveFormsModule,
     FormsModule,
     PipesModule,
-    NgxIntlTelInputModule,
 
 
 
 
+
+
+
+  ]
+
+  ,
+  providers : [
 
   ]
 })

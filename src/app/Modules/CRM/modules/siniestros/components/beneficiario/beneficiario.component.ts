@@ -12,5 +12,4 @@ export class BeneficiarioComponent {
   @Input() beneficiario! : Beneficiario;
 
 
-
 }

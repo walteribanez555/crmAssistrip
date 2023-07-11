@@ -27,7 +27,7 @@ export class ListMessagesComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.eventsSubscription = this.events.subscribe(( data ) => {
+    this.eventsSubscription = this.events.subscribe(( data :MessageResp ) => {
       this.addMessageToList(data);
     } );
 
@@ -36,13 +36,13 @@ export class ListMessagesComponent implements OnInit {
 
     ).subscribe(
       {
-        next: (data) => {
+        next: (data : MessageResp[]) => {
            data = data.filter( message => message.siniestro_id === this.siniestro.siniestro_id );
            this.listMessages = data;
            this.listMessages = this.listMessages.reverse();
            this.loading = false;
           },
-        error : (err) => {
+        error : (err : string) => {
           console.log(err);
           this.loading=  false
         },

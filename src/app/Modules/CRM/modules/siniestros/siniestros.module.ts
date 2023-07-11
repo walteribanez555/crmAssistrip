@@ -48,6 +48,9 @@ import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
     NgxIntlTelInputModule,
 
 
+  ],
+  exports: [
+    SiniestroDataComponent,
   ]
 })
 export class SiniestrosModule { }

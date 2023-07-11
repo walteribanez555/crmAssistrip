@@ -66,10 +66,15 @@ display: flex;
 flex-direction: column;
 align-items: center;
 justify-content: center;
-padding: 5px;
+padding: 0px;
+height: fit-content;
 margin: 0 20px;
 cursor: pointer;
 background-color: var(--body-bg);
+}
+
+.navbar-user span{
+  padding: 10px 0px 0px 0px;
 }
 
 .navbar-user-name{
@@ -154,10 +159,18 @@ flex-direction: row;
 
 
 
-nav .btn-outline{
+button.btn-outline{
   visibility: visible;
   background-color: var(--body-bg);
-  fill: var(--text-color);
+  fill: var(--main-color);
+  border: 3px solid var(--main-color);
+  transition: all 0.2s ease-in-out;
+}
+
+button.btn-outline:hover{
+  background-color: var(--main-color);
+  fill: white;
+  transition: all 0.2s ease-in-out;
 }
 
 .sidebar-close {
@@ -175,6 +188,12 @@ nav .btn-outline{
   margin: 0 20px;
   cursor: pointer;
   background-color: var(--body-bg);
+}
+
+.dir{
+  font-size: 20px;
+  font-weight: bold;
+
 }
 
 .navbar-user-name{

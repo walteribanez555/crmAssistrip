@@ -1,6 +1,6 @@
 <div class="container"  *ngIf="!loading">
     <div class="left">
-      <h2>Siniestro : {{1}}</h2>
+      <h2>Siniestro : {{siniestroId}}</h2>
       <hr>
       <div class="info">
 
@@ -15,6 +15,12 @@
     <div class="right">
       <h2>Acciones</h2>
       <hr>
+      <div class="actions">
+        <a class="reembolso"  [routerLink]="['../../reembolso', siniestroId]"  >
+          Generar reembolso
+        </a>
+
+      </div>
 
     </div>
 </div>

@@ -1,0 +1,44 @@
+<form class="container" [formGroup]="reembolsoForm"  (ngSubmit)="submitForm()">
+  <span class="title">
+    Informacion de reembolso
+  </span>
+
+
+  <div class="field">
+    <label for="">Informacion del propietario de la cuenta</label>
+    <input type="text" placeholder="Joe Tim" formControlName="nombre_propietario_cuenta" name="nombre_propietario_cuenta">
+  </div>
+  <div class="field">
+    <label for="">Nro de pasaporte del propietario de la cuenta</label>
+    <input type="text" placeholder="ABC-29301212" formControlName="nro_identificacion" name="nro_identificacion">
+  </div>
+  <div class="field">
+    <label for="">Nro de cuenta</label>
+    <input type="text" placeholder="123456789" formControlName="nro_cuenta" name="nro_cuenta">
+  </div>
+  <div class="field">
+    <label for="">Codigo SWIFT / ABA</label>
+    <input type="text" placeholder="123456789" formControlName="codigo_swift" name="codigo_swift">
+  </div>
+  <div class="field">
+    <label for="">Banco</label>
+    <input type="text" placeholder="Inserte su banco aqui" formControlName="banco" name="banco">
+  </div>
+  <div class="field">
+    <label for="">Pais del Banco</label>
+    <input type="text" placeholder="España" formControlName="pais" name="pais">
+  </div>
+  <div class="field">
+    <label for="">Ciudad del Banco</label>
+    <input type="text" placeholder="Madrid" formControlName="ciudad" name="ciudad">
+  </div>
+
+  <hr>
+
+
+  <button type="submit">Generar Reembolso</button>
+
+
+
+
+</form>

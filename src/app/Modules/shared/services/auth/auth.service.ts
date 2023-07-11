@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { UserRole } from '../../enums/userRole.enums';
+import { HttpClient } from '@angular/common/http';
+import { Observable, catchError, map, throwError } from 'rxjs';
+import { LoginResponse } from './interfaces/login-response.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -7,45 +10,34 @@ import { UserRole } from '../../enums/userRole.enums';
 export class AuthService {
 
 
-
-  private urlLogin : string = '';
+  private urlLogin : string = '/api-auth/sessions';
   private isAuthenticated: boolean = false;
-  private currentUserRole: UserRole | null = null;
-  private currentUser : any =null;
+  private email  : string = "";
 
-  constructor() { }
+  constructor(
+    private http  : HttpClient
+  ) { }
 
-  login(username: string, password: string): boolean {
-    // Authentication logic using the enum UserRole
-    if (username === 'walteribanez555@gmail.com' && password === 'Walteribane_8612') {
-      this.isAuthenticated = true;
-      this.currentUserRole = UserRole.Admin;
-      this.currentUser = username;
-      localStorage.setItem('token', '123456789')
+  login( username: string, password: string ): Observable<boolean> {
+
+    const url  = this.urlLogin;
+    const body = { username, password };
+
+    return this.http.post<LoginResponse>( url, body )
+      .pipe(
+        map( ({sessionToken}) => {  this.isAuthenticated = true  ; this.email = username ; return  this.setAuthentication( sessionToken , username )   }),
+        catchError( err => throwError( () => err.error.message ))
+      );
     }
-
-    if (username === 'user' && password === 'user') {
-      this.isAuthenticated = true;
-      this.currentUserRole = UserRole.User;
-      this.currentUser = username;
-      localStorage.setItem('token', '123456789')
-    }
-
-    return this.isAuthenticated;
-
-
-  }
 
   logout(): void {
     this.isAuthenticated = false;
-    this.currentUserRole = null;
-    this.currentUser = null;
     localStorage.clear();
   }
 
   isLoggedIn(): boolean {
 
-    if(!this.isAuthenticated  && !localStorage.getItem('token')  ){
+    if(!this.isAuthenticated  && !localStorage.getItem('sessionToken')  ){
       return false;
     }
 
@@ -53,17 +45,58 @@ export class AuthService {
     return true;
   }
 
-  getCurrentUserRole(): UserRole | null {
-    return this.currentUserRole;
+  // getCurrentUserRole(): UserRole | null {
+  //   return this.currentUserRole;
+  // }
+
+  // hasRole(role: UserRole): boolean {
+  //   return this.currentUserRole === role;
+  // }
+
+
+  private setAuthentication(sessionToken:  string, email : string): boolean {
+
+    localStorage.clear();
+
+    localStorage.setItem('sessionToken', sessionToken);
+
+    localStorage.setItem('email', email);
+
+
+    return true;
   }
 
-  hasRole(role: UserRole): boolean {
-    return this.currentUserRole === role;
+
+  getEmail( ): string{
+
+    const email = localStorage.getItem('email');
+
+    if(!email) throw new Error( "Email not found");
+
+    return email;
+
   }
 
-  
+  getToken() : string | null{
+    const token = localStorage.getItem('sessionToken');
 
-  
 
-  
+    return token;
+
+  }
+
+  getAuthStatus() : string{
+    const token = localStorage.getItem('sessionToken');
+
+    if(!token) return "notAuthenticated";
+
+
+
+    return 'authenticated';
+  }
+
+
+
+
+
 }

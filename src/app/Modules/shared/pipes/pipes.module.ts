@@ -5,6 +5,7 @@ import { DateOnlyPipe } from './getDateOnly.pipe';
 import { ZeroFilterPipe } from './zero-filtered.pipe';
 import { ZeroToMessagePipe } from './zero-to-message.pipe';
 import { SignalsPipe } from './signals.pipe';
+import { RolPipe } from './rol.pipe';
 
 
 
@@ -15,7 +16,8 @@ import { SignalsPipe } from './signals.pipe';
     DateOnlyPipe,
     ZeroFilterPipe,
     ZeroToMessagePipe,
-    SignalsPipe
+    SignalsPipe,
+    RolPipe
   ],
 
   exports: [
@@ -25,6 +27,7 @@ import { SignalsPipe } from './signals.pipe';
     ZeroFilterPipe,
     ZeroToMessagePipe,
     SignalsPipe,
+    RolPipe,
   ]
 })
 export class PipesModule { }

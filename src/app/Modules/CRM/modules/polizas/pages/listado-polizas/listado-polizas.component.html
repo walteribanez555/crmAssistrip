@@ -20,10 +20,9 @@
 
    <div class="container">
     <div class="list">
-      <h2>Polizas</h2>
+      <h2>Pólizas</h2>
       <hr>
-      <input type="text" placeholder="Buscar por numero de poliza, pasaporte o nombre del cliente">
-
+      <search-box  (onValue)="filterByPolizaId($event)"></search-box>
       <div class="table-container">
         <div class="table-data">
           <div class="loading" [@loadingAnimation]="hasLoaded ? 'hide' : 'show'">
@@ -45,7 +44,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let poliza of listInfo">
+              <tr *ngFor="let poliza of _filteredListInfo">
                 <td>
                   <span style="margin-right: 2px;" *ngIf="poliza.beneficiario.primer_nombre">{{poliza.beneficiario.primer_nombre | zeroFilter}}</span>
                   <span style="margin-right: 2px;" *ngIf="poliza.beneficiario.segundo_nombre">{{poliza.beneficiario.segundo_nombre | zeroFilter }}</span>
@@ -55,28 +54,24 @@
                 <td>{{poliza.polizaBeneficiario.destino }} </td>
                 <td>{{poliza.siniestrosBeneficiario.length}}  </td>
                 <td>{{poliza.servicioBeneficiario.servicio}}</td>
-                <td>{{"Vigente" }}  </td>
-                <td style="color: var(--main-color); cursor: pointer;" >Editar </td>
+                <td>
+                  <span class="vigente" *ngIf="poliza.polizaBeneficiario.status ===0 ">Vigente</span>
+                  <span class="congelada" *ngIf="poliza.polizaBeneficiario.status ===1 ">Congelada</span>
+                  <span class="uso" *ngIf="poliza.polizaBeneficiario.status ===2 ">En uso</span>
+                  <span class="anulada" *ngIf="poliza.polizaBeneficiario.status ===3 ">Anulada</span>
+
+                </td>
+                <td style="color: var(--main-color); cursor: pointer;" >
+                  <a [routerLink]="['../../polizas', poliza.beneficiario.poliza_id]" >Editar</a>
+
+                </td>
               </tr>
 
             </tbody>
           </table>
 
         </div>
-        <div class="table-selector">
-          <div class="pagination">
-              <button class=" btn active">
-                <span>1</span>
-              </button>
-              <button class="btn">
-                <span>2</span>
-              </button>
-            <div class="btn">
-                 Siguiente
-            </div>
 
-          </div>
-        </div>
       </div>
 
 
@@ -92,7 +87,7 @@
         </button>
 
         <button  (click)="createPolizas()" class="emitir" >
-          Emitir Poliza
+          Anular Poliza
         </button>
       </div>
 

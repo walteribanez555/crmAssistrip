@@ -1,1 +1,67 @@
-<p>poliza works!</p>
+<div class="container" *ngIf="!loading && poliza && venta && servicio" >
+
+  <div class="left">
+
+    <div class="title-info">
+      <h2>Póliza : {{polizaId}}</h2>
+      <span class="vigente" *ngIf="poliza.status ===0 ">Vigente</span>
+      <span class="congelada" *ngIf="poliza.status ===1 ">Congelada</span>
+      <span class="uso" *ngIf="poliza.status ===2 ">En uso</span>
+      <span class="anulada" *ngIf="poliza.status ===3 ">Anulada</span>
+
+    </div>
+
+    <hr>
+    <div class="info">
+      <div class="field">
+        <div class="title">
+          <span>Destino</span>
+        </div>
+        <div class="description">
+          <span>{{poliza.destino}}</span>
+        </div>
+      </div>
+      <div class="field">
+        <div class="title">
+          <span>Plan</span>
+        </div>
+      </div>
+      <div class="description">
+        <span>{{servicio.servicio}}</span>
+      </div>
+      <div class="field">
+        <div class="title">
+          <span>Pasajeros : {{beneficiarios.length}}</span>
+        </div>
+        <div class="listado-beneficiarios">
+          <beneficiario  *ngFor="let beneficiario of beneficiarios" [beneficiario]="beneficiario" ></beneficiario>
+        </div>
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+  <div class="right">
+    <h2>Acciones</h2>
+    <hr>
+
+
+    <div class="actions">
+      <a class="edit" [routerLink]="['edit']"  >
+        Editar Poliza
+      </a>
+      <button class="delete"  >
+        Eliminar Poliza
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<loading-div *ngIf="loading"></loading-div>

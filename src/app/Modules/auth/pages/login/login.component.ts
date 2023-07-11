@@ -35,11 +35,11 @@ export class LoginComponent implements OnInit {
   public loginForm = new FormGroup(
     {
 
-      email: new FormControl('', [Validators.required, Validators.email]),
+      email: new FormControl('', [Validators.required]),
       password: new FormControl('', Validators.required),
 
     }
-  ); 
+  );
 
   showPassword: boolean = false;
 
@@ -78,23 +78,55 @@ export class LoginComponent implements OnInit {
         title: 'Bienvenido',
         showConfirmButton: false,
         timer: 1500
-        
+
       })
 
 
-      this.router.navigate(['../../dashboard/polizas/listado-polizas']);
+      this.router.navigate(['../../dashboard/cupones/listado-cupones']);
 
 
 
     }
-    
 
 
 
 
-    
+
+
   }
-  
+
+  onLogin(){
+
+    if(this.loginForm.value.email && this.loginForm.value.password){
+      this.hasLoaded = false;
+      this.authService.login(this.loginForm.value.email , this.loginForm.value.password)
+        .subscribe(  {
+          next: () =>{
+            this.hasLoaded =true
+            Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              title: 'Bienvenido',
+              showConfirmButton: false,
+              timer: 1500
+
+            });
+            this.router.navigateByUrl('/dashboard/cupones/listado-cupones')},
+          error : (message)=> {
+            this.hasLoaded = true;
+            console.log(message);
+            Swal.fire('Error',message,'error' );
+          }
+        })
+    }
+      else{
+        Swal.fire('Oops','Se requiere rellenar el campo', 'warning');
+      }
+
+
+
+
+  }
 
 
 

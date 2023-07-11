@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, catchError, map, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Venta } from '../../models/Data/Venta.model';
 
@@ -17,13 +17,13 @@ export class VentasService {
 
 
   constructor(private http : HttpClient) {
-  
+
    }
 
 
    postVenta(cliente_id : number,cantidad : number,descuento : number,fechaSalida : string, fechaRegreso : string, costoPolizaTotal:  number ) : Observable<Venta>{
 
-    
+
 
     return this.http.post<Venta>(this.apiUrl,{
       username : "raforios",
@@ -44,14 +44,38 @@ export class VentasService {
    }
 
    getVentas() : Observable<Venta[]>{
-      
+
       return this.http.get<Venta[]>(this.apiUrl);
-  
+
     }
-    
+
+    getVentasById( id : number) : Observable<Venta[]>{
+      let params = new HttpParams;
+
+      params = params.append('id', id);
+
+      return this.http.get<Venta[]>(this.apiUrl, {params}).pipe(
+        map(
+          data => {
+            if(data.length>0){
+              return data;
+            }else{
+              throw new Error("No se encontro la venta");
+            }
+        }
+
+        ),
+        catchError(
+          err =>  throwError( () => err.error.message)
+        )
+      )
+
+
+    }
 
 
 
 
-  
+
+
 }

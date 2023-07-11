@@ -10,15 +10,10 @@ export class FileDropComponent {
   @Output() filesDropped = new EventEmitter<FileList>();
   @Input() inputControl!: FormControl | null;
 
-
-
-
-
   selectFile(event : any){
     this.filesDropped.emit();
 
   }
-
 
 
 

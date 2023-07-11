@@ -1,5 +1,5 @@
-import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { routeSideNav } from 'src/app/Modules/shared/models/Pages/routes.model';
 import { AuthService } from 'src/app/Modules/shared/services/auth/auth.service';
 
@@ -8,13 +8,14 @@ import { AuthService } from 'src/app/Modules/shared/services/auth/auth.service';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
 
 
 
   actualDir : string = 'Dashboard';
   lightActive = true;
   darkActive = false;
+  email : string = "";
 
   @Output() displayNav = new EventEmitter();
 
@@ -28,7 +29,22 @@ export class NavbarComponent {
     private authService : AuthService,
     private router : Router,){
 
+
   }
+
+  ngOnInit() {
+    this.email = this.authService.getEmail();
+
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.actualDir = event.url.split('/dashboard/')[1];
+
+        // Perform any additional actions based on the route change
+      }
+    });
+  }
+
+
 
 
   toggleSidenav(){

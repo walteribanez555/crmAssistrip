@@ -1,1 +1,32 @@
-<p>reembolso works!</p>
+
+<div class="container">
+  <div class="left">
+    <div class="title-info">
+      <h2>Agregar reembolso</h2>
+
+
+    </div>
+
+    <hr>
+
+   <div class="info">
+    <siniestro-data style="width: 100%;" *ngIf="siniestro" [siniestro]="siniestro"  (beneficiarioEmit)="haveBeneficiario($event)"></siniestro-data>
+
+
+    <form-reembolso style="padding: 20px;" [siniestro_id]="siniestroId" (addReembolso)="onAddReembolso($event)" ></form-reembolso>
+   </div>
+
+
+  </div>
+  <div class="right">
+    <h2>Lista de reembolsos</h2>
+    <hr>
+
+    <list-reembolsos [siniestroId]="siniestroId" ></list-reembolsos>
+
+
+
+  </div>
+
+
+</div>

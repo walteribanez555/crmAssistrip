@@ -36,6 +36,8 @@ export class ListadoPolizasComponent implements OnInit {
 
 
   listInfo : any[] = [];
+  _filteredListInfo : any[] = [];
+  filterText : string = "";
 
 
   showComponent = false;
@@ -78,24 +80,22 @@ export class ListadoPolizasComponent implements OnInit {
       switchMap(
         data => {
             this.listado_Polizas = data;
-            const requests : any[] = [];
-            data.forEach(
-              poliza => {
+            // const requests : any[] = [];
+            // data.forEach(
+            //   poliza => {
 
-                requests.push(this.beneficiarioService.getBeneficiarioById(poliza.poliza_id))
-              }
-            )
+            //     requests.push(this.beneficiarioService.getBeneficiarioById(poliza.poliza_id))
+            //   }
+            // )
 
-            return forkJoin(requests);
+
+            return this.beneficiarioService.getBeneficiario();
+
         }
       ),
       switchMap(
         data => {
-          data.forEach( beneficiariolist => {
-            if(beneficiariolist.length>0){
-              this.listado_beneficiarios = [...this.listado_beneficiarios, ...beneficiariolist]
-            }
-          })
+          this.listado_beneficiarios = data;
           return this.siniestroService.getSiniestros()
         }
       ),
@@ -115,6 +115,7 @@ export class ListadoPolizasComponent implements OnInit {
 
 
          this.listInfo =this.mapData(this.listado_Polizas,this.listado_beneficiarios, this.listado_Siniestros,this.listado_servicios);
+         this._filteredListInfo = this.listInfo;
          this.hasLoaded = true;
 
       }
@@ -150,7 +151,15 @@ export class ListadoPolizasComponent implements OnInit {
     }
   }
 
+  get filterPolizas(){
+    return this._filteredListInfo;
+  }
 
+  set FilterText(value : string){
+    this.filterText = value;
+    this._filteredListInfo = this.filterByPolizaId(value);
+
+  }
 
   createPolizas(){
     this.router.navigate(['../dashboard/polizas/generar-polizas']);
@@ -187,6 +196,19 @@ export class ListadoPolizasComponent implements OnInit {
 
 
     return dtoBeneficiarios;
+  }
+
+
+  filterByPolizaId( filterTerm : string){
+    if(this.listInfo.length === 0 || filterTerm === ""){
+      return this.listInfo;
+    }
+    else{
+      return this.listInfo.filter( info => {
+        info.polizaBeneficiario.poliza_id.toString() === filterTerm;
+      })
+    }
+
   }
 
 }

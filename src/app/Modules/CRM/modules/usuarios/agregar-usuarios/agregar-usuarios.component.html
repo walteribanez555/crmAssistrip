@@ -1,1 +1,131 @@
-<p>Hola mundo</p>
+<form  [formGroup]="userForm"  (ngSubmit)="submitForm()" class="container">
+  <div class="list">
+    <h2>Agregar Usuario</h2>
+    <hr>
+
+    <div class="grid-columns">
+      <div class="left">
+        <div class="field">
+          <label>
+            username
+          </label>
+          <input type="text" formControlName="username" name="username" placeholder="adminPrincipal"  >
+
+        </div>
+        <div class="field">
+          <label>
+            Nombre(s)
+          </label>
+          <input type="text" formControlName="first_name" name="first_name" placeholder="Jhon Due"  >
+
+        </div>
+        <div class="field">
+          <label>
+            Apellido(s)
+          </label>
+          <input type="text" formControlName="last_name" name="first_name" placeholder="Gates"  >
+
+
+        </div>
+        <div class="field">
+          <label>
+            email
+          </label>
+          <input type="text" formControlName="email" name="email" placeholder=" email@assistrip.com">
+
+        </div>
+
+        <div class="field">
+          <label>
+            Contraseña
+          </label>
+          <input type="text" formControlName="password" name="password" placeholder=" 1231412">
+        </div>
+        <div class="field">
+          <label>
+            Confirmacion Contraseña
+          </label>
+          <input type="text" formControlName="confirm" name="confirm" placeholder=" 1231412">
+        </div>
+
+        <div class="field">
+          <label>
+            Telefono
+          </label>
+          <input type="text" formControlName="phone" name="phone" placeholder="+591 78140498">
+
+        </div>
+
+
+      </div>
+      <div class="right">
+        <div class="field">
+          <label>
+            Paneles de acceso
+          </label>
+
+          <type-user  [inputControl]="secondControl" ></type-user>
+
+        </div>
+
+        <div class="field">
+          <label>
+            Tipo de usuario
+          </label>
+
+
+          <rol-select style="width: 100%;"  [inputControl]="inputControl" ></rol-select>
+
+        </div>
+      </div>
+
+    </div>
+
+
+
+
+
+
+
+
+  </div>
+
+  <!-- // {
+    //   "username" : "adminBorrar",
+    //   "rol_id" : "1",
+    //   "user_type" : "INTERNAL",
+    //   "password" : "MotoPassword",
+    //   "confirm" : "MotoPassword",
+    //   "first_name" : "Rafel",
+    //   "last_name" : "Rios",
+    //   "email" : "raforios@gmail.com",
+    //   "phone" : "77781631"
+
+    // } -->
+
+
+
+
+  <div class="actions">
+    <h2>Acciones</h2>
+    <hr>
+
+    <div class="buttons">
+      <button  type="submit"  class="emitir active ">
+        Agregar
+      </button>
+
+      <button   type="button"  class="cancelar"  [routerLink]="['../listado-usuarios']" >
+        Cancelar
+      </button>
+    </div>
+
+    <hr>
+
+
+
+
+  </div>
+
+
+</form>

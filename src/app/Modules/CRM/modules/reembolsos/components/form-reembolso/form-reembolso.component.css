@@ -1,0 +1,48 @@
+.container{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+
+span.title{
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.field{
+  display: flex;
+  flex-direction: column;
+
+}
+
+label{
+  width: 100%;
+  padding: 20px 10px;
+}
+
+input{
+  width: 100%;
+  padding: 10px 20px;
+}
+
+hr{
+  width: 100%;
+  border: 1px solid var(--border-color);
+  margin: 10px 0px;
+}
+
+textarea{
+  width: 100%;
+  height: 100px;
+}
+
+
+button{
+  margin: 0px 20px;
+  padding: 10px 20px;
+  font-size: 15px;
+  background-color: var(--main-color);
+  color: white;
+  border : 1px solid var(--main-color);
+}

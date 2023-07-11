@@ -1,0 +1,97 @@
+<div class="container">
+
+  <div class="process">
+    <!-- <div class="loading"
+     *ngIf="!hasLoaded" [@loadingAnimation]="hasLoaded ? 'hide' : 'show'">
+      <img
+      src="assets/svg/loading.svg"
+      alt=""
+      >
+      <span>Espere un momento, cargando la informacion</span>
+    </div> -->
+
+    <!-- <ng-container *ngIf="hasLoaded">
+
+      <div class="field">
+        <span class="title">
+          Nombre
+        </span>
+        <span class="description" *ngIf="nombre">
+          {{nombre}}
+        </span>
+        <span class="description" *ngIf="!nombre">
+          No tiene nombre
+        </span>
+      </div>
+      <div class="field">
+        <div class="row">
+          <div class="field">
+            <span class="title">
+              Desde
+            </span>
+            <div class="description">
+              {{initialDate}}
+            </div>
+
+          </div>
+          <div class="field">
+            <span class="title">
+              Hasta
+            </span>
+            <span class="description">
+              {{finalDate}}
+            </span>
+
+          </div>
+        </div>
+      </div>
+      <div class="field">
+        <span class="title">
+          Descuento
+        </span>
+        <span class="description">
+          15 %
+        </span>
+      </div>
+      <div class="field">
+        <span class="title">
+          Planes incluidos
+        </span>
+        <span class="description" >
+            <ul>
+              <li *ngFor="let servicio of listado_servicios">
+                <a href="">{{servicio.servicio}}</a>
+              </li>
+            </ul>
+        </span>
+      </div>
+    </ng-container>
+ -->
+
+
+
+  </div>
+
+  <div class="actions">
+    <h2>Acciones</h2>
+    <hr>
+
+    <div class="buttons">
+      <button    class="emitir ">
+        Editar
+      </button>
+
+      <button    class="cancelar" [routerLink]="['../../../listado-usuarios']"  >
+        Cancelar
+      </button>
+    </div>
+
+    <hr>
+
+
+
+
+  </div>
+
+
+</div>

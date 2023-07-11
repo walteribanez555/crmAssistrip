@@ -25,7 +25,7 @@ export class SiniestroDataComponent {
 
       this.beneficiarioService.getBeneficiarioById(this.siniestro.beneficiario_id).pipe(
         switchMap(
-          data => {
+          (data : Beneficiario[]) => {
             this.beneficiario = data[0];
 
             this.beneficiarioEmit.emit(this.beneficiario);
@@ -43,10 +43,10 @@ export class SiniestroDataComponent {
 
       ).subscribe(
         {
-          next :  ( data  ) => {
+          next :  ( data : Catalogo[]  ) => {
             this.tipoBeneficio = data.filter( catalogo => catalogo.catalogo_id === this.siniestro.tipo_siniestro)[0];
           },
-          error : ( error ) => {
+          error : ( error : string ) => {
             console.log(error);
           },
         }
