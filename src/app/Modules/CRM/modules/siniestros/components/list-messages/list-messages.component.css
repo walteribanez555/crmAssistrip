@@ -30,4 +30,5 @@ hr{
 
 message{
   width: 100%;
+  display: flex;
 }

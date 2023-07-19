@@ -40,30 +40,15 @@ export class ClientesService {
   }
 
 
-  getClienteById(id : number): Observable<Cliente[]>{
-     let params  = new HttpParams;
+  getClienteById(id : string): Observable<Cliente[]>{
+    let params  = new HttpParams;
 
-     params = params.append('id', id);
+    console.log(id);
 
-     return this.http.get<Cliente[]>(this.apiUrl,{params}).pipe(
-        map(
-          data =>{
-            if(data.length> 0 ){
-              return data
-            }
-            else{
-              throw new Error("No se encontro ningun cliente")
-            }
+    params = params.append('id', id);
 
-          }
-        ),
-        catchError(
-          err => throwError( () => err.error.message)
-        )
-
-
-     )
-  }
+    return this.http.get<Cliente[]>(this.apiUrl,{params});
+ }
 
   postCliente(cliente : ClientePost) :Observable<ClienteResp>{
 
@@ -72,7 +57,7 @@ export class ClientesService {
       tipo_cliente : 1,
       nombre : cliente.nombre,
       apellido : cliente.apellido,
-      nit_ci : cliente.nit_ci,
+      nro_identificacion : cliente.nit_ci,
       origen : cliente.origen,
       email : cliente.email,
       nro_contacto : cliente.nro_contacto,

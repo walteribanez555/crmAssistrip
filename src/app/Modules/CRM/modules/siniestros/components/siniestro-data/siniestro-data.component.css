@@ -94,6 +94,13 @@ beneficiario{
 
   }
 
+
+.description span,
+.description p{
+  font-weight: bold;
+  font-size: 12px;
+}
+
 }
 
 

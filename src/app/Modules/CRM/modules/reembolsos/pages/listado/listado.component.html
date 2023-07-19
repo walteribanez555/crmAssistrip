@@ -1,6 +1,6 @@
 
 <div class="container">
-  <h2>Listado de siniestros</h2>
+  <h2>Listado de reembolsos</h2>
   <hr>
       <search-box  [placeholder]="'Buscar por numero de reembolso'" ></search-box>
       <div class="table-container">
@@ -12,41 +12,47 @@
             >
             <span>Espere un momento, cargando la informacion</span>
           </div>
-          <table [@loadingAnimation]="hasLoaded ? 'show' : 'hide'">
+          <table  [@loadingAnimation]="hasLoaded ? 'show' : 'hide'">
             <thead>
               <tr>
 
-                <!-- <th>Beneficiario</th>
+                <th>Reembolso</th>
                 <th>Ciudad</th>
                 <th>Pais</th>
                 <th>fecha</th>
-                <th>tipo de asistencia</th>
-                <th>archivo</th>
+                <th>siniestro_id</th>
                 <th>estado</th>
-                <th style="padding: 0px 60px;"></th> -->
               </tr>
             </thead>
             <tbody>
-              <!-- <tr *ngFor="let siniestro of siniestros">
-                <td style="color: var(--main-color); cursor: pointer; text-decoration: none;">
-                  <a [routerLink]="['../../polizas', siniestro.beneficiario.poliza_id]" >
-                    <span style="margin-right: 2px;" *ngIf="siniestro.beneficiario.primer_nombre">{{siniestro.beneficiario.primer_nombre | zeroFilter}}</span>
-                    <span style="margin-right: 2px;" *ngIf="siniestro.beneficiario.segundo_nombre">{{siniestro.beneficiario.segundo_nombre | zeroFilter }}</span>
-                    <span style="margin-right: 2px;" *ngIf="siniestro.beneficiario.primer_apellido">{{siniestro.beneficiario.primer_apellido | zeroFilter}}</span>
-                    <span style="margin-right: 2px;" *ngIf="siniestro.beneficiario.segundo_apellido">{{siniestro.beneficiario.segundo_apellido | zeroFilter}}</span>
-                  </a>
+              <tr *ngFor="let reembolso of listadoReembolsos"  [routerLink]="['../',reembolso.siniestro_id]" >
+                <td>
+                  {{reembolso.reembolso_id}}
                 </td>
-                <td>{{siniestro.siniestro.ciudad_ocurrencia | zeroToMessage }} </td>
-                <td>{{siniestro.siniestro.pais_ocurrencia | zeroToMessage }}  </td>
-                <td>{{siniestro.siniestro.fecha_siniestro  | dateOnly}}</td>
-                <td>{{siniestro.tipoBeneficio.etiqueta}}</td>
-                <td>{{siniestro.siniestro.url_archivo | zeroToMessage }}</td>
-                <td>{{"Vigente" }}  </td>
-                <td style="color: var(--main-color); cursor: pointer; text-decoration: none;" >
-                  <a [routerLink]="['../',siniestro.siniestro.siniestro_id]"  >Ver detalles</a>
+                <td>
+                  {{reembolso.ciudad}}
                 </td>
-              </tr> -->
-
+                <td>
+                  {{reembolso.pais}}
+                </td>
+                <td>
+                  {{reembolso.fecha_emision | dateOnly}}
+                </td>
+                <td>
+                  {{reembolso.siniestro_id}}
+                </td>
+                <td style="display: flex; flex-direction: column; align-items: center;justify-content: center;">
+                  <div class="description process" *ngIf="reembolso.status ===1">
+                    En proceso
+                  </div>
+                  <div class="description success" *ngIf="reembolso.status ===2">
+                    Reembolsado
+                  </div>
+                  <div class="description denied" *ngIf="reembolso.status ===3">
+                    Anulado
+                  </div>
+                </td>
+              </tr>
             </tbody>
           </table>
 

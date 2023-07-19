@@ -4,7 +4,7 @@ import { VentaDatos } from 'src/app/Modules/shared/models/Pages/venta_datos.mode
 import { ClientesService } from 'src/app/Modules/shared/services/requests/clientes.service';
 import { PolizasService } from 'src/app/Modules/shared/services/requests/polizas.service';
 import { VentasService } from 'src/app/Modules/shared/services/requests/ventas.service';
-import { map, switchMap, tap } from 'rxjs/operators';
+import { filter, map, switchMap, tap } from 'rxjs/operators';
 import { forkJoin } from 'rxjs';
 import { Router } from '@angular/router';
 import { Cliente } from 'src/app/Modules/shared/models/Data/Cliente';
@@ -157,7 +157,6 @@ export class ListadoPolizasComponent implements OnInit {
 
   set FilterText(value : string){
     this.filterText = value;
-    this._filteredListInfo = this.filterByPolizaId(value);
 
   }
 
@@ -200,14 +199,10 @@ export class ListadoPolizasComponent implements OnInit {
 
 
   filterByPolizaId( filterTerm : string){
-    if(this.listInfo.length === 0 || filterTerm === ""){
-      return this.listInfo;
-    }
-    else{
-      return this.listInfo.filter( info => {
-        info.polizaBeneficiario.poliza_id.toString() === filterTerm;
-      })
-    }
+
+      this._filteredListInfo =  this.listInfo.filter( info =>
+        info.polizaBeneficiario.poliza_id.toString().includes(filterTerm)
+      )
 
   }
 

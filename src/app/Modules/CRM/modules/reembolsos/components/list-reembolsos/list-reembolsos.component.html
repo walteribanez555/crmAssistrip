@@ -1,5 +1,5 @@
 <div class="info" *ngIf="listadoReembolsos.length > 0 ; else noFoundMessage ">
-
+  <reembolso style="width: 100%;margin: 10px 0px;" *ngFor="let reembolso of listadoReembolsos"  [reembolso]="reembolso" ></reembolso>
 
 
 

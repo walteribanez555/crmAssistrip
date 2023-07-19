@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, catchError, map, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Venta } from '../../models/Data/Venta.model';
+import { Venta, VentaResp } from '../../models/Data/Venta.model';
 
 @Injectable({
   providedIn: 'root'
@@ -21,25 +21,32 @@ export class VentasService {
    }
 
 
-   postVenta(cliente_id : number,cantidad : number,descuento : number,fechaSalida : string, fechaRegreso : string, costoPolizaTotal:  number ) : Observable<Venta>{
+   postVenta(cliente_id : number,cantidad : string,descuento : string, tipo_descuento : string,plus : number, servicio_id : string ,fechaSalida : string, fechaRegreso : string ) : Observable<VentaResp>{
 
 
 
-    return this.http.post<Venta>(this.apiUrl,{
+    return this.http.post<VentaResp>(this.apiUrl,{
       username : "raforios",
       officeId : 1,
-      cliente_id :cliente_id,
+      cliente_id ,
       tipo_venta : 1,
       forma_pago : 1,
-      cantidad : cantidad,
-      descuento : descuento,
-      plus : 0,
+      cantidad ,
+      tipo_descuento,
+      descuento ,
+      plus,
       fecha_salida : fechaSalida,
       fecha_retorno : fechaRegreso,
-      servicio_id : 2,
-      total_pago : costoPolizaTotal,
+      servicio_id,
       status:1
-    })
+    }).pipe(
+      map(
+        data => data,
+      ),
+      catchError(
+        err => throwError( () => err.error.message)
+      )
+    )
 
    }
 

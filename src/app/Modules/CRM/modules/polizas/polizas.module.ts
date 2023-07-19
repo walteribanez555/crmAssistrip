@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { GenerarCotizacionComponent } from './pages/generar-cotizacion/generar-cotizacion.component';
 import { ComponentsModule } from '../../components/components.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PipesModule } from 'src/app/Modules/shared/pipes/pipes.module';
 import { PolizasRoutingModule } from './polizas-routing.module';
 import { ListadoPolizasComponent } from './pages/listado-polizas/listado-polizas.component';
-import { GenerarPolizasComponent } from './pages/generar-polizas/generar-polizas.component';
 import { PolizaComponent } from './pages/poliza/poliza.component';
 import { EditComponent } from './pages/edit/edit.component';
 import { SharedModule } from 'src/app/Modules/shared/shared.module';
 import { BeneficiarioComponent } from './components/beneficiario/beneficiario.component';
+import { GenerarPolizasComponent } from './pages/generar-polizas/generar-polizas.component';
+import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 
 
 
@@ -23,7 +23,6 @@ import { BeneficiarioComponent } from './components/beneficiario/beneficiario.co
   declarations: [
     ListadoPolizasComponent,
     GenerarPolizasComponent,
-    GenerarCotizacionComponent,
     PolizaComponent,
     EditComponent,
 
@@ -43,6 +42,7 @@ import { BeneficiarioComponent } from './components/beneficiario/beneficiario.co
     PipesModule,
     PolizasRoutingModule,
     SharedModule,
+    NgxIntlTelInputModule,
 
 
 
@@ -52,6 +52,7 @@ import { BeneficiarioComponent } from './components/beneficiario/beneficiario.co
 
   ],
   exports: [
+
 
   ],
   providers:[

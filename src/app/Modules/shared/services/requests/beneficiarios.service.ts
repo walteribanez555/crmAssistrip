@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, catchError, map, throwError } from 'rxjs';
 import { Beneficiario, BeneficiarioResp } from '../../models/Data/Beneficiario';
 import { environment } from 'src/environments/environment';
 @Injectable({
@@ -48,7 +48,7 @@ export class BeneficiariosService {
   //   "telefono": "34343456"
   // }
 
-  postBeneficiario( poliza_id : number, primer_apellido : string, segundo_apellido : string, primer_nombre: string , segundo_nombre: string, ci: string, pasaporte: string, fecha_nacimiento: string, sexo: string, origen : string, email : string, telefono : string ): Observable<BeneficiarioResp>{
+  postBeneficiario( poliza_id : number, primer_apellido : string, segundo_apellido : string, primer_nombre: string , segundo_nombre: string, identifier: string, fecha_nacimiento: string, sexo: string, origen : string, email : string, telefono : string ): Observable<BeneficiarioResp>{
 
     return this.http.post<BeneficiarioResp>(this.apiUrl, {
       poliza_id,
@@ -56,14 +56,28 @@ export class BeneficiariosService {
       segundo_apellido,
       primer_nombre,
       segundo_nombre,
-      ci,
-      pasaporte,
+      nro_identificacion: identifier,
       fecha_nacimiento,
       sexo,
       origen,
       email,
       telefono
-    })
+    }).pipe(
+      map(
+        data => data,
+      ),
+      catchError( err => throwError( () => err.error.message))
+
+    )
   }
 
+
+    // console.log(cliente_id, nombres, apellidos, age, ci, email, telf, origen, gender);
+    updateBeneficiario( beneficiario_id : number, primer_nombre : string, segundo_nombre : string, ci : string, email : string, telf : string, origen : string, gender : number  ){
+
+      return this.http.put(`${this.apiUrl}?id=${beneficiario_id}`,{
+
+
+      })
+    }
 }

@@ -53,11 +53,13 @@ export class PolizasService {
       destino,
       fecha_salida,
       fecha_retorno,
-      extra
+      extra,
+      status: 0,
+
     })
 
   }
-  
+
 
 
 }

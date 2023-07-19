@@ -127,7 +127,7 @@ export class SidebarComponent {
       icon : 'fa-solid fa-file',
       submenuItems: [
         {
-          label: 'Buscar pólizas',
+          label: 'Pólizas',
           route:'polizas/listado-polizas',
           icon : 'fa-solid fa-magnifying-glass'
         },
@@ -137,12 +137,12 @@ export class SidebarComponent {
           icon : 'fa-solid fa-square-plus',
 
         },
-        {
-          label: 'Crear cotización',
-          route: 'polizas/generar-cotizacion',
-          icon : 'fa-solid fa-square-plus',
+        // {
+        //   label: 'Crear cotización',
+        //   route: 'polizas/generar-cotizacion',
+        //   icon : 'fa-solid fa-square-plus',
 
-        }
+        // }
       ]
 
     },

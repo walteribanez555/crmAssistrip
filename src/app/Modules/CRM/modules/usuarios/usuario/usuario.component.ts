@@ -54,4 +54,12 @@ export class UsuarioComponent implements OnInit {
 
   }
 
+
+
+
+  onDelete( ){
+
+
+  }
+
 }

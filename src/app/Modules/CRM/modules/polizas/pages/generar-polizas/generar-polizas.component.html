@@ -9,9 +9,9 @@
                             <svg xmlns="http://www.w3.org/2000/svg"  (click)="remove(tag)" height="20" width="20"  ><path d="M6.062 15 5 13.938 8.938 10 5 6.062 6.062 5 10 8.938 13.938 5 15 6.062 11.062 10 15 13.938 13.938 15 10 11.062Z"/></svg>
                             {{tag}}
                         </li>
-                        
+
                         </ul>
-        
+
                         <div class="options list " >
                             <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 96 960 960" width="20"><path d="M444 816V612H240v-72h204V336h72v204h204v72H516v204h-72Z"/></svg>
                             <select class="listado"  (change)="onSelect($event)" >
@@ -29,51 +29,60 @@
 
 
             </div>
-    
+
             <div class="fechas">
                 <span>Fechas</span>
                 <div class="fechas-container">
                     <div class="fecha">
                         <label for="fecha_salida">Fecha de Salida</label>
-                        <input type="date" [min]="minDate" name="fecha_salida" id="fecha_salida">
+                        <input type="date" [min]="minDate" [(ngModel)]="inputMinDate" name="fecha_salida" id="fecha_salida"   >
                     </div>
                     <div class="fecha">
                         <label for="fecha_retorno">Fecha de Retorno</label>
-                        <input type="date" [min]="minDate" name="fecha_retorno" id="fecha_retorno">
+                        <input type="date"                 [(ngModel)]="inputMaxDate" name="fecha_retorno" id="fecha_retorno">
                     </div>
                 </div>
             </div>
-    
+
             <div class="pasajeros">
                 <span>Pasajeros ({{listPolizas.length}})</span>
 
                 <div class="list-cards">
                     <ng-container *ngFor="let poliza of listPolizas" >
+                      <div class="card">
 
-                        <form  [formGroup]="poliza.form" class="card">
+                        <form  [formGroup]="poliza.form" >
                             <div class="field">
                                 <label >Nombre(s)</label>
                                 <input type="text" placeholder="Ingrese nombres aqui" formControlName="nombres" name="nombres" >
                             </div>
                             <div class="field">
                                 <label >Apellido(s)</label>
-                                <input type="text"  placeholder="Ingrese apellidos aqui" formContrlName="apellidos" name="apellidos"> 
+                                <input type="text"  placeholder="Ingrese apellidos aqui" formControlName="apellidos" name="apellidos">
+                            </div>
+                            <div class="field">
+                              <label for="nombre">Genero</label>
+                              <div class="select">
+                                  <select name="gender" id="gender"  formControlName="gender" name="gender">
+                                      <option value="Masculino">Masculino</option>
+                                      <option value="Femenino">Femenino</option>
+                                  </select>
+                              </div>
                             </div>
                             <div class="field">
                                 <label> Fecha de nacimiento</label>
                                 <input type="date" placeholder="Fecha de nacimiento"  formControlName="age" name="age">
                             </div>
                             <div class="field">
-                                <label >Numero de pasaporte</label>
-                                <input type="text" placeholder="Inserte su pasaporte aqui" formControlName="passport" name="passport">
+                                <label >Dni o paspaporte</label>
+                                <input type="text" placeholder="Inserte su pasaporte aqui" formControlName="ci" name="ci">
                             </div>
                             <div class="field">
                                 <label >Nacionalidad</label>
                                 <select name="nacionalidad" id="nacionalidad" formControlName="origen" name="origen">
-                                    <option value="Bolivia">Bolivia</option>
-                                    <option value="Argentina">Argentina</option>
-                                    <option value="Peru">Peru</option>
-            
+                                  <option  *ngFor="let pais of paises"   value={{pais.etiqueta}} > {{pais.etiqueta}}  </option>
+
+
                                 </select>
                             </div>
                             <div class="field">
@@ -93,12 +102,15 @@
                                 <input type="email" placeholder="Inserte su email aqui" formControlName="email" name="email">
                             </div>
                             <hr class="poliza">
-                            <input  type="checkbox" formControlName="titular"    name="titular" id="titular" value="titular">
-                            <label class="titular" for="titular">Titular</label>
-        
+
+
                         </form>
+                        <input  type="checkbox" [(ngModel)]="poliza.titular" (change)="poliza.titular" >
+                            <label class="titular"   for="titular">Titular</label>
+                      </div>
+
                     </ng-container>
-                    
+
                 </div>
 
 
@@ -106,24 +118,59 @@
                     <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 96 960 960" width="20"><path d="M444 816V612H240v-72h204V336h72v204h204v72H516v204h-72Z"/></svg>
                     Agregar pasajero(a)
                 </button>
-    
-                
-    
+
+
+
             </div>
             <hr class="poliza">
-    
-    
+
+
             <div class="space-button">
-                <button class="generar">
+                <button class="generar"  (click)="generarPlan()">
                     Generar planes para polizas
                 </button>
             </div>
-            
-    
+
+
+            <div class="listado-plan" *ngIf="ListadoServiciosToShow">
+              <span class="alert">
+                La lista de planes disponibles es resultado directo de la información proveida en el formulario de arriba. Si deceas ver mas planes cambia los datos del formulario y dale click, denuevo, a “Genera planes para polizas”
+              </span>
+
+              <div class="field">
+                <label >Planes</label>
+                <select class="planes"  [(ngModel)]="selectedPlan" (change)="onSelectPlan()"  >
+                  <option   *ngFor="let servicio of ListadoServiciosToShow" value={{servicio.servicio_id}}>{{servicio.servicio}}</option>
+                </select>
+              </div>
+
+              <div class="field" *ngIf="costo>-1">
+                  <span>Total</span>
+                  <span>{{costo | currency:'USD':'$':'1.1-2' }}</span>
+
+              </div>
+              <span class="field" *ngIf="costo>-1">
+                <span>Descuentos</span>
+                <span  *ngFor="let cuponAplicado of listDescuentos">{{cuponAplicado.cupon.nombre}} - {{cuponAplicado.montoTotal  | currency:'USD':'$':'1.1-2'}}</span>
+              </span>
+
+              <div class="field">
+                <label >Estado de la poliza</label>
+                <select [(ngModel)]="status" >
+                  <option value="1">Pagado</option>
+                  <option value="2">Impaga</option>
+                </select>
+              </div>
+
+
+
+            </div>
+
+
         </div>
 
-        
-        
+
+
 
 
 
@@ -131,16 +178,16 @@
     <div class="actions">
         <h2>Acciones</h2>
         <hr>
-  
+
         <div class="buttons">
-          <button    class="emitir active">
+          <button    class="emitir active" (click)="generarVenta()" >
             Emitir Poliza
           </button>
-          
-          <button  class="cancelar" >
+
+          <!-- <button  class="cancelar" >
             Cancelar
-          </button>
-        </div>     
+          </button> -->
+        </div>
 
         <hr>
 

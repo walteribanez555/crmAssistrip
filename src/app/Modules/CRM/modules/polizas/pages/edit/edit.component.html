@@ -1,1 +1,134 @@
-<p>edit works!</p>
+<div class="container" *ngIf="!loading && poliza && venta && servicio" >
+
+  <div class="left">
+
+    <div class="title-info">
+      <h2>Póliza : {{polizaId}}</h2>
+      <span class="vigente" *ngIf="poliza.status ===0 ">Vigente</span>
+      <span class="congelada" *ngIf="poliza.status ===1 ">Congelada</span>
+      <span class="uso" *ngIf="poliza.status ===2 ">En uso</span>
+      <span class="anulada" *ngIf="poliza.status ===3 ">Anulada</span>
+
+    </div>
+
+    <hr>
+    <div class="info">
+      <div class="field">
+        <div class="title">
+          <span>Destino</span>
+        </div>
+        <div class="description">
+          <span>{{poliza.destino}}</span>
+        </div>
+      </div>
+      <div class="field">
+        <div class="title">
+          <span>Plan</span>
+        </div>
+      </div>
+      <div class="description">
+        <span>{{servicio.servicio}}</span>
+      </div>
+      <div class="field">
+        <div class="title">
+          <span>Pasajeros : {{beneficiarios.length}}</span>
+        </div>
+        <div class="listado-beneficiarios">
+          <ng-container *ngFor="let poliza of listPolizas" >
+            <div class="card">
+
+              <form  [formGroup]="poliza"  (ngSubmit)="updateCliente(poliza)" >
+                  <div class="field">
+                      <label >Nombre(s)</label>
+                      <input type="text" placeholder="Ingrese nombres aqui" formControlName="nombres" name="nombres" >
+                  </div>
+                  <div class="field">
+                      <label >Apellido(s)</label>
+                      <input type="text"  placeholder="Ingrese apellidos aqui" formControlName="apellidos" name="apellidos">
+                  </div>
+                  <div class="field">
+                    <label for="nombre">Genero</label>
+                    <div class="select">
+                        <select name="gender" id="gender"  formControlName="gender" name="gender">
+                            <option value="Masculino">Masculino</option>
+                            <option value="Femenino">Femenino</option>
+                        </select>
+                    </div>
+                  </div>
+                  <div class="field">
+                      <label> Fecha de nacimiento</label>
+                      <input type="date" placeholder="Fecha de nacimiento"  formControlName="age" name="age">
+                  </div>
+                  <div class="field">
+                      <label >Dni o paspaporte</label>
+                      <input type="text" placeholder="Inserte su pasaporte aqui" formControlName="ci" name="ci">
+                  </div>
+                  <div class="field">
+                      <label >Nacionalidad</label>
+                      <select name="nacionalidad" id="nacionalidad" formControlName="origen" name="origen">
+                        <option  *ngFor="let pais of paises"   value={{pais.etiqueta}} > {{pais.etiqueta}}  </option>
+
+                      </select>
+                  </div>
+                  <div class="field">
+                      <label >Nro Whatsapp</label>
+                      <div style="margin: 10px 0px;" class="datos-numero">
+
+                          <input type="text" placeholder="Inserte su numero aqui" formControlName="telf" name="telf">
+                      </div>
+                  </div>
+                  <div class="field">
+                      <label>Email</label>
+                      <input type="email" placeholder="Inserte su email aqui" formControlName="email" name="email">
+                  </div>
+                  <hr class="poliza">
+
+                  <button class="edit" >
+                    Actualizar Beneficiario
+                  </button>
+
+
+              </form>
+
+            </div>
+
+          </ng-container>
+        </div>
+      </div>
+      <div class="field">
+        <div class="title">
+          <span> Estado  de la poliza</span>
+        </div>
+        <select >
+          <option value="">Vigente</option>
+          <option value="">Congelar</option>
+          <option value="">StandBy</option>
+
+        </select>
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+  <div class="right">
+    <h2>Acciones</h2>
+    <hr>
+
+
+    <div class="actions">
+      <button class="edit"  >
+        Realizar cambios a la poliza
+      </button>
+
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<loading-div *ngIf="loading"></loading-div>

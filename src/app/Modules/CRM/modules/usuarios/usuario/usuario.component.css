@@ -38,7 +38,9 @@ hr{
   border: 1px solid coral;
 }
 
-
+h2{
+  font-size: 12px;
+}
 
 
 .grid-columns{
@@ -542,6 +544,9 @@ height: 60px;
     text-align: start;
   }
 
+  .grid-columns{
+    grid-template-columns: 1fr;
+  }
 
 
   .actions {

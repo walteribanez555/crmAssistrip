@@ -123,3 +123,19 @@ a.edit:hover{
 button.delete:hover{
   background-color: #dad8e8;
 }
+
+@media (max-width:768px) {
+  .container{
+    grid-template-columns: 1fr;
+
+  }
+
+
+
+  .info{
+    flex-direction: column;
+
+  }
+
+
+}

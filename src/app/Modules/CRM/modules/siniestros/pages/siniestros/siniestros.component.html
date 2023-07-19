@@ -27,7 +27,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let siniestro of siniestros">
+              <tr *ngFor="let siniestro of siniestros"  [routerLink]="['../',siniestro.siniestro.siniestro_id]">
                 <td style="color: var(--main-color); cursor: pointer; text-decoration: none;">
                   <a [routerLink]="['../../polizas', siniestro.beneficiario.poliza_id]" >
                     <span style="margin-right: 2px;" *ngIf="siniestro.beneficiario.primer_nombre">{{siniestro.beneficiario.primer_nombre | zeroFilter}}</span>
@@ -43,7 +43,7 @@
                 <td>{{siniestro.siniestro.url_archivo | zeroToMessage }}</td>
                 <td>{{"Vigente" }}  </td>
                 <td style="color: var(--main-color); cursor: pointer; text-decoration: none;" >
-                  <a [routerLink]="['../',siniestro.siniestro.siniestro_id]"  >Ver detalles</a>
+                  <a   >Ver detalles</a>
                 </td>
               </tr>
 

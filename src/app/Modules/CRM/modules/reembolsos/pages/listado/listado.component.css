@@ -233,6 +233,35 @@ text-align: center;
 font-size: small;
 }
 
+.description{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.process{
+  border: 1px solid coral;
+  color: coral;
+  width : fit-content;
+  padding : 10px 20px
+
+}
+.success{
+  border: 1px solid green;
+  color: green;
+  width : fit-content;
+  padding : 10px 20px
+}
+.denied{
+  border: 1px solid gray;
+  color: gray;
+  width : fit-content;
+  padding : 10px 20px
+}
+
 
 
 

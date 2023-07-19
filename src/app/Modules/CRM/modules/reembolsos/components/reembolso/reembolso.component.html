@@ -1,0 +1,52 @@
+
+
+
+<div class="container">
+  <div class="field">
+    <div class="title">
+      Estatus
+    </div>
+    <div class="description">
+      En proceso
+    </div>
+  </div>
+  <div class="field">
+    <div class="title">
+      Fecha de emision
+    </div>
+    <div class="description">
+      {{reembolso.fecha_emision | dateOnly}}
+    </div>
+  </div>
+
+
+  <div class="field">
+    <div class="title">
+      Status
+    </div>
+    <div class="description process" *ngIf="reembolso.status ===1">
+      En proceso
+    </div>
+    <div class="description succes" *ngIf="reembolso.status ===2">
+      Reembolsado
+    </div>
+    <div class="description denied" *ngIf="reembolso.status ===3">
+      Anulado
+    </div>
+  </div>
+
+  <div class="status">
+    <span  style="margin: 10px 0px;">Realizar cambios</span>
+    <select (change)="changeState($event)">
+      <option value="1">En proceso</option>
+      <option value="2">Reembolsado</option>
+      <option value="3">Anulado</option>
+    </select>
+    <button>
+      Modificar
+    </button>
+
+  </div>
+
+
+</div>

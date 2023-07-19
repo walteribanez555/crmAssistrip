@@ -90,5 +90,10 @@ export class ReembolsosService {
   }
 
 
+  updateReembolsos(id : string, reembolso : Reembolso){
+
+  }
+
+
 
 }

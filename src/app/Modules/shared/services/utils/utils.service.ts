@@ -1,8 +1,13 @@
 import { Injectable } from '@angular/core';
 import { cotizacionDataForm } from '../../models/Pages/cotizacionDataForm.model';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Servicio } from '../../models/Data/Servicio';
 import { Precio } from '../../models/Data/Precio';
+import { Catalogo } from '../../models/Data/Catalogo';
+import { Plan } from '../../models/Data/Plan';
+import { catalogoBeneficio } from '../../models/Pages/catalogoBeneficio.model';
+import { Beneficio } from '../../models/Data/Beneficio';
+import { catalogoBeneficioData } from '../../models/Pages/catalogoBeneficioData.model';
 import { Cupon } from '../../models/Data/Cupon';
 
 @Injectable({
@@ -16,16 +21,21 @@ export class UtilsService {
   DivideByAge(listCotizaciones : any[]){
     const cotizaciones : any = [];
     const cotizacionesMayores: any = [];
-    let minPlanes =1;
+    let minPlanes =0;
 
 
     listCotizaciones.forEach(cotizacion => {
-      if(cotizacion.age<75){
+
+      if(cotizacion.age*1 < 75*1){
         cotizaciones.push(cotizacion);
       }else{
         cotizacionesMayores.push(cotizacion);
       }
     });
+
+    if(cotizaciones.length> 0){
+      minPlanes++
+    }
 
     if(cotizacionesMayores.length> 0) {
       minPlanes++;
@@ -79,7 +89,11 @@ export class UtilsService {
   //Si el plan tiene los requisitos que en este caso son los dias necesarios
   haveRange(servicio : Servicio, diffDays: number, precios : Precio[] ):Boolean{
     const dias : number = diffDays;
+
       const haveArange : Precio[] =  precios.filter(precio => {
+
+
+
           if(this.betweenTheRange(precio.limite_inferior, precio.limite_superior ,dias)  && precio.servicio_id*1 === servicio.servicio_id*1){
             return true;
           }
@@ -100,17 +114,17 @@ export class UtilsService {
   }
 
 
-   //Crear un nuevo item para las edades
-   createItemForm(): FormGroup{
+  createItemForm(): FormGroup {
     return new FormGroup({
-      age: new FormControl(''),
+      age: new FormControl(null, [Validators.required, Validators.pattern('^[0-9]*$')]),
 
     });
   }
 
    //Comprobar de que este en el rango un numero
   betweenTheRange( liInf: number, liSup: number, diffd : number ) : boolean{
-    return diffd >= liInf && diffd <= liSup;
+
+    return diffd*1 >= liInf*1 && diffd*1 <= liSup*1;
   }
 
 
@@ -134,26 +148,112 @@ export class UtilsService {
 
   }
 
-  filterCouponsByDates( listCupones : Cupon[]) : Cupon[]{
-    const cupones : Cupon[] =listCupones.filter(
-      cupon => {
-        const fecha_actual = new Date();
-        const fecha_inicial = new Date(cupon.fecha_desde);
-        const fecha_final = new Date(cupon.fecha_hasta);
+  obtenerCostoPlan( precios : Precio[], servicio_id : number, diffd : number){
 
 
-        if( fecha_actual >= fecha_inicial && fecha_actual <= fecha_final){
-          return true;
-        }
+    const rangoPrecio =  precios.find(precio => {
 
-        return false;
+
+      if((+precio.servicio_id === +servicio_id)  && this.betweenTheRange(precio.limite_inferior, precio.limite_superior, diffd)){
+        return true;
       }
-    )
 
-    return cupones;
 
+      return false;
+    });
+
+
+    if(rangoPrecio){
+      const costo= this.realizarCalculo(rangoPrecio, diffd) ;
+      return costo;
+    }
+
+
+    return -1;
 
   }
+
+  realizarCalculo(rangoPrecio : Precio, diffDays : number){
+    let precio :number = 0;
+    if(rangoPrecio.tipo_ecuacion*1 ===1){
+      precio=this.ecuacionCurva(rangoPrecio, diffDays)*1 * diffDays*1;
+    }
+    if(rangoPrecio.tipo_ecuacion*1 ===2){
+      precio = this.ecuacionRecta(rangoPrecio, diffDays)*1 *diffDays*1;
+    }
+
+    return precio;
+
+  }
+
+
+
+  ecuacionCurva(rangoPrecio : Precio, dias : number){
+    const valor = Math.pow(dias, rangoPrecio.intercepto)
+    return valor*1*rangoPrecio.pendiente*1;
+
+  }
+
+
+  ecuacionRecta( rangoPrecio : Precio, dias: number){
+
+
+
+      const valor = (rangoPrecio.pendiente*dias)*1 + rangoPrecio.intercepto*1;
+
+      return valor;
+
+  }
+
+
+  //Mapear los listados de beneficio por cada plan
+  mapListBeneficio(listPlan : Plan[], beneficios : Catalogo[]){
+
+    const listCatBeneficio : catalogoBeneficio[] = [];
+    beneficios.forEach(beneficio=> {
+      const planesByBeneficio : Plan[] = listPlan.filter( plan => plan.tipo_beneficio === beneficio.valor);
+      const catyBeneficio = {
+        tipo_beneficio : beneficio,
+        beneficios :  planesByBeneficio,
+        isSubDropdownOpen: false,
+      }
+      listCatBeneficio.push(catyBeneficio);
+    })
+
+    return listCatBeneficio
+   }
+
+   //Mapear los listados de beneficios por cada categoria
+   mapListBeneficioCat(listBeneficios : Beneficio[], beneficiosData : Catalogo[] ){
+    const listCatBeneficio : catalogoBeneficioData[] = [];
+    beneficiosData.forEach(cat=> {
+      const catbyBeneficio : Beneficio[] = listBeneficios.filter( beneficio => beneficio.tipo_beneficio === cat.valor);
+      const catyBeneficio = {
+        tipo_beneficio : cat,
+        beneficios :  catbyBeneficio,
+        subDropdownOpen: false,
+      }
+
+      listCatBeneficio.push(catyBeneficio);
+    })
+
+    return listCatBeneficio
+
+ }
+
+ filterCouponsByDates( cupones : Cupon[]){
+
+  return cupones.filter( cupon => {
+    const fechaActual = new Date();
+
+    const fechaInicial = new Date(cupon.fecha_desde);
+    const fechaFinal = new Date(cupon.fecha_hasta);
+
+    return fechaActual>= fechaActual && fechaActual < fechaFinal
+  })
+
+
+ }
 
 
 }
