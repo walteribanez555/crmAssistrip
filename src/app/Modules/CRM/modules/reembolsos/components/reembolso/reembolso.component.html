@@ -37,16 +37,15 @@
 
   <div class="status">
     <span  style="margin: 10px 0px;">Realizar cambios</span>
-    <select (change)="changeState($event)">
+    <select (change)="changeState($event)" [value]="reembolso.status">
       <option value="1">En proceso</option>
       <option value="2">Reembolsado</option>
       <option value="3">Anulado</option>
     </select>
-    <button>
+    <button (click)="modifyForm()">
       Modificar
     </button>
-
   </div>
-
+  <loading-process *ngIf="loading"></loading-process>
 
 </div>

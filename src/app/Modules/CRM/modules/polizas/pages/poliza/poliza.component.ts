@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs';
 import { Beneficiario } from 'src/app/Modules/shared/models/Data/Beneficiario';
 import { Cliente } from 'src/app/Modules/shared/models/Data/Cliente';
@@ -11,6 +11,8 @@ import { ClientesService } from 'src/app/Modules/shared/services/requests/client
 import { PolizasService } from 'src/app/Modules/shared/services/requests/polizas.service';
 import { ServiciosService } from 'src/app/Modules/shared/services/requests/servicios.service';
 import { VentasService } from 'src/app/Modules/shared/services/requests/ventas.service';
+import Swal from 'sweetalert2';
+import { addDaysToDate, addOneDayToDate } from '../../../reportes/utils/dates.Utils';
 
 @Component({
   templateUrl: './poliza.component.html',
@@ -23,6 +25,7 @@ export class PolizaComponent implements OnInit{
   private ventaService = inject(VentasService);
   private route = inject(ActivatedRoute);
   private servicioService = inject(ServiciosService);
+  private  router  = inject(Router);
 
 
   polizaId = -1;
@@ -55,7 +58,10 @@ export class PolizaComponent implements OnInit{
           ),
           switchMap(
             data => {
-              this.beneficiarios = data;
+              this.beneficiarios = data.map( poliza => {
+                poliza.fecha_nacimiento = poliza.fecha_nacimiento.split('T')[0];
+                return poliza
+              });
 
               const servicio_id = this.poliza? this.poliza.servicio_id : 0;
 
@@ -71,9 +77,8 @@ export class PolizaComponent implements OnInit{
             this.servicio = data[0];
 
 
-            console.log(this.beneficiarios);
-            console.log(this.poliza);
-            console.log(this.venta);
+
+
 
           },
           error : ( error ) => {
@@ -85,6 +90,48 @@ export class PolizaComponent implements OnInit{
     })
   }
 
+
+  modifyPoliza( status : number){
+
+
+    if(this.poliza)
+    this.polizaService.putPolizas(this.poliza.poliza_id, this.poliza.fecha_salida.split('T')[0],this.poliza.fecha_retorno.split('T')[0], status).subscribe({
+      next : ( data ) => {
+        this.showSuccessNotification();
+        this.router.navigate(['dashboard/polizas/listado-polizas'])
+      },
+      error : ( err ) => {
+        this.showError(err);
+      }
+    })
+
+  }
+
+
+
+  showSuccessNotification() {
+    Swal.fire({
+      icon: 'success',
+      title: 'Modificado correctamente',
+      text: 'Modificado correctamente',
+      position: 'top-end',
+      toast: true,
+      timer: 3000,
+      showConfirmButton: false
+    });
+  };
+
+
+  showError(error : string){
+    Swal.fire({
+      position: 'top-end',
+      icon : 'error',
+      title: 'No se pudo realizar',
+      showConfirmButton: false,
+      timer: 1500
+
+    });
+  }
 
 
 }

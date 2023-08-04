@@ -1,14 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
-
-
-
-
-import { CommonModule } from '@angular/common';
 import { BeneficiosService } from './Modules/shared/services/requests/beneficios.service';
 import { CatalogosService } from './Modules/shared/services/requests/catalogos.service';
 import { ClientesService } from './Modules/shared/services/requests/clientes.service';
@@ -33,6 +29,7 @@ import { SessionInterceptor } from './Modules/shared/interceptors/session.interc
 import { ErrorInterceptor } from './Modules/shared/interceptors/error.interceptor';
 import { RolService } from './Modules/shared/services/requests/rol.service';
 import { UserService } from './Modules/shared/services/requests/user.service';
+import { ReportesService } from './Modules/shared/services/requests/reportes.service';
 
 
 
@@ -43,10 +40,6 @@ import { UserService } from './Modules/shared/services/requests/user.service';
 @NgModule({
   declarations: [
     AppComponent,
-
-
-
-
   ],
   imports: [
     BrowserModule,
@@ -57,12 +50,7 @@ import { UserService } from './Modules/shared/services/requests/user.service';
     ReactiveFormsModule,
     FormsModule,
     PipesModule,
-    BrowserAnimationsModule
-
-
-
-
-
+    BrowserAnimationsModule,
   ],
   providers: [
     BeneficiosService,
@@ -83,6 +71,7 @@ import { UserService } from './Modules/shared/services/requests/user.service';
     TransformDataService,
     RolService,
     UserService,
+    ReportesService,
     {
       provide : HTTP_INTERCEPTORS,
       useClass : SessionInterceptor,
@@ -92,8 +81,7 @@ import { UserService } from './Modules/shared/services/requests/user.service';
       provide : HTTP_INTERCEPTORS,
       useClass : ErrorInterceptor,
       multi : true,
-    }
-
+    },
 
   ],
   bootstrap: [AppComponent]

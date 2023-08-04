@@ -32,6 +32,7 @@ export class FormReembolsoComponent implements OnInit {
     banco : new FormControl(null, Validators.required),
     pais : new FormControl(null, Validators.required),
     ciudad : new FormControl(null, Validators.required),
+    monto : new FormControl(null, Validators.required)
 
 
   })
@@ -48,7 +49,8 @@ export class FormReembolsoComponent implements OnInit {
             codigo_swift,
             banco,
             pais,
-            ciudad
+            ciudad,
+            monto
            } = this.reembolsoForm.value;
 
     const siniestro_id = this.siniestro_id;
@@ -66,6 +68,7 @@ export class FormReembolsoComponent implements OnInit {
       ciudad,
       new Date().toISOString().split("T")[0],
       1,
+      monto
     ).subscribe(
       {
         next: (data) => { this.showSuccessNotification() , this.addReembolso.emit(data)  },

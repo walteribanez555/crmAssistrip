@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CountryISO } from 'ngx-intl-tel-input';
 import { switchMap } from 'rxjs';
 import { Beneficiario } from 'src/app/Modules/shared/models/Data/Beneficiario';
@@ -13,6 +13,8 @@ import { CatalogosService } from 'src/app/Modules/shared/services/requests/catal
 import { PolizasService } from 'src/app/Modules/shared/services/requests/polizas.service';
 import { ServiciosService } from 'src/app/Modules/shared/services/requests/servicios.service';
 import { VentasService } from 'src/app/Modules/shared/services/requests/ventas.service';
+import { UtilsService } from 'src/app/Modules/shared/services/utils/utils.service';
+import Swal from 'sweetalert2';
 
 @Component({
   templateUrl: './edit.component.html',
@@ -25,6 +27,9 @@ export class EditComponent {
   private route = inject(ActivatedRoute);
   private servicioService = inject(ServiciosService);
   private catalogoService = inject(CatalogosService);
+  private router = inject(Router);
+  private utilService = inject(UtilsService);
+
 
 
   polizaId = -1;
@@ -38,6 +43,14 @@ export class EditComponent {
   servicio : Servicio | null = null;
   beneficiarios : Beneficiario[] = [];
   paises : Catalogo[] =[];
+
+
+  fecha_retorno : string ="";
+  fecha_salida : string = "";
+
+
+
+
 
 
   listPolizas : FormGroup[] = [];
@@ -73,6 +86,13 @@ export class EditComponent {
 
               this.listPolizas = this.mapBeneficiariosToForm(this.beneficiarios);
 
+
+              if(this.poliza){
+                this.fecha_salida = this.poliza.fecha_salida.split('T')[0];
+                this.fecha_retorno = this.poliza.fecha_retorno.split('T')[0];
+              }
+
+
               const servicio_id = this.poliza? this.poliza.servicio_id : 0;
 
               return this.servicioService.getServicioById(servicio_id);
@@ -87,9 +107,9 @@ export class EditComponent {
             this.servicio = data[0];
 
 
-            console.log(this.beneficiarios);
-            console.log(this.poliza);
-            console.log(this.venta);
+            // console.log(this.beneficiarios);
+            // console.log(this.poliza);
+            // console.log(this.venta);
 
           },
           error : ( error ) => {
@@ -136,6 +156,9 @@ export class EditComponent {
 
 
 
+
+
+
   updateCliente(event : any){
     console.log(event);
 
@@ -144,14 +167,102 @@ export class EditComponent {
     }
 
 
+
+
+
+    console.log(event);
+
     const { cliente_id, nombres, apellidos, age, ci, email, telf, origen, gender } = event.value;
 
 
 
+    const names = this.splitFirstWord(nombres);
+
+              const firstName = names.firsWord;
+              const secondName= names.resOfWord;
+
+              const lastNames= this.splitFirstWord(apellidos);
+
+              const firstLastName = lastNames.firsWord;
+              const secondLastName = lastNames.resOfWord;
 
 
+    this.beneficiarioService.updateBeneficiario(cliente_id,firstName, secondName, firstLastName, secondLastName, ci,email,telf,origen,gender,age).subscribe(
+      {
+        next : (data) => {
+          this.showSuccessNotification();
+          this.router.navigate(['dashboard/polizas/listado-polizas']);
+        },
+        error : (err) => {
+          this.showError(err);
+        }
+      }
+    )
+
+  }
+
+  splitFirstWord(input: string) : {firsWord : string , resOfWord : string} {
 
 
+    const inputNormalized:  string =  this.normalizeSpaces(input);
+
+    const firstSpaceIndex = inputNormalized.indexOf(' ');
+
+    if (firstSpaceIndex === -1) {
+      // No hay espacios en el string, así que se devuelve el string en un array
+      return {firsWord : input , resOfWord : ""};
+    }
+
+    const firstWord = inputNormalized.slice(0, firstSpaceIndex);
+    const restOfString = inputNormalized.slice(firstSpaceIndex + 1);
+
+    return {firsWord : firstWord , resOfWord : restOfString.trimEnd()}
+  }
+
+  normalizeSpaces(input: string): string {
+    // Dividir el string en palabras, utilizando un espacio como separador
+    const words = input.split(' ');
+
+    // Filtrar palabras vacías (espacios adicionales)
+    const nonEmptyWords = words.filter(word => word !== '');
+
+    // Unir las palabras con un solo espacio entre ellas
+    const normalizedString = nonEmptyWords.join(' ');
+
+    return normalizedString;
+  }
+
+  updatePoliza(){
+    if(this.poliza)
+    this.polizaService.putPolizas(this.polizaId, this.fecha_salida,this.fecha_retorno, this.poliza.status ).subscribe({
+      next: (data) => { this.showSuccessNotification(); this.router.navigate(['dashboard/polizas/listado-polizas'])},
+      error : ( err) => { this.showError(err)},
+    })
+  }
+
+
+  showSuccessNotification() {
+    Swal.fire({
+      icon: 'success',
+      title: 'Modificado correctamente',
+      text: 'Modificado correctamente',
+      position: 'top-end',
+      toast: true,
+      timer: 3000,
+      showConfirmButton: false
+    });
+  };
+
+
+  showError(error : string){
+    Swal.fire({
+      position: 'top-end',
+      icon : 'error',
+      title: 'No se pudo realizar',
+      showConfirmButton: false,
+      timer: 1500
+
+    });
   }
 
 }

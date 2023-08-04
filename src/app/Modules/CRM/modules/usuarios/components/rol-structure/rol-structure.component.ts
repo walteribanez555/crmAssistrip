@@ -33,7 +33,7 @@ export class RolStructureComponent implements OnInit {
 
   rols : RolForm[] = [
     {
-      area : "polizas",
+      area : "Polizas",
       area_permissions : [
         "Agregar",
         "generar-polizas",
@@ -44,21 +44,21 @@ export class RolStructureComponent implements OnInit {
       ]
     },
     {
-      area: "siniestros",
+      area: "Siniestros",
       area_permissions : [
         "listado-siniestros",
         "siniestro/:id",
       ]
     },
     {
-      area : 'reembolso',
+      area : 'Reembolsos',
       area_permissions : [
         "reembolso/:id",
         "listado-reembolso",
       ]
     },
     {
-      area : 'cupones',
+      area : 'Cupones',
       area_permissions : [
         "listado-cupones",
         "cupones/:id",
@@ -67,11 +67,18 @@ export class RolStructureComponent implements OnInit {
       ]
     },
     {
-      area : 'usuarios',
+      area : 'Usuarios y Acceso',
       area_permissions : [
         "agregar-rol",
         "listado-usuarios",
         "agregar-usuarios",
+      ]
+    },
+    {
+      area: 'Ventas y Reportes',
+      area_permissions : [
+        "Ventas",
+        "Siniestros",
       ]
     }
   ]

@@ -1,20 +1,20 @@
 
 
 export interface Venta {
-    id : number,
+    venta_id : number,
     username : string,
-    officeId : number,
-    cliente_id : number,
+    total_pago : number,
+    total : string,
     tipo_venta : number,
-    forma_pago : number,
-    cantidad : number,
-    descuento : number,
+    tipo_descuento : string,
+    status : number,
+    precio : string,
     plus : number,
-    fecha_salida : string,
-    fecha_retorno : string,
-    servicio_id : number,
-    status : number
-
+    officeId : number,
+    fecha_venta : string,
+    descuento : string,
+    cliente_id : number,
+    cantidad : string,
 }
 
 export interface VentaResp extends Omit<Venta, 'venta_id'>{

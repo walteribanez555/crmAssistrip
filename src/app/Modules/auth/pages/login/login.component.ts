@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { switchMap } from 'rxjs';
+import { compareRol } from 'src/app/Modules/CRM/modules/usuarios/utils/Rols.utils';
 import { loadingAnimation } from 'src/app/Modules/shared/animations/loading.animation';
+import { RolResp } from 'src/app/Modules/shared/models/Data/Rol';
 import { AuthService } from 'src/app/Modules/shared/services/auth/auth.service';
+import { RolService } from 'src/app/Modules/shared/services/requests/rol.service';
+import { UserService } from 'src/app/Modules/shared/services/requests/user.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -16,7 +21,9 @@ import Swal from 'sweetalert2';
 export class LoginComponent implements OnInit {
 
   constructor(  private authService : AuthService,
-                private router : Router
+                private router : Router,
+                private rolesService : RolService,
+                private userService : UserService,
     ){
 
   }
@@ -31,6 +38,10 @@ export class LoginComponent implements OnInit {
 
 
   hasLoaded: boolean = true;
+
+  roles : RolResp[] = [];
+
+
 
   public loginForm = new FormGroup(
     {
@@ -82,7 +93,7 @@ export class LoginComponent implements OnInit {
       })
 
 
-      this.router.navigate(['../../dashboard/cupones/listado-cupones']);
+      this.router.navigate(['../../dashboard/polizas/listado-polizas']);
 
 
 
@@ -99,9 +110,26 @@ export class LoginComponent implements OnInit {
 
     if(this.loginForm.value.email && this.loginForm.value.password){
       this.hasLoaded = false;
-      this.authService.login(this.loginForm.value.email , this.loginForm.value.password)
+      this.authService.login(this.loginForm.value.email , this.loginForm.value.password).pipe(
+        switchMap(
+          data => {
+            return this.rolesService.getRoles();
+          }
+        ),
+        switchMap(
+          data => {
+            this.roles = data;
+
+            return this.userService.getByUsernameUsers(this.authService.getEmail())
+          }
+        )
+      )
         .subscribe(  {
-          next: () =>{
+          next: (data) =>{
+
+
+            this.authService.setRoutes(compareRol(this.roles,data[0]));
+
             this.hasLoaded =true
             Swal.fire({
               position: 'top-end',
@@ -111,7 +139,7 @@ export class LoginComponent implements OnInit {
               timer: 1500
 
             });
-            this.router.navigateByUrl('/dashboard/cupones/listado-cupones')},
+            this.router.navigate(['../../dashboard/polizas/listado-polizas'])},
           error : (message)=> {
             this.hasLoaded = true;
             console.log(message);

@@ -22,6 +22,9 @@ export class SidebarComponent {
   @Output() displayNav = new EventEmitter();
 
 
+
+  menuItemsFiltered: routeSideNav[] = [];
+
   menuItems : routeSideNav[] = [
     {
       label: 'Usuarios y Acceso',
@@ -161,7 +164,7 @@ export class SidebarComponent {
       ]
     },
     {
-      label : 'reembolsos',
+      label : 'Reembolsos',
       isDropdownOpen : false,
       dropdownHeight : '0',
       icon : 'fa-solid fa-money-bill-transfer',
@@ -172,7 +175,32 @@ export class SidebarComponent {
           icon : 'fa-solid fa-magnifying-glass'
         }
       ]
-    }
+    },
+    {
+      label: 'Ventas y Reportes',
+      isDropdownOpen: false,
+      dropdownHeight: '0',
+      icon : 'fa-regular fa-file-code',
+      submenuItems: [
+
+        {
+          label: 'Ventas',
+          icon : 'fa-solid fa-money-bill',
+          route: 'reportes/ventas'
+        },
+        {
+          label: 'Siniestros',
+          route: 'reportes/siniestros',
+          icon: 'fa-solid fa-person-falling',
+        },
+
+        // {
+        //   label : 'Roles',
+        //   route : 'usuarios/listado-roles',
+        //   icon : 'fa-sharp fa-solid fa-shield-halved'
+        // },
+      ]
+    },
 
     // {
     //   label: 'inicio',
@@ -274,6 +302,17 @@ export class SidebarComponent {
     if(!this.authService.isLoggedIn()){
       this.router.navigate(['login']);
     }
+
+
+    const routes : string[] = this.authService.getRoutes().map( (route : any ) => route.area );
+
+
+    this.menuItemsFiltered  = this.menuItems.filter( menuItem => routes.includes(menuItem.label));
+
+
+    // this.menuItemsFiltered = this.menuItems.filter( menuItem => )
+
+
   }
 
 

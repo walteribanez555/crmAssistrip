@@ -1,6 +1,6 @@
 <div   class="sidebar" [class.active]="display_sidenav"  #sidebar>
   <div class="sidebar-logo" (click)="toggleSidenav()">
-        <div class="logo"><a routerLink="/dashboard/cupones/listado-cupones">
+        <div class="logo"><a routerLink="/dashboard/polizas/listado-polizas">
           <h1>Assis<span class="trip" >Trip</span><span class="com">.com</span></h1>
 
         </a></div>
@@ -21,12 +21,12 @@
   </div> -->
   <!-- SIDEBAR MENU -->
   <ul class="sidebar-menu overflow-scroll">
-      <li class="sidebar-submenu" *ngFor="let menuItem of menuItems">
+      <li class="sidebar-submenu" *ngFor="let menuItem of menuItemsFiltered ">
           <div class="sidebar-menu-dropdown" style="margin-left: 10px; border-radius: 10px 0px 0px 10px;"  (click)="toggleDropdown(menuItem)">
             <div class="icon-left" style="padding: 0px 10px 0px 0px; width: 40px; display: flex; align-items: center; justify-content: center;">
               <i class={{menuItem.icon}}  style="color: var(--main-color);"></i>
             </div>
-            <span style="cursor: pointer; color: var(--main-color);"  >{{ menuItem.label  }}</span>
+            <span style="cursor: pointer; color: var(--main-color); font-size: 12px;"  >{{ menuItem.label  | uppercase }}</span>
             <div class="dropdown-icon">
                 <i class='bx bx-category'></i>
             </div>
@@ -40,7 +40,7 @@
 
 
 
-                <span>{{ subMenuItem.label }}</span>
+                <span style="font-size: 12px;">{{ subMenuItem.label | uppercase }}</span>
               </a>
             </li>
           </ul>

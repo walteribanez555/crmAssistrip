@@ -13,10 +13,10 @@ import { AuthService } from '../auth/auth.service';
 })
 export class ClientesService {
 
-  private apiUrl : string = '/api/clientes';
+  // private apiUrl : string = '/api/clientes';
   private headers: HttpHeaders;
   private authService = inject(AuthService);
-  // private apiUrl = environment.apiUrl + '/clientes';
+  private apiUrl = environment.apiUrl + '/clientes';
 
   constructor(private http: HttpClient) {
     this.headers = new HttpHeaders();

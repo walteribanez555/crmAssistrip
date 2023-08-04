@@ -10,10 +10,10 @@ import { Venta, VentaResp } from '../../models/Data/Venta.model';
 export class VentasService {
 
 
-    private apiUrl  = '/api/ventas';
+    // private apiUrl  = '/api/ventas';
 
 
-    // private apiUrl = environment.apiUrl + '/ventas';
+    private apiUrl = environment.apiUrl + '/ventas';
 
 
   constructor(private http : HttpClient) {

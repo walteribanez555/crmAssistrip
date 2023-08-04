@@ -13,8 +13,8 @@ export class BeneficiariosService {
 
   ) { }
 
-  private apiUrl  = '/api/beneficiarios';
-  // private apiUrl = environment.apiUrl + '/beneficiarios';
+  // private apiUrl  = '/api/beneficiarios';
+  private apiUrl = environment.apiUrl + '/beneficiarios';
 
   getBeneficiario(): Observable<Beneficiario[]>{
 
@@ -73,10 +73,19 @@ export class BeneficiariosService {
 
 
     // console.log(cliente_id, nombres, apellidos, age, ci, email, telf, origen, gender);
-    updateBeneficiario( beneficiario_id : number, primer_nombre : string, segundo_nombre : string, ci : string, email : string, telf : string, origen : string, gender : number  ){
+    updateBeneficiario( beneficiario_id : number, primer_nombre : string, segundo_nombre : string, primer_apellido : string,segundo_apellido: string, ci : string, email : string, telf : string, origen : string, gender : number, age : string  ){
 
       return this.http.put(`${this.apiUrl}?id=${beneficiario_id}`,{
-
+        primer_nombre,
+        segundo_nombre,
+        primer_apellido,
+        segundo_apellido,
+        nro_identificacion : ci,
+        email,
+        telf,
+        origen,
+        gender,
+        fecha_nacimiento : age
 
       })
     }

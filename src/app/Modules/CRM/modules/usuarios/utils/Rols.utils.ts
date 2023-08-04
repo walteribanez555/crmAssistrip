@@ -2,6 +2,10 @@
 
 // "{'permissions': [{'area': 'Dashboard', 'area_permissions': ['read', 'update', 'delete']}] }"
 
+import { RolResp } from "src/app/Modules/shared/models/Data/Rol";
+import { User } from "src/app/Modules/shared/models/Data/User.model";
+import { Rol } from "../interfaces/RolComponents.interfaces";
+
 export const updateRol = ( action : string, area : string, toAdd : boolean, permissions : string    ) : string => {
 
   let updatedPermissions = JSON.parse(permissions);
@@ -64,3 +68,53 @@ const deleteToRol = ( permissions : any , area: string, action : string  ) => {
   return listPermissions;
 }
 
+
+export const compareRol = ( roles : RolResp[], user : User ) =>{
+  const rolesFromUser  = user.rol_id.split(',').map( rol_id => +rol_id);
+
+
+  const rolesFiltered = roles.filter( (rol) =>
+      rolesFromUser.includes(rol.rol_id)
+  )
+
+
+  return getRoutes(rolesFiltered);
+
+}
+
+
+export const getRoutes =  ( roles : RolResp[]) => {
+
+  // const routes = roles.map( rol => JSON.parse(rol.rol_structure));
+  // console.log(routes);
+  let routes : any[] = [];
+  roles.forEach( rol => {
+    const route = JSON.parse(rol.rol_structure);
+    routes = [...routes, ...route.permissions];
+  });
+
+
+  return reduceRepeatRoutes(routes);
+
+
+}
+
+
+
+export const reduceRepeatRoutes = ( routes : any[])  => {
+
+
+  return  routes.reduce((acc, current) => {
+    // Check if the current 'area' is already present in the accumulator array
+    const isDuplicate = acc.some((obj : any) => obj.area === current.area);
+
+    // If it's not a duplicate, add it to the accumulator array
+    if (!isDuplicate) {
+      acc.push(current);
+    }
+
+    return acc;
+  }, []);
+
+
+}

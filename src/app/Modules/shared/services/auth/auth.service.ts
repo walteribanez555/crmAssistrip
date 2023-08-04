@@ -3,6 +3,7 @@ import { UserRole } from '../../enums/userRole.enums';
 import { HttpClient } from '@angular/common/http';
 import { Observable, catchError, map, throwError } from 'rxjs';
 import { LoginResponse } from './interfaces/login-response.interface';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,9 @@ import { LoginResponse } from './interfaces/login-response.interface';
 export class AuthService {
 
 
-  private urlLogin : string = '/api-auth/sessions';
+  // private urlLogin : string = '/api-auth/sessions';
+  private urlLogin : string = environment.apiBackend+'/sessions';
+
   private isAuthenticated: boolean = false;
   private email  : string = "";
 
@@ -64,6 +67,26 @@ export class AuthService {
 
 
     return true;
+  }
+
+  setRoutes( routes : any){
+
+
+    localStorage.removeItem('roles');
+
+    localStorage.setItem('roles',JSON.stringify(routes));
+
+  }
+
+  getRoutes( ){
+    const roles = localStorage.getItem('roles');
+
+
+    if(roles){
+      return JSON.parse(roles);
+    }
+
+    throw new Error("Problems on the get");
   }
 
 

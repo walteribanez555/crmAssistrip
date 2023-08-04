@@ -31,6 +31,28 @@
       </div>
       <div class="field">
         <div class="title">
+          <span>Fecha de inicio</span>
+        </div>
+      </div>
+      <div class="field">
+        <div class="title">
+          <span>Fecha de salida</span>
+        </div>
+      </div>
+      <div class="description">
+        <input type="date" style="width: 300px; padding: 10px;"  [(ngModel)]="fecha_salida">
+      </div>
+      <div class="field">
+        <div class="title">
+          <span>Fecha de retorno</span>
+        </div>
+      </div>
+      <div class="description">
+        <input type="date" style="width: 300px; padding: 10px;"   [(ngModel)]="fecha_retorno">
+      </div>
+
+      <div class="field">
+        <div class="title">
           <span>Pasajeros : {{beneficiarios.length}}</span>
         </div>
         <div class="listado-beneficiarios">
@@ -99,12 +121,17 @@
         <div class="title">
           <span> Estado  de la poliza</span>
         </div>
-        <select >
-          <option value="">Vigente</option>
-          <option value="">Congelar</option>
-          <option value="">StandBy</option>
+        <ng-container *ngIf="poliza">
 
-        </select>
+          <select [(ngModel)]="poliza.status"  >
+            <option value="0">Vigente</option>
+            <option value="1">Congelar</option>
+            <option value="2">En uso</option>
+            <option value="3">Anulada</option>
+
+
+          </select>
+        </ng-container>
       </div>
 
 
@@ -119,9 +146,10 @@
 
 
     <div class="actions">
-      <button class="edit"  >
+      <button class="edit" (click)="updatePoliza()"  >
         Realizar cambios a la poliza
       </button>
+
 
 
     </div>

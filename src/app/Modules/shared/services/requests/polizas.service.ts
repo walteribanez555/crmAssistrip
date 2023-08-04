@@ -10,8 +10,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 export class PolizasService {
 
 
-  private apiUrl = '/api/polizas';
-  // private apiUrl = environment.apiUrl + '/polizas';
+  // private apiUrl = '/api/polizas';
+  private apiUrl = environment.apiUrl + '/polizas';
 
   constructor(private http : HttpClient) { }
 
@@ -59,6 +59,19 @@ export class PolizasService {
     })
 
   }
+
+
+  putPolizas(poliza_id:number,  fecha_salida : string, fecha_retorno : string, status: number) {
+    const urlPut = `${this.apiUrl}?id=${poliza_id}`;
+    return this.http.put(urlPut,{
+      fecha_salida,
+      fecha_retorno,
+      status,
+
+    })
+  }
+
+
 
 
 

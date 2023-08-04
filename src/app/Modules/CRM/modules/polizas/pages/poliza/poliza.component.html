@@ -53,10 +53,10 @@
       <a class="edit" [routerLink]="['edit']"  >
         Editar Poliza
       </a>
-      <button class="delete"  >
+      <button class="delete" (click)="modifyPoliza(3)"  >
         Anular Poliza
       </button>
-      <button class="delete"  >
+      <button class="delete"  (click)="modifyPoliza(1)" >
         Congelar Poliza
       </button>
 

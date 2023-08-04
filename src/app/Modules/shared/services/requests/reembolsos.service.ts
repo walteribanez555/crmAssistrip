@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, map, throwError } from 'rxjs';
 import { Reembolso, ReembolsoPost } from '../../models/Data/Reembolso';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,8 @@ export class ReembolsosService {
     private readonly http : HttpClient
   ) { }
 
-  private apiUrl = '/api/reembolsos';
+  // private apiUrl = '/api/reembolsos';
+  private apiUrl = environment.apiUrl + '/reembolsos';
 
   getReembolsos( ): Observable<Reembolso[]>{
     return this.http.get<Reembolso[]>(this.apiUrl);
@@ -64,7 +66,8 @@ export class ReembolsosService {
                   pais: string,
                   ciudad : string,
                   fecha_emision : string,
-                  status : number) : Observable<Reembolso>{
+                  status : number,
+                  monto : number) : Observable<Reembolso>{
 
       return this.http.post<Reembolso>(this.apiUrl, {
         siniestro_id,
@@ -77,7 +80,8 @@ export class ReembolsosService {
         pais,
         ciudad,
         fecha_emision,
-        status
+        status,
+        monto
       }).pipe(
         catchError(
           data => {
@@ -90,9 +94,22 @@ export class ReembolsosService {
   }
 
 
-  updateReembolsos(id : string, reembolso : Reembolso){
-
+  updateReembolsos(id : number, reembolso : Reembolso){
+    const urlPut = `${this.apiUrl}?id=${id}`;
+    return this.http.put(urlPut,
+      reembolso
+    )
   }
+
+  // putPolizas(poliza_id:number,  fecha_salida : string, fecha_retorno : string, status: number) {
+  //   const urlPut = `${this.apiUrl}?id=${poliza_id}`;
+  //   return this.http.put(urlPut,{
+  //     fecha_salida,
+  //     fecha_retorno,
+  //     status,
+
+  //   })
+  // }
 
 
 

@@ -5,13 +5,14 @@ import { ComponentsModule } from '../../components/components.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PipesModule } from 'src/app/Modules/shared/pipes/pipes.module';
 import { PolizasRoutingModule } from './polizas-routing.module';
-import { ListadoPolizasComponent } from './pages/listado-polizas/listado-polizas.component';
-import { PolizaComponent } from './pages/poliza/poliza.component';
-import { EditComponent } from './pages/edit/edit.component';
 import { SharedModule } from 'src/app/Modules/shared/shared.module';
-import { BeneficiarioComponent } from './components/beneficiario/beneficiario.component';
-import { GenerarPolizasComponent } from './pages/generar-polizas/generar-polizas.component';
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
+
+
+import { EditComponent, GenerarPolizasComponent, ListadoPolizasComponent, PolizaComponent } from './pages';
+import { BeneficiarioComponent } from './components';
+
+
 
 
 
@@ -21,11 +22,14 @@ import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 
 @NgModule({
   declarations: [
+
+    //Paginas
     ListadoPolizasComponent,
     GenerarPolizasComponent,
     PolizaComponent,
     EditComponent,
 
+    //Componentes
     BeneficiarioComponent,
 
 

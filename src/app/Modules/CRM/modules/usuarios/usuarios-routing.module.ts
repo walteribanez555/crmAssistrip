@@ -1,13 +1,13 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { AgregarUsuariosComponent } from "./agregar-usuarios/agregar-usuarios.component";
-import { ListadoUsuariosComponent } from "./listado-usuarios/listado-usuarios.component";
-import { UsuarioComponent } from "./usuario/usuario.component";
-import { ListadoRolesComponent } from "./listado-roles/listado-roles.component";
-import { RolComponent } from "./rol/rol.component";
-import { EditarRolComponent } from "./editar-rol/editar-rol.component";
-import { AgregarRolComponent } from "./agregar-rol/agregar-rol.component";
-import { EditarUsuarioComponent } from "./editar-usuario/editar-usuario.component";
+import { AgregarUsuariosComponent } from "./pages/agregar-usuarios/agregar-usuarios.component";
+import { ListadoUsuariosComponent } from "./pages/listado-usuarios/listado-usuarios.component";
+import { UsuarioComponent } from "./pages/usuario/usuario.component";
+import { ListadoRolesComponent } from "./pages/listado-roles/listado-roles.component";
+import { RolComponent } from "./pages/rol/rol.component";
+import { EditarRolComponent } from "./pages/editar-rol/editar-rol.component";
+import { AgregarRolComponent } from "./pages/agregar-rol/agregar-rol.component";
+import { EditarUsuarioComponent } from "./pages/editar-usuario/editar-usuario.component";
 
 
 const routes: Routes = [

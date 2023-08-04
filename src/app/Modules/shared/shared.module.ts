@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UploadFileDirective } from './directives/upload-file.directive';
 import { LoadingDivComponent } from './Components/loading-div/loading-div.component';
 import { SearchBoxComponent } from './Components/search-box/search-box.component';
+import { NumberDisplayComponent } from './Components/number-display/number-display.component';
 
 
 
@@ -18,6 +19,7 @@ import { SearchBoxComponent } from './Components/search-box/search-box.component
     UploadFileDirective,
     LoadingDivComponent,
     SearchBoxComponent,
+    NumberDisplayComponent,
 
 
   ],
@@ -34,6 +36,7 @@ import { SearchBoxComponent } from './Components/search-box/search-box.component
     LoadingProcessComponent,
     LoadingDivComponent,
     SearchBoxComponent,
+    NumberDisplayComponent,
 
   ]
 })

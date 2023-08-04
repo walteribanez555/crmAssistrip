@@ -1,0 +1,207 @@
+.container {
+  display: grid;
+  grid-template-columns: 3fr 1fr; /* 3/4 and 1/4 ratio */
+  grid-gap: 20px; /* gap between grid items */
+  width: 100%;
+  min-height: calc(100vh - (var(--main-header-height) + 100px));
+  padding: 10px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  animation: aparecerDesdeDerecha 0.5s ease-out;
+
+}
+
+
+.data,
+.actions{
+  background-color: var(--body-bg);
+    padding: 10px;
+    height: fit-content;
+    border-radius: 2px;
+    box-shadow: 0 0 5px 0 rgba(0,0,0,.2);
+    margin-bottom: 20px;
+}
+
+.actions{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  height: fit-content;
+  width: 100%;
+  max-width: 100vw;
+  background-color: var(--body-bg);
+  border-radius: 2px;
+  box-shadow: 0 0 5px 0 rgba(0,0,0,.2);
+}
+
+
+hr{
+  border: 1px solid coral;
+}
+
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+
+
+}
+
+.buttons button {
+  width: 100%;
+  height: 30px;
+  margin: 5px;
+  border: none;
+  border-radius: 2px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all .3s ease-in-out;
+}
+
+.buttons button.cancelar:hover,
+.buttons button.emitir.active:hover
+{
+  scale: 1.05;
+}
+
+
+h3{
+  padding: 0px 20px;
+}
+
+.buttons .emitir{
+  background-color: #e6dfdf;
+  color: var(--text-color);
+  height: fit-content;
+  min-height: 30px;
+  cursor:not-allowed;
+}
+
+.buttons .emitir.active{
+  background-color : var(--main-color);
+  border: 1px solid var(--main-color);
+  color: white;
+  cursor: pointer;
+}
+
+
+.info{
+  display: flex;
+  width: 100%;
+  height: fit-content;
+  flex-direction: column;
+  padding: 20px;
+}
+
+
+.list-cards{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3%;
+  flex-direction: row;
+}
+
+.card{
+  width: 35%;
+  height: 120px;
+  border-radius: 20px;
+  border: 1px solid #efedf7;
+  display: flex;
+  flex-direction: row;
+  background : #efedf7;
+  box-shadow: 0 0 5px #0003;
+  padding: 10px;
+  position: relative;
+
+}
+.card-info{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.card span{
+  font-size: 12px;
+  font-weight: normal;
+
+}
+
+.card .icon{
+  position: absolute;
+  right: -15px;
+  top: -15px;
+  background: white;
+  border-radius: 50px;
+  padding: 10px 10px 10px 10px;
+  border: 1px solid #efedf7;
+  box-shadow: 0 0 5px #0003;
+
+
+}
+
+.cantidad{
+  display: flex;
+  flex-direction: column;
+  padding: 0px 0px 20px 0px;
+}
+
+.icon svg{
+  fill: var(--main-color);
+  color: var(--main-color);
+
+
+
+}
+
+.separator{
+  margin: 20px 10px;
+  width: 90%;
+  height: 0.25px;
+  background-color: #dedddc;
+  border: none;
+}
+
+
+
+@media (max-width:768px) {
+
+  .container{
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  .info{
+    padding: 10px 0px;
+  }
+
+  .ventas{
+    padding: 0px;
+  }
+
+  .list-cards{
+    width: 100%;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 30px;
+    align-items: center;
+
+  }
+  .card{
+    width: 90%;
+  }
+
+  sale-month{
+    width: 100%;
+  }
+
+  h3{
+    font-size: 15px;
+  }
+
+}
+

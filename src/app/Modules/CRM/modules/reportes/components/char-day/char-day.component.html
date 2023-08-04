@@ -1,0 +1,28 @@
+<div class="card" [class.par]="isPar">
+  <h5>
+    {{dia}}
+  </h5>
+  <hr  [class.par]="isPar">
+
+  <div class="state">
+    <div class="field">
+      <span class="title">
+        Cantidad
+      </span>
+      <span class="description">
+        {{ventas.length}}
+      </span>
+    </div>
+    <div class="field">
+      <span class="title">
+        Monto
+      </span>
+      <span class="description">
+        {{totalMes | currency:'USD':'$':'1.1-3'}}
+      </span>
+    </div>
+
+
+  </div>
+
+</div>

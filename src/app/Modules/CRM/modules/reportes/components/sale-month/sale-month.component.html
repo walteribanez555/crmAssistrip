@@ -1,0 +1,44 @@
+<div class="month">
+  <h4>Ventas por Mes</h4>
+  <hr class="separator">
+  <div class="info" >
+
+    <div class="charts">
+
+      <div class="container" >
+        <canvas id="byMonth" >
+
+        </canvas>
+
+      </div>
+      <div class="container-mobile">
+        <canvas id="byMonthBar">
+
+        </canvas>
+
+
+      </div>
+    </div>
+
+
+    <h4>Datos por Mes</h4>
+    <hr class="separator">
+    <span style="padding: 10px 10px; font-size: 10px; color: var(--main-color);">Seleccione una para ver mas detalles</span>
+    <div class="list-charts" >
+      <char-month *ngFor="let ventaList of listadoVentas   ; index as i" [mes]="meses[i]" [ventas]="ventaList"  ></char-month>
+    </div>
+
+
+
+
+  </div>
+
+
+</div>
+
+<!-- <h2>Chart</h2>
+<div style="width: 200px; height: 200px;" class="container">
+
+  <canvas id="piechart"></canvas>
+</div>
+ -->
