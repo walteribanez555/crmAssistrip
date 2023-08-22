@@ -107,11 +107,37 @@ export class ListadoPolizasComponent implements OnInit {
             return this.serviciosServices.getServicios();
 
         }
-      )
+      ),
+
 
     ).subscribe(
       data => {
+
+        const request : any[] = [];
         this.listado_servicios = data;
+
+          this.listado_Polizas = this.listado_Polizas.map( item => {
+
+            if( item.status === 0) {
+
+              const salida = new Date(item.fecha_salida);
+
+              const fechaActual = new Date();
+              const fechaAyer = new Date(fechaActual);
+              fechaAyer.setDate(fechaActual.getDate() - 1);
+
+              if (salida < fechaAyer){
+
+                item.status = 2;
+              }
+
+              return item
+            }
+
+            return item
+
+
+          })
 
 
          this.listInfo =this.mapData(this.listado_Polizas,this.listado_beneficiarios, this.listado_Siniestros,this.listado_servicios);
@@ -192,6 +218,8 @@ export class ListadoPolizasComponent implements OnInit {
       }
 
     })
+
+    console.log(dtoBeneficiarios);
 
 
     return dtoBeneficiarios;

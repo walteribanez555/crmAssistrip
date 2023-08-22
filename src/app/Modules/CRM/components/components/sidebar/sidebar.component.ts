@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, Output, 
 import { Router } from '@angular/router';
 import { routeSideNav } from 'src/app/Modules/shared/models/Pages/routes.model';
 import { AuthService } from 'src/app/Modules/shared/services/auth/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'sidebar',
@@ -305,6 +306,19 @@ export class SidebarComponent {
 
 
     const routes : string[] = this.authService.getRoutes().map( (route : any ) => route.area );
+
+
+    if(routes.length===0){
+      this.authService.logout();
+      this.router.navigate(['../../../auth/login']);
+      Swal.fire({
+        title : "Su usuario no esta autorizado para el ingreso",
+        icon : 'error',
+      }
+
+      )
+
+    }
 
 
     this.menuItemsFiltered  = this.menuItems.filter( menuItem => routes.includes(menuItem.label));

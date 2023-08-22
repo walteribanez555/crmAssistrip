@@ -6,8 +6,9 @@
       <h2>Póliza : {{polizaId}}</h2>
       <span class="vigente" *ngIf="poliza.status ===0 ">Vigente</span>
       <span class="congelada" *ngIf="poliza.status ===1 ">Congelada</span>
-      <span class="uso" *ngIf="poliza.status ===2 ">En uso</span>
-      <span class="anulada" *ngIf="poliza.status ===3 ">Anulada</span>
+      <span class="uso" *ngIf="poliza.status ===2 ">Activa</span>
+      <span class="anulada" *ngIf="poliza.status ===3 " >Anulada</span>
+      <span class="anulada" *ngIf="poliza.status ===4 ">En proceso</span>
 
     </div>
 
@@ -49,7 +50,7 @@
     <hr>
 
 
-    <div class="actions">
+    <div class="actions" *ngIf="poliza.status!==3; else alternateContent ">
       <a class="edit" [routerLink]="['edit']"  >
         Editar Poliza
       </a>
@@ -63,6 +64,10 @@
     </div>
 
   </div>
+
+  <ng-template #alternateContent>
+    <span  style="text-align: center; width: 100%; color: red; display: flex;align-items: center;justify-content: center; padding: 20px 0px;" >La poliza se encuentra anulada, no permite modificaciones</span>
+  </ng-template>
 
 </div>
 

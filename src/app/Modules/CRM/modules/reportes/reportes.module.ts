@@ -12,6 +12,9 @@ import { CharMonthComponent } from './components/char-month/char-month.component
 import { ModalMonthComponent } from './components/modal-month/modal-month.component';
 import { CharDayComponent } from './components/char-day/char-day.component';
 import { SaleBenMonthComponent } from './components/sale-ben-month/sale-ben-month.component';
+import { SiniestroMonthComponent } from './components/siniestro-month/siniestro-month.component';
+import { ChartSiniestrosComponent } from './components/chart-siniestros/chart-siniestros.component';
+import { ModalSiniestroComponent } from './components/modal-siniestro/modal-siniestro.component';
 
 
 
@@ -24,7 +27,10 @@ import { SaleBenMonthComponent } from './components/sale-ben-month/sale-ben-mont
     CharMonthComponent,
     ModalMonthComponent,
     CharDayComponent,
-    SaleBenMonthComponent
+    SaleBenMonthComponent,
+    SiniestroMonthComponent,
+    ChartSiniestrosComponent,
+    ModalSiniestroComponent
   ],
   imports: [
     CommonModule,

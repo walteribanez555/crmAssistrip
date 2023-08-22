@@ -58,8 +58,9 @@
                   <td >
                     <span class="vigente" *ngIf="poliza.polizaBeneficiario.status ===0 ">Vigente</span>
                     <span class="congelada" *ngIf="poliza.polizaBeneficiario.status ===1 ">Congelada</span>
-                    <span class="uso" *ngIf="poliza.polizaBeneficiario.status ===2 ">En uso</span>
+                    <span class="uso" *ngIf="poliza.polizaBeneficiario.status ===2 ">Activa</span>
                     <span class="anulada" *ngIf="poliza.polizaBeneficiario.status ===3 ">Anulada</span>
+                    <span class="anulada" *ngIf="poliza.polizaBeneficiario.status ===4 ">En Proceso</span>
 
                   </td>
                   <td style="color: var(--main-color); cursor: pointer;" >

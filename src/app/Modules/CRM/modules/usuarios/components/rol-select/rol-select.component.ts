@@ -22,9 +22,11 @@ export class RolSelectComponent implements OnInit {
 
   list_roles : RolResp[] = [];
 
-  information : number[]  = [];
+  information : string[]  = [];
 
   hasLoaded = true;
+
+  roles_mapped  : any[] = [];
 
 
 
@@ -34,11 +36,29 @@ export class RolSelectComponent implements OnInit {
   }
   ngOnInit(): void {
 
+
+    this.information = this.inputControl?.value.split(',');
+    // console.log(this.inputControl?.value);
+
+
     this.hasLoaded= false
     this.rolService.getRoles().subscribe({
       next : ( data ) => {
 
         this.list_roles = data;
+
+
+
+        this.roles_mapped = this.list_roles.map( rol => {
+
+          return {
+            rol,
+            isChecked : this.information.includes(rol.rol_id.toString()) ? true : false
+          }
+
+        })
+
+
 
 
 
@@ -62,13 +82,13 @@ export class RolSelectComponent implements OnInit {
 
 
 
-    const index = this.information.indexOf(role.rol_id);
+    const index = this.information.indexOf(role.rol_id.toString());
 
     if (index !== -1) {
       this.information.splice(index, 1);
     }
     else{
-      this.information.push( role.rol_id);
+      this.information.push( role.rol_id.toString());
     }
 
 

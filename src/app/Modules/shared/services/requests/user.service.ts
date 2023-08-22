@@ -68,6 +68,46 @@ export class UserService {
 
     }
 
+    updateUser( username : string , rol_id  : string, user_type : string, first_name : string, last_name : string, email : string, phone : string, password?: string, confirm?: string, ){
+      const urlPut = `${this.urlLogin}?id=${username}`;
+      if(!password || !confirm){
+        return this.http.put(urlPut, {
+          username,
+          rol_id,
+          user_type,
+          first_name,
+          last_name,
+          email,
+          phone,
+        }).pipe(
+          catchError(
+              data => {
+                throw new Error(data);
+              }
+          )
+        )
+
+      }
+
+      return this.http.put(urlPut, {
+        username,
+        rol_id,
+        user_type,
+        password,
+        confirm,
+        first_name,
+        last_name,
+        email,
+        phone,
+      }).pipe(
+        catchError(
+            data => {
+              throw new Error(data);
+            }
+        )
+      )
+    }
+
 
 
 

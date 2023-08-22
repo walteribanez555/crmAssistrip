@@ -126,11 +126,31 @@ export class LoginComponent implements OnInit {
       )
         .subscribe(  {
           next: (data) =>{
+            this.hasLoaded =true
+
+
 
 
             this.authService.setRoutes(compareRol(this.roles,data[0]));
 
-            this.hasLoaded =true
+            if(this.authService.getRoutes().length === 0  ){
+
+              this.authService.logout();
+
+
+
+              Swal.fire({
+                title: "No esta autorizado su ingreso",
+                icon : 'error',
+              })
+
+              return;
+
+            }
+
+
+
+
             Swal.fire({
               position: 'top-end',
               icon: 'success',

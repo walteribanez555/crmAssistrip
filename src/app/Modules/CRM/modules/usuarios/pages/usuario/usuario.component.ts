@@ -43,7 +43,19 @@ export class UsuarioComponent implements OnInit {
           }
         )
       ).subscribe({
-        next : (data) => { this.rols = data, console.log(data)},
+        next : (data) => {
+
+          const roles =    this.usuario?.rol_id.split(',');
+          console.log(roles);
+          console.log(data);
+
+
+           this.rols = data.filter( rol => roles?.includes(rol.rol_id.toString())) ;
+
+
+
+
+          },
         error : (err) => { console.log(err)},
         complete : () => { this.isLoading=false}
       })

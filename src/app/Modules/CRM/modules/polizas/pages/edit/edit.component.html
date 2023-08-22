@@ -6,7 +6,7 @@
       <h2>Póliza : {{polizaId}}</h2>
       <span class="vigente" *ngIf="poliza.status ===0 ">Vigente</span>
       <span class="congelada" *ngIf="poliza.status ===1 ">Congelada</span>
-      <span class="uso" *ngIf="poliza.status ===2 ">En uso</span>
+      <span class="uso" *ngIf="poliza.status ===2 ">Activa</span>
       <span class="anulada" *ngIf="poliza.status ===3 ">Anulada</span>
 
     </div>
@@ -126,8 +126,9 @@
           <select [(ngModel)]="poliza.status"  >
             <option value="0">Vigente</option>
             <option value="1">Congelar</option>
-            <option value="2">En uso</option>
+            <option value="2">Activa</option>
             <option value="3">Anulada</option>
+            <option value="4">En Proceso</option>
 
 
           </select>

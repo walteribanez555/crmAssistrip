@@ -18,14 +18,14 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let rol of list_roles">
+            <tr *ngFor="let rol_mapped of roles_mapped">
               <td    class="f-start">
-                <span>{{rol.rol_name}}</span>
+                <span>{{rol_mapped.rol.rol_name}}</span>
               </td>
               <td>
                 <div class="option">
-                  <input type="checkbox" [id]="rol.rol_name"  (change)="onChangeSelect(rol)" >
-                  <label class="button" [for]="rol.rol_name"></label>
+                  <input type="checkbox" [id]="rol_mapped.rol.rol_name"  [(ngModel)]="rol_mapped.isChecked"   (change)="onChangeSelect(rol_mapped.rol)" >
+                  <label class="button" [for]="rol_mapped.rol.rol_name"></label>
 
                 </div>
               </td>

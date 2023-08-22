@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { switchMap } from 'rxjs';
+import { forkJoin, map, switchMap } from 'rxjs';
 import { Beneficiario } from 'src/app/Modules/shared/models/Data/Beneficiario';
 import { Cliente } from 'src/app/Modules/shared/models/Data/Cliente';
 import { Poliza } from 'src/app/Modules/shared/models/Data/Poliza';
@@ -46,7 +46,10 @@ export class PolizaComponent implements OnInit{
         this.polizaService.getPolizasById(this.polizaId).pipe(
           switchMap(
             data => {
+                console.log(data);
                 this.poliza = data[0];
+
+
                 return this.ventaService.getVentasById(this.poliza.venta_id)
             }
           ),
@@ -67,14 +70,45 @@ export class PolizaComponent implements OnInit{
 
               return this.servicioService.getServicioById(servicio_id);
             }
+          ),
+
+          switchMap(
+            data => {
+
+              this.servicio = data[0];
+              const requests : any[] = [];
+
+              if( this.poliza?.status === 0) {
+
+                const salida = new Date(this.poliza.fecha_salida);
+
+                const fechaActual = new Date();
+                const fechaAyer = new Date(fechaActual);
+                fechaAyer.setDate(fechaActual.getDate() - 1);
+
+                if (salida < fechaAyer){
+                  requests.push( this.polizaService.putPolizas(this.poliza.poliza_id, this.poliza.fecha_salida.split('T')[0], this.poliza.fecha_retorno.split('T')[0], 2))
+                }
+              }
+              else{
+                if(this.poliza)
+                requests.push(this.polizaService.putPolizas(this.polizaId, this.poliza?.fecha_salida.split('T')[0], this.poliza?.fecha_retorno.split('T')[0], this.poliza?.status));
+
+              }
+
+
+
+              return forkJoin(requests);
+            }
           )
+
 
         ).subscribe({
 
           next :  ( data  ) => {
-            this.loading = false;
 
-            this.servicio = data[0];
+
+
 
 
 
@@ -83,6 +117,9 @@ export class PolizaComponent implements OnInit{
           },
           error : ( error ) => {
             console.log(error);
+          },
+          complete : ( ) => {
+            this.loading = false;
           }
 
         })

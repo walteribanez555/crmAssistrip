@@ -150,6 +150,7 @@ export class VentasComponent implements OnInit {
               fecha_salida : item.fecha_salida.split('T')[0],
               fecha_retorno : item.fecha_retorno.split('T')[0],
               dias_viaje : this.obtenerDiferenciaEnDias(item.fecha_salida, item.fecha_retorno),
+              servicio : item.servicio,
 
             }
           }
@@ -245,7 +246,7 @@ export class VentasComponent implements OnInit {
       showTitle: true,
       title: 'Report data',
       useBom: true,
-      headers: ["fecha venta","Voucher", "id venta","precio base","descuento","total","origen","destino", "telefono", "email", "nombre","apellido", "identificador","dia nacimiento","fecha salida","fecha retorno","dias" ],
+      headers: ["fecha venta","Voucher", "id venta","precio base","descuento","total","origen","destino", "telefono", "email", "nombre","apellido", "identificador","dia nacimiento","fecha salida","fecha retorno","dias", "servicio" ],
     };
 
 

@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, Type } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { TypeUser, enumTypeUser } from '../../interfaces/TypeUser.interface';
+import { tree } from 'd3';
 
 @Component({
   selector: 'type-user',
@@ -9,26 +10,43 @@ import { TypeUser, enumTypeUser } from '../../interfaces/TypeUser.interface';
 })
 export class TypeUserComponent implements OnInit {
 
+  @Input() userType : enumTypeUser = enumTypeUser.INTERNAL
+
   options : TypeUser[]  =  [
     {
       name  : enumTypeUser.INTERNAL,
       state : false,
-      description : "Usuario Cliente"
+      description : "Usuario Cliente",
     },
     {
       name : enumTypeUser.CLIENTE,
       state : false,
-      description : "Usuario Administrativo"
+      description : "Usuario Administrativo",
+
     },
     {
       name : enumTypeUser.INVITED,
       state : false,
-      description : "Invitado"
+      description : "Invitado",
+
     }
   ]
 
 
   ngOnInit(): void {
+
+    this.options = this.options.map( option => {
+
+      if(option.name === this.userType){
+        return{
+          name : option.name,
+          state : true,
+          description : option.description,
+        }
+      }
+
+      return option
+    })
   }
 
 

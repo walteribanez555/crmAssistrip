@@ -1,97 +1,136 @@
-<div class="container">
+<ng-container  *ngIf="!isLoading && userForm">
 
-  <div class="process">
-    <!-- <div class="loading"
-     *ngIf="!hasLoaded" [@loadingAnimation]="hasLoaded ? 'hide' : 'show'">
-      <img
-      src="assets/svg/loading.svg"
-      alt=""
-      >
-      <span>Espere un momento, cargando la informacion</span>
-    </div> -->
+  <form  [formGroup]="userForm"  (ngSubmit)="submitForm()" class="container">
+    <div class="list">
+      <h2>Editar Usuario</h2>
+      <hr>
 
-    <!-- <ng-container *ngIf="hasLoaded">
-
-      <div class="field">
-        <span class="title">
-          Nombre
-        </span>
-        <span class="description" *ngIf="nombre">
-          {{nombre}}
-        </span>
-        <span class="description" *ngIf="!nombre">
-          No tiene nombre
-        </span>
-      </div>
-      <div class="field">
-        <div class="row">
+      <div class="grid-columns">
+        <div class="left">
           <div class="field">
-            <span class="title">
-              Desde
-            </span>
-            <div class="description">
-              {{initialDate}}
-            </div>
+            <label>
+              username
+            </label>
+            <input type="text" formControlName="username" name="username"  placeholder="adminPrincipal" [disabled]="true" >
 
           </div>
           <div class="field">
-            <span class="title">
-              Hasta
-            </span>
-            <span class="description">
-              {{finalDate}}
-            </span>
+            <label>
+              Nombre(s)
+            </label>
+            <input type="text" formControlName="first_name" name="first_name" placeholder="Jhon Due"  >
+
+          </div>
+          <div class="field">
+            <label>
+              Apellido(s)
+            </label>
+            <input type="text" formControlName="last_name" name="first_name" placeholder="Gates"  >
+
+
+          </div>
+          <div class="field">
+            <label>
+              email
+            </label>
+            <input type="text" formControlName="email" name="email" placeholder=" email@assistrip.com">
+
+          </div>
+
+          <div class="field">
+            <label>
+              Contraseña
+            </label>
+            <input type="text" formControlName="password" name="password" placeholder=" No rellenar en caso de no actualizar">
+          </div>
+          <div class="field">
+            <label>
+              Confirmacion Contraseña
+            </label>
+            <input type="text" formControlName="confirm" name="confirm" placeholder=" No rellenar en caso de no actualizar">
+          </div>
+
+          <div class="field">
+            <label>
+              Telefono
+            </label>
+            <input type="text" formControlName="phone" name="phone" placeholder="+591 78140498">
+
+          </div>
+
+
+        </div>
+        <div class="right">
+          <div class="field">
+            <label>
+              Paneles de acceso
+            </label>
+
+            <type-user  [inputControl]="secondControl" ></type-user>
+
+          </div>
+
+          <div class="field">
+            <label>
+              Tipo de usuario
+            </label>
+
+
+            <rol-select style="width: 100%;"  [inputControl]="inputControl" ></rol-select>
 
           </div>
         </div>
+
       </div>
-      <div class="field">
-        <span class="title">
-          Descuento
-        </span>
-        <span class="description">
-          15 %
-        </span>
-      </div>
-      <div class="field">
-        <span class="title">
-          Planes incluidos
-        </span>
-        <span class="description" >
-            <ul>
-              <li *ngFor="let servicio of listado_servicios">
-                <a href="">{{servicio.servicio}}</a>
-              </li>
-            </ul>
-        </span>
-      </div>
-    </ng-container>
- -->
 
 
 
-  </div>
 
-  <div class="actions">
-    <h2>Acciones</h2>
-    <hr>
 
-    <div class="buttons">
-      <button    class="emitir ">
-        Editar
-      </button>
 
-      <button    class="cancelar" [routerLink]="['../../../listado-usuarios']"  >
-        Cancelar
-      </button>
+
+
     </div>
 
-    <hr>
+    <!-- // {
+      //   "username" : "adminBorrar",
+      //   "rol_id" : "1",
+      //   "user_type" : "INTERNAL",
+      //   "password" : "MotoPassword",
+      //   "confirm" : "MotoPassword",
+      //   "first_name" : "Rafel",
+      //   "last_name" : "Rios",
+      //   "email" : "raforios@gmail.com",
+      //   "phone" : "77781631"
+
+      // } -->
 
 
 
 
-  </div>
+    <div class="actions">
+      <h2>Acciones</h2>
+      <hr>
+
+      <div class="buttons">
+        <button  type="submit"  class="emitir active ">
+          Modificar
+        </button>
+
+        <button   type="button"  class="cancelar"  [routerLink]="['../listado-usuarios']" >
+          Cancelar
+        </button>
+      </div>
+
+      <hr>
 
 
-</div>
+
+
+    </div>
+
+
+  </form>
+
+</ng-container>
+

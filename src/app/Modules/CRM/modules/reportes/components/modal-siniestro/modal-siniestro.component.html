@@ -1,0 +1,38 @@
+<div class="modal">
+  <div class="top">
+    <div class="info-top">
+      <h3>{{mes}}</h3>
+
+      <span (click)="close()">X</span>
+    </div>
+
+
+
+
+  <hr>
+</div>
+<div class="main">
+
+  <div class="table" >
+      <canvas id="ventasMes"></canvas>
+
+      <button>Generar reporte mensual</button>
+
+  </div>
+  <div class="list">
+    <h3>Listado por dias</h3>
+    <hr style="margin: 20px 0px;">
+    <div class="month-space">
+      <span>Mes : {{mes}}</span>
+    </div>
+    <div class="list-items">
+      <char-day  *ngFor="let siniestroByMonthsList of siniestrosByMonthsLists, let i = index" [ventas]="siniestroByMonthsList" [dia]="i+1" ></char-day>
+
+    </div>
+
+  </div>
+</div>
+
+</div>
+
+<div class="modal-backdrop" (click)="close()"></div>

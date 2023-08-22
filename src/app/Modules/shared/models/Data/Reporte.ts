@@ -22,4 +22,6 @@ export interface Reporte {
   destino:            string;
   fecha_salida:       string;
   fecha_retorno:      string;
+  servicio : string,
+
 }

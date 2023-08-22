@@ -1,0 +1,30 @@
+
+<div class="container" (click)="displayModal()">
+  <p>{{mes}}</p>
+  <hr>
+
+  <div class="field">
+    <span class="title">
+      Siniestros Totales
+    </span>
+    <span class="description">
+      <number-display [finalNumber]="siniestros.length"></number-display>
+
+    </span>
+  </div>
+
+
+  <div class="field">
+    <span class="title">
+      Monto Total Reembolsado
+    </span>
+    <span class="description">
+      {{montoTotal | currency:'USD':'$':'1.1-3'}}
+    </span>
+  </div>
+
+
+</div>
+
+<!-- <modal-month *ngIf="openModal"  (closeModal)="displayModal()" [mes]="mes" [ventas]="ventas"></modal-month> -->
+

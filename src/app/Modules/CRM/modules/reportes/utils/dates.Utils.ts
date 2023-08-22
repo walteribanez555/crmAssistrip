@@ -68,9 +68,61 @@ export const setMensualDetails = ( ventas : Venta[], month : string) =>{
   })
 
   return ventas;
+}
+
+export const setMensualSiniestros = (  siniestros : any[] ,   month : string ) => {
+
+  const validMonths = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
+
+  if (!validMonths.includes(month)) {
+    console.error("Invalid month string.");
+    return null;
+  }
+
+
+  // Get the current date
+  const currentDate = new Date();
+
+
+  // Extract the current month and year
+  const currentYear = currentDate.getFullYear();
+
+  const newDate = new Date(`${month} , ${currentYear}`);
+
+
+
+
+  siniestros = siniestros.filter( siniestro => {
+
+    const siniestroFecha = addOneDayToDate(new Date(siniestro.fecha_siniestro));
+    const monthSale = siniestroFecha.getMonth();
+    const yearSale = siniestroFecha.getFullYear();
+
+    // if(siniestro.estado!=="Reembolsado"){
+    //   return false;
+    // }
+
+
+    if( (monthSale === newDate.getMonth()) && (currentYear=== yearSale)){
+      return true;
+    }
+    else{
+      return false
+    }
+
+  })
+
+
+  return siniestros;
+
 
 
 }
+
+
 
 export const addOneDayToDate = (date: Date): Date  =>{
   const oneDayMilliseconds = 24 * 60 * 60 * 1000; // Number of milliseconds in one day

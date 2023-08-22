@@ -15,6 +15,15 @@
                 <span>{{rol.rol_name}}</span>
               </td>
             </tr>
+            <ng-container *ngIf="list_roles.length===0">
+              <tr>
+                <td class="f-start">
+                  <span>No tiene rol asignado</span>
+                </td>
+              </tr>
+
+            </ng-container>
+
           </tbody>
         </table>
 

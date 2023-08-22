@@ -27,7 +27,7 @@ export class AgregarUsuariosComponent implements OnInit {
     last_name : new FormControl(null , [Validators.required]),
     email : new FormControl( null , [Validators.required]),
     phone : new FormControl(null, [Validators.required]),
-    rol_id  : new FormControl(null , [ Validators.required]),
+    rol_id  : new FormControl('' , [ Validators.required]),
   })
 
 
