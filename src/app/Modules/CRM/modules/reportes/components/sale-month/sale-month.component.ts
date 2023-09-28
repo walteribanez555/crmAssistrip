@@ -58,7 +58,12 @@ export class SaleMonthComponent implements OnInit, AfterViewInit{
 
 
     const cantVentas =  listadoPorMes.map( ventasMes => ventasMes.reduce((total: number, objeto: Venta) => {
-      return total + objeto.total_pago;
+      // return total + objeto.total_pago;
+      if(objeto.status!==3){
+        return total + objeto.total_pago;
+      }
+      return total;
+
     }, 0).toFixed(3));
 
 

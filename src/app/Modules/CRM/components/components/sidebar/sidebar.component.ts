@@ -202,6 +202,28 @@ export class SidebarComponent {
         // },
       ]
     },
+    {
+      label: 'Marketing',
+      isDropdownOpen: false,
+      dropdownHeight: '0',
+      icon : 'fa-solid fa-globe',
+      submenuItems: [
+
+        {
+          label: 'Notificaciones',
+          icon : 'fa-solid fa-money-bill',
+          route: 'marketing/notificaciones'
+        },
+
+
+        // {
+        //   label : 'Roles',
+        //   route : 'usuarios/listado-roles',
+        //   icon : 'fa-sharp fa-solid fa-shield-halved'
+        // },
+      ]
+    },
+
 
     // {
     //   label: 'inicio',

@@ -80,6 +80,12 @@ export class RolStructureComponent implements OnInit {
         "Ventas",
         "Siniestros",
       ]
+    },
+    {
+      area: 'Marketing',
+      area_permissions : [
+        "notificaciones",
+      ]
     }
   ]
 

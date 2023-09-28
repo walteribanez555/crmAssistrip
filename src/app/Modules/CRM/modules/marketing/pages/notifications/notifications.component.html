@@ -1,0 +1,75 @@
+<form [formGroup]="notificationForm" (ngSubmit)="submitForm()" class="container">
+  <div class="list">
+    <h2>Agregar Notificacion</h2>
+    <hr>
+
+    <div class="grid-columns">
+      <div class="left">
+        <div class="field">
+          <label>
+            Titulo
+          </label>
+          <input type="text" formControlName="title" name="title" placeholder="Titulo">
+
+        </div>
+        <div class="field">
+          <label>
+            Contenido
+          </label>
+          <textarea formControlName="body" placeholder="Contendio" name="body" id="" cols="100" rows="10"></textarea>
+
+        </div>
+
+
+      </div>
+      <div class="right">
+        <div class="field">
+          <input type="file" (change)="onFileSelected($event)" formControlName="image" name="image">
+        </div>
+        <div class="field">
+          <div class="preview-image" *ngIf="preview">
+            <img [src]="preview" alt="">
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+
+
+
+
+
+
+  </div>
+
+
+
+  <div class="actions">
+    <h2>Acciones</h2>
+    <hr>
+
+    <div class="buttons">
+      <button type="submit" class="emitir active ">
+        Agregar
+      </button>
+
+      <div class="loading-container"
+        style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
+
+        <loading-process [loading]="isLoading"></loading-process>
+      </div>
+
+
+    </div>
+
+    <hr>
+
+
+
+
+  </div>
+
+
+</form>
