@@ -187,7 +187,10 @@ export class EditComponent {
               const secondLastName = lastNames.resOfWord;
 
 
-    this.beneficiarioService.updateBeneficiario(cliente_id,firstName, secondName, firstLastName, secondLastName, ci,email,telf,origen,gender,age).subscribe(
+    this.beneficiarioService.updateBeneficiario(cliente_id,firstName, secondName, firstLastName, secondLastName, ci,email,telf,origen,gender,age)
+
+
+    .subscribe(
       {
         next : (data) => {
           this.showSuccessNotification();
@@ -233,8 +236,24 @@ export class EditComponent {
   }
 
   updatePoliza(){
-    if(this.poliza)
-    this.polizaService.putPolizas(this.polizaId, this.fecha_salida,this.fecha_retorno, this.poliza.status ).subscribe({
+    if(this.poliza && this.venta)
+    this.polizaService.putPolizas(this.polizaId, this.fecha_salida,this.fecha_retorno, this.poliza.status ).pipe(
+      switchMap( (data) => {
+
+        if(this.poliza?.status === 3 ){
+          return this.ventaService.updateVenta(this.venta!.venta_id,1)
+        }
+
+        if( this.poliza?.status === 4){
+          return this.ventaService.updateVenta(this.venta!.venta_id,0)
+        }
+
+        return this.ventaService.updateVenta(this.venta!.venta_id, 3);
+
+
+      })
+
+      ).subscribe({
       next: (data) => { this.showSuccessNotification(); this.router.navigate(['dashboard/polizas/listado-polizas'])},
       error : ( err) => { this.showError(err)},
     })

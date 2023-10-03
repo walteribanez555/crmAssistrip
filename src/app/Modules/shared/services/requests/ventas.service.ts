@@ -21,7 +21,7 @@ export class VentasService {
    }
 
 
-   postVenta(cliente_id : number,cantidad : string,descuento : string, tipo_descuento : string,plus : number, servicio_id : string ,fechaSalida : string, fechaRegreso : string ) : Observable<VentaResp>{
+   postVenta(cliente_id : number,cantidad : string,descuento : string, tipo_descuento : string,plus : number, servicio_id : string ,fechaSalida : string, fechaRegreso : string ,status : number ) : Observable<VentaResp>{
 
 
 
@@ -38,7 +38,7 @@ export class VentasService {
       fecha_salida : fechaSalida,
       fecha_retorno : fechaRegreso,
       servicio_id,
-      status:1
+      status:status
     }).pipe(
       map(
         data => data,
@@ -78,6 +78,14 @@ export class VentasService {
       )
 
 
+    }
+
+
+    updateVenta( id : number , status : number){
+      const urlPut = `${this.apiUrl}?id=${id}`;
+      return this.http.put(urlPut,{
+        status : status
+      })
     }
 
 

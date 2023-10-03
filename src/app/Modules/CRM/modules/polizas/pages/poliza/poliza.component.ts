@@ -132,7 +132,18 @@ export class PolizaComponent implements OnInit{
 
 
     if(this.poliza)
-    this.polizaService.putPolizas(this.poliza.poliza_id, this.poliza.fecha_salida.split('T')[0],this.poliza.fecha_retorno.split('T')[0], status).subscribe({
+    this.polizaService.putPolizas(this.poliza.poliza_id, this.poliza.fecha_salida.split('T')[0],this.poliza.fecha_retorno.split('T')[0], status).pipe(
+      switchMap(data => {
+
+        if(status === 3) {
+          return this.ventaService.updateVenta(this.venta!.venta_id, 1);
+        }
+
+        return this.ventaService.updateVenta(this.venta!.venta_id, this.venta!.status);
+
+      })
+
+      ).subscribe({
       next : ( data ) => {
         this.showSuccessNotification();
         this.router.navigate(['dashboard/polizas/listado-polizas'])

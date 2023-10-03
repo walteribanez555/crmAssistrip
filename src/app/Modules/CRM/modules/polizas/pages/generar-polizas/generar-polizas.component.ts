@@ -61,6 +61,7 @@ export class GenerarPolizasComponent implements OnInit{
   costo : number =-1;
   listDescuentos : CuponAplicado[] = [];
   status : number = 0;
+  statusVenta : number = 0;
 
 
   createItemForm(  ): FormGroup {
@@ -441,6 +442,7 @@ export class GenerarPolizasComponent implements OnInit{
                 servicios,
                 this.inputMinDate,
                 this.inputMaxDate,
+                this.status
               );
             }else{
               console.log(" no se  encontro cliente");
@@ -455,8 +457,7 @@ export class GenerarPolizasComponent implements OnInit{
                 nro_contacto : polizas[0].form.value.telf
               };
 
-              console.log(nuevoCliente);
-              console.log(polizas[0]);
+
 
               return this.clientesService.postCliente(nuevoCliente).pipe(
                 switchMap((data) => {
@@ -472,6 +473,7 @@ export class GenerarPolizasComponent implements OnInit{
                     servicios,
                     this.inputMinDate,
                     this.inputMaxDate,
+                    this.status
                   );
 
 
@@ -491,7 +493,13 @@ export class GenerarPolizasComponent implements OnInit{
           console.log(data);
           const venta_id = data.id;
           console.log(venta_id, this.selectedPlan , this.tags.join(','),this.inputMinDate,this.inputMaxDate,0);
-          return this.polizasService.postPolizas(venta_id, this.selectedPlan , this.tags.join(','),this.inputMinDate,this.inputMaxDate,1);
+          if(this.status ===3 ) {
+
+            return this.polizasService.postPolizas(venta_id, this.selectedPlan , this.tags.join(','),this.inputMinDate,this.inputMaxDate,1,0);
+          }
+
+          return this.polizasService.postPolizas(venta_id, this.selectedPlan , this.tags.join(','),this.inputMinDate,this.inputMaxDate,1,4);
+
 
         }),
 
