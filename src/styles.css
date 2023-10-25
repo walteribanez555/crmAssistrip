@@ -5,6 +5,16 @@
   src: url('../src/assets/font/Lato-Regular.ttf') format('truetype');
 }
 
+@import '~quill/dist/quill.core.css';
+@import '~quill/dist/quill.snow.css';
+
+.ql-editor{
+
+  height: 350px;
+  width: 66vw;
+
+}
+
 
 @font-face{
 font-family: 'Poppins';

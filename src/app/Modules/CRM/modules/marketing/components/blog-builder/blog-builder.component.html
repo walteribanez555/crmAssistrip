@@ -1,0 +1,46 @@
+<div class="builder">
+  <div class="row">
+    <h2>Construye tu nuevo Post</h2>
+
+    <div>
+      <button class="add-btn" style="cursor: pointer;">
+        Vista Previa
+
+      </button>
+
+      <button class="add-btn" style="cursor: pointer;">
+        Agregar
+
+      </button>
+    </div>
+
+  </div>
+
+  <div class="page">
+
+    <!-- <input type="text" class="title" placeholder="INSERTA TU TIULO AQUI" > -->
+    <quill-editor class="title" [placeholder]="'TITULO DE LA NOTICIA'"   >
+      <div quill-editor-toolbar>
+        <select class="ql-size">
+          <option value="small"></option>
+          <option selected></option>
+          <option value="large"></option>
+          <option value="huge"></option>
+        </select>
+        <span class="ql-formats">
+          <button class="ql-bold" [title]="'Bold'"></button>
+        </span>
+        <span class="ql-formats">
+          <select class="ql-align" [title]="'Aligment'">
+            <option selected></option>
+            <option value="center"></option>
+            <option value="right"></option>
+            <option value="justify"></option>
+          </select>
+        </span>
+      </div>
+
+    </quill-editor>
+
+  </div>
+</div>

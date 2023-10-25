@@ -214,6 +214,11 @@ export class SidebarComponent {
           icon : 'fa-solid fa-money-bill',
           route: 'marketing/notificaciones'
         },
+        {
+          label: 'Blog',
+          icon : 'fa-solid fa-money-bill',
+          route: 'marketing/blogs'
+        }
 
 
         // {
