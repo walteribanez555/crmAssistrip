@@ -1,0 +1,42 @@
+quill-editor{
+  height: 70%;
+}
+
+
+quill-editor .ql-editor .ql-video {
+  width: 100%;
+}
+
+.buttons{
+  flex-direction: row;
+  display: flex;
+  width: 100%;
+  align-items: end;
+  justify-content: end;
+  margin-top: 0px;
+  margin-bottom: 20px;
+}
+
+.buttons button{
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
+  padding: 10px 20px;
+  border: none;
+  background-color: var(--main-color);
+  color: white;
+  border-radius: 5px;
+}
+
+.buttons button span{
+  padding-left: 20px;
+}
+
+@media (max-width:768px) {
+
+
+  quill-editor{
+    height: 400px;
+  }
+
+}

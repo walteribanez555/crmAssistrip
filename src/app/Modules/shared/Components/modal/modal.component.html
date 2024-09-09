@@ -1,0 +1,24 @@
+<div class="modal">
+
+  <div class="top">
+    <h2>{{title}}</h2>
+
+    <button class="btn_close" (click)="close()">X</button>
+
+  </div>
+  <hr>
+  <div class="data">
+    <ng-template dcWrapper id="item"></ng-template>
+
+  </div>
+
+ <div class="actions">
+  <button type="button" (click)="submit()">Realizar</button>
+  <button type="button" (click)="close()">Cancelar</button>
+ </div>
+
+  <!-- <loading-div *ngIf="loading"  ></loading-div> -->
+
+</div>
+
+<div class="modal-backdrop" (click)="close()"></div>

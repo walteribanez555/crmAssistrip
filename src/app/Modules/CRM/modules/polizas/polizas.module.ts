@@ -11,6 +11,12 @@ import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 
 import { EditComponent, GenerarPolizasComponent, ListadoPolizasComponent, PolizaComponent } from './pages';
 import { BeneficiarioComponent } from './components';
+import { ImpresionModalComponent } from './components/impresion-modal/impresion-modal.component';
+import { PolizaPdfComponent } from 'src/app/Modules/shared/Components/poliza-pdf/poliza-pdf.component';
+import { QRCodeModule } from 'angularx-qrcode';
+import { BeneficiarioPdfComponent } from './components/beneficiario-pdf/beneficiario-pdf.component';
+import { DetailComponent } from './pages/detail/detail.component';
+import { PriceFormComponent } from './components/price-form/price-form.component';
 
 
 
@@ -31,6 +37,11 @@ import { BeneficiarioComponent } from './components';
 
     //Componentes
     BeneficiarioComponent,
+    ImpresionModalComponent,
+    PolizaPdfComponent,
+    BeneficiarioPdfComponent,
+    DetailComponent,
+    PriceFormComponent,
 
 
 
@@ -47,6 +58,8 @@ import { BeneficiarioComponent } from './components';
     PolizasRoutingModule,
     SharedModule,
     NgxIntlTelInputModule,
+    QRCodeModule,
+
 
 
 

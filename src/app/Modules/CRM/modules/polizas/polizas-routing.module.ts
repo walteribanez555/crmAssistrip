@@ -6,6 +6,7 @@ import { ListadoPolizasComponent } from "./pages/listado-polizas/listado-polizas
 import { PolizaComponent } from "./pages/poliza/poliza.component";
 import { EditComponent } from "./pages/edit/edit.component";
 import { GenerarPolizasComponent } from "./pages/generar-polizas/generar-polizas.component";
+import { DetailComponent } from "./pages/detail/detail.component";
 
 
 const routes : Routes = [
@@ -21,6 +22,10 @@ const routes : Routes = [
             {
                 path : 'listado-polizas',
                 component : ListadoPolizasComponent
+            },
+            {
+              path : 'detail',
+              component : DetailComponent,
             },
             {
               path : ':id',

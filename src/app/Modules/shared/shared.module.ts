@@ -8,6 +8,8 @@ import { UploadFileDirective } from './directives/upload-file.directive';
 import { LoadingDivComponent } from './Components/loading-div/loading-div.component';
 import { SearchBoxComponent } from './Components/search-box/search-box.component';
 import { NumberDisplayComponent } from './Components/number-display/number-display.component';
+import { ModalComponent } from './Components/modal/modal.component';
+import { DcDirective } from './directives/dc.directive';
 
 
 
@@ -20,6 +22,7 @@ import { NumberDisplayComponent } from './Components/number-display/number-displ
     LoadingDivComponent,
     SearchBoxComponent,
     NumberDisplayComponent,
+    ModalComponent,
 
 
   ],
@@ -27,6 +30,7 @@ import { NumberDisplayComponent } from './Components/number-display/number-displ
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
+    DcDirective
 
   ],
 

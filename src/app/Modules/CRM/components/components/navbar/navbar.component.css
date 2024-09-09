@@ -62,7 +62,8 @@ color: var(--main-color);
 }
 
 .navbar-user{
-display: flex;
+
+display: none;
 flex-direction: column;
 align-items: center;
 justify-content: center;
@@ -188,6 +189,7 @@ button.btn-outline:hover{
   margin: 0 20px;
   cursor: pointer;
   background-color: var(--body-bg);
+  display: none;
 }
 
 .dir{

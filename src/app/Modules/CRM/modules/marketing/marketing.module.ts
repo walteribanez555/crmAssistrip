@@ -7,19 +7,15 @@ import { NotificationsService } from './services/notifications.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/Modules/shared/shared.module';
 import { ImagesService } from './services/images.service';
-import { BlogComponent } from './pages/blog/blog.component';
 import { QuillModule } from 'ngx-quill';
-import { BlogListadoComponent } from './components/blog-listado/blog-listado.component';
-import { BlogBuilderComponent } from './components/blog-builder/blog-builder.component';
+
 
 
 @NgModule({
   declarations: [
     LayoutPageComponent,
     NotificationsComponent,
-    BlogComponent,
-    BlogListadoComponent,
-    BlogBuilderComponent
+
   ],
   imports: [
     CommonModule,
@@ -30,8 +26,6 @@ import { BlogBuilderComponent } from './components/blog-builder/blog-builder.com
     QuillModule,
   ],
   providers: [
-    NotificationsService,
-    ImagesService,
   ]
 })
 export class MarketingModule { }

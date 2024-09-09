@@ -6,7 +6,8 @@
   <div class="main "   >
 
     <navbar   (displayNav)="toggleSidenav()" ></navbar>
-    <div class="main-content overflow-scroll " style="overflow-x: hidden;"  >
+    <div class="main-content overflow-scroll " style="overflow-x: hidden;
+    height: calc(100vh - 80px);"  >
         <router-outlet></router-outlet>
 
     </div>

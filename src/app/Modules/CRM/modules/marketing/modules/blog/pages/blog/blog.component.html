@@ -1,0 +1,87 @@
+<div class="container" style="padding: 10px;">
+  <div class="top">
+    <div class="right">
+      <a [routerLink]="'./edit'">
+        <button    >
+          <i class="fa-solid fa-pen" style="color: var(--main-color);"></i>
+          <span>Editar</span>
+        </button>
+      </a>
+    </div>
+  </div>
+
+  <hr style="width: 100%;
+  border: 1px solid gainsboro;
+  margin-top: 10px;" >
+  <div class="info">
+
+
+    <div class="blog-preview">
+      <span>Blog</span>
+      <div [innerHTML]="htmlContent" style="width: 100%;height: fit-content;" ></div>
+
+
+    </div>
+
+    <div class="card-preview" *ngIf="!isLoading ; else isLoadingTemplate" >
+      <span>Card</span>
+
+      <div class="design-card">
+
+        <div class="space-card">
+
+          <div class="prototipe" *ngFor="let card of blogToShow">
+            <div class="img-container">
+              <img [src]="card.img_url" alt="">
+
+            </div>
+
+            <div class="inf-container">
+
+              <div class="top">
+                <div class="author">
+
+                  <p>Assistrip</p>
+                  <p class="date" >{{card.fecha_post.split('T')[0]}}</p>
+
+                </div>
+
+
+              </div>
+
+
+              <p class="title">
+                {{card.titulo}}
+              </p>
+              <p class="description">
+                {{card.descripcion}}
+              </p>
+
+
+
+              <hr>
+
+              <div class="icon">
+                <img src="../../../../../../../assets/images/ASSISTRIP/app y web/logo-icon-2.png" >
+              </div>
+
+
+
+
+            </div>
+
+          </div>
+
+
+        </div>
+      </div>
+
+    </div>
+
+    <ng-template #isLoadingTemplate>
+      <loading-div></loading-div>
+    </ng-template>
+
+  </div>
+
+</div>

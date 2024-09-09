@@ -1,7 +1,6 @@
 import { Component, Input, OnInit, Type } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { TypeUser, enumTypeUser } from '../../interfaces/TypeUser.interface';
-import { tree } from 'd3';
 
 @Component({
   selector: 'type-user',

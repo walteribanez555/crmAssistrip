@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, catchError, map, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Poliza, PolizaResp } from '../../models/Data/Poliza';
 import { HttpClient, HttpParams } from '@angular/common/http';
@@ -18,6 +18,8 @@ export class PolizasService {
 
 
 
+
+
   getPolizas() : Observable<Poliza[]>{
 
 
@@ -30,7 +32,14 @@ export class PolizasService {
 
     params = params.append('id', id);
 
-    return this.http.get<Poliza[]>(this.apiUrl,{params});
+    return this.http.get<Poliza[]>(this.apiUrl,{params}).pipe(
+      map(
+        data => data
+      ),
+      catchError(
+        err => throwError( () => err.error.message )
+      )
+    )
 
   }
 
@@ -43,8 +52,13 @@ export class PolizasService {
             // poliza.descuento = descuento;
             // poliza.totalPago = totalPago;
 
+            // <span class="vigente" *ngIf="poliza.polizaBeneficiario.status ===0 ">Vigente</span>
+            // <span class="congelada" *ngIf="poliza.polizaBeneficiario.status ===1 ">Congelada</span>
+            // <span class="uso" *ngIf="poliza.polizaBeneficiario.status ===2 ">En uso</span>
+            // <span class="anulada" *ngIf="poliza.polizaBeneficiario.status ===3 ">Anulada</span>
 
-  postPolizas(venta_id: number, servicio_id : number, destino : string,fecha_salida : string, fecha_retorno : string, extra:number , status : number):Observable<PolizaResp>{
+
+  postPolizas(venta_id: number, servicio_id : number, destino : string,fecha_salida : string, fecha_retorno : string, extra:number):Observable<PolizaResp>{
 
 
     return this.http.post<PolizaResp>(this.apiUrl, {
@@ -54,23 +68,40 @@ export class PolizasService {
       fecha_salida,
       fecha_retorno,
       extra,
-      status: status,
-
-    })
+      status: 2,
+      nro_poliza : 1,
+      multiviaje : 1,
+      fecha_caducidad: this.getExpirationDate(fecha_salida),
+      username : localStorage.getItem('email')!,
+    }).pipe(
+      map( data => data),
+      catchError( err => throwError( () => err.error.message) )
+    )
 
   }
 
+  getExpirationDate(fecha_retorno : string){
+    const inputDate = new Date(fecha_retorno);
 
-  putPolizas(poliza_id:number,  fecha_salida : string, fecha_retorno : string, status: number) {
+    // Add one year to the date
+    const oneYearLater = new Date(inputDate);
+    oneYearLater.setFullYear(inputDate.getFullYear() + 1);
+    return oneYearLater.toISOString().split('T')[0];
+  }
+
+
+
+  putPolizas(poliza_id : number,  fecha_salida : string, fecha_retorno : string, status: number,destino : string) {
     const urlPut = `${this.apiUrl}?id=${poliza_id}`;
+
     return this.http.put(urlPut,{
       fecha_salida,
       fecha_retorno,
       status,
+      destino,
 
     })
   }
-
 
 
 

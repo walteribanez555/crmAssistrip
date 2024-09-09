@@ -8,6 +8,7 @@ import { Catalogo } from 'src/app/Modules/shared/models/Data/Catalogo';
 import { Poliza } from 'src/app/Modules/shared/models/Data/Poliza';
 import { Servicio } from 'src/app/Modules/shared/models/Data/Servicio';
 import { Venta } from 'src/app/Modules/shared/models/Data/Venta.model';
+import { ModalService } from 'src/app/Modules/shared/services/Modal.service';
 import { BeneficiariosService } from 'src/app/Modules/shared/services/requests/beneficiarios.service';
 import { CatalogosService } from 'src/app/Modules/shared/services/requests/catalogos.service';
 import { PolizasService } from 'src/app/Modules/shared/services/requests/polizas.service';
@@ -15,6 +16,7 @@ import { ServiciosService } from 'src/app/Modules/shared/services/requests/servi
 import { VentasService } from 'src/app/Modules/shared/services/requests/ventas.service';
 import { UtilsService } from 'src/app/Modules/shared/services/utils/utils.service';
 import Swal from 'sweetalert2';
+import { PriceFormComponent } from '../../components/price-form/price-form.component';
 
 @Component({
   templateUrl: './edit.component.html',
@@ -29,7 +31,7 @@ export class EditComponent {
   private catalogoService = inject(CatalogosService);
   private router = inject(Router);
   private utilService = inject(UtilsService);
-
+  private modalService = inject(ModalService);
 
 
   polizaId = -1;
@@ -222,6 +224,50 @@ export class EditComponent {
     return {firsWord : firstWord , resOfWord : restOfString.trimEnd()}
   }
 
+  onUpdateVentas() {
+
+
+    console.log({venta : this.venta});
+
+
+    const formVenta = new FormGroup({
+      total_pago : new FormControl<any>(null,Validators.required),
+      descuento : new FormControl<any>(null,Validators.required),
+    })
+
+    formVenta.get('total_pago')?.setValue(this.venta?.total_pago);
+    formVenta.get('descuento')?.setValue(this.venta?.descuento);
+
+
+    this.modalService.open(PriceFormComponent,{ size : 'md', title: 'Modificar Venta', form: formVenta}).subscribe({
+      next: ( resp) => {
+        // console.log({resp});
+
+        if(resp.valid){
+          const { total_pago, descuento } = resp.value;
+
+          this.ventaService.onEdit(this.venta!.venta_id, resp.value).subscribe({
+            next : (data) => {
+              this.showSuccessNotification();
+              this.router.navigate(['dashboard/polizas/listado-polizas']);
+            },
+            error : (err) => {
+              this.showError(err);
+            }
+          })
+        }
+
+
+      },
+      error : ( err) => {
+
+      },
+      complete: ( ) => {
+
+      }
+    })
+  }
+
   normalizeSpaces(input: string): string {
     // Dividir el string en palabras, utilizando un espacio como separador
     const words = input.split(' ');
@@ -237,18 +283,10 @@ export class EditComponent {
 
   updatePoliza(){
     if(this.poliza && this.venta)
-    this.polizaService.putPolizas(this.polizaId, this.fecha_salida,this.fecha_retorno, this.poliza.status ).pipe(
+    this.polizaService.putPolizas(this.polizaId, this.fecha_salida,this.fecha_retorno, this.poliza.status , this.poliza.destino).pipe(
       switchMap( (data) => {
 
-        if(this.poliza?.status === 3 ){
-          return this.ventaService.updateVenta(this.venta!.venta_id,1)
-        }
-
-        if( this.poliza?.status === 4){
-          return this.ventaService.updateVenta(this.venta!.venta_id,0)
-        }
-
-        return this.ventaService.updateVenta(this.venta!.venta_id, 3);
+          return this.ventaService.updateVenta(this.venta!.venta_id,this.poliza?.status!);
 
 
       })

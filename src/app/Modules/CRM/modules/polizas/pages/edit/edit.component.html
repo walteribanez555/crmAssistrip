@@ -4,10 +4,11 @@
 
     <div class="title-info">
       <h2>Póliza : {{polizaId}}</h2>
-      <span class="vigente" *ngIf="poliza.status ===0 ">Vigente</span>
-      <span class="congelada" *ngIf="poliza.status ===1 ">Congelada</span>
-      <span class="uso" *ngIf="poliza.status ===2 ">Activa</span>
-      <span class="anulada" *ngIf="poliza.status ===3 ">Anulada</span>
+      <span class="vigente" *ngIf="poliza.status ===1 ">Proceso</span>
+      <span class="vigente" *ngIf="poliza.status ===2 ">Vigente</span>
+      <span class="congelada" *ngIf="poliza.status ===4 ">Congelada</span>
+      <span class="uso" *ngIf="poliza.status ===3 ">Activa</span>
+      <span class="anulada" *ngIf="poliza.status ===6 ">Anulada</span>
 
     </div>
 
@@ -18,7 +19,16 @@
           <span>Destino</span>
         </div>
         <div class="description">
-          <span>{{poliza.destino}}</span>
+          <select [(ngModel)]="poliza.destino">
+            <option value="pais">Agregar</option>
+            <option value="America">America</option>
+            <option value="Europa">Europa</option>
+            <option value="Asia">Asia</option>
+            <option value="Oceania">Oceania</option>
+            <option value="Africa">Africa</option>
+            <option value="Antartida">Antartida</option>
+            <option  *ngFor="let pais of paises"   value={{pais.etiqueta}} > {{pais.etiqueta}}  </option>
+          </select>
         </div>
       </div>
       <div class="field">
@@ -124,11 +134,11 @@
         <ng-container *ngIf="poliza">
 
           <select [(ngModel)]="poliza.status"  >
-            <option value="0">Vigente</option>
-            <option value="1">Congelar</option>
-            <option value="2">Activa</option>
-            <option value="3">Anulada</option>
-            <option value="4">En Proceso</option>
+            <option value="2">Vigente</option>
+            <option value="4">Congelar</option>
+            <option value="3">Activa</option>
+            <option value="6">Anulada</option>
+            <option value="1">En Proceso</option>
 
 
           </select>
@@ -147,6 +157,9 @@
 
 
     <div class="actions">
+      <button (click)="onUpdateVentas()" >
+        Actualizar detalles de la venta
+      </button>
       <button class="edit" (click)="updatePoliza()"  >
         Realizar cambios a la poliza
       </button>

@@ -1,0 +1,17 @@
+<div class="buttons">
+  <!-- <button>
+    <i class="fa-solid fa-eye"></i>
+    <span>Vista Previa</span>
+  </button> -->
+
+</div>
+
+
+<quill-editor  *ngIf="blog" (onEditorCreated)="getEditorInstance($event)"  name="blog" [formControl]="blog"  [placeholder]="'TITULO DE LA NOTICIA'"   >
+
+
+</quill-editor>
+
+
+
+

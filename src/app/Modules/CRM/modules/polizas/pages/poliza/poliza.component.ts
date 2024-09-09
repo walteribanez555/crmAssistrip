@@ -87,12 +87,12 @@ export class PolizaComponent implements OnInit{
                 fechaAyer.setDate(fechaActual.getDate() - 1);
 
                 if (salida < fechaAyer){
-                  requests.push( this.polizaService.putPolizas(this.poliza.poliza_id, this.poliza.fecha_salida.split('T')[0], this.poliza.fecha_retorno.split('T')[0], 2))
+                  requests.push( this.polizaService.putPolizas(this.poliza.poliza_id, this.poliza.fecha_salida.split('T')[0], this.poliza.fecha_retorno.split('T')[0], 2, this.poliza.destino))
                 }
               }
               else{
                 if(this.poliza)
-                requests.push(this.polizaService.putPolizas(this.polizaId, this.poliza?.fecha_salida.split('T')[0], this.poliza?.fecha_retorno.split('T')[0], this.poliza?.status));
+                requests.push(this.polizaService.putPolizas(this.polizaId, this.poliza?.fecha_salida.split('T')[0], this.poliza?.fecha_retorno.split('T')[0], this.poliza?.status, this.poliza.destino));
 
               }
 
@@ -128,11 +128,20 @@ export class PolizaComponent implements OnInit{
   }
 
 
+  onOpenModal() {
+    console.log("Abierto");
+    this.openModal = true;
+  }
+
+  closeCart() {
+    this.openModal = false;
+  }
+
   modifyPoliza( status : number){
 
 
     if(this.poliza)
-    this.polizaService.putPolizas(this.poliza.poliza_id, this.poliza.fecha_salida.split('T')[0],this.poliza.fecha_retorno.split('T')[0], status).pipe(
+    this.polizaService.putPolizas(this.poliza.poliza_id, this.poliza.fecha_salida.split('T')[0],this.poliza.fecha_retorno.split('T')[0], status, this.poliza.destino).pipe(
       switchMap(data => {
 
         if(status === 3) {
@@ -146,7 +155,7 @@ export class PolizaComponent implements OnInit{
       ).subscribe({
       next : ( data ) => {
         this.showSuccessNotification();
-        this.router.navigate(['dashboard/polizas/listado-polizas'])
+        // this.router.navigate(['dashboard/polizas/listado-polizas'])
       },
       error : ( err ) => {
         this.showError(err);

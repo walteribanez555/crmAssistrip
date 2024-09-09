@@ -10,9 +10,16 @@
 
 .ql-editor{
 
-  height: 350px;
   width: 66vw;
 
+}
+
+.ql-editor .ql-video {
+  width: 100%;
+}
+
+iframe{
+  width: 100%;
 }
 
 

@@ -42,6 +42,7 @@ export class CuponesService {
       fecha_hasta : nuevoCupon.fecha_hasta,
       status: nuevoCupon.status,
       nombre : nuevoCupon.nombre,
+      oficina_id : nuevoCupon.oficina_id
 
     })
 

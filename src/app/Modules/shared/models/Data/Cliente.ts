@@ -3,7 +3,7 @@ export interface Cliente{
     tipo_cliente : number,
     apellido: string,
     nombre : string,
-    nit_ci : string,
+    ci : string,
     fecha_registro : string,
     origen : string,
     email: string,
@@ -23,8 +23,11 @@ export interface ClientePost extends Omit<Cliente, 'cliente_id'|'status'|'tipo_c
 }
 
 
+
 export interface ClienteResp extends Omit<Cliente, 'fecha_registro' | 'cliente_id'>{
-    id : number;
-    
+  id : number;
+  errno? :  string;
+
+
 }
 

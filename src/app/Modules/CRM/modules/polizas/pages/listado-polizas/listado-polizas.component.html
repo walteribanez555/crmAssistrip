@@ -20,9 +20,29 @@
 
    <div class="container">
     <div class="list">
-      <h2>Pólizas</h2>
+      <h2>Vouchers</h2>
       <hr>
-      <search-box    (onDebounce)="filterByPolizaId($event)"  [placeholder]="'Buscar por numero de poliza'"></search-box>
+      <div class="list-items">
+        <div class="item">
+          <span>Fecha de salida</span>
+          <input [(ngModel)]="dateInit" type="date">
+        </div>
+        <div class="item">
+          <span>Fecha de retornos</span>
+          <input [(ngModel)]="dateEnd" type="date">
+        </div>
+        <div class="item">
+          <button (click)="filterByDates()" >Filtrar Por Fechas</button>
+        </div>
+      </div>
+      <div class="item">
+        <span>Buscar por numero de Voucher</span>
+        <input type="text" placeholder="Buscar por numero de poliza" (input)="searchByPoliza($event)" >
+      </div>
+      <div class="item">
+        <label for="nro_identificacion">Filtrar por Nro de Identificacion</label>
+        <input  (input)="search($event)"   type="text" name="nro_identificacion" placeholder="Nro de Identificacion">
+      </div>
       <div class="table-container">
         <div class="table-data">
           <div class="loading" [@loadingAnimation]="hasLoaded ? 'hide' : 'show'">
@@ -32,35 +52,39 @@
             >
             <span>Espere un momento, cargando la informacion</span>
           </div>
-          <ng-container *ngIf="_filteredListInfo.length>0">
+          <ng-container *ngIf="listFiltReportes.length>0">
             <table [@loadingAnimation]="hasLoaded ? 'show' : 'hide'">
               <thead>
                 <tr>
-                  <th>Cliente(a) Nro Poliza</th>
+                  <th>Voucher</th>
+                  <th>Cliente(a)</th>
                   <th>Destinos</th>
-                  <th>Siniestros</th>
+                  <!-- <th>Siniestros</th> -->
                   <th>Planes incluidos</th>
                   <th>Estado</th>
                   <th style="padding: 0px 60px;"></th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let poliza of _filteredListInfo"  [routerLink]="['../../polizas', poliza.beneficiario.poliza_id]">
+                <tr *ngFor="let reporte of listFiltReportes"  [routerLink]="['../../polizas', reporte.poliza_id]">
                   <td>
-                    <span style="margin-right: 2px;" *ngIf="poliza.beneficiario.primer_nombre">{{poliza.beneficiario.primer_nombre | zeroFilter}}</span>
-                    <span style="margin-right: 2px;" *ngIf="poliza.beneficiario.segundo_nombre">{{poliza.beneficiario.segundo_nombre | zeroFilter }}</span>
-                    <span style="margin-right: 2px;" *ngIf="poliza.beneficiario.primer_apellido">{{ poliza.beneficiario.primer_apellido | zeroFilter}}</span>
-                    <span style="margin-right: 2px;" *ngIf="poliza.beneficiario.segundo_apellido">{{ poliza.beneficiario.segundo_apellido | zeroFilter}}</span>
+                    <span style="margin-right: 2px;" *ngIf="reporte.poliza_id">{{reporte.poliza_id}}</span>
                   </td>
-                  <td>{{poliza.polizaBeneficiario.destino }} </td>
-                  <td>{{poliza.siniestrosBeneficiario.length}}  </td>
-                  <td>{{poliza.servicioBeneficiario.servicio}}</td>
+                  <td>
+                    <span style="margin-right: 2px;" *ngIf="reporte.primer_nombre">{{reporte.primer_nombre | zeroFilter}}</span>
+                    <!-- <span style="margin-right: 2px;" *ngIf="listadoReportes.segundo_nombre">{{poliza.beneficiario.segundo_nombre | zeroFilter }}</span> -->
+                    <span style="margin-right: 2px;" *ngIf="reporte.primer_apellido">{{ reporte.primer_apellido | zeroFilter}}</span>
+                    <!-- <span style="margin-right: 2px;" *ngIf="poliza.beneficiario.segundo_apellido">{{ poliza.beneficiario.segundo_apellido | zeroFilter}}</span> -->
+                  </td>
+                  <td>{{reporte.destino }} </td>
+                  <!-- <td>{{reporte.length}}  </td> -->
+                  <td>{{mapService(reporte.servicio_id)!.servicio}}</td>
                   <td >
-                    <span class="vigente" *ngIf="poliza.polizaBeneficiario.status ===0 ">Vigente</span>
-                    <span class="congelada" *ngIf="poliza.polizaBeneficiario.status ===1 ">Congelada</span>
-                    <span class="uso" *ngIf="poliza.polizaBeneficiario.status ===2 ">Activa</span>
-                    <span class="anulada" *ngIf="poliza.polizaBeneficiario.status ===3 ">Anulada</span>
-                    <span class="anulada" *ngIf="poliza.polizaBeneficiario.status ===4 ">En Proceso</span>
+                    <span class="vigente" *ngIf="reporte.poliza_st ===2 ">Vigente</span>
+                    <span class="congelada" *ngIf="reporte.poliza_st ===4 ">Congelada</span>
+                    <span class="uso" *ngIf="reporte.poliza_st ===3 ">Activa</span>
+                    <span class="anulada" *ngIf="reporte.poliza_st ===6 ">Anulada</span>
+                    <span class="anulada" *ngIf="reporte.poliza_st ===1 ">En Proceso</span>
 
                   </td>
                   <td style="color: var(--main-color); cursor: pointer;" >
@@ -72,7 +96,7 @@
               </tbody>
             </table>
           </ng-container>
-          <ng-container *ngIf="_filteredListInfo.length===0">
+          <ng-container *ngIf="listFiltReportes.length===0">
             <div style="width: 100% ; height: 100%; display: flex; align-items: center; justify-content: center; flex-direction: column; ">
               <svg style="fill: var(--main-color);" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24"><path d="M440 776h80V536h-80v240Zm40-320q17 0 28.5-11.5T520 416q0-17-11.5-28.5T480 376q-17 0-28.5 11.5T440 416q0 17 11.5 28.5T480 456Zm0 520q-83 0-156-31.5T197 859q-54-54-85.5-127T80 576q0-83 31.5-156T197 293q54-54 127-85.5T480 176q83 0 156 31.5T763 293q54 54 85.5 127T880 576q0 83-31.5 156T763 859q-54 54-127 85.5T480 976Z"/></svg>
               <span>No se encontro ninguna poliza</span>
@@ -95,7 +119,7 @@
 
       <div class="buttons">
         <button    class="cotizacion"  (click)="createPolizas()">
-          Emitir poliza
+          Emitir voucher
         </button>
 
 

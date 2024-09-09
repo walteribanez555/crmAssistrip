@@ -86,16 +86,8 @@
                                 </select>
                             </div>
                             <div class="field">
-                                <label >Nro Whatsapp</label>
-                                <div class="datos-numero">
-                                    <select name="initial" formControlName="ext" name="ext">
-                                        <option value="591">591</option>
-                                        <option value="999">999</option>
-                                        <option value="653">653</option>
-                                        <option value="124">124</option>
-                                    </select>
-                                    <input type="text" placeholder="Inserte su numero aqui" formControlName="telf" name="telf">
-                                </div>
+                                <label >Nro Contacto</label>
+                                <input type="text" placeholder="Inserte su numero aqui" formControlName="telf" name="telf">
                             </div>
                             <div class="field">
                                 <label>Email</label>
@@ -123,6 +115,25 @@
 
             </div>
             <hr class="poliza">
+
+            <div class="list-extras">
+              <div class="extra"    *ngFor="let extra of ListadoExtrasUi"  [class.selected]="extra.isSelected"   >
+                <div class="extra-info">
+                  <h2>{{extra.descripcion}}</h2>
+                </div>
+                <div class="extra-price">
+                  <span>{{extra.cobertura ?? 'incluido'}}</span>
+                </div>
+                <div class="extra-button">
+                  <button  (click)="selectItem(extra)" >{{ extra.isSelected ? 'seleccionado' : 'seleccionar'}}</button>
+                </div>
+              </div>
+
+              <span  *ngIf="ListadoExtrasUi.length === 0">
+                No hay extras disponibles
+              </span>
+
+            </div>
 
 
             <div class="space-button">
@@ -153,6 +164,11 @@
                 <span>Descuentos</span>
                 <span  *ngFor="let cuponAplicado of listDescuentos">{{cuponAplicado.cupon.nombre}} - {{cuponAplicado.montoTotal  | currency:'USD':'$':'1.1-2'}}</span>
               </span>
+
+              <div class="field" *ngIf="costo>-1" >
+                <span>Extras</span>
+                <span>{{ extraTotal | currency:'USD':'$':'1.1-2'}}</span>
+              </div>
 
               <div class="field">
                 <label >Estado de la poliza</label>

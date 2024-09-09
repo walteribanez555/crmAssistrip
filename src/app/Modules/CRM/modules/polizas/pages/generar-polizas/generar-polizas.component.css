@@ -60,7 +60,7 @@ span{
 
 .buttons button {
   width: 100%;
-  height: 30px;
+  /* height: 30px; */
   margin: 5px;
   border: none;
   border-radius: 2px;
@@ -68,6 +68,7 @@ span{
   font-weight: bold;
   cursor: pointer;
   transition: all .3s ease-in-out;
+  padding: 10px 20px;
 }
 
 .buttons button.cancelar:hover,
@@ -107,10 +108,10 @@ span{
 
 .fechas-container{
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
-  margin: 10px;
+  margin: 0px;
 
 }
 
@@ -124,6 +125,14 @@ span{
 }
 
 
+.fecha input {
+  font-size: 12px;
+  padding: 10px 20px;
+  border: 1px solid gainsboro;
+  border-radius: 8px;
+  font-weight: normal;
+}
+
 
 
 .card .field{
@@ -131,21 +140,29 @@ span{
   display: flex;
   flex-direction: column;
   margin: 10px;
+  gap: 10px;
 }
 .card{
-  box-shadow: 0 0 5px 0 rgba(0,0,0,.2);
+  /* box-shadow: 0 0 5px 0 rgba(0,0,0,.2); */
   padding: 10px;
   width: 60%;
+  border: 1px solid gainsboro;
+  border-radius: 4px;
 }
 
 .card .field input,
 .card .field select{
   width: 90%;
-  height: 30px;
-  padding: 5px;
+  /* height: 30px; */
+  /* padding: 5px; */
   font-size: 1rem;
-  font-weight: bold;
+  /* font-weight: bold; */
   color: var(--text-color);
+  border-radius: 4px;
+  padding: 10px 20px;
+  border: 1px solid gainsboro;
+  font-size: 12px;
+  outline: var(--main-color);
 }
 
 .field .datos-numero{
@@ -185,11 +202,14 @@ hr.poliza{
 
 .fecha input {
   width: 100%;
-  height: 30px;
-  padding: 5px;
+  /* height: 30px; */
+  /* padding: 5px; */
   font-size: 1rem;
-  font-weight: bold;
+  /* font-weight: bold; */
   color: var(--text-color);
+  padding: 10px 20px;
+  font-size: 12px;
+  /* outline: none; */
 }
 
 .field .datos-numero select{
@@ -232,7 +252,7 @@ button.generar{
   align-items: center;
   justify-content: center;
   width: 80%;
-  height: 30px;
+  /* height: 30px; */
   margin: 5px;
   border: none;
   border-radius: 2px;
@@ -242,6 +262,8 @@ button.generar{
   transition: all .3s ease-in-out;
   background-color: var(--main-color);
   color: white;
+  padding: 10px 20px;
+  border-radius: 4px;
 
 }
 
@@ -383,6 +405,10 @@ button.generar{
     margin-left: 0;
 
   }
+
+  .fechas-container{
+    flex-direction: column;
+  }
 }
 
 @media (max-width:768px){
@@ -419,6 +445,89 @@ button.generar{
     width: 100%;
   }
 
+
+
+
+
+
+}
+
+
+.list-extras{
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+
+.extra{
+  padding: 20px;
+  border: 1px solid gainsboro;
+  border-radius: 8px;
+}
+
+.extra.selected{
+  background-color: var(--main-color);
+  border: 1px solid var(--main-color);
+  color: white;
+}
+
+
+.extra-button{
+  width: 100%;
+  padding: 10px 20px;
+  border-radius: 8px;
+
+}
+
+
+.extra-button button{
+  width: 100%;
+  padding: 10px 20px;
+  border: 1px solid gainsboro;
+  border-radius: 8px;
+  cursor: pointer;
+  color: white;
+  background-color: var(--main-color);
+}
+
+
+.list-buttons{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 20px;
+  align-items: center;
+}
+
+.list-buttons button{
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: white;
+  background-color: var(--main-color);
+  border: none;
+}
+
+.selected .extra-price span{
+  color: white;
+}
+
+
+@media (max-width:768px) {
+  .extra{
+    width: 100%;
+  }
+
+
+  .list-buttons button{
+    width: 100%;
+  }
 
 
 

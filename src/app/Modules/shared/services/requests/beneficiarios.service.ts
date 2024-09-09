@@ -4,33 +4,24 @@ import { Observable, catchError, map, throwError } from 'rxjs';
 import { Beneficiario, BeneficiarioResp } from '../../models/Data/Beneficiario';
 import { environment } from 'src/environments/environment';
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class BeneficiariosService {
-
-  constructor(
-    private http : HttpClient
-
-  ) { }
+  constructor(private http: HttpClient) {}
 
   // private apiUrl  = '/api/beneficiarios';
   private apiUrl = environment.apiUrl + '/beneficiarios';
 
-  getBeneficiario(): Observable<Beneficiario[]>{
-
+  getBeneficiario(): Observable<Beneficiario[]> {
     return this.http.get<Beneficiario[]>(this.apiUrl);
-
-
   }
 
-
-  getBeneficiarioById(id : number): Observable<Beneficiario[]>{
-    let params = new HttpParams;
+  getBeneficiarioById(id: number): Observable<Beneficiario[]> {
+    let params = new HttpParams();
 
     params = params.append('id', id);
 
-    return this.http.get<Beneficiario[]>(this.apiUrl, {params});
-
+    return this.http.get<Beneficiario[]>(this.apiUrl, { params });
   }
 
   // {
@@ -48,45 +39,64 @@ export class BeneficiariosService {
   //   "telefono": "34343456"
   // }
 
-  postBeneficiario( poliza_id : number, primer_apellido : string, segundo_apellido : string, primer_nombre: string , segundo_nombre: string, identifier: string, fecha_nacimiento: string, sexo: string, origen : string, email : string, telefono : string ): Observable<BeneficiarioResp>{
-
-    return this.http.post<BeneficiarioResp>(this.apiUrl, {
-      poliza_id,
-      primer_apellido,
-      segundo_apellido,
-      primer_nombre,
-      segundo_nombre,
-      nro_identificacion: identifier,
-      fecha_nacimiento,
-      sexo,
-      origen,
-      email,
-      telefono
-    }).pipe(
-      map(
-        data => data,
-      ),
-      catchError( err => throwError( () => err.error.message))
-
-    )
+  postBeneficiario(
+    poliza_id: number,
+    primer_apellido: string,
+    segundo_apellido: string,
+    primer_nombre: string,
+    segundo_nombre: string,
+    identifier: string,
+    fecha_nacimiento: string,
+    sexo: string,
+    origen: string,
+    email: string,
+    telefono: string
+  ): Observable<BeneficiarioResp> {
+    return this.http
+      .post<BeneficiarioResp>(this.apiUrl, {
+        poliza_id,
+        primer_apellido: primer_apellido + ' ' + segundo_apellido,
+        segundo_apellido: ' ',
+        primer_nombre: primer_nombre + ' ' + segundo_nombre,
+        segundo_nombre: ' ',
+        nro_identificacion: identifier,
+        fecha_nacimiento,
+        sexo,
+        origen,
+        email,
+        telefono,
+      })
+      .pipe(
+        map((data) => data),
+        catchError((err) => throwError(() => err.error.message))
+      );
   }
 
-
-    // console.log(cliente_id, nombres, apellidos, age, ci, email, telf, origen, gender);
-    updateBeneficiario( beneficiario_id : number, primer_nombre : string, segundo_nombre : string, primer_apellido : string,segundo_apellido: string, ci : string, email : string, telf : string, origen : string, gender : number, age : string  ){
-
-      return this.http.put(`${this.apiUrl}?id=${beneficiario_id}`,{
-        primer_nombre,
-        segundo_nombre,
-        primer_apellido,
-        segundo_apellido,
-        nro_identificacion : ci,
-        email,
-        telf,
-        origen,
-        gender,
-        fecha_nacimiento : age
-
-      })
-    }
+  // console.log(cliente_id, nombres, apellidos, age, ci, email, telf, origen, gender);
+  updateBeneficiario(
+    beneficiario_id: number,
+    primer_nombre: string,
+    segundo_nombre: string,
+    primer_apellido: string,
+    segundo_apellido: string,
+    ci: string,
+    email: string,
+    telf: string,
+    origen: string,
+    gender: number,
+    age: string
+  ) {
+    return this.http.put(`${this.apiUrl}?id=${beneficiario_id}`, {
+      primer_apellido: primer_apellido + ' ' + segundo_apellido,
+      segundo_apellido: ' ',
+      primer_nombre: primer_nombre + ' ' + segundo_nombre,
+      segundo_nombre: ' ',
+      nro_identificacion: ci,
+      email,
+      telf,
+      origen,
+      gender,
+      fecha_nacimiento: age,
+    });
+  }
 }

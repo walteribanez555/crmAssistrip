@@ -41,7 +41,7 @@ export class NotificationsComponent {
           imagesForm.append('image', file);
         });
 
-        this.imageService.postNotification(imagesForm).pipe(
+        this.imageService.postNotification(this.files[0]).pipe(
           switchMap( imgUrl => {
 
             imageUrl = imgUrl;

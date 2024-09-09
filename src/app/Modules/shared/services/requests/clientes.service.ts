@@ -13,27 +13,11 @@ import { AuthService } from '../auth/auth.service';
 })
 export class ClientesService {
 
-  // private apiUrl : string = '/api/clientes';
-  private headers: HttpHeaders;
-  private authService = inject(AuthService);
   private apiUrl = environment.apiUrl + '/clientes';
 
   constructor(private http: HttpClient) {
-    this.headers = new HttpHeaders();
-    const token = this.authService.getToken();
 
-    if(token)
-        this.headers.set('Authorization',token);
-
-
-
-    try{
-
-
-    }catch(err){
-      console.log(err);
-    }
-  }
+   }
 
   getClientes(): Observable<Cliente[]> {
     return this.http.get<Cliente[]>(this.apiUrl);
@@ -41,14 +25,14 @@ export class ClientesService {
 
 
   getClienteById(id : string): Observable<Cliente[]>{
-    let params  = new HttpParams;
+     let params  = new HttpParams;
 
-    console.log(id);
+     console.log(id);
 
-    params = params.append('id', id);
+     params = params.append('id', id);
 
-    return this.http.get<Cliente[]>(this.apiUrl,{params});
- }
+     return this.http.get<Cliente[]>(this.apiUrl,{params});
+  }
 
   postCliente(cliente : ClientePost) :Observable<ClienteResp>{
 
@@ -57,34 +41,29 @@ export class ClientesService {
       tipo_cliente : 1,
       nombre : cliente.nombre,
       apellido : cliente.apellido,
-      nro_identificacion : cliente.nit_ci,
+      nro_identificacion : cliente.ci,
       origen : cliente.origen,
       email : cliente.email,
-      nro_contacto : cliente.nro_contacto,
+      nro_contacto : cliente.nro_contacto === "" ? "No tiene"  : cliente.nro_contacto,
       status: 1,
+      contacto : cliente.nombre + " " + cliente.apellido,
 
     }
 
     return this.http.post<ClienteResp>(this.apiUrl, data).pipe(
-      catchError((error: HttpErrorResponse) => {
-        let errorMessage = '';
-        if (error.error instanceof ErrorEvent) {
-          // Client-side error
-          errorMessage = `Error: ${error.error.message}`;
-        } else {
-          // Server-side error
-          errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-        }
-        console.error(errorMessage);
-        return throwError(errorMessage);
-      })
-    );;
+        map((response: ClienteResp) => {
+          if (response.errno) {
+            throw new Error("El email del titular ya se encuentra registrado");
+          } else {
+            return response;
+          }
+        }),
+        catchError((error: HttpErrorResponse) => {
 
-  }
-
-
-
-
+          return throwError(error.message);
+        })
+      )
+    }
 
 
 }

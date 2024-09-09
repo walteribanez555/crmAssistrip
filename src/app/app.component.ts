@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit,  ElementRef, } from '@angular/core';
 
-
+(window as any).global = window;
 
 @Component({
   selector: 'app-root',
@@ -8,18 +8,19 @@ import { ChangeDetectorRef, Component, OnInit,  ElementRef, } from '@angular/cor
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  
-  
 
 
-  
 
-  
+
+
+
+
+
 
   constructor(){
-    
+
   }
 
 
-  
+
 }

@@ -1,0 +1,27 @@
+<div class="blog-space">
+  <h3>Listado de Blogs</h3>
+
+
+  <div class="option-blog">
+    <a [routerLink]="'./post'">
+      <button>
+        <i class="fa-solid fa-plus fa-2xl" style="color: white;"></i>
+        <span style="margin-left: 20px;">Agregar Blog</span>
+      </button>
+
+    </a>
+
+    <hr style="width: calc(100%-20px);border: 1px solid gainsboro; margin-top: 10px;" >
+    <div class="listblogs" *ngIf="!isLoading ; else onLoadingBlog" >
+      <blog-item  *ngFor="let blog of blogs"  [blog]="blog" ></blog-item>
+
+
+
+    </div>
+    <ng-template #onLoadingBlog >
+      <loading-div ></loading-div>
+
+    </ng-template>
+
+  </div>
+</div>

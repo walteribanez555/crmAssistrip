@@ -1,0 +1,17 @@
+<a class="container-blog"  [routerLink]="'./'+blog.blog_id" >
+  <div class="title">
+    <span>{{blog.titulo}}</span>
+  </div>
+
+
+
+  <div class="button-blog"  >
+    <i class="fa-solid fa-pen-to-square fa" style="color: var(--main-color);"></i>
+  </div>
+
+
+  <div class="tile">
+    <span>{{blog.fecha_post.split('T')[0]}}</span>
+  </div>
+
+</a>

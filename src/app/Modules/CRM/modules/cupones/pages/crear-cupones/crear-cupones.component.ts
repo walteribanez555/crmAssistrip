@@ -134,6 +134,7 @@ export class CrearCuponesComponent {
             status: 1,
             tipo_valor : this.checkbox1Value ? 1 : 2,
             valor: this.monto,
+            oficina_id : 1000,
           }
           cupones.push(cupon);
         }

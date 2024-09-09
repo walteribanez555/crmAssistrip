@@ -28,7 +28,7 @@ export class SidebarComponent {
 
   menuItems : routeSideNav[] = [
     {
-      label: 'Usuarios y Acceso',
+      label: 'Usuarios',
       isDropdownOpen: false,
       dropdownHeight: '0',
       icon : 'fa-solid fa-users',
@@ -56,6 +56,7 @@ export class SidebarComponent {
         // },
       ]
     },
+
     // {
     //   label: 'Planes',
     //   isDropdownOpen: false,
@@ -178,7 +179,7 @@ export class SidebarComponent {
       ]
     },
     {
-      label: 'Ventas y Reportes',
+      label: 'Ventas',
       isDropdownOpen: false,
       dropdownHeight: '0',
       icon : 'fa-regular fa-file-code',
@@ -202,32 +203,32 @@ export class SidebarComponent {
         // },
       ]
     },
-    {
-      label: 'Marketing',
-      isDropdownOpen: false,
-      dropdownHeight: '0',
-      icon : 'fa-solid fa-globe',
-      submenuItems: [
+    // {
+    //   label: 'Marketing',
+    //   isDropdownOpen: false,
+    //   dropdownHeight: '0',
+    //   icon : 'fa-solid fa-globe',
+    //   submenuItems: [
 
-        {
-          label: 'Notificaciones',
-          icon : 'fa-solid fa-money-bill',
-          route: 'marketing/notificaciones'
-        },
-        {
-          label: 'Blog',
-          icon : 'fa-solid fa-money-bill',
-          route: 'marketing/blogs'
-        }
+    //     {
+    //       label: 'Notificaciones',
+    //       icon : 'fa-solid fa-money-bill',
+    //       route: 'marketing/notificaciones'
+    //     },
+    //     {
+    //       label: 'Blog',
+    //       icon : 'fa-solid fa-money-bill',
+    //       route: 'marketing/blogs/post'
+    //     }
 
 
-        // {
-        //   label : 'Roles',
-        //   route : 'usuarios/listado-roles',
-        //   icon : 'fa-sharp fa-solid fa-shield-halved'
-        // },
-      ]
-    },
+    //     // {
+    //     //   label : 'Roles',
+    //     //   route : 'usuarios/listado-roles',
+    //     //   icon : 'fa-sharp fa-solid fa-shield-halved'
+    //     // },
+    //   ]
+    // },
 
 
     // {

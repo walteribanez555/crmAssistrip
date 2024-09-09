@@ -120,43 +120,43 @@ export class VentasComponent implements OnInit {
     )
 
 
-    this.reportesService.getReports().subscribe(
-     ( data) => {
-        this.listadoVentaReporte = data.map(
-          (item ) => {
-            const fecharetorno = new Date(item.fecha_retorno);
-            const edadPasajero = this.obtenerDiferenciaEntreFechas(item.fecha_nacimiento, addDaysToDate(fecharetorno,2).toISOString());
-            const precioPasajero = + this.obtenerDetallePasajero(item.precio, edadPasajero);
-            const descuentoPasajero = + this.obtenerDetallePasajero(item.descuento, edadPasajero);
-            const totalPasajero = precioPasajero - descuentoPasajero;
-            const fechaTransaccion = item.fecha_venta.split('T')[0];
+    // this.reportesService.getReports().subscribe(
+    //  ( data) => {
+    //     this.listadoVentaReporte = data.map(
+    //       (item ) => {
+    //         const fecharetorno = new Date(item.fecha_retorno);
+    //         const edadPasajero = this.obtenerDiferenciaEntreFechas(item.fecha_nacimiento, addDaysToDate(fecharetorno,2).toISOString());
+    //         const precioPasajero = + this.obtenerDetallePasajero(item.precio, edadPasajero);
+    //         const descuentoPasajero = + this.obtenerDetallePasajero(item.descuento, edadPasajero);
+    //         const totalPasajero = precioPasajero - descuentoPasajero;
+    //         const fechaTransaccion = item.fecha_venta.split('T')[0];
 
 
-            return{
-              fechaTransaccion,
-              idBeneficiario : item.beneficiario_id,
-              idVenta : item.venta_id,
-              precioPasajero,
-              descuentoPasajero,
-              totalPasajero,
-              origen : item.origen,
-              destino : item.destino,
-              telefono : item.telefono,
-              email : item.email,
-              nombre : item.primer_nombre,
-              apellidos : item.primer_apellido,
-              identificador : item.nro_identificacion,
-              fecha_nacimiento : item.fecha_nacimiento.split('T')[0],
-              fecha_salida : item.fecha_salida.split('T')[0],
-              fecha_retorno : item.fecha_retorno.split('T')[0],
-              dias_viaje : this.obtenerDiferenciaEnDias(item.fecha_salida, item.fecha_retorno),
-              servicio : item.servicio,
+    //         return{
+    //           fechaTransaccion,
+    //           idBeneficiario : item.beneficiario_id,
+    //           idVenta : item.venta_id,
+    //           precioPasajero,
+    //           descuentoPasajero,
+    //           totalPasajero,
+    //           origen : item.origen,
+    //           destino : item.destino,
+    //           telefono : item.telefono,
+    //           email : item.email,
+    //           nombre : item.primer_nombre,
+    //           apellidos : item.primer_apellido,
+    //           identificador : item.nro_identificacion,
+    //           fecha_nacimiento : item.fecha_nacimiento.split('T')[0],
+    //           fecha_salida : item.fecha_salida.split('T')[0],
+    //           fecha_retorno : item.fecha_retorno.split('T')[0],
+    //           dias_viaje : this.obtenerDiferenciaEnDias(item.fecha_salida, item.fecha_retorno),
+    //           servicio : item.servicio,
 
-            }
-          }
-        )
-      }
-    )
+    //         }
+    //       }
+    //     )
+    //   }
+    // )
 
 
 

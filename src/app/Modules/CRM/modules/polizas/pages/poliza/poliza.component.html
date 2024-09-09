@@ -50,15 +50,21 @@
     <hr>
 
 
-    <div class="actions" *ngIf="poliza.status!==3; else alternateContent ">
+    <div class="actions" *ngIf="poliza.status!==6; else alternateContent ">
       <a class="edit" [routerLink]="['edit']"  >
-        Editar Poliza
+        Editar Voucher
       </a>
-      <button class="delete" (click)="modifyPoliza(3)"  >
-        Anular Poliza
+      <button class="delete" (click)="modifyPoliza(6)"  >
+        Anular Voucher
       </button>
-      <button class="delete"  (click)="modifyPoliza(1)" >
-        Congelar Poliza
+      <button class="delete"  *ngIf="poliza.status!==4"  (click)="modifyPoliza(4)" >
+        Congelar Voucher
+      </button>
+      <button class="delete"  *ngIf="poliza.status===4"  (click)="modifyPoliza(2)">
+        Descongelar Voucher
+      </button>
+      <button class="delete" *ngIf="poliza.status<4" (click)="onOpenModal()" >
+        Descargar Voucher
       </button>
 
     </div>
@@ -73,3 +79,4 @@
 
 
 <loading-div *ngIf="loading"></loading-div>
+<impresion-modal *ngIf="openModal && poliza"  (closeModal)="closeCart()"  [beneficiarios]="beneficiarios" [poliza]="poliza" ></impresion-modal>

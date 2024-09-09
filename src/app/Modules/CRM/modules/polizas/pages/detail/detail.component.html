@@ -1,0 +1,4 @@
+
+
+<loading-div *ngIf="isLoading" ></loading-div>
+<impresion-modal *ngIf="openModal && poliza"  (closeModal)="closeCart()"  [beneficiarios]="listBeneficiario" [poliza]="poliza" ></impresion-modal>

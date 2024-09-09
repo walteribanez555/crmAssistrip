@@ -30,6 +30,8 @@ import { ErrorInterceptor } from './Modules/shared/interceptors/error.intercepto
 import { RolService } from './Modules/shared/services/requests/rol.service';
 import { UserService } from './Modules/shared/services/requests/user.service';
 import { ReportesService } from './Modules/shared/services/requests/reportes.service';
+import { ImagesService } from './Modules/CRM/modules/marketing/services/images.service';
+import { GeneratePdfService } from './Modules/shared/services/utils/generate-pdf.service';
 
 
 
@@ -72,6 +74,8 @@ import { ReportesService } from './Modules/shared/services/requests/reportes.ser
     RolService,
     UserService,
     ReportesService,
+    GeneratePdfService,
+    // ImagesService,
     {
       provide : HTTP_INTERCEPTORS,
       useClass : SessionInterceptor,

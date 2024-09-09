@@ -179,7 +179,7 @@ export class UtilsService {
       precio=this.ecuacionCurva(rangoPrecio, diffDays)*1 * diffDays*1;
     }
     if(rangoPrecio.tipo_ecuacion*1 ===2){
-      precio = this.ecuacionRecta(rangoPrecio, diffDays)*1 *diffDays*1;
+      precio = rangoPrecio.intercepto;
     }
 
     return precio;
@@ -199,7 +199,7 @@ export class UtilsService {
 
 
 
-      const valor = (rangoPrecio.pendiente*dias)*1 + rangoPrecio.intercepto*1;
+      const valor = rangoPrecio.intercepto;
 
       return valor;
 

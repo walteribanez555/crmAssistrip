@@ -4,8 +4,8 @@ import { VentaDatos } from 'src/app/Modules/shared/models/Pages/venta_datos.mode
 import { ClientesService } from 'src/app/Modules/shared/services/requests/clientes.service';
 import { PolizasService } from 'src/app/Modules/shared/services/requests/polizas.service';
 import { VentasService } from 'src/app/Modules/shared/services/requests/ventas.service';
-import { filter, map, switchMap, tap } from 'rxjs/operators';
-import { forkJoin } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter, map, switchMap, tap } from 'rxjs/operators';
+import { Subject, forkJoin, of } from 'rxjs';
 import { Router } from '@angular/router';
 import { Cliente } from 'src/app/Modules/shared/models/Data/Cliente';
 import { Siniestro } from 'src/app/Modules/shared/models/Data/Siniestro';
@@ -15,6 +15,9 @@ import { Servicio } from 'src/app/Modules/shared/models/Data/Servicio';
 import { ServiciosService } from 'src/app/Modules/shared/services/requests/servicios.service';
 import { loadingAnimation } from 'src/app/Modules/shared/animations/loading.animation';
 import { SiniestroService } from 'src/app/Modules/shared/services/requests/siniestro.service';
+import { ReportesService } from 'src/app/Modules/shared/services/requests/reportes.service';
+import { Reporte } from 'src/app/Modules/shared/models/Data/Reporte';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-listado-polizas',
@@ -26,6 +29,9 @@ import { SiniestroService } from 'src/app/Modules/shared/services/requests/sinie
 })
 export class ListadoPolizasComponent implements OnInit {
 
+  dateInit : string = "";
+  dateEnd : string = "";
+
 
   listado_Polizas: Poliza[] = [];
   listado_clientes: Cliente[] = [];
@@ -33,6 +39,9 @@ export class ListadoPolizasComponent implements OnInit {
   listado_beneficiarios : Beneficiario[] = [];
   listado_servicios : Servicio[] = [];
 
+
+  listadoReportes : Reporte[]  = [];
+  listFiltReportes : Reporte[] = [];
 
 
   listInfo : any[] = [];
@@ -45,12 +54,40 @@ export class ListadoPolizasComponent implements OnInit {
 
   hasLoaded = true;
 
+  searchTermByPoliza$ = new Subject<string>();
+  searchTerm$ = new Subject<string>();
+
+
 
   //Obtener las ventas
 
   //Obtener los clientes
   //Obtener los planes
 
+
+  searchByPoliza(event: any): void {
+    if (event.target.value) {
+      this.searchTermByPoliza$.next(event.target.value);
+    }
+  }
+
+
+  filterByDates() {
+    this.hasLoaded = true;
+    console.log({dateInit : this.dateInit, dateEnd : this.dateEnd})
+
+    if(this.dateInit.length === 0 || this.dateEnd.length === 0){
+      return
+    }
+
+    this.reportesService.get(this.dateInit, this.dateEnd).subscribe(
+      data => {
+        this.listadoReportes = data;
+        this.listFiltReportes = data;
+        this.hasLoaded = true;
+      }
+    )
+  }
 
 
 
@@ -66,6 +103,7 @@ export class ListadoPolizasComponent implements OnInit {
     private siniestroService : SiniestroService,
     private serviciosServices : ServiciosService,
     private beneficiarioService : BeneficiariosService,
+    private reportesService : ReportesService,
     private router : Router,
 
 
@@ -74,85 +112,163 @@ export class ListadoPolizasComponent implements OnInit {
   ngOnInit(): void {
 
     //Obtenemos las polizas, beneficiarios y siniestros
-    this.hasLoaded = false
+    this.hasLoaded = false;
 
-    this.polizaServices.getPolizas().pipe(
-      switchMap(
-        data => {
-            this.listado_Polizas = data;
-            // const requests : any[] = [];
-            // data.forEach(
-            //   poliza => {
+    this.dateInit = new Date().toISOString().split('T')[0];
+    this.dateEnd = new Date().toISOString().split('T')[0];
 
-            //     requests.push(this.beneficiarioService.getBeneficiarioById(poliza.poliza_id))
-            //   }
-            // )
+    this.filterByDates();
 
+    this.serviciosServices.getServicios().subscribe({
+      next : ( resp ) => {
+        this.listado_servicios = resp;
+      },
+      error : (err) => {
 
-            return this.beneficiarioService.getBeneficiario();
-
-        }
-      ),
-      switchMap(
-        data => {
-          this.listado_beneficiarios = data;
-          return this.siniestroService.getSiniestros()
-        }
-      ),
-      switchMap(
-        data=> {
-            this.listado_Siniestros = data;
-
-
-            return this.serviciosServices.getServicios();
+      },
+      complete : () => {
 
         }
-      ),
+    })
 
 
-    ).subscribe(
-      data => {
+    this.searchTerm$.pipe(
+      debounceTime(500), // Adjust the delay time here (in milliseconds)
+      distinctUntilChanged(),
+      switchMap((term) => {
+        console.log({ term });
 
-        const request : any[] = [];
-        this.listado_servicios = data;
+          if (!term) {
+            console.log('No hay info');
+          }
 
-          this.listado_Polizas = this.listado_Polizas.map( item => {
+          term.length <= 1
+              ? (this.listFiltReportes = this.listadoReportes)
+              : this.reportesService.getByNroIdentificacion(term).subscribe((resp) => {
+                console.log({resp});
+                this.listFiltReportes = resp;
+              });
 
-            if( item.status === 0) {
+          return of();
 
-              const salida = new Date(item.fecha_salida);
+      })
+    ).subscribe((resp) => {})
 
-              const fechaActual = new Date();
-              const fechaAyer = new Date(fechaActual);
-              fechaAyer.setDate(fechaActual.getDate() - 1);
+    this.searchTermByPoliza$
+      .pipe(
+        debounceTime(500), // Adjust the delay time here (in milliseconds)
+        distinctUntilChanged(),
+        switchMap((term) => {
+          console.log({ term });
 
-              if (salida < fechaAyer){
+          if (!term) {
+            console.log('No hay info');
+          }
 
-                item.status = 2;
-              }
+          term.length <= 1
+              ? (this.listFiltReportes = this.listadoReportes)
+              : this.reportesService.getByNumPoliza(term).subscribe((resp) => {
+                this.listFiltReportes = resp;
+              });
 
-              return item
-            }
-
-            return item
-
-
-          })
-
-
-         this.listInfo =this.mapData(this.listado_Polizas,this.listado_beneficiarios, this.listado_Siniestros,this.listado_servicios);
-         this._filteredListInfo = this.listInfo;
-         this.hasLoaded = true;
-
-      }
-
-    )
-
-
-
-
+          return of();
+        })
+      )
+      .subscribe((resp) => {});
 
 
+
+
+    // this.reportesService.
+
+    // this.polizaServices.getPolizas().pipe(
+    //   switchMap(
+    //     data => {
+    //         this.listado_Polizas = data;
+    //         // const requests : any[] = [];
+    //         // data.forEach(
+    //         //   poliza => {
+
+    //         //     requests.push(this.beneficiarioService.getBeneficiarioById(poliza.poliza_id))
+    //         //   }
+    //         // )
+
+
+    //         return this.beneficiarioService.getBeneficiario();
+
+    //     }
+    //   ),
+    //   switchMap(
+    //     data => {
+    //       this.listado_beneficiarios = data;
+    //       return this.siniestroService.getSiniestros()
+    //     }
+    //   ),
+    //   switchMap(
+    //     data=> {
+    //         this.listado_Siniestros = data;
+
+
+    //         return this.serviciosServices.getServicios();
+
+    //     }
+    //   ),
+
+
+    // ).subscribe(
+    //   data => {
+
+    //     const request : any[] = [];
+    //     this.listado_servicios = data;
+
+    //       // this.listado_Polizas = this.listado_Polizas.map( item => {
+
+    //       //   if( item.status === 0) {
+
+    //       //     const salida = new Date(item.fecha_salida);
+
+    //       //     const fechaActual = new Date();
+    //       //     const fechaAyer = new Date(fechaActual);
+    //       //     fechaAyer.setDate(fechaActual.getDate() - 1);
+
+    //       //     if (salida < fechaAyer){
+
+    //       //       item.status = 2;
+    //       //     }
+
+    //       //     return item
+    //       //   }
+
+    //       //   return item
+
+
+    //       // })
+
+
+    //     //  this.listInfo =this.mapData(this.listado_Polizas,this.listado_beneficiarios, this.listado_Siniestros,this.listado_servicios);
+    //      this._filteredListInfo = this.listInfo;
+    //      this.hasLoaded = true;
+
+    //   }
+
+    // )
+
+
+
+
+
+
+  }
+
+
+  search(event: any): void {
+    if (event.target.value) {
+      this.searchTerm$.next(event.target.value);
+    }
+  }
+
+  mapService(id : number) {
+    return this.listado_servicios.find( servicio => servicio.servicio_id === id);
   }
 
   @HostListener('window:scroll', [])

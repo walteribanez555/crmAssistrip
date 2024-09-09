@@ -1,0 +1,47 @@
+<div class="builder">
+  <div class="row">
+    <h3 style="color: var(--main-color);" >Edita el Post</h3>
+
+  </div>
+  <div class="steps">
+    <span class="circle" [class.active]="pos >= 0"  (click)="onChangeStepForm(0)" >Post</span>
+    <span class="circle" [class.active]="pos >= 1"  (click)="onChangeStepForm(1)">Card</span>
+    <span class="circle" [class.active]="pos >= 2"  (click)="onChangeStepForm(2)">Revisa los detalles</span>
+    <span class="circle" [class.active]="pos >= 3"  (click)="onChangeStepForm(3)">Modifica el Blog</span>
+    <div class="progress-bar">
+      <span class="indicator" [style.width]="dynamicWidth">
+
+      </span>
+    </div>
+  </div>
+
+
+  <div class="buttons">
+    <button (click)="onChangeStepForm(pos-1)">
+      <span>Paso Previo</span>
+    </button>
+
+    <button (click)="onChangeStepForm(pos+1)">
+      <span>Siguiente Paso</span>
+    </button>
+  </div>
+
+
+  <hr>
+
+
+  <div class="page">
+    <post-builder style="width: 100%;"  [blog]="blog" [hidden]="pos !== 0"   ></post-builder>
+    <blog-card  style="width: 100%;"  [title]="title_card" [description]="description_card" [urlImg]="url_img"  [hidden]="pos !== 1" ></blog-card>
+    <blog-preview style="width: 100%;" [hidden]="pos !== 2" ></blog-preview>
+    <blog-posting style="width: 100%;" [hidden]="pos !== 3" ></blog-posting>
+
+
+
+
+
+
+  </div>
+
+
+  </div>

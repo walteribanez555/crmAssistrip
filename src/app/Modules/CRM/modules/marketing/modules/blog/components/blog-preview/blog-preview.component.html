@@ -1,0 +1,70 @@
+<div class="container" style="padding: 10px;">
+
+  <div class="info">
+
+
+    <div class="blog-preview">
+      <span>Blog</span>
+      <div [innerHTML]="htmlContent" style="width: 100%;height: fit-content;" ></div>
+
+
+    </div>
+
+    <div class="card-preview" *ngIf="title && description && blog ">
+      <span>Card</span>
+
+      <div class="design-card">
+
+        <div class="space-card">
+
+          <div class="prototipe">
+            <div class="img-container">
+              <img [src]="imgUrlView" alt="">
+
+            </div>
+
+            <div class="inf-container">
+
+              <div class="top">
+                <div class="author">
+
+                  <p>Assistrip.com</p>
+                  <p class="date" >dateTimeNow</p>
+
+                </div>
+
+
+              </div>
+
+
+              <p class="title">
+                {{title.value}}
+              </p>
+              <p class="description">
+                {{description.value}}
+              </p>
+
+
+
+              <hr>
+
+              <div class="icon">
+                <img  src="../../../../../../../assets/images/ASSISTRIP/app y web/logo-icon-2.png" >
+              </div>
+
+
+
+
+            </div>
+
+          </div>
+
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

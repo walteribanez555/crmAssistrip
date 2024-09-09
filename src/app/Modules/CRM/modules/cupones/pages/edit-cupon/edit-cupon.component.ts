@@ -134,7 +134,7 @@ export class EditCuponComponent {
   selectItem(servicio : any){
 
     this.uncheckServices();
-    servicio.selectedItem = !servicio.selectedItem;
+    servicio.isSelected = !servicio.isSelected;
     this.onChangeForm();
 
   }
@@ -180,6 +180,7 @@ export class EditCuponComponent {
             status: 1,
             tipo_valor : this.checkbox1Value ? 1 : 2,
             valor: this.monto,
+            oficina_id: 1000,
           }
           cupones.push(cupon);
         }

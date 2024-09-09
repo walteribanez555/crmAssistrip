@@ -23,7 +23,6 @@
                 <th>cupon_id</th>
                 <th>Nombre</th>
                 <th>servicio_id</th>
-
                 <th>valor</th>
                 <th>fecha_desde</th>
                 <th>fecha_hasta</th>
@@ -43,7 +42,7 @@
                 </td>
                 <td (click)="showDetails(cupon.cupon_id)" *ngIf="cupon.nombre">{{cupon.nombre}}</td>
                 <td  (click)="showDetails(cupon.cupon_id)"*ngIf="!cupon.nombre">No tiene nombre</td>
-                <td (click)="showDetails(cupon.cupon_id)">{{cupon.servicio_id}}</td>
+                <td (click)="showDetails(cupon.cupon_id)">{{mapServiceById(cupon.servicio_id)!.servicio}}</td>
                 <td  (click)="showDetails(cupon.cupon_id)" *ngIf="cupon.tipo_valor===1">{{cupon.valor+'%'}}</td>
                 <td (click)="showDetails(cupon.cupon_id)"  *ngIf="cupon.tipo_valor===2">{{cupon.valor  | currency:'USD':'symbol':'1.1-2' }}</td>
                 <td (click)="showDetails(cupon.cupon_id)">{{cupon.fecha_desde | extractDate}}</td>

@@ -15,20 +15,38 @@ export class SessionInterceptor implements HttpInterceptor{
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    console.log("Paso por aqui");
 
-      console.log("Paso por aqui");
-        const token = this.authService.getToken();
-        if(token){
-          const requestWithToken = req.clone({
-            headers: new HttpHeaders({
-              Authorization : token
-            })
-          });
+    const token = this.authService.getToken();
+    if (!token) {
+      const requestWithDefaultToken = req.clone({
+        headers: new HttpHeaders({
+          Authorization: 'ExternalUser902010',
+          schema: 'assist_trip',
+        }),
+      });
+      return next.handle(requestWithDefaultToken);
+    } else {
+      const requestWithToken = req.clone({
+        headers: new HttpHeaders({
+          Authorization: token,
+          schema: 'assist_trip',
+        }),
+      });
+      return next.handle(requestWithToken);
+    }
+  }
 
-          return next.handle(requestWithToken)
-        }else{
-          return next.handle(req);
-        }
+  private shouldExcludeAuthorizationHeader(req: HttpRequest<any>): boolean {
+    // Check if the request URL includes the S3 base URL
+    const s3BaseUrl = 'https://assistrip-external-repo.s3.amazonaws.com';
+    if (req.url.startsWith(s3BaseUrl)) {
+      return true;
+    }
+
+    // You can add more conditions based on the request URL or any other criteria here
+
+    return false; // Default to not exclude the Authorization header
   }
 
 }
